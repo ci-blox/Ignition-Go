@@ -1,9 +1,12 @@
-# ignition-go
-Codeigniter Modular App Building Framework - create and reuse "blox"
+# Ignition Go
+A Modular App Building Framework - create and reuse "blox" to build enterprise class web applications
+- uses Codeigniter 3.x and Bootstrap 3.x
+- can be used as a quickstart project starter/boilerplate
+- *What are blox?* "Blox" are just pluggable modules or applets that are commonly used in web applications. Ignition Go will include a web-based generator.
 
-### Coming soon!
-Please contact me to help, I'm hoping to build a team of master "blox ignitians".
-Planned "blox" include bulk emailer, dashboard, report manager, and many more!!!  
+### Coming soon (alpha in February 2016), contact us to help build the most amazing web app builder ever!  
+Please contact me to help, I'm hoping to build a team of master "Blox Ignitians".
+Planned example "blox" include bulk emailer, dashboard, report manager, and many more!!!  
 
 ### Server Requirements (Preferred)
 
@@ -14,7 +17,7 @@ Planned "blox" include bulk emailer, dashboard, report manager, and many more!!!
 
 ### Features
 
-Ignite-Go will be a jumpstart for rapid development:
+Ignition Go will be a jumpstart for rapid development:
 * Multi-faceted (e.g. Frontend Website, Admin Panel, and API) website in a single application
 * Modular design using CodeIgniter HMVC extension
 * Custom config files (sites.php, locale.php) for easy configuration of website behavior
@@ -64,7 +67,8 @@ application/                    --- Main application (CodeIgniter) source folder
     third_party/
         MX/                     --- Required for HMVC extension
     views/                      --- Views for Frontend Website
-assets/
+public/                        --- site root
+public/assets/
     css/                        --- Custom CSS files append to each site
     dist/                       --- Minified scripts, stylesheets and optimized images via Gulp tasks
     fonts/                      --- Font files copied via Gulp tasks
@@ -73,7 +77,8 @@ assets/
     uploads/                    --- Default directory of upload files, where permission should set as writable
 gulpfile.js/                    --- Task runner following gulp-starter 2.0 practice
 sql/                            --- MySQL files
-system/                         --- CodeIgniter core files (unchanged as clean CI3 installation)
+ignitcore/                         --- Ignition Go core files
+ignitcore/system/                         --- CodeIgniter core files (unchanged as clean CI3 installation)
 
 ### Asset Customization (e.g. additional js/css files)
 
