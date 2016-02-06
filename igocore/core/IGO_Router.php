@@ -9,8 +9,8 @@
  *
  */
 
-require_once(IGOPATH . 'libraries/MX/Modules.php');
-require_once(IGOPATH . 'libraries/MX/Route.php');
+//require_once(IGOPATH . 'libraries/MX/Modules.php');
+require_once(IGOPATH . 'libraries/MX/Router.php');
 
 /**
  * Modular Extensions - HMVC

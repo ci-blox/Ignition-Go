@@ -85,7 +85,7 @@ class Auth
             Template::set_message(
                 sprintf(
                     lang('us_fields_required'),
-                    $this->ci->settings_lib->item('auth.login_type') == 'both' ? lang('us_login_type_both') : lang('us_' . $this->ci->settings_lib->item('auth.login_type'))
+                    $this->ci->settings->item('auth.login_type') == 'both' ? lang('us_login_type_both') : lang('us_' . $this->ci->settings->item('auth.login_type'))
                 ),
                 'error'
             );
@@ -106,12 +106,12 @@ class Auth
             'force_password_reset'
         );
 
-        if ($this->ci->settings_lib->item('auth.do_login_redirect')) {
+        if ($this->ci->settings->item('auth.do_login_redirect')) {
             $selects[] = 'login_destination';
         }
 
         $this->ci->user_model->select($selects);
-        if ($this->ci->settings_lib->item('auth.login_type') == 'both') {
+        if ($this->ci->settings->item('auth.login_type') == 'both') {
             $user = $this->ci->user_model->find_by(
                 array('username' => $login, 'email' => $login),
                 null,
@@ -119,7 +119,7 @@ class Auth
             );
         } else {
             $user = $this->ci->user_model->find_by(
-                $this->ci->settings_lib->item('auth.login_type'),
+                $this->ci->settings->item('auth.login_type'),
                 $login
             );
         }
@@ -132,7 +132,7 @@ class Auth
 
         // Check whether the account has been activated.
         if ($user->active == 0) {
-            $activation_type = $this->ci->settings_lib->item('auth.user_activation_method');
+            $activation_type = $this->ci->settings->item('auth.user_activation_method');
             if ($activation_type > 0) {
                 if ($activation_type == 1) {
                     Template::set_message(lang('us_account_not_active'), 'error');
@@ -514,7 +514,7 @@ class Auth
             || ! is_numeric($iterations)
             || $iterations <= 0
         ) {
-            $iterations = $this->ci->settings_lib->item('password_iterations');
+            $iterations = $this->ci->settings->item('password_iterations');
         }
 
         // Load the password hash library and hash the password.
@@ -699,21 +699,21 @@ class Auth
         // What are we using as login identity?
 
         // If "both", defaults to email, unless we display usernames globally
-        if ($this->ci->settings_lib->item('auth.login_type') == 'both') {
-            $login = $this->ci->settings_lib->item('auth.use_usernames') ? $username : $email;
+        if ($this->ci->settings->item('auth.login_type') == 'both') {
+            $login = $this->ci->settings->item('auth.use_usernames') ? $username : $email;
         } else {
-            $login = $this->ci->settings_lib->item('auth.login_type') == 'username' ? $username : $email;
+            $login = $this->ci->settings->item('auth.login_type') == 'username' ? $username : $email;
         }
 
         // @todo consider taking this out of setupSession()
-        if ($this->ci->settings_lib->item('auth.use_usernames') == 0
-            && $this->ci->settings_lib->item('auth.login_type') == 'username'
+        if ($this->ci->settings->item('auth.use_usernames') == 0
+            && $this->ci->settings->item('auth.login_type') == 'username'
         ) {
             // If we've a username at identity, and don't want made user name, let's have an email nearby.
             $us_custom = $email;
         } else {
             // For backward compatibility, default to username.
-            $us_custom = $this->ci->settings_lib->item('auth.use_usernames') == 2 ? $user_name : $username;
+            $us_custom = $this->ci->settings->item('auth.use_usernames') == 2 ? $user_name : $username;
         }
 
         // Save the user's session info
@@ -813,7 +813,7 @@ class Auth
      */
     private function autologin()
     {
-        $this->ci->load->library('settings/settings_lib');
+        $this->ci->load->library('settings');
         if (! $this->allowRemember()) {
             return;
         }
@@ -912,7 +912,7 @@ class Auth
             $this->ci->input->set_cookie(
                 'autologin',
                 $user_id .'~'. $token,
-                $this->ci->settings_lib->item('auth.remember_length')
+                $this->ci->settings->item('auth.remember_length')
             );
 
             return true;
@@ -972,7 +972,7 @@ class Auth
             return $this->allowRemember;
         }
 
-        $this->allowRemember = (bool) $this->ci->settings_lib->item('auth.allow_remember');
+        $this->allowRemember = (bool) $this->ci->settings->item('auth.allow_remember');
         return $this->allowRemember;
     }
 }

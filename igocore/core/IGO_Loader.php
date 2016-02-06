@@ -4,6 +4,9 @@
  * Loader
  *
  */
+require_once(IGOPATH . 'libraries/MX/Router.php');
+ 
+ 
 class IGO_Loader extends MX_Loader
 {
     /**

@@ -3,7 +3,7 @@
 /**
  * CommonMark Driver for PHP Markdown Extra Extended v0.3
  *
- * Adapter to use the Markdown Extra Extended helper within the Bonfire CommonMark
+ * Adapter to use the Markdown Extra Extended helper within the CommonMark
  * library.
  *
  * @link    https://github.com/egil/php-markdown-extra-extended

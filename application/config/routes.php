@@ -73,25 +73,15 @@ $route['api/(:any)/(:any)']				= "api_v1/$1/$2";
 
 
 // Authentication
-Route::any(LOGIN_URL, 'users/login', array('as' => 'login'));
-Route::any(REGISTER_URL, 'users/register', array('as' => 'register'));
-Route::block('users/login');
-Route::block('users/register');
+$route[LOGIN_URL] = 'users/login';
+$route[REGISTER_URL] = 'users/register';
 
-Route::any('logout', 'users/logout');
-Route::any('forgot_password', 'users/forgot_password');
-Route::any('reset_password/(:any)/(:any)', 'users/reset_password/$1/$2');
+$route['logout'] = 'users/logout';
+$route['forgot_password'] = 'users/forgot_password';
+$route['reset_password/(:any)/(:any)'] = 'users/reset_password/$1/$2';
 
 // Activation
-Route::any('activate', 'users/activate');
-Route::any('activate/(:any)', 'users/activate/$1');
-Route::any('resend_activation', 'users/resend_activation');
-
-// Contexts
-Route::prefix(SITE_AREA, function(){
-    Route::context('content', array('home' => SITE_AREA .'/content/index'));
-    Route::context('settings');
-});
-
-$route = Route::map($route);
+$route['activate'] = 'users/activate';
+$route['activate/(:any)'] = 'users/activate/$1';
+$route['resend_activation'] = 'users/resend_activation';
 

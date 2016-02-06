@@ -14,8 +14,7 @@ class Home extends MX_Controller
 
 		$this->load->helper('application');
 		$this->load->library('Template');
-		$this->load->library('Assets');
-		$this->lang->load('application');
+//		$this->lang->load('application');
 		$this->load->library('events');
 
         // Make the requested page var available

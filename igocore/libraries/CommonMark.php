@@ -88,7 +88,7 @@ class CommonMark
         }
 
         // Load the abstract driver which the drivers extend.
-        require_once(BFPATH . 'libraries/CommonMark/CommonMarkDriver.php');
+        require_once(IGOPATH . 'libraries/CommonMark/CommonMarkDriver.php');
 
         // Load the driver and set it as the adapter.
         $driverName = "CommonMark_{$this->driver}";

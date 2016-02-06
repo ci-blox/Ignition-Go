@@ -1,26 +1,9 @@
 <?php defined('BASEPATH') || exit('No direct script access allowed');
 /**
- * Bonfire
+ * Security Class
  *
- * An open source project to allow developers to jumpstart their development of
- * CodeIgniter applications
- *
- * @package   Bonfire
- * @author    Bonfire Dev Team
- * @copyright Copyright (c) 2011 - 2015, Bonfire Dev Team
- * @license   http://opensource.org/licenses/MIT MIT License
- * @link      http://cibonfire.com
- * @since     Version 1.0
  */
-
-/**
- * Bonfire Security Class
- *
- * @package Bonfire\Core\BF_Security
- * @author  Bonfire Dev Team
- * @link    http://cibonfire.com/docs/developer
- */
-class BF_Security extends CI_Security
+class IGO_Security extends CI_Security
 {
     /**
      * @var array Controllers to ignore during the CSRF cycle. If part of a module,

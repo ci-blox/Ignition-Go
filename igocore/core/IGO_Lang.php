@@ -169,7 +169,7 @@ class IGO_Lang extends MX_Lang
         }
 
         if (! empty($lang)) {
-            log_message('debug', "Bonfire MY_Lang: Language file loaded: '{$file}'");
+            log_message('debug', "IGO_Lang: Language file loaded: '{$file}'");
         }
 
         return $lang;

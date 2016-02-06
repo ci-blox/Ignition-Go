@@ -394,4 +394,3 @@ class Curl {
 }
 
 /* End of file Curl.php */
-/* Location: ./bonfire/libraries/Curl.php */

@@ -227,7 +227,7 @@ class User_model extends IGO_Model
     {
         // If 'display_name' is not provided, set it to 'username' or 'email'.
         if (empty($data['display_name'])) {
-            if ($this->settings_lib->item('auth.use_usernames') == 1
+            if ($this->settings->item('auth.use_usernames') == 1
                 && ! empty($data['username'])
             ) {
                 $data['display_name'] = $data['username'];
@@ -475,19 +475,19 @@ class User_model extends IGO_Model
         $message = array(
             sprintf(
                 lang('us_password_min_length_help'),
-                (string) $this->settings_lib->item('auth.password_min_length')
+                (string) $this->settings->item('auth.password_min_length')
             )
         );
 
-        if ($this->settings_lib->item('auth.password_force_numbers') == 1) {
+        if ($this->settings->item('auth.password_force_numbers') == 1) {
             $message[] = lang('us_password_number_required_help');
         }
 
-        if ($this->settings_lib->item('auth.password_force_symbols') == 1) {
+        if ($this->settings->item('auth.password_force_symbols') == 1) {
             $message[] = lang('us_password_symbols_required_help');
         }
 
-        if ($this->settings_lib->item('auth.password_force_mixed_case') == 1) {
+        if ($this->settings->item('auth.password_force_mixed_case') == 1) {
             $message[] = lang('us_password_caps_required_help');
         }
 
@@ -792,7 +792,7 @@ class User_model extends IGO_Model
     public function set_activation($user_id)
     {
         // User activation method
-        $activation_method = $this->settings_lib->item('auth.user_activation_method');
+        $activation_method = $this->settings->item('auth.user_activation_method');
 
         // Prepare user messaging vars
         $emailMsgData   = array();
@@ -801,7 +801,7 @@ class User_model extends IGO_Model
         $email_mess     = '';
         $message        = lang('us_email_thank_you');
         $type           = 'success';
-        $site_title     = $this->settings_lib->item('site.title');
+        $site_title     = $this->settings->item('site.title');
         $error          = false;
         $ccAdmin      = false;
 
@@ -811,7 +811,7 @@ class User_model extends IGO_Model
                 // Activate the user and send confirmation email.
                 $subject = str_replace(
                     '[SITE_TITLE]',
-                    $this->settings_lib->item('site.title'),
+                    $this->settings->item('site.title'),
                     lang('us_account_reg_complete')
                 );
 
@@ -874,7 +874,7 @@ class User_model extends IGO_Model
                  * @todo Add CC/BCC capabilities to emailer, so this doesn't require
                  * sending a second email.
                  */
-                $data['to'] = $this->settings_lib->item('system_email');
+                $data['to'] = $this->settings->item('system_email');
                 if (! empty($data['to'])) {
                     $this->emailer->send($data);
                 }
