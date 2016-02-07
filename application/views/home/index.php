@@ -5,7 +5,7 @@
 </div>
 
 <div class="row">
-Note: STILL WIP- - - not ready yet!!!<br>    
+Note: STILL WIP- - - not all components ready yet!!!<br>    
     &nbsp;<br>
 <h3>Helpful resources:</h3>
 </div>
@@ -21,7 +21,7 @@ Note: STILL WIP- - - not ready yet!!!<br>
 	<div class="col-sm-6">
 		<h4>Bootstrap/JQuery</h4>
 
-		<p>Interface is <a href="http://bootstrp.com">Bootstrap</a> UI framework and <a href="http://jquery.com/">jQuery</a> as the Javascript engine.</p>
+		<p>Interface is <a href="http://bootstrap.com">Bootstrap</a> UI framework and <a href="http://jquery.com/">jQuery</a> as the Javascript engine.</p>
 
 	</div>
 </div>
