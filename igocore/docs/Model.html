@@ -1,0 +1,796 @@
+<h1>Model</h1>
+
+<h2>Overview</h2>
+
+<p>This section covers use of models (normally tied to a database) within your application.</p>
+
+<p>Models (part of the MVC pattern) allow you to interact with your database in a simple, consistent manner. You can use the <strong>IGO_Model</strong> as the base class for all of your models. This will allow you to quickly setup a simple model capable of finding records, creating new and editing existing records, deleting records, checking if a key/value is unique in this table, counting results, and more.</p>
+
+<p><strong>Topics</strong></p>
+
+<ul>
+<li><a href="#skeleton">An Example Skeleton Model</a></li>
+<li><a href="#selecting">Selecting Data</a></li>
+<li><a href="#inserting">Inserting Data</a></li>
+<li><a href="#updating">Updating Data</a></li>
+<li><a href="#deleting">Deleting Data</a></li>
+<li><a href="#utility">Utility Methods</a></li>
+<li><a href="#returns">Return Types</a></li>
+<li><a href="#chainable">Chainable Methods</a></li>
+<li><a href="#extending">Extending the Model</a></li>
+<li><a href="#observers">Observers</a></li>
+<li><a href="#validation">Data Validation</a></li>
+</ul>
+
+<h2>An Example Skeleton Model</h2>
+
+<p>To get started with a new model, you can use the following skeleton file:</p>
+
+<pre><code>class XXXXX_model extends IGO_Model
+{
+    protected $table_name   = '';
+    protected $key          = 'id';
+    protected $soft_deletes = FALSE;
+    protected $date_format  = 'int';
+    protected $log_user     = FALSE;
+
+    protected $set_created  = TRUE;
+    protected $created_field    = 'created_on';
+    protected $created_by_field = 'created_by';
+
+    protected $set_modified     = FALSE;
+    protected $modified_field   = 'modified_on';
+    protected $modified_by_field = 'modified_by';
+
+    protected $deleted_field    = 'deleted';
+    protected $deleted_by_field = 'deleted_by';
+
+    // Observers
+    protected $before_insert    = array();
+    protected $after_insert     = array();
+    protected $before_update    = array();
+    protected $after_update     = array();
+    protected $before_find      = array();
+    protected $after_find       = array();
+    protected $before_delete    = array();
+    protected $after_delete     = array();
+
+    protected $return_insert_id = true;
+    protected $return_type      = 'object';
+    protected $protected_attributes = array();
+    protected $field_info           = array();
+
+    protected $validation_rules         = array();
+    protected $insert_validation_rules  = array();
+    protected $skip_validation          = false;
+    protected $empty_validation_rules   = array();
+}
+</code></pre>
+
+<p>This is the minimum needed to take advantage of the built-in functions. All variables shown here are set to their default, so you don't need to show them if you are using the default values.  Model_name is the name of your class and follows the same rules as <a href="http://codeigniter.com/user_guide/general/models.html">CodeIgniter models</a>.</p>
+
+<p>This model class supports quite a few ways to customize how your class works with the database.</p>
+
+<h3><code>$table_name</code></h3>
+
+<p>The var <code>$table_name</code> should be set to the name of the table in your database. If you database is set to use a prefix (defaults to a <code>igo_</code> prefix), you should leave the prefix off. So a table named <code>igo_users</code> should be entered as <code>users</code>.</p>
+
+<h3><code>$key</code></h3>
+
+<p>The var <code>$key</code> should be the name of the primary key for your table. BF_Model requires that your table has primary key. If it doesn't you should extend Model and will need to write your own methods to interface with the database. The <code>$key</code> is expected to be linked to an INT field.</p>
+
+<h3><code>$soft_deletes</code></h3>
+
+<p>Bonfire uses the concept of <em>soft deletes</em> that will set a flag that an item has been deleted instead of actually deleting the item. This allows you to later restore the user in case the deletion was accidental, or to keep a permanent record of any sensitive information, like transaction records.</p>
+
+<p>To use soft_deletes, your table must have a <code>deleted</code> field that is a <strong>TINYINT (1)</strong>. A value of <code>0</code> means the record has not been deleted, while a value of <code>1</code> shows that the item has been deleted.<br/>
+The name of the <code>deleted</code> field may be modified by setting <code>$deleted_field</code>.</p>
+
+<p>If <code>$soft_deletes == TRUE</code>, Bonfire will automatically update the record to set <code>deleted</code> to a value of <code>1</code>.</p>
+
+<p>If <code>$soft_deletes == FALSE</code>, the record will be permanently deleted from the database.</p>
+
+<h3><code>$date_format</code></h3>
+
+<p>Determines the type of field that is used to store created and modified dates. The possible values are:</p>
+
+<ul>
+<li>&#x2018;int&#x2019; - A Unix integer timestamp. (This is the default)</li>
+<li>&#x2018;datetime&#x2019; Is a MySQL Datetime field. ( YYYY-MM-DD HH:MM:SS )</li>
+<li>&#x2018;date&#x2019; is a MySQL Date field. ( YYYY-MM-DD )</li>
+</ul>
+
+<p>While &#x2018;int&#x2019; seems to be one of the most common amongst PHP developers, datetime should be at least considered since it makes inspecting your data within the database much easier to interpret, though it does take a little bit more work during the script execution.</p>
+
+<h3><code>$set_created</code></h3>
+
+<p>Bonfire can automatically set your created on dates and times for you, in the format specified through <code>$date_format</code>. To use this, your table must have a <code>created_on</code> field of the proper type.</p>
+
+<p>If <code>$set_created == TRUE</code>, Bonfire will set the <code>created_on</code> field value for you at the time of an <code>insert()</code> call.<br/>
+The name of the <code>created_on</code> field may be modified by setting <code>$created_field</code>.</p>
+
+<h3><code>$set_modified</code></h3>
+
+<p>Bonfire can automatically set your modified on dates and times for you, in the format specified through <code>$date_format</code>. To use this, your table must have a <code>modified_on</code> field of the proper type.<br/>
+The name of the <code>modified_on</code> field may be modified by setting <code>$modified_field</code>.</p>
+
+<p>If <code>$set_created == TRUE</code>, Bonfire will set the <code>created_on</code> field value for you at the time of an <code>insert()</code> call.</p>
+
+<h3><code>$created_field</code> &amp; <code>$modified_field</code></h3>
+
+<p><code>created_field</code> and <code>modified_field</code> specify the name of the field that the time is inserted into. Defaults to <em>created_on</em> and <em>modified_on</em>.</p>
+
+<h3><code>$log_user</code></h3>
+
+<p><code>log_user</code> provides a way to keep a small activity trail of actions related to each record.  When TRUE, it will populate a field in the record with the user id. This applies to the <code>insert</code>, <code>update</code> and <code>deleted</code> commands, and their related methods, like <code>update_by</code>.</p>
+
+<p>The name of the fields to store the user id in can be set by changing the <code>created_by_field</code>, <code>modified_by_field</code> and <code>deleted_by_field</code> values. They default to <code>created_by</code>, <code>modified_by</code> and <code>deleted_by</code>, respectively.</p>
+
+<h3><code>$deleted_field</code> &amp; <code>$deleted_by_field</code></h3>
+
+<p><code>deleted_field</code> and <code>deleted_by_field</code> specify the name of the fields used to determine whether a row has been deleted (when <code>$soft_deletes</code> == true) and the user which deleted the row (when <code>$log_user</code> == true).</p>
+
+<h3><code>$escape</code></h3>
+
+<p>When FALSE, the <code>select()</code> method will not try to protect your field names with backticks. This is useful if you need a compound statement.</p>
+
+<h3><code>$db_con</code></h3>
+
+<p>Holds the database connection details for this model only. Can be either a string or an array as per the <a href="http://codeigniter.com/user_guide/database/connecting.html">CodeIgniter manual</a>. This is useful if you have a single model that needs to use a database connection different than the rest, like a logging class.</p>
+
+<h3><code>$return_type</code></h3>
+
+<p>Specifies whether the model returns records as an object or an array. The only valid values here are <code>object</code> or <code>array</code>.</p>
+
+<p>The format can be overridden on a per-call basis using the <code>as_array</code> and <code>as_object</code> methods.</p>
+
+<pre><code>$user = $this-&gt;user_model-&gt;as_array()-&gt;find($id);
+</code></pre>
+
+<h3><code>$protected_attributes</code></h3>
+
+<p>This is simply a list of keys that will always be removed from the data arrays passed to the insert, update, and similar methods. This is convenient if you like to throw your $_POST arrays directly at the model, but don't want the 'submit' inputs being saved, or for always removing the 'id' if it's passed in.</p>
+
+<pre><code>protected $protected_attributes = array( 'submit', 'id' );
+</code></pre>
+
+<h3><code>$field_info</code></h3>
+
+<p>This is an array of field definitions which may be used (in combination with <code>prep_data()</code>) to define the model's interaction with the database. If <code>field_info</code> is empty, the model will query the database to fill this array when using <code>get_field_info()</code>. The <code>field_info</code> array could also be used by a controller to help map post data to the fields in the model. See CodeIgniter's <code>$this-&gt;db-&gt;field_data()</code> <a href="http://www.codeigniter.com/user_guide/#database-reference">http://www.codeigniter.com/user_guide/#database-reference</a></p>
+
+<p>The field definition should be as follows:</p>
+
+<pre><code>$field_info = array(
+    array(
+        'name'          =&gt; 'id',
+        'type'          =&gt; 'int',
+        'primary_key'   =&gt; 1,
+    ),
+    array(
+        'name'          =&gt; 'field_1_name',
+        'type'          =&gt; 'varchar',
+        'default'       =&gt; '',
+        'max_length'    =&gt; 255,
+    ),
+);
+</code></pre>
+
+<h2>Provided Methods</h2>
+
+<p>By using the skeleton file, you get a number of methods ready to use on your model. All of these methods can be overriden in your own model if you need to customize them by joining other tables, processing the results before handing off to the controller, etc.</p>
+
+<pre><code>$user = $this-&gt;user_model-&gt;select(&#x2018;id, username, email&#x2019;)
+                         -&gt;where(&#x2018;deleted&#x2019;, 1)
+                         -&gt;limit(10,0)
+                         -&gt;find_all();
+</code></pre>
+
+<p>If you need to do additional processing, join tables, etc than you can do that in your model using CodeIgniter&#x2019;s built-in ActiveRecord commands.</p>
+
+<pre><code>class User_model extends IGO_Model {
+    public function find_all()
+    {
+        $this-&gt;db-&gt;join(...);
+        return parent::find_all();
+    }
+}
+</code></pre>
+
+<p><a name="selecting" href=" "><title></title></a></p>
+
+<h2>Selecting Data</h2>
+
+<h3><code>find()</code></h3>
+
+<p>The <code>find()</code> method is used to locate a single record based on it's <code>id</code>.</p>
+
+<pre><code>$user = $this-&gt;user_model-&gt;find($id);
+
+echo $user-&gt;username;
+</code></pre>
+
+<p>Returns an object with the results if found, or <code>FALSE</code> if not found.</p>
+
+<h3><code>find_by()</code></h3>
+
+<p>A convenience method that combines the <code>where()</code> and <code>find()</code> methods. Expects to return a single result, so you should search on a field that will have unique values.</p>
+
+<pre><code>$this-&gt;user_model-&gt;find_by('email', 'darth@theempire.com');
+</code></pre>
+
+<p>This method can also be called with only a single associative array as the first parameter. This allows you set multiple criteria to search by.</p>
+
+<pre><code>$user = $this-&gt;user_model-&gt;find_by( array('email'=&gt;'darth@theempire.com', 'deleted'=&gt;0) );
+
+# SQL: SELECT * FROM `igo_users` WHERE email='darth@theempire.com' AND deleted='0'
+</code></pre>
+
+<p>This defaults to combining all criteria as "AND" but can be modified by passing the the type into the third parameter:</p>
+
+<pre><code>$user = $this-&gt;user_model-&gt;find_by( array('email'=&gt;'darth@theempire.com', 'deleted'=&gt;0), null, 'OR' );
+
+# SQL: SELECT * FROM `igo_users` WHERE email='darth@theempire.com' OR deleted='0'
+</code></pre>
+
+<h3><code>find_all()</code></h3>
+
+<p>Locates all records in the table.</p>
+
+<pre><code>$this-&gt;user_model-&gt;find_all();
+</code></pre>
+
+<p>If you need to modify the search criteria you can use any of the chainable methods.</p>
+
+<pre><code>$users = $this-&gt;user_model-&gt;where('deleted', 1)
+                          -&gt;limit(25)
+                          -&gt;find_all();
+
+foreach ($users as $user)
+{
+    echo $user-&gt;username;
+}
+</code></pre>
+
+<p>Returns an array of objects where each object holds the results of a single record.</p>
+
+<h3><code>find_all_by()</code></h3>
+
+<p>Locates all records matching certain criteria. This is a convenience method for using a <code>where()</code> and a <code>find_all()</code> in one command.</p>
+
+<pre><code>$this-&gt;user_model-&gt;find_all_by('deleted', 1);
+</code></pre>
+
+<p>Any of the standard options available to a CodeIgniter <code>where()</code> method may be used here.</p>
+
+<pre><code>$this-&gt;user_model-&gt;find_all_by('deleted', 1);
+$this-&gt;user_model-&gt;find_all_by('deleted !=', 0);
+$this-&gt;user_model-&gt;find_all_by( array('email'=&gt;'darth@theempire.com', 'deleted'=&gt;0) );
+</code></pre>
+
+<p>Returns an array of objects where each object holds the results of a single record.</p>
+
+<p><a name="inserting" href=" "><title></title></a></p>
+
+<h2>Inserting Data</h2>
+
+<h3><code>insert()</code></h3>
+
+<p>Creates a new record. Will set the <code>created_on</code> field if the model is setup to allow that. The first parameter should be an associative array of field/values to insert.</p>
+
+<pre><code>$user = array(
+    'email'     =&gt; 'dart@theempire.com',
+    'username'  =&gt; 'darth.vader'
+);
+$this-&gt;user_model-&gt;insert($user);
+
+# SQL: INSERT INTO `igo_users` (email, username, created_on) VALUES ('darth@theempire.com', 'darth.vader', 1321645674);
+</code></pre>
+
+<p>Returns an INT ID of the new record on success, or <code>FALSE</code> on failure.</p>
+
+<h3><code>insert_batch()</code></h3>
+
+<p>Allows for inserting more than one record at a time. Works just like CodeIgniter&#x2019;s stock method, but handles setting the table name for you.</p>
+
+<pre><code>$data = array(
+   array(
+      'title' =&gt; 'My title' ,
+      'name' =&gt; 'My Name' ,
+      'date' =&gt; 'My date'
+   ),
+   array(
+      'title' =&gt; 'Another title' ,
+      'name' =&gt; 'Another Name' ,
+      'date' =&gt; 'Another date'
+   )
+);
+
+$this-&gt;db-&gt;insert_batch('mytable', $data);
+</code></pre>
+
+<p><a name="updating" href=" "><title></title></a></p>
+
+<h2>Updating Data</h2>
+
+<h3><code>update()</code></h3>
+
+<p>Updates an existing record in the database by ID. Will set the correct time for the <code>modified_on</code> field, if the model requires it.</p>
+
+<pre><code>$user = array(
+    'email'     =&gt; 'dart@theempire.com',
+    'username'  =&gt; 'darth.vader'
+);
+$this-&gt;user_model-&gt;update($user_id, $user);
+
+# SQL: UPDATE `igo_users` SET email='darth@theempire.com', username='darth.vader', modified_on=1321645674 WHERE id=1;
+</code></pre>
+
+<p>Returns a boolean <code>TRUE/FALSE</code> on success/failure.</p>
+
+<h3><code>update_where()</code></h3>
+
+<p>Updates a single record in the database by a key/value pair. Will set the correct time for the <code>modified_on</code> field, if the model requires it.</p>
+
+<pre><code>$user = array(
+    'email'     =&gt; 'dart@theempire.com',
+    'username'  =&gt; 'darth.vader'
+);
+$this-&gt;user_model-&gt;update('is_father', 1, $user);
+
+# SQL: UPDATE `igo_users` SET email='darth@theempire.com', username='darth.vader', modified_on=1321645674 WHERE is_father=1;
+</code></pre>
+
+<h3><code>update_batch()</code></h3>
+
+<p>Updates multiple records with a single method call.</p>
+
+<pre><code class="language-php">  $data = array(
+     array(
+        'title' =&gt; 'My title' ,
+        'name' =&gt; 'My Name 2' ,
+        'date' =&gt; 'My date 2'
+     ),
+     array(
+        'title' =&gt; 'Another title' ,
+        'name' =&gt; 'Another Name 2' ,
+        'date' =&gt; 'Another date 2'
+     )
+  );
+
+  $this-&gt;model-&gt;update_batch($data, 'title');
+</code></pre>
+
+<p>The first parameter is an array of values. The second parameter is the where key.</p>
+
+<p><a name="deleting" href=" "><title></title></a></p>
+
+<h2>Deleting Data</h2>
+
+<h3><code>delete()</code></h3>
+
+<p>Deletes a single record from the database. If <code>$soft_deletes</code> are on, then will just set the <code>deleted</code> field to <code>1</code>. Otherwise, will permanently delete the record from the database.</p>
+
+<pre><code>$this-&gt;user_model-&gt;delete($user_id);
+
+# SQL w/ soft deletes: UPDATE igo_users SET deleted=1 WHERE id=$user_id;
+# SQL w/out soft deletes: DELETE FROM igo_users WHERE id=$user_id;
+</code></pre>
+
+<p>Returns a boolean <code>TRUE/FALSE</code> on success/failure.</p>
+
+<h3><code>delete_where()</code></h3>
+
+<p>Deletes one or more records that match certain requirements. If <code>$soft_deletes == true</code>, will set the <code>deleted</code> field to 1, otherwise will delete the record permenantly.</p>
+
+<p>The first parameter accepts an array of key/value pairs to form the &#x2018;where&#x2019; portion of the query.</p>
+
+<pre><code>$wheres = array(
+    &#x2018;active&#x2019;    =&gt; 0,
+    &#x2018;last_login&#x2019; =&gt; &#x2018;&lt; &#x2018;. time()
+);
+$this-&gt;model-&gt;delete_where($wheres);
+</code></pre>
+
+<p><a name="utility" href=" "><title></title></a></p>
+
+<h2>Utility Methods</h2>
+
+<h3><code>is_unique()</code></h3>
+
+<p>Checks to see if a given field/value combination would be unique in the table.</p>
+
+<pre><code>$this-&gt;user_model-&gt;is_unique('email', 'darth@theempire.com');
+</code></pre>
+
+<h3><code>count_all()</code></h3>
+
+<p>Counts all records in the table.</p>
+
+<pre><code>$this-&gt;user_model-&gt;count_all();
+</code></pre>
+
+<p>Returns an INT containing the number of results, or FALSE.</p>
+
+<h3><code>count_by()</code></h3>
+
+<p>Counts the number of elements that match the field/value pair.</p>
+
+<pre><code>$this-&gt;user_model-&gt;count_by('delete', 1);
+</code></pre>
+
+<p>Returns an INT containing the number of results, or FALSE.</p>
+
+<h3><code>get_field()</code></h3>
+
+<p>A convenience method to return only a single field of the specified row. The first parameter is the ID of the row to search in. The second parameter is the column to return the value of.</p>
+
+<pre><code>$this-&gt;user_model-&gt;get_field($user_id, 'email');
+</code></pre>
+
+<p>Returns the value of the row's field, or FALSE.</p>
+
+<h3><code>get_created_field()</code>, <code>get_modified_field()</code>, <code>get_deleted_field()</code>, <code>get_created_by_field()</code>, <code>get_modified_by_field()</code>, &amp; <code>get_deleted_by_field()</code></h3>
+
+<p>Returns the names of the respective fields, or an empty string if the fields are not used by the model (based on the values of <code>set_created</code>, <code>set_modified</code>, <code>soft_deletes</code>, and <code>log_user</code>).</p>
+
+<h3><code>get_field_info()</code></h3>
+
+<p>Returns the <code>$field_info</code> array, attempting to populate it from the database if empty.</p>
+
+<h3><code>prep_data()</code></h3>
+
+<p>Intended to be called by a controller and/or extended in the model, <code>prep_data</code> processes an array of field/value pairs (can be the result of <code>$this-&gt;input-&gt;post()</code>) and attempts to setup a <code>$data</code> array suitable for use in the model's <code>insert</code>/<code>update</code> methods. The output array will not include the model's <code>key</code>, <code>created_on</code>, <code>created_by</code>, <code>modified_on</code>, <code>modified_by</code>, <code>deleted</code>, or <code>deleted_by</code> fields, or fields indicated as the primary key in the model's <code>field_info</code> array.</p>
+
+<p>For example, the user_model extends prep_data to map field names from the view that don't match the tables in the database and ensure fields that should not be set are not set:</p>
+
+<pre><code>public function prep_data($post_data)
+{
+    $data = parent::prep_data($post_data);
+
+    if ( ! empty($post_data['timezones'])) {
+        $data['timezone'] = $post_data['timezones'];
+    }
+    if ( ! empty($post_data['password'])) {
+        $data['password'] = $post_data['password'];
+    }
+    if ($data['display_name'] === '') {
+        unset($data['display_name']);
+    }
+    if (isset($post_data['restore']) &amp;&amp; $post_data['restore']) {
+        $data['deleted'] = 0;
+    }
+    if (isset($post_data['unban']) &amp;&amp; $post_data['unban']) {
+        $data['banned'] = 0;
+    }
+    if (isset($post_data['activate']) &amp;&amp; $post_data['activate']) {
+        $data['active'] = 1;
+    } elseif (isset($post_data['deactivate']) &amp;&amp; $post_data['deactivate']) {
+        $data['active'] = 0;
+    }
+
+    return $data;
+}
+</code></pre>
+
+<p>The User Settings controller then uses the model's <code>prep_data</code> method to process the post data before inserting/updating the user:</p>
+
+<pre><code>private function save_user($type='insert', $id=0, $meta_fields=array(), $cur_role_name = '')
+{
+    /* ... Omitting validation setup and gathering of user_meta data ... */
+
+    // Compile our core user elements to save.
+    $data = $this-&gt;user_model-&gt;prep_data($this-&gt;input-&gt;post());
+
+    if ($type == 'insert') {
+        $activation_method = $this-&gt;settings_lib-&gt;item('auth.user_activation_method');
+
+        // No activation method
+        if ($activation_method == 0) {
+            // Activate the user automatically
+            $data['active'] = 1;
+        }
+
+        $return = $this-&gt;user_model-&gt;insert($data);
+        $id = $return;
+    } else {    // Update
+        $return = $this-&gt;user_model-&gt;update($id, $data);
+    }
+
+    /* ... Omitting saving user_meta data and event trigger ... */
+
+    return $return;
+
+}//end save_user()
+</code></pre>
+
+<p><a name="returns" href=" "><title></title></a></p>
+
+<h2>Return Types</h2>
+
+<p>You can temporarily override the type of records returned by the model by using the folliwing commands. This allows you to use objects as a default since they consume less memory, but ask for the results as an array for a single method that you need the extra flexibilty arrays provide.</p>
+
+<h3><code>as_array()</code></h3>
+
+<p>A chainable method that specifies the model should return the results as an array (for single results) or an array of arrays (for multiple rows). This overrides the models <code>$result_type</code> class variable.</p>
+
+<h3><code>as_object()</code></h3>
+
+<p>A chainable method that specifies the model should return the results as an object (for single results) or an array of objects (for multiple rows). This overrides the models <code>$result_type</code> class variable.</p>
+
+<h3><code>as_json()</code></h3>
+
+<p>A chainable method that specifies the model should return the results as a JSON object suitable for returning in AJAX methods. This overrides the models <code>$result_type</code> class variable.</p>
+
+<p><a name="chainable" href=" "><title></title></a></p>
+
+<h2>Chainable Methods</h2>
+
+<p>Thanks to CodeIgniter's <a href="http://www.codeigniter.com/user_guide/#database-reference">ActiveRecord</a> library, it is very simply to modify the BF_Model's methods. This can be done through either chainable methods or by extending methods.</p>
+
+<p>Chainable methods are a feature of PHP 5 and higher that allow you to return the results of one function into another, and to keep this 'chain' of events continuing through several functions. Bonfire duplicates several of the stock ActiveRecord methods in BF_Model to make it simple and elegant to customize your queries.</p>
+
+<p>Bonfire's model supports chaining for most of the ActiveRecord methods available, including:</p>
+
+<ul>
+<li>select</li>
+<li>select_max</li>
+<li>select_min</li>
+<li>select_avg</li>
+<li>select_sum</li>
+<li>distinct</li>
+<li>from</li>
+<li>join</li>
+<li>where</li>
+<li>or_where</li>
+<li>where_in</li>
+<li>or_where_in</li>
+<li>where_not_in</li>
+<li>or_where_not_in</li>
+<li>like</li>
+<li>not_like</li>
+<li>or_like</li>
+<li>or_not_like</li>
+<li>group_by</li>
+<li>having</li>
+<li>or_having</li>
+<li>limit</li>
+<li>offset</li>
+<li>set</li>
+</ul>
+
+<p>All of these methods accept the same parameters as their <a href="http://www.codeigniter.com/user_guide/#database-reference">CodeIgniter</a> counterparts. These are included for the sole reason of making your syntax more expressive. You can now do things like:</p>
+
+<pre><code>$this-&gt;user_model-&gt;where('city', 'Detroit')
+                 -&gt;or_where('city', 'Cleveland')
+                 -&gt;join('tour_dates', 'x on y')
+                 -&gt;find_all();
+</code></pre>
+
+<h3><code>where()</code></h3>
+
+<p>Modifies the query to a specific <code>where</code> condition. Can be used with any of the read-type queries (find, find_all, etc).</p>
+
+<p>The first parameter is the field to match against. The second parameter is the value of the field to find.</p>
+
+<p>Accepts any of the standard CodeIgniter ActiveRecord where statements.</p>
+
+<pre><code>$this-&gt;user_model-&gt;where('email', 'darth@theempire.com');
+$this-&gt;user_model-&gt;where('email !=', 'darth@theempire.com');
+$this-&gt;user_model-&gt;where( array('email' =&gt; 'darth@theempire.com') );
+
+$this-&gt;user_model-&gt;where('email', 'darth@theempire.com')
+                 -&gt;find_all();
+</code></pre>
+
+<p>You can also pass an array of field/value pairs as the first parameter. In this case, the second parameter is ignored.</p>
+
+<pre><code>$wheres = array(
+    &#x2018;active&#x2019;        =&gt; 1,
+    &#x2018;deleted&#x2019;   =&gt; 0
+);
+$results = $this-&gt;model-&gt;where($wheres)-&gt;find_all();
+</code></pre>
+
+<p><a name="extending" href=" "><title></title></a></p>
+
+<h2>Extending Methods</h2>
+
+<p>While it is possible to modify the query via the chainable methods any time you need results in your controller, it is highly recommended to extend the model's methods to bring you the results you need. This keeps all of your changes to queries in a single place.</p>
+
+<p>Sometimes, you might want to do some additional processing to the database results before passing it on to the controller. This is another perfect example of when to extend the model's method.</p>
+
+<p>To extend an existing method, you simply create a new method in your model that accepts the same parameters as the original BF_Model method.</p>
+
+<pre><code>// Extend the existing functionality.
+public function find($id=null)
+{
+    $result = parent::find($id);
+
+    if ($result)
+    {
+        $result-&gt;display_name = $this-&gt;format_name($result);
+    }
+
+    return $result;
+}
+</code></pre>
+
+<h2>Modify Query in Controller</h2>
+
+<p>You can modify a query in your model for a single use by using CodeIgniter's ActiveRecord commands in your controllers. Since BF_Model uses the ActiveRecord commands, the changes in your controller will affect the results of the next query in your model.</p>
+
+<pre><code>// In your controller.
+$this-&gt;db-&gt;join('other_table', 'link_field = users.id', 'left');
+$user = $this-&gt;user_model-&gt;find($user_id);
+</code></pre>
+
+<p><a name="observers" href=" "><title></title></a></p>
+
+<h2>Observers</h2>
+
+<p>Observers provide a simple and convenient method for your models to change portions of the data at certain execution points within a model&#x2019;s interaction. This can be very handy for adding in the created_on time before inserting a record, or deleting related records in other tables whenever a user is deleted.</p>
+
+<p>The following events can be observed by your class:</p>
+
+<ul>
+<li>before_insert</li>
+<li>after_insert</li>
+<li>before_update</li>
+<li>after_update</li>
+<li>before_find</li>
+<li>after_find</li>
+<li>before_delete</li>
+<li>after_delete</li>
+<li>empty_validation_rules</li>
+</ul>
+
+<p>These are each arrays that should have the name of the methods to call, in order of priority as the array&#x2019;s elements.</p>
+
+<pre><code>protected $before_insert = array(&#x2018;set_created_on&#x2019;, &#x2018;another_callback&#x2019;);
+</code></pre>
+
+<p>To observe an event and have your methods called you simply add the method name to the definition array and create a new function.</p>
+
+<pre><code>protected function set_created_on($row)
+{
+    if (!array_key_exists($this-&gt;created_field, $row))
+    {
+        $row[$this-&gt;created_field] = $this-&gt;set_date();
+    }
+
+    return $row;
+}
+</code></pre>
+
+<p>Each observing method must accept a single parameter. Depending on the event triggered, this might be a single INT, or an array of values, etc. Check the function to verify what the payload being passed along is for the event you&#x2019;re observing.</p>
+
+<p>The following table lists what data should be expected during each observer. Note that the *_batch or *_many may exhibit slightly different behaviour. You should familiarize yourself with code for each if you need special triggers for these situations.</p>
+
+<table class="table table-hover">
+<thead>
+<tr>
+  <th>Trigger</th>
+  <th>Type</th>
+  <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>before_insert</td>
+  <td>array</td>
+  <td>The values to be inserted in the new record</td>
+</tr>
+<tr>
+  <td>after_insert</td>
+  <td>mixed</td>
+  <td>The primary_key of the row just inserted.</td>
+</tr>
+<tr>
+  <td>before_update</td>
+  <td>array</td>
+  <td>The values to be updated. Does NOT include the primary key.</td>
+</tr>
+<tr>
+  <td>after_update</td>
+  <td>array</td>
+  <td>The data that was inserted (including any modifications made in before_udpate).</td>
+</tr>
+<tr>
+  <td>before_find</td>
+  <td>mixed</td>
+  <td>The primary_key of the row to find.</td>
+</tr>
+<tr>
+  <td>after_find</td>
+  <td>array/object</td>
+  <td>The found object/array (depends on the specified return type for that model)</td>
+</tr>
+<tr>
+  <td>before_delete</td>
+  <td>mixed</td>
+  <td>The primary_key of the row to be deleted.</td>
+</tr>
+<tr>
+  <td>after_delete</td>
+  <td>mixed</td>
+  <td>The primary_key of the row that was just deleted.</td>
+</tr>
+<tr>
+  <td>empty_validation_rules</td>
+  <td>array</td>
+  <td>An array of temporary validation rules.</td>
+</tr>
+</tbody>
+</table>
+
+<p><a name="validation" href=" "><title></title></a></p>
+
+<h2>Validating Data</h2>
+
+<p>The model should contain all of the validation rules for your data so that it is always kept in a single place with the model that represents it. Bonfire's models provide a simple way to automatically have your data validated during inserts and updates.</p>
+
+<h3>Basic Validation</h3>
+
+<p>The <code>$validation_rules</code> variable can take an array of data that follows the same format as CodeIgniter's <a href="http://www.codeigniter.com/user_guide/#database-reference">Form Validation Library</a>.</p>
+
+<pre><code>protected $validation_rules = array(
+    array(
+        'field' =&gt; 'username',
+        'label' =&gt; 'Username',
+        'rules' =&gt; 'trim|strip_tags|min_length[4]|xss_clean'
+    ),
+    array(
+        'field' =&gt; 'password',
+        'label' =&gt; 'lang:igo_password',
+        'rules' =&gt; 'trim|min_length[8]'
+    )
+);
+</code></pre>
+
+<p>Note: the value of the <code>label</code> can be retrieved from a language file by prefixing the name of the entry in the language file with <code>lang:</code>, as in the example for the password field, above.</p>
+
+<p>During an insert or update, the data passed in is automatically validated using the form_validaiton library. If the validation doesn't pass successfully, the insert/update method will return a value of FALSE and the form_validation_ library will function as expected, providing errors through <code>validation_errors</code> and <code>form_error</code>.</p>
+
+<h3>Insert Rules Customization</h3>
+
+<p>Often, you will have certain rules that are slightly different during object creation than you will during an update. Frequently, this is as simple as having a field required during inserts, but not during updates. You can handle this by adding any additional rules for inserts in the <code>$insert_validation_rules</code> class variable.</p>
+
+<pre><code>protected $insert_validation_rules = array(
+   'password'   =&gt; 'required|matches[pass_confirm]'
+);
+</code></pre>
+
+<p>Unlike, the $validation_rules array, the $insert_validation_rules array consists of the field name as the key, and the additional rules as the value. Theses rules are added at the end of the normal rules string before being passed to the form_validation library.</p>
+
+<h3>Skipping Validation</h3>
+
+<p>If you need to turn off validation for any reason (like performance durin a large CSV import) you can use the <code>skip_validation()</code> method, passing either TRUE or FALSE to the skip or not skip the validation process. This stays in effect as long as the model is loaded but will reset the next time the model is loaded in memory. Typically the next page request.</p>
+
+<pre><code>$this-&gt;user_model-&gt;skip_validation(true);
+
+$this-&gt;user_model-&gt;skip_validation(true)-&gt;insert($data);
+</code></pre>
+
+<h3>Traditional validation using the Model's validation rules</h3>
+
+<p>If you wish to perform validation in the Controller (or another Model), you can retrieve the validation rules from the Model using the <code>get_validation_rules()</code> method, passing either 'update' or 'insert' to determine whether the <code>$insert_validation_rules</code> are added (you will probably want to disable the model's validation when calling the <code>insert()</code>/<code>update()</code> methods using the <code>skip_validation()</code> method or the model's <code>skip_validation</code> property). The rules may then be passed to CI's Form Validation library to perform validation:</p>
+
+<pre><code>$this-&gt;form_validation-&gt;set_rules($this-&gt;example_model-&gt;get_validation_rules('update'));
+
+if ($this-&gt;form_validation-&gt;run() === false) {
+    return false;
+}
+</code></pre>
+
+<h3>Generating validation rules</h3>
+
+<p>If you want to generate the validation rules in code (rather than supplying a hard-coded array), you can supply the name of a function to the <code>$empty_validation_rules</code> observer to generate the validation rules. The function will receive an array of the current validation rules (usually empty or a non-array value, but if multiple functions are used with the observer, it may be a valid array), and is expected to return an array of validation rules.</p>
+
+<p>For instance, you could create a function that uses $this-&gt;db-&gt;field_data($this-&gt;table_name) to retrieve the field information directly from the database, then iterate through the results to create validation rules for each field based on the information returned by the database.</p>
+
+<p>Because it is faster to use the array, the observer will not be called if the array has been set (and the array generated by the observer when it is called will be assigned to the array to prevent the current instance of the model from attempting to generate the rules again).</p></div>    </div>
+
+                </div>
+            </div>
+
+        </div>

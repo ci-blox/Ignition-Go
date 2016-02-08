@@ -1,0 +1,56 @@
+<h2>Controller</h2>
+
+<h2>Overview</h2>
+
+<p>This section covers use of controller classes within your application.  Codeigniter includes the CI_Controller, but the below controller classes provide more flexibility.</p>
+
+<p>Each controller type is meant to serve a specific purpose, and they are all easily adaptable to fit your needs.  Important Note: be sure to capitalize the first letter of your controller, or otherwise CI will not find them.</p>
+
+
+
+<h3>Base_Controller</h3>
+
+<p>All of the custom controllers extend from the <code>Base_Controller</code>.  This class extends the MX_Controller from <a href="https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc/wiki/Home">WireDesign&#x2019;s HMVC</a>. </p>
+
+<p>This controller is the place that you want to setup anything that should happen for every page, like:</p>
+
+<ul>
+<li>Setup environment-specific settings, like turning the profiler on for development and off for production and testing.</li>
+<li>Get the cache setup correctly.  This is currently setup to only use a file-based cache, but you can easily tell it to use APC if available, and fallback to the file system if not.</li>
+<li>This controller also sets up certain events that will get executed just before and just after the Base_Controller&#x2019;s constructor runs.</li>
+</ul>
+
+<p>Some of the things that would normally be auto-loaded are handled here so that any AJAX controllers you may write don't need to process any of these other settings.</p>
+
+<p>By default, the Base_Controller class provides the following features for any of your classes that extend it:</p>
+
+<ul>
+<li><code>$previous_page</code> and <code>$requested_page</code> class vars that help you know where you came from. These are auto-populated for you.</li>
+<li><code>$current_user</code> class var that, if logged in, will contain all of the information from the users table. This same information is automatically made available to the view files that are rendered with the Template class.</li>
+<li>Loads the cache drivers. For development environments, we simply harness the 'dummy' driver which always returns FALSE. Production and test environments default to APC caching with a file-based backup, if that's not available.</li>
+<li>Gets the <code>activity model</code> loaded and ready.</li>
+<li>Loads the <code>application language</code> file.</li>
+</ul>
+
+<p><a name="front" href=" "><title></title></a></p>
+
+<h3>Front_Controller</h3>
+
+<p>The <code>Front_Controller</code> is intended to be used as the base for any public-facing controllers.  As such, anything that needs to be done for the front-end can be done here.  The Template library is loaded. </p> 
+
+<h3>Api_Controller</h3>
+<p>This controller class is for use as a REST API server. </p>
+
+<h3>Admin_Controller</h3>
+<p>This controller class is for use within the Admin area. </p>
+
+<h3>Additional Resources</h3>
+<ul>
+<li><a class="reference internal" href="#what-is-a-controller" id="id2">What is a Controller?</a></li>
+<li><a class="reference internal" href="#methods" id="id4">Methods</a></li>
+<li><a class="reference internal" href="#passing-uri-segments-to-your-methods" id="id5">Passing URI Segments to your methods</a></li>
+<li><a class="reference internal" href="#remapping-method-calls" id="id7">Remapping Method Calls</a></li>
+<li><a class="reference internal" href="#processing-output" id="id8">Processing Output</a></li>
+<li><a class="reference internal" href="#class-constructors" id="id11">Class Constructors</a></li>
+<li><a class="reference internal" href="#reserved-method-names" id="id12">Reserved method names</a></li>
+</ul>
