@@ -1,4 +1,4 @@
-# Themes and Views (the Template library)
+# Views and Themes (the Template library)
 
 ## Overview
 
