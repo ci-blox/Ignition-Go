@@ -1,6 +1,11 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
+
+#
+# TABLE STRUCTURE FOR: sessions
+#
+
 CREATE TABLE IF NOT EXISTS `igo_sessions` (
   `id` varchar(40) NOT NULL,
   `ip_address` varchar(45) NOT NULL,
@@ -14,6 +19,7 @@ CREATE TABLE IF NOT EXISTS `igo_sessions` (
 # TABLE STRUCTURE FOR: user / login related
 #
 
+# login attempt tracking
 CREATE TABLE IF NOT EXISTS `igo_login_attempts` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `ip_address` varchar(45) NOT NULL,
@@ -22,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `igo_login_attempts` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+# user
 CREATE TABLE IF NOT EXISTS `igo_users` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `role` enum('admin','staff','user','support') NOT NULL DEFAULT 'user',
@@ -53,6 +60,7 @@ CREATE TABLE IF NOT EXISTS `igo_users` (
 INSERT INTO `igo_users` (`id`, `role`, `email`, `username`, `password_hash`, `reset_hash`, `last_login`, `last_ip`, `created_on`, `deleted`, `reset_by`, `banned`, `ban_message`, `display_name`, `display_name_changed`, `timezone`, `language`, `active`, `activate_hash`, `force_password_reset`) VALUES
 (1, 'admin', 'admin@ciblox.com', 'admin', '$2a$08$T/79zwGVEtodc2Sop8XPReTrv0WviLcFt1Zp3d3ywlAuVCrmsTszi', NULL, '0000-00-00 00:00:00', '', now(), 0, NULL, 0, NULL, 'admin', NULL, 'UM6', 'english', 1, '', 0);
 
+# cookies
 CREATE TABLE IF NOT EXISTS `igo_user_cookies` (
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `token` varchar(128) NOT NULL,
@@ -60,6 +68,7 @@ CREATE TABLE IF NOT EXISTS `igo_user_cookies` (
   KEY `token` (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+# user meta data
 CREATE TABLE IF NOT EXISTS `igo_user_meta` (
   `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
@@ -68,10 +77,12 @@ CREATE TABLE IF NOT EXISTS `igo_user_meta` (
   PRIMARY KEY (`meta_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 #
-# TABLE STRUCTURES FOR: Securinator
+# TABLE STRUCTURES FOR: Securinator (permissions, roles)
 #
 
+# permissions
 CREATE TABLE IF NOT EXISTS `igo_sec_permissions` (
   `permission_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -98,7 +109,7 @@ INSERT INTO `igo_sec_permissions` (`permission_id`, `name`, `description`, `stat
 (24, 'Permissions.User.Manage', 'To manage the access control permissions for the User role.', 'active'),
 (25, 'Permissions.Support.Manage', 'To manage the access control permissions for the Support role.', 'active');
 
-
+# roles info
 CREATE TABLE IF NOT EXISTS `igo_sec_roles` (
   `role` enum('admin','staff','user','support'),
   `role_name` varchar(60) NOT NULL,
@@ -116,10 +127,13 @@ INSERT INTO `igo_sec_roles` (`role`, `role_name`, `description`, `default`, `can
 ('user', 'User', 'This is the default user with access to login.', 1, 0, '',  0),
 ('support', 'Support', 'Has subset of Administrator power.', 0, 1, '',  0);
 
+# role to permission cross reference
 CREATE TABLE IF NOT EXISTS `igo_sec_role_permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `role`  enum('admin','staff','user','support') NOT NULL,
   `permission_id` int(11) NOT NULL,
-  PRIMARY KEY (`role`,`permission_id`)
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `idx_sec_role_permission_id` (`role`, `permission_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `igo_sec_role_permissions` (`role`, `permission_id`) VALUES
@@ -140,11 +154,13 @@ INSERT INTO `igo_sec_role_permissions` (`role`, `permission_id`) VALUES
 ('admin', 24),
 ('admin', 25);
 
+# app settings
 CREATE TABLE IF NOT EXISTS `igo_settings` (
   `name` varchar(30) NOT NULL,
   `category` varchar(255) NOT NULL,
   `scope` varchar(50) NOT NULL,
   `value` varchar(500) NOT NULL,
+  `textvalue` text NULL,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -180,3 +196,5 @@ INSERT INTO `igo_settings` (`name`, `category`, `scope`, `value`) VALUES
 ('smtp_port', 'email', 'all', ''),
 ('smtp_timeout', 'email', 'all', ''),
 ('smtp_user', 'common', 'all', '');
+
+# end install.sql

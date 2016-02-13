@@ -230,7 +230,7 @@ class User_model extends IGO_Model
      *
      * @param array $data An array of user information. 'password' and either 'email'
      * or 'username' are required, depending on the 'auth.use_usernames' setting.
-     * 'email' or 'username' must be unique. If 'role_id' is not included, the default
+     * 'email' or 'username' must be unique. If 'role' is not included, the default
      * role from the Roles model will be assigned.
      *
      * @return boolean|integer The ID of the new user on success, else false.
@@ -258,7 +258,7 @@ class User_model extends IGO_Model
 
         unset($data['password'], $password);
 
-        // Get the default role if the role_id was not provided.
+        // Get the default role if the role was not provided.
         if (! isset($data['role'])) {
             if (! class_exists('sec_role_model', false)) {
                 $this->load->model('securinator/sec_role_model');
@@ -395,7 +395,7 @@ class User_model extends IGO_Model
     {
         $this->db->select(array("{$this->roles_table}.role_name", 'count(1) as count'))
                  ->from($this->table_name)
-                 ->join($this->roles_table, "{$this->roles_table}.role_id = {$this->table_name}.role_id", 'left')
+                 ->join($this->roles_table, "{$this->roles_table}.role = {$this->table_name}.role", 'left')
                  ->group_by("{$this->roles_table}.role_name");
 
         $query = $this->db->get();
@@ -425,12 +425,12 @@ class User_model extends IGO_Model
         if (! class_exists('sec_role_model', false)) {
             $this->load->model('securinator/sec_role_model');
         }
-        $defaultRoleId = $this->sec_role_model->default_role_id();
+        $defaultRoleId = $this->sec_role_model->default_role();
 
-        $this->db->where('role_id', $current_role);
+        $this->db->where('role', $current_role);
         $query = $this->db->update(
             $this->table_name,
-            array('role_id' => $defaultRoleId)
+            array('role' => $defaultRoleId)
         );
 
         return (bool) $query;
@@ -939,7 +939,7 @@ class User_model extends IGO_Model
 
         $this->db->join(
             $this->roles_table,
-            "{$this->roles_table}.role_id = {$this->table_name}.role_id",
+            "{$this->roles_table}.role = {$this->table_name}.role",
             'left'
         );
     }
