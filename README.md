@@ -81,6 +81,7 @@ gulpfile.js/ **                 --- Task runner following gulp-starter 2.0 pract
 sql/                            --- MySQL files
 ignitcore/                         --- Ignition Go core files
 ignitcore/system/                         --- CodeIgniter core files (clean CI3 installation with modifications only to reference IGO core)
+```
 
 ### Asset Customization (e.g. additional js/css files)
 
