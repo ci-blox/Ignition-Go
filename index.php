@@ -52,8 +52,29 @@
  *     production
  *
  * NOTE: If you change these, also change the error_reporting() code below
- */
-	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+ */	
+define('DEFAULT_ENV', 'development');
+
+// the below if logic detects and kicks in if called from command line (cli),
+// so for cli we have the ability to pass in --env option
+if ((php_sapi_name() == 'cli') or defined('STDIN'))
+{
+	$environment = DEFAULT_ENV;
+	if (isset($argv)) 
+	{
+		// grab the --env argument, and the one that comes next
+
+		$key = (array_search('--env', $argv));
+		$environment = $argv[$key +1];
+
+		// get rid of them so they don't get passed in to our method as parameter values
+
+		unset($argv[$key], $argv[$key +1]);
+	}  
+  	define('ENVIRONMENT', $environment);
+} 
+
+if (!defined('ENVIRONMENT')) define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : DEFAULT_ENV);
 
 /*
  *---------------------------------------------------------------

@@ -40,6 +40,16 @@ class User_model extends IGO_Model
             'rules' => '',
         ),
         array(
+            'field' => 'first_name',
+            'label' => 'lang:us_first_name',
+            'rules' => 'trim|max_length[50]',
+        ),
+        array(
+            'field' => 'last_name',
+            'label' => 'lang:us_last_name',
+            'rules' => 'trim|max_length[50]',
+        ),
+        array(
             'field' => 'display_name',
             'label' => 'lang:us_display_name',
             'rules' => 'trim|max_length[255]',
@@ -65,9 +75,9 @@ class User_model extends IGO_Model
             'rules' => 'required|trim|valid_email|max_length[254]',
         ),
         array(
-            'field' => 'role_id',
+            'field' => 'role',
             'label' => 'lang:us_role',
-            'rules' => 'trim|max_length[2]|is_numeric',
+            'rules' => 'trim',
         ),
     );
 
@@ -90,7 +100,7 @@ class User_model extends IGO_Model
         array('name' => 'id', 'primary_key' => 1),
         array('name' => 'created_on'),
         array('name' => 'deleted'),
-        array('name' => 'role_id'),
+        array('name' => 'role'),
         array('name' => 'email'),
         array('name' => 'username'),
         array('name' => 'password_hash'),
@@ -100,6 +110,8 @@ class User_model extends IGO_Model
         array('name' => 'banned'),
         array('name' => 'ban_message'),
         array('name' => 'reset_by'),
+        array('name' => 'first_name'),
+        array('name' => 'last_name'),
         array('name' => 'display_name'),
         array('name' => 'display_name_changed'),
         array('name' => 'timezone'),
@@ -247,11 +259,11 @@ class User_model extends IGO_Model
         unset($data['password'], $password);
 
         // Get the default role if the role_id was not provided.
-        if (! isset($data['role_id'])) {
-            if (! class_exists('role_model', false)) {
-                $this->load->model('roles/role_model');
+        if (! isset($data['role'])) {
+            if (! class_exists('sec_role_model', false)) {
+                $this->load->model('securinator/sec_role_model');
             }
-            $data['role_id'] = $this->role_model->default_role_id();
+            $data['role'] = $this->sec_role_model->default_role();
         }
 
         $id = parent::insert($data);
@@ -410,10 +422,10 @@ class User_model extends IGO_Model
         }
 
         // Get the default role ID.
-        if (! class_exists('role_model', false)) {
-            $this->load->model('roles/role_model');
+        if (! class_exists('sec_role_model', false)) {
+            $this->load->model('securinator/sec_role_model');
         }
-        $defaultRoleId = $this->role_model->default_role_id();
+        $defaultRoleId = $this->sec_role_model->default_role_id();
 
         $this->db->where('role_id', $current_role);
         $query = $this->db->update(
