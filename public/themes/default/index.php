@@ -30,7 +30,7 @@
 </div>
 <?php /* echo theme_view('footer'); */ ?>
 <script src="<?php echo base_url(); ?>/components/jquery/dist/jquery.min.js"></script>
-<script src="<?php echo base_url(); ?>/components/bootstrap/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>/components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src='<?php echo base_url('assets/js/app.min.js'); ?>'></script>
 <script>
     var _gaq = _gaq || [];
