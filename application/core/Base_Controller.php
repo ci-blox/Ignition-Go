@@ -170,7 +170,7 @@ class Base_Controller extends MX_Controller
     {
         // Load the Auth library before the parent constructor to ensure the
         // current user's settings are honored by the parent
-        $this->load->library('users/auth');
+        $this->load->library('securinator/auth');
 
         // Ensure the user is logged in.
         $this->auth->restrict();

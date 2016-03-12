@@ -4,3 +4,5 @@
 */cache/*
 !*/cache/index.html
 !*/cache/.htaccess
+*/bower_components/*
+*/public/components/*

@@ -30,7 +30,7 @@ class Home extends MX_Controller
 	 */
 	public function index()
 	{
-		$this->load->library('users/auth');
+		$this->load->library('securinator/auth');
 		$this->set_current_user();
 		Template::render();
 	}//end index()
