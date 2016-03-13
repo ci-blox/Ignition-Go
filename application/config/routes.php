@@ -73,7 +73,8 @@ $route['api/(:any)/(:any)']				= "api_v1/$1/$2";
 
 
 // Authentication
-$route[LOGIN_URL] = 'users/login';
+$route[LOGIN_URL] = 'users/check/login';
+$route[LOGIN_BACKEND_URL] = 'admin/check/login';
 $route[REGISTER_URL] = 'users/register';
 
 $route['logout'] = 'users/logout';

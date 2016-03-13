@@ -71,8 +71,8 @@ class Check extends Front_Controller
         }
 
         // Prompt the user to login.
-        Template::set('secarea', 'Admin');
-        Template::set('secareatitleorlogo', 'Admin - Ignition Go');
+        Template::set('secarea', 'Registered User');
+        Template::set('secareatitleorlogo', 'Login - Ignition Go');
         Template::render('blank');
     }
 
