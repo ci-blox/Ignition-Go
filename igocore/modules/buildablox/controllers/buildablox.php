@@ -19,7 +19,7 @@ class Buildablox extends Admin_Controller
     {
         parent::__construct();
 
-        $this->lang->load('buildablox');
+        $this->lang->load('builder');
         $this->load->config('buildablox');
 
         $this->options = $this->config->item('buildablox');
@@ -414,7 +414,7 @@ class Buildablox extends Admin_Controller
             // No need to do any of the below on every iteration of the loop
             $lang_field_details = lang('mb_form_field_details') . ' ';
 
-            $this->load->library('buildablox');
+            $this->load->library('Modulebuilder');
 
             // Make sure the length field is required if the DB Field type
             // requires a length
