@@ -30,11 +30,11 @@ class Buildablox extends Admin_Controller
             $this->form_validation->set_error_delimiters($this->options['form_error_delimiters'][0], $this->options['form_error_delimiters'][1]);
         }
 
-        Assets::add_module_css('buildablox', 'buildablox.css');
-        Assets::add_module_js('buildablox', 'buildablox.js');
+        Modules::register_asset('buildablox.css');
+        Modules::register_asset('buildablox.js');
 
-        Template::set_block('sub_nav', 'developer/_sub_nav');
-        Template::set_block('sidebar', 'developer/sidebar');
+        Template::set_block('sub_nav', '_sub_nav');
+        Template::set_block('sidebar', 'sidebar');
     }
 
     /**

@@ -475,6 +475,22 @@ class MX_Loader extends CI_Loader
 			}
 		}
 	}
+
+/* ADDED ASSETS MGMT */
+    #Register your assets
+    public static function register_asset( $asset )
+    {
+        if( in_array($asset,self::$assets) === FALSE )
+        {
+            self::$assets[] = $asset;
+        }
+    }
+
+    public static function assets()
+    {
+            return self::$assets;
+    }
+/* END ASSETS MGMT */
 }
 
 /** load the CI class for Modular Separation **/

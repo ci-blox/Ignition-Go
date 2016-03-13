@@ -2,7 +2,7 @@
 <div class="alert alert-danger">
 	<p><?php echo lang('mb_not_writable_note'); ?></p>
 </div>
-<?php endif;?>
+<?php endif;?><link type="text/css" src="../assets/css/buildablox.css"/>
 <div class="admin-box">
 	<?php if (isset($modules) && is_array($modules) && count($modules)) : ?>
 	<table class="table table-striped">

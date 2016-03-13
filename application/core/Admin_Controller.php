@@ -19,7 +19,7 @@ class Admin_Controller extends Base_Controller
         parent::__construct();
 
         $this->load->library('form_validation');
-        $this->form_validation->CI =& $this;
+        //$this->form_validation->CI =& $this;
         $this->form_validation->set_error_delimiters('', '');
         
         Template::set_theme('backend');
