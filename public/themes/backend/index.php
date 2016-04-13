@@ -156,8 +156,8 @@ Apply one or more of the following
 
 <!-- REQUIRED JS SCRIPTS -->
 
-<!-- jQuery 2.1.4 -->
-<script src="<?php echo $adm_url; ?>plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<!-- jQuery 2.2.0 -->
+<script src="<?php echo $adm_url; ?>plugins/jQuery/jQuery-2.2.0.min.js"></script>
 <!-- Bootstrap 3.3.5 -->
 <script src="<?php echo $adm_url; ?>bootstrap/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
