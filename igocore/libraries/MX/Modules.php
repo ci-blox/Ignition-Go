@@ -495,5 +495,20 @@ class Modules
 
         return $map;
     }
+    
+    #Register your css js assets
+    public static function register_asset( $asset )
+    {
+        if( in_array($asset,self::$assets) === FALSE )
+        {
+            self::$assets[] = $asset;
+        }
+    }
+
+    public static function assets()
+    {
+            return self::$assets;
+    }
+       
     /* end custom */
 }
