@@ -5,6 +5,13 @@
 </div>
 
 <div class="row">
+This framework supports multiple login areas:<br>    
+    &nbsp;<br>
+<h3>1) Login to front area with or without Admin access (use menu above)</h3>
+<h3>2) Login to backend area (Admin): <a href="<?php echo site_url(LOGIN_BACKEND_URL); ?>">Go to Admin</a></h3>
+<h3>3) Other areas can be set up using the Check controller</h3>
+</div>
+<div class="row">
 Note: STILL WIP- - - not all components ready yet!!!<br>    
     &nbsp;<br>
 <h3>Helpful resources:</h3>

@@ -107,6 +107,7 @@ defined('SITE_AREA') || define('SITE_AREA', 'admin');
 // be redirected to 403/4 in routes.php.
 // -----------------------------------------------------------------------------
 define('LOGIN_URL', 'login');
+define('LOGIN_BACKEND_URL', 'admin/login');
 define('REGISTER_URL', 'register');
 
 // -----------------------------------------------------------------------------

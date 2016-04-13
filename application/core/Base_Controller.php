@@ -44,7 +44,7 @@ class Base_Controller extends MX_Controller
      */
     public $autoload = array(
         'libraries' => array('settings', 'events'),
-        'helpers'   => array('application'),
+        'helpers'   => array('application','language'),
         'models'    => array(),
     );
 
@@ -136,13 +136,13 @@ class Base_Controller extends MX_Controller
             if ($this->auth->is_logged_in()) {
                 $this->current_user = clone $this->auth->user();
 
-                $this->current_user->user_img = gravatar_link(
+               /* $this->current_user->user_img = gravatar_link(
                     $this->current_user->email,
                     22,
                     $this->current_user->email,
                     "{$this->current_user->email} Profile"
                 );
-
+*/
                 // If the user has a language setting then use it
                 if (isset($this->current_user->language)) {
                     $this->config->set_item('language', $this->current_user->language);
@@ -170,7 +170,7 @@ class Base_Controller extends MX_Controller
     {
         // Load the Auth library before the parent constructor to ensure the
         // current user's settings are honored by the parent
-        $this->load->library('users/auth');
+        $this->load->library('securinator/auth');
 
         // Ensure the user is logged in.
         $this->auth->restrict();

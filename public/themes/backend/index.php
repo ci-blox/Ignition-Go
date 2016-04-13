@@ -167,5 +167,11 @@ Apply one or more of the following
      Both of these plugins are recommended to enhance the
      user experience. Slimscroll is required when using the
      fixed layout. -->
-</body>
+  <?php if (Modules::assets() && count(Modules::assets())>0) :
+  foreach (Modules::assets() as $asset) {
+      if (substr($asset,-3)=='.js') {
+          echo '<script src="'.$asset.'"></script>';
+      }
+  } 
+  endif; ?></body>
 </html>

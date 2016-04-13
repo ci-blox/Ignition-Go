@@ -139,7 +139,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="<?php echo site_url('/user/profile');?>" class="btn btn-default btn-flat">Profile</a>
+                  <a href="<?php echo site_url('/users/profile');?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <a href="<?php echo site_url('/admin/check/logout'); ?>" class="btn btn-default btn-flat">Sign out</a>
