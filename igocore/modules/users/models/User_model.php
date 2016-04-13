@@ -393,10 +393,10 @@ class User_model extends IGO_Model
      */
     public function count_by_roles()
     {
-        $this->db->select(array("{$this->roles_table}.role_name", 'count(1) as count'))
+        $this->db->select(array("{$this->roles_table}.role role_name", 'count(1) as count'))
                  ->from($this->table_name)
                  ->join($this->roles_table, "{$this->roles_table}.role = {$this->table_name}.role", 'left')
-                 ->group_by("{$this->roles_table}.role_name");
+                 ->group_by("{$this->roles_table}.role");
 
         $query = $this->db->get();
         if ($query->num_rows()) {
@@ -934,7 +934,7 @@ class User_model extends IGO_Model
     protected function preFind()
     {
         if (empty($this->selects)) {
-            $this->select("{$this->table_name}.*, role_name");
+            $this->select("{$this->table_name}.*, {$this->roles_table}.role role_name", false);
         }
 
         $this->db->join(

@@ -464,7 +464,7 @@ class Auth
         if (! class_exists('role_model', false)) {
             $this->ci->load->model('roles/role_model');
         }
-        $results = $this->ci->role_model->select('role_id, role_name')
+        $results = $this->ci->role_model->select('role role_id, role role_name')
                                         ->find_all();
 
         // Store the role names.
@@ -848,7 +848,7 @@ class Auth
 
         // Grab the current user info for the session.
         $this->ci->load->model('users/user_model');
-        $user = $this->ci->user_model->select(array('id', 'username', 'email', 'password_hash', 'users.role_id'))
+        $user = $this->ci->user_model->select(array('id', 'username', 'email', 'password_hash', 'users.role role_id'))
                                      ->find($user_id);
 
         if (! $user) {
