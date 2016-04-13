@@ -1,19 +1,27 @@
 # Ignition Go     | <a style="text-align:right" href='https://pledgie.com/campaigns/30957'><img alt='Click here to lend your support to: Ignition Go - development fund and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/30957.png?skin_name=chrome' border='0' ></a>
-A Modular App Building Framework - create and reuse "blox" to build enterprise class web applications
+A Modular App Building Framework - complete with front end, REST api and admin area
+- [Soon] create and reuse "blox" to build enterprise class web applications
 - uses Codeigniter 3.x and Bootstrap 3.x
 - can be used as a quickstart project starter/boilerplate
-- *What are blox?* "Blox" are just pluggable modules or applets that are commonly used in web applications. Ignition Go will include a web-based generator.
+- *What are blox?* "Blox" are just pluggable modules or applets that are commonly used in web applications. Ignition Go will include a web-based generator. Planned example "blox" include bulk emailer, dashboard, report manager, and many more!!!  
 
-### Coming soon (see below folder structure for progress), contact us to help build the most amazing web app builder ever!  
-Please contact me to help, I'm hoping to build a team of master "Blox Ignitians".
-Planned example "blox" include bulk emailer, dashboard, report manager, and many more!!!  
+### In progress (see below folder structure for progress), contact us to help build the most amazing web app builder ever!  
+Please contact us to contribute.
 
 ### Server Requirements (Preferred)
 
-* **PHP 5.5+** (mainly for [password_hash()](http://php.net/manual/en/function.password-hash.php) and [password_verify()](http://php.net/manual/en/function.password-verify.php) functions as used in this project); minimum is [PHP 5.4](http://php.net/manual/en/migration54.new-features.php) for this project. Use of [GuzzlePHP](http://guzzlephp.com) requires PHP 5.5
+* **PHP 5.4+** ideal is 5.5 but minimum is [PHP 5.4](http://php.net/manual/en/migration54.new-features.php) for this project. Use of [GuzzlePHP](http://guzzlephp.com) requires PHP 5.5
 * **Apache 2.2+** with rewrite mod enabled
 * **MySQL 5.5+**
 
+### Installing
+1.Install NPM [node.js](http://nodejs.org/): package manager for node modules
+2.Install Bower [bower](http://bower.io/): manager for bower components 
+3.GIT clone this repository
+4.Install and run 'gulp'
+5.In Apache, map to the public folder to localhost or other url
+6.Create an empty mysql db
+7.Go to http://localhost/install/init to finish 
 
 ### Features
 
@@ -46,7 +54,7 @@ application/                    --- Main application (CodeIgniter) source folder
     config/                     --- Config files
         production/             --- Override Configuration when ENVIRONMENT is set as "production"
     controllers/                --- Controllers for Frontend Website; extends from MX_Controller, Base_Controller or Front_Controller
-        Cli.php **              --- Utility function that can only be called from command line
+        Cli.php                 --- Utility function that can only be called from command line
         Home.php                --- Default controller for Frontend Website        
     core/                       --- Extending CodeIgniter core classes; can also be used within modules (MY_????.php); Also extendable controllers here
     helpers/                    --- Contains custom helper functions being used throughout this repo
@@ -55,7 +63,7 @@ application/                    --- Main application (CodeIgniter) source folder
     models/                     --- Sample model extending from MY_Model
     toolblox/ **                --- Each blox module can be installed or removed
     modules/                    --- Each module can be accessed by http://{base_url}/{module_name}/{module_controller}/, etc.
-        admin/  **              --- Module for Admin Panel
+        admin/                  --- Module for Admin Panel
             config/             --- Configuration for Admin Panel (overriding application/config/)
             controllers/        --- Controllers for Admin Panel; also extends from MY_Controller
             helpers/            --- Helper classes, e.g. to generate AdminLTE widgets
@@ -63,8 +71,8 @@ application/                    --- Main application (CodeIgniter) source folder
             models/             --- Models only being used in Admin panel
             views/              --- Views for Admin Panel; can reuse Frontend views, or override by using same path/filename
         api/                    --- A module specific for REST API endpoints
-        buildablox/ **          --- A module to generate and add/remove blox
-        securify/ **            --- A module for roles, permissions, security settings
+        buildablox/             --- A module to generate and add/remove blox
+        securinator/            --- A module for roles, permissions, security settings
         translate/ **           --- A module to auto-generate translations
     third_party/
         MX/                     --- Required for HMVC extension
@@ -77,7 +85,7 @@ public/assets/
     img/                        --- Source image files before optimization
     js/                         --- Custom CSS files append to each site
     uploads/                    --- Default directory of upload files, where permission should set as writable
-gulpfile.js/ **                 --- Task runner following gulp-starter 2.0 practice
+gulpfile.js/                    --- Task runner following gulp-starter 2.0 practice
 sql/                            --- MySQL files
 ignitcore/                         --- Ignition Go core files
 ignitcore/system/                         --- CodeIgniter core files (clean CI3 installation with modifications only to reference IGO core)
