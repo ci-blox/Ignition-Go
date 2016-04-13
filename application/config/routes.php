@@ -77,7 +77,7 @@ $route[LOGIN_URL] = 'users/check/login';
 $route[LOGIN_BACKEND_URL] = 'admin/check/login';
 $route[REGISTER_URL] = 'users/register';
 
-$route['logout'] = 'users/logout';
+$route['logout'] = 'users/check/logout';
 $route['forgot_password'] = 'users/forgot_password';
 $route['reset_password/(:any)/(:any)'] = 'users/reset_password/$1/$2';
 
