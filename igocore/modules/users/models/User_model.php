@@ -13,7 +13,7 @@ class User_model extends IGO_Model
     protected $meta_table = 'user_meta';
 
     /** @var string Name of the roles table. */
-    protected $roles_table = 'roles';
+    protected $roles_table = 'sec_roles';
 
     /** @var boolean Use soft deletes or not. */
     protected $soft_deletes = true;

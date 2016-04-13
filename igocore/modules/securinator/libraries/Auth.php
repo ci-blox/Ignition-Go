@@ -97,7 +97,7 @@ class Auth
             'id',
             'email',
             'username',
-            'users.role_id',
+            'users.role role_id',
             'users.deleted',
             'users.active',
             'banned',
@@ -206,7 +206,7 @@ class Auth
             $user->username,
             $user->password_hash,
             $user->email,
-            $user->role_id,
+            $user->role,
             $remember,
             '',
             $user->username
@@ -226,7 +226,7 @@ class Auth
             unset($this->user);
 
         // Can't pass the array directly to the trigger, must use a variable.
-        $trigger_data = array('user_id' => $user->id, 'role_id' => $user->role_id);
+        $trigger_data = array('user_id' => $user->id, 'role_id' => $user->role);
         Events::trigger('after_login', $trigger_data);
 
         // Save the redirect location
@@ -292,7 +292,7 @@ class Auth
 
         $this->user = $user;
             $this->user->id = (int) $this->user->id;
-            $this->user->role_id = (int) $this->user->role_id;
+            $this->user->role = $this->user->role;
 
         return $this->user;
     }
@@ -419,7 +419,7 @@ class Auth
         if (! $this->is_logged_in()) {
             return false;
         }
-        return $this->user()->role_id;
+        return $this->user()->role;
     }
 
     /**
@@ -431,7 +431,8 @@ class Auth
      */
     public function role_name_by_id($role_id)
     {
-        if (! is_numeric($role_id)) {
+        return $role_id;
+        /*if (! is_numeric($role_id)) {
             return '';
         }
 
@@ -444,6 +445,7 @@ class Auth
         }
 
         return '';
+        */
     }
 
     /**

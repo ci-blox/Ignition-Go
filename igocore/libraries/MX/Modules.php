@@ -48,7 +48,7 @@ spl_autoload_register('Modules::autoload');
  **/
 class Modules
 {
-	public static $routes, $registry, $locations;
+	public static $routes, $registry, $locations, $assets;
 	
 	/**
 	* Run a module controller method
