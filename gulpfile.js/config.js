@@ -87,7 +87,8 @@ module.exports = {
 			admin: 'admin.min.css'
 		},
 		settings: {
-			keepBreaks: false
+			keepBreaks: false,
+			compatibility: 'ie8'
 		}
 	},
 
