@@ -23,6 +23,7 @@ class Front_Controller extends Base_Controller
         Events::trigger('before_front_controller');
 
         $this->load->library('template');
+        $this->load->language('application');
  
         $this->set_current_user();
 

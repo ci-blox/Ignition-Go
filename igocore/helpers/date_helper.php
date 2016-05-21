@@ -225,7 +225,7 @@ if (! function_exists('user_time')) {
     {
         if (! $timezone) {
             $CI =& get_instance();
-            $CI->load->library('securinator/auth');
+            $CI->load->library('securinator/Auth');
             if ($CI->auth->is_logged_in()) {
                 $timezone = standard_timezone($CI->auth->user()->timezone);
             }

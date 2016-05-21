@@ -44,7 +44,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="http://builtwithbootstrap.com/" target="_blank">Built With Bootstrap</a></li>
          <?php if (empty($current_user)) : ?>
-        <li><a href="<?php echo site_url(LOGIN_URL); ?>">Sign In</a></li>
+        <li><a href="<?php echo site_url(LOGIN_URL); ?>"><?php e(lang('us_action_login')); ?></a></li>
         <?php else : ?>
         <li <?php echo check_method('profile'); ?>><a href="<?php echo site_url('users/profile'); ?>"><?php e(lang('us_user_settings')); ?></a></li>
         <li><a href="<?php echo site_url('logout'); ?>"><?php e(lang('us_action_logout')); ?></a></li>

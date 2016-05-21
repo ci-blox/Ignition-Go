@@ -14,7 +14,7 @@ class Home extends MX_Controller
 
 		$this->load->helper('application');
 		$this->load->library('Template');
-//		$this->lang->load('application');
+		$this->lang->load('application');
 		$this->load->library('events');
 
         // Make the requested page var available
@@ -30,7 +30,7 @@ class Home extends MX_Controller
 	 */
 	public function index()
 	{
-		$this->load->library('securinator/auth');
+		$this->load->library('securinator/Auth');
 		$this->set_current_user();
 		Template::render();
 	}//end index()

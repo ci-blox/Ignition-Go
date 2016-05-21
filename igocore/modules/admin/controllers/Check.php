@@ -17,13 +17,12 @@ class Check extends Front_Controller
     {
         parent::__construct();
 
-        $this->load->helper('language');
         $this->load->helper('form');
         $this->load->library('form_validation');
 
         $this->load->model('users/user_model');
 
-        $this->load->library('securinator/auth');
+        $this->load->library('securinator/Auth');
 
         Template::set_theme('backend');
         //$this->lang->load('users');

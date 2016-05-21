@@ -25,7 +25,7 @@ class Dashboard extends Front_Controller
 
 //        $this->load->model('users/user_model');
 
-        $this->load->library('securinator/auth');
+        $this->load->library('securinator/Auth');
 
         Template::set_theme('backend');
         //$this->lang->load('users');
