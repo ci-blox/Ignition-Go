@@ -17,6 +17,7 @@ class Check extends Front_Controller
     {
         parent::__construct();
 
+        $this->load->helper('language');
         $this->load->helper('form');
         $this->load->library('form_validation');
 
