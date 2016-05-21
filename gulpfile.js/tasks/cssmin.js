@@ -1,5 +1,5 @@
 var gulp = require('gulp'),
-	minifyCSS = require('gulp-clean-css'),
+	cleanCSS = require('gulp-clean-css'),
 	concat = require('gulp-concat'),
 	sourcemaps = require('gulp-sourcemaps'),
 	config = require('../config').css;
