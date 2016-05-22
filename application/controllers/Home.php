@@ -38,6 +38,34 @@ class Home extends MX_Controller
 	//--------------------------------------------------------------------
 
 	/**
+	 * Displays elements preview
+	 *
+	 * @return void
+	 */
+	public function elements()
+	{
+		$this->load->library('securinator/Auth');
+		$this->set_current_user();
+		Template::render();
+	}//end elements()
+
+	//--------------------------------------------------------------------
+
+	/**
+	 * Displays help
+	 *
+	 * @return void
+	 */
+	public function help()
+	{
+		$this->load->library('securinator/Auth');
+		$this->set_current_user();
+		Template::render();
+	}//end help()
+
+	//--------------------------------------------------------------------
+
+	/**
 	 * If the Auth lib is loaded, it will set the current user, since users
 	 * will never be needed if the Auth library is not loaded. By not requiring
 	 * this to be executed and loaded for every command, we can speed up calls
