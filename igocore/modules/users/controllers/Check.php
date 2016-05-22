@@ -72,7 +72,7 @@ class Check extends Front_Controller
         }
 
         // Prompt the user to login.
-        Template::set('secarea', 'Users');
+        Template::set('secarea', 'users');
         Template::set('secareatitleorlogo', 'Registered User Login - Ignition Go');
         Template::render('blank');
     }
