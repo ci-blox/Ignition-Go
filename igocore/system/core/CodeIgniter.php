@@ -398,14 +398,20 @@ if ( ! is_php('5.4'))
 	$e404 = FALSE;
 	$class = ucfirst($RTR->class);
 	$method = $RTR->method;
-
-	if (empty($class) OR ! file_exists(APPPATH.'controllers/'.$RTR->directory.$class.'.php'))
+	if (empty($class))
 	{
 		$e404 = TRUE;
 	}
 	else
 	{
-		require_once(APPPATH.'controllers/'.$RTR->directory.$class.'.php');
+        // Check for IGO controller if Application controller was not found.
+        if (file_exists(APPPATH.'controllers/'.$RTR->directory.$class.'.php')) {
+    		require_once(APPPATH.'controllers/'.$RTR->directory.$class.'.php');
+        } elseif (file_exists(IGOPATH . 'controllers/' . $RTR->directory . $class . '.php')) {
+            require_once(IGOPATH . 'controllers/' . $RTR->directory . $class . '.php');
+        } else {
+            $e404 = TRUE;
+        }
 
 		if ( ! class_exists($class, FALSE) OR $method[0] === '_' OR method_exists('CI_Controller', $method))
 		{

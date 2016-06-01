@@ -151,8 +151,9 @@ if ( ! function_exists('load_class'))
 		$name = FALSE;
 
 		// Look for the class first in the local application/libraries folder
+		// then in the IGO core libraries folder
 		// then in the native system/libraries folder
-		foreach (array(APPPATH, BASEPATH) as $path)
+		foreach (array(APPPATH, IGOPATH, BASEPATH) as $path)
 		{
 			if (file_exists($path.$directory.'/'.$class.'.php'))
 			{
@@ -166,6 +167,16 @@ if ( ! function_exists('load_class'))
 				break;
 			}
 		}
+
+        // Is class extension in IGO core?
+        if (file_exists(IGOPATH . $directory . '/IGO_' . $class . '.php'))
+        {
+            $name = 'IGO_' . $class;
+            if (class_exists($name, FALSE) === FALSE)
+            {
+                require_once(IGOPATH . $directory . '/IGO_' . $class . '.php');
+            }
+        }
 
 		// Is the request a class extension? If so we load it too
 		if (file_exists(APPPATH.$directory.'/'.config_item('subclass_prefix').$class.'.php'))
