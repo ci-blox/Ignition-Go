@@ -610,6 +610,13 @@ class CI_Loader {
 				}
 			}
 
+            // Look for helper extension in IGO core.
+            if (file_exists(IGOPATH . "helpers/IGO_{$helper}.php"))
+            {
+                include_once(IGOPATH . "helpers/IGO_{$helper}.php");
+                $ext_loaded = TRUE;
+            }
+
 			// If we have loaded extensions - check if the base one is here
 			if ($ext_loaded === TRUE)
 			{
