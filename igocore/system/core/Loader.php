@@ -285,41 +285,13 @@ class CI_Loader {
 			$this->database($db_conn, FALSE, TRUE);
 		}
 
-		// Note: All of the code under this condition used to be just:
-		//
-		//       load_class('Model', 'core');
-		//
-		//       However, load_class() instantiates classes
-		//       to cache them for later use and that prevents
-		//       MY_Model from being an abstract class and is
-		//       sub-optimal otherwise anyway.
 		if ( ! class_exists('CI_Model', FALSE))
 		{
-			$app_path = APPPATH.'core'.DIRECTORY_SEPARATOR;
-			if (file_exists($app_path.'Model.php'))
-			{
-				require_once($app_path.'Model.php');
-				if ( ! class_exists('CI_Model', FALSE))
-				{
-					throw new RuntimeException($app_path."Model.php exists, but doesn't declare class CI_Model");
-				}
-			}
-			elseif ( ! class_exists('CI_Model', FALSE))
-			{
-				require_once(BASEPATH.'core'.DIRECTORY_SEPARATOR.'Model.php');
-			}
-			$class = config_item('subclass_prefix').'Model';
-			if (file_exists($app_path.$class.'.php'))
-			{
-				require_once($app_path.$class.'.php');
-				if ( ! class_exists($class, FALSE))
-				{
-					throw new RuntimeException($app_path.$class.".php exists, but doesn't declare class ".$class);
-				}
-			}
+			load_class('Model', 'core');
 		}
+
 		$model = ucfirst($model);
-		if ( ! class_exists($model, FALSE))
+		if ( ! class_exists($model))
 		{
 			foreach ($this->_ci_model_paths as $mod_path)
 			{
@@ -327,13 +299,16 @@ class CI_Loader {
 				{
 					continue;
 				}
+
 				require_once($mod_path.'models/'.$path.$model.'.php');
 				if ( ! class_exists($model, FALSE))
 				{
 					throw new RuntimeException($mod_path."models/".$path.$model.".php exists, but doesn't declare class ".$model);
 				}
+
 				break;
 			}
+
 			if ( ! class_exists($model, FALSE))
 			{
 				throw new RuntimeException('Unable to locate the model you have specified: '.$model);
@@ -343,6 +318,7 @@ class CI_Loader {
 		{
 			throw new RuntimeException("Class ".$model." already exists and doesn't extend CI_Model");
 		}
+
 		$this->_ci_models[] = $name;
 		$CI->$name = new $model();
 		return $this;
@@ -604,12 +580,13 @@ class CI_Loader {
 				}
 			}
 
-            // Look for helper extension in IGO core.
+            // Look for IGO helper extension.
             if (file_exists(IGOPATH . "helpers/IGO_{$helper}.php"))
             {
                 include_once(IGOPATH . "helpers/IGO_{$helper}.php");
                 $ext_loaded = TRUE;
             }
+
 
 			// If we have loaded extensions - check if the base one is here
 			if ($ext_loaded === TRUE)

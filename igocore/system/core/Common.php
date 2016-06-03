@@ -178,6 +178,36 @@ if ( ! function_exists('load_class'))
             }
         }
 
+        // Is class extension in IGO core?
+        if (file_exists(IGOPATH . $directory . '/IGO_' . $class . '.php'))
+        {
+            $name = 'IGO_' . $class;
+            if (class_exists($name, FALSE) === FALSE)
+            {
+                require_once(IGOPATH . $directory . '/IGO_' . $class . '.php');
+            }
+        }
+
+        // Is class extension in IGO core?
+        if (file_exists(IGOPATH . $directory . '/IGO_' . $class . '.php'))
+        {
+            $name = 'IGO_' . $class;
+            if (class_exists($name, FALSE) === FALSE)
+            {
+                require_once(IGOPATH . $directory . '/IGO_' . $class . '.php');
+            }
+        }
+
+        // Is class extension in IGO core?
+        if (file_exists(IGOPATH . $directory . '/IGO_' . $class . '.php'))
+        {
+            $name = 'IGO_' . $class;
+            if (class_exists($name, FALSE) === FALSE)
+            {
+                require_once(IGOPATH . $directory . '/IGO_' . $class . '.php');
+            }
+        }
+
 		// Is the request a class extension? If so we load it too
 		if (file_exists(APPPATH.$directory.'/'.config_item('subclass_prefix').$class.'.php'))
 		{
