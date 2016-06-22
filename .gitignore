@@ -6,3 +6,6 @@
 !*/cache/.htaccess
 */bower_components/*
 */public/components/*
+bower_components/*
+node_modules/*
+public/components/*

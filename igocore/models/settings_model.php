@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') || exit('No direct script access allowed');
 /**
- * Settings Model.
+ * Settings Model
  *
  * Retrieves and updates settings in the database.
  *
@@ -63,4 +63,4 @@ class Settings_model extends IGO_Model
         return $resultArray;
     }
 }
-/* end models/settings_model.php */
+/* end models/Settings_model.php */

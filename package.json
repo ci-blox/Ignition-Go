@@ -9,19 +9,22 @@
     "type": "git",
     "url": "https://github.com/ci-blox/ignition-go"
   },
-  "author": [
-    "boblennes"
-  ],
+  "author": 
+    "boblennes",
   "license": "MIT",
   "devDependencies": {
+    "lodash":"*",
     "browser-sync": "*",
     "del": "*",
     "gulp": "*",
     "gulp-changed": "*",
     "gulp-concat": "*",
     "gulp-connect-php": "*",
-    "gulp-imagemin": "*",
-    "gulp-minify-css": "*",
+    "gulp-imagemin": "^3.0.1",
+    "imagemin-gifsicle": "^5.0.1",
+    "imagemin-jpegtran": "^5.0.1",
+    "imagemin-optipng": "^5.1.0",
+    "gulp-clean-css": "^2.0.3",
     "gulp-notify": "*",
     "gulp-sequence": "*",
     "gulp-sourcemaps": "*",

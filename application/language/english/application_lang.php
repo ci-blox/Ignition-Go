@@ -21,6 +21,8 @@ $lang['us_log_edit_profile']		= 'updated their profile';
 
 
 $lang['us_purge_del_confirm']		= 'Are you sure you want to completely remove the user account(s) - there is no going back?';
+$lang['us_action_login']			= 'Sign In';
+$lang['us_action_logout']			= 'Sign Out';
 $lang['us_action_purged']			= 'Users purged.';
 $lang['us_action_deleted']			= 'The User was successfully deleted.';
 $lang['us_action_not_deleted']		= 'We could not delete the user: ';
@@ -59,3 +61,5 @@ $lang['us_no_states']				= 'There are no states/provences/counties/regions for t
 $lang['us_no_countries']			= 'Unable to find any countries. Create them in the address config file.';
 $lang['us_country']					= 'Country';
 $lang['us_zipcode']					= 'Zipcode';
+
+$lang['us_user_settings']           = 'Settings';

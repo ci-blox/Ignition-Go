@@ -11,7 +11,7 @@ class Init extends MX_Controller
 		$this->load->helper('form');
         $this->load->library('settings');
         $this->load->library('events');
-       $this->load->library('securinator/auth');
+       $this->load->library('securinator/Auth');
 
         $this->lang->load('users/users');
         

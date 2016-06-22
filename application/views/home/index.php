@@ -21,7 +21,7 @@ Note: STILL WIP- - - not all components ready yet!!!<br>
 	<div class="col-sm-6">
 		<h4>CodeIgniter</h4>
 
-		<p><a href="http://ellislab.com/codeigniter" target="_blank">CodeIgniter <?php echo CI_VERSION; ?></a> is a proven PHP framework. In order to make the best use of it, you should be comfortable with CodeIgniter and its <a href="http://ellislab.com/codeigniter/user-guide/" target="_blank">documentation</a> first.</p>
+		<p><a href="https://codeigniter.com" target="_blank">CodeIgniter <?php echo CI_VERSION; ?></a> is a proven PHP framework. In order to make the best use of it, you should be comfortable with CodeIgniter and its <a href="http://ellislab.com/codeigniter/user-guide/" target="_blank">documentation</a> first.</p>
 
 	</div>
 

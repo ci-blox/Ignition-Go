@@ -11,18 +11,19 @@ class Check extends Front_Controller
     /** @var array Site settings  */
     private $siteSettings;
     /** @var string $loginDest  */
-    private $loginDest = '/Admin/Dashboard/';
+    private $loginDest = '/';
 
     public function __construct()
     {
         parent::__construct();
 
+        $this->load->helper('language');
         $this->load->helper('form');
         $this->load->library('form_validation');
 
         $this->load->model('users/user_model');
 
-        $this->load->library('securinator/auth');
+        $this->load->library('securinator/Auth');
 
         Template::set_theme('backend');
         //$this->lang->load('users');
@@ -71,7 +72,7 @@ class Check extends Front_Controller
         }
 
         // Prompt the user to login.
-        Template::set('secarea', 'Users');
+        Template::set('secarea', 'users');
         Template::set('secareatitleorlogo', 'Registered User Login - Ignition Go');
         Template::render('blank');
     }

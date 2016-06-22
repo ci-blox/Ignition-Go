@@ -6,7 +6,7 @@
  *
  * This content is released under the MIT License (MIT)
  *
- * Copyright (c) 2014 - 2015, British Columbia Institute of Technology
+ * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,10 +28,10 @@
  *
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (http://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2015, British Columbia Institute of Technology (http://bcit.ca/)
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+ * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
- * @link	http://codeigniter.com
+ * @link	https://codeigniter.com
  * @since	Version 1.0.0
  * @filesource
  */
@@ -46,7 +46,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Libraries
  * @category	Loader
  * @author		EllisLab Dev Team
- * @link		http://codeigniter.com/user_guide/libraries/loader.html
+ * @link		https://codeigniter.com/user_guide/libraries/loader.html
  */
 class CI_Loader {
 
@@ -580,12 +580,13 @@ class CI_Loader {
 				}
 			}
 
-            // Look for helper extension in IGO core.
+            // Look for IGO helper extension.
             if (file_exists(IGOPATH . "helpers/IGO_{$helper}.php"))
             {
                 include_once(IGOPATH . "helpers/IGO_{$helper}.php");
                 $ext_loaded = TRUE;
             }
+
 
 			// If we have loaded extensions - check if the base one is here
 			if ($ext_loaded === TRUE)
@@ -695,9 +696,16 @@ class CI_Loader {
 	{
 		if (is_array($library))
 		{
-			foreach ($library as $driver)
+			foreach ($library as $key => $value)
 			{
-				$this->driver($driver);
+				if (is_int($key))
+				{
+					$this->driver($value, $params);
+				}
+				else
+				{
+					$this->driver($key, $params, $value);
+				}
 			}
 
 			return $this;
@@ -906,6 +914,14 @@ class CI_Loader {
 		 */
 		if (is_array($_ci_vars))
 		{
+			foreach (array_keys($_ci_vars) as $key)
+			{
+				if (strncmp($key, '_ci_', 4) === 0)
+				{
+					unset($_ci_vars[$key]);
+				}
+			}
+
 			$this->_ci_cached_vars = array_merge($this->_ci_cached_vars, $_ci_vars);
 		}
 		extract($this->_ci_cached_vars);
@@ -1311,10 +1327,7 @@ class CI_Loader {
 		// Autoload drivers
 		if (isset($autoload['drivers']))
 		{
-			foreach ($autoload['drivers'] as $item)
-			{
-				$this->driver($item);
-			}
+			$this->driver($autoload['drivers']);
 		}
 
 		// Load libraries
