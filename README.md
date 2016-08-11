@@ -16,12 +16,18 @@ Please contact us to contribute.
 
 ### Installing
 1.Install NPM [node.js](http://nodejs.org/): package manager for node modules
-2.Install Bower [bower](http://bower.io/): manager for bower components 
+
+2.Install Bower [bower](http://bower.io/): manager for bower components
+
 3.GIT clone this repository
+
 4.Install and run 'gulp'
+
 5.In Apache, map to the public folder to localhost or other url
+
 6.Create an empty mysql db
-7.Go to http://localhost/install/init to finish 
+
+7.Go to http://localhost/install/init to finish using install wizard 
 
 ### Features
 
