@@ -285,13 +285,43 @@ class CI_Loader {
 			$this->database($db_conn, FALSE, TRUE);
 		}
 
+		// Note: All of the code under this condition used to be just:
+		//
+		//       load_class('Model', 'core');
+		//
+		//       However, load_class() instantiates classes
+		//       to cache them for later use and that prevents
+		//       MY_Model from being an abstract class and is
+		//       sub-optimal otherwise anyway.
 		if ( ! class_exists('CI_Model', FALSE))
 		{
-			load_class('Model', 'core');
+			$app_path = APPPATH.'core'.DIRECTORY_SEPARATOR;
+			if (file_exists($app_path.'Model.php'))
+			{
+				require_once($app_path.'Model.php');
+				if ( ! class_exists('CI_Model', FALSE))
+				{
+					throw new RuntimeException($app_path."Model.php exists, but doesn't declare class CI_Model");
+				}
+			}
+			elseif ( ! class_exists('CI_Model', FALSE))
+			{
+				require_once(BASEPATH.'core'.DIRECTORY_SEPARATOR.'Model.php');
+			}
+
+			$class = config_item('subclass_prefix').'Model';
+			if (file_exists($app_path.$class.'.php'))
+			{
+				require_once($app_path.$class.'.php');
+				if ( ! class_exists($class, FALSE))
+				{
+					throw new RuntimeException($app_path.$class.".php exists, but doesn't declare class ".$class);
+				}
+			}
 		}
 
 		$model = ucfirst($model);
-		if ( ! class_exists($model))
+		if ( ! class_exists($model, FALSE))
 		{
 			foreach ($this->_ci_model_paths as $mod_path)
 			{
@@ -586,7 +616,6 @@ class CI_Loader {
                 include_once(IGOPATH . "helpers/IGO_{$helper}.php");
                 $ext_loaded = TRUE;
             }
-
 
 			// If we have loaded extensions - check if the base one is here
 			if ($ext_loaded === TRUE)
@@ -1084,7 +1113,7 @@ class CI_Loader {
 	 * @used-by	CI_Loader::_ci_load_library()
 	 * @uses	CI_Loader::_ci_init_library()
 	 *
-	 * @param	string	$library	Library name to load
+	 * @param	string	$library_name	Library name to load
 	 * @param	string	$file_path	Path to the library filename, relative to libraries/
 	 * @param	mixed	$params		Optional parameters to pass to the class constructor
 	 * @param	string	$object_name	Optional object name to assign to

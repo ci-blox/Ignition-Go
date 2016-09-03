@@ -89,7 +89,7 @@ class Users extends Front_Controller
         $this->user_model->password_hints();
 
         Template::set('user', $user);
-        Template::set('languages', unserialize($this->settings_lib->item('site.languages')));
+        Template::set('languages', array('' => '' ));// unserialize($this->settings_lib->item('site.languages')));
 
         Template::set_view('profile');
         Template::render();

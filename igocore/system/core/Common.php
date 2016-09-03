@@ -178,36 +178,6 @@ if ( ! function_exists('load_class'))
             }
         }
 
-        // Is class extension in IGO core?
-        if (file_exists(IGOPATH . $directory . '/IGO_' . $class . '.php'))
-        {
-            $name = 'IGO_' . $class;
-            if (class_exists($name, FALSE) === FALSE)
-            {
-                require_once(IGOPATH . $directory . '/IGO_' . $class . '.php');
-            }
-        }
-
-        // Is class extension in IGO core?
-        if (file_exists(IGOPATH . $directory . '/IGO_' . $class . '.php'))
-        {
-            $name = 'IGO_' . $class;
-            if (class_exists($name, FALSE) === FALSE)
-            {
-                require_once(IGOPATH . $directory . '/IGO_' . $class . '.php');
-            }
-        }
-
-        // Is class extension in IGO core?
-        if (file_exists(IGOPATH . $directory . '/IGO_' . $class . '.php'))
-        {
-            $name = 'IGO_' . $class;
-            if (class_exists($name, FALSE) === FALSE)
-            {
-                require_once(IGOPATH . $directory . '/IGO_' . $class . '.php');
-            }
-        }
-
 		// Is the request a class extension? If so we load it too
 		if (file_exists(APPPATH.$directory.'/'.config_item('subclass_prefix').$class.'.php'))
 		{
@@ -396,7 +366,7 @@ if ( ! function_exists('is_https'))
 		{
 			return TRUE;
 		}
-		elseif (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+		elseif (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) === 'https')
 		{
 			return TRUE;
 		}
@@ -757,8 +727,8 @@ if ( ! function_exists('remove_invisible_characters'))
 		// carriage return (dec 13) and horizontal tab (dec 09)
 		if ($url_encoded)
 		{
-			$non_displayables[] = '/%0[0-8bcef]/';	// url encoded 00-08, 11, 12, 14, 15
-			$non_displayables[] = '/%1[0-9a-f]/';	// url encoded 16-31
+			$non_displayables[] = '/%0[0-8bcef]/i';	// url encoded 00-08, 11, 12, 14, 15
+			$non_displayables[] = '/%1[0-9a-f]/i';	// url encoded 16-31
 		}
 
 		$non_displayables[] = '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S';	// 00-08, 11, 12, 14-31, 127
