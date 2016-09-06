@@ -10,24 +10,37 @@ Please contact us to contribute.
 
 ### Server Requirements (Preferred)
 
-* **PHP 5.4+** ideal is 5.5 but minimum is [PHP 5.4](http://php.net/manual/en/migration54.new-features.php) for this project. Use of [GuzzlePHP](http://guzzlephp.com) requires PHP 5.5
+* **PHP 5.4+** ideal version to use is [PHP 5.6](http://php.net/manual/en/migration56.new-features.php) but minimum is [PHP 5.4](http://php.net/manual/en/migration54.new-features.php) for this project. Use of [GuzzlePHP](http://guzzlephp.com) requires PHP 5.5
 * **Apache 2.2+** with rewrite mod enabled
-* **MySQL 5.5+**
+* **MySQL 5.5+ or MariaDb**
 
 ### Installing
 1.Install NPM [node.js](http://nodejs.org/): package manager for node modules
 
-2.Install Bower [bower](http://bower.io/): manager for bower components
+2.GIT clone this repository
+Example: git clone git clone https://github.com/ci-blox/Ignition-Go.git mynewsite
 
-3.GIT clone this repository
+3. Change directory to new site/web app root
+Example: cd mynewsite
 
-4.Install and run 'gulp'
+4.Install Bower [bower](http://bower.io/): manager for bower components
+Example: npm install -g bower
 
-5.In Apache, map to the public folder to localhost or other url
+5. Install the bower components
+Example: bower install
+
+5.Install and run 'gulp' (note that gulp will run continuously in 'watch' mode, watching for css and js changes).
+Example: npm install gulp
+         gulp
+
+6.In Apache, map the public folder to localhost or other url
+Example: in your httpd-vhosts.conf file, add new <VirtualHost> section and restart Apache
 
 6.Create an empty mysql db
+Example: use HeidiSQL and create both a database and a user with privileges to new database 
 
-7.Go to http://localhost/install/init to finish using install wizard 
+7.Go to http://[your web root from step 5]/install/init in your browser to finish using install wizard 
+eg ifyou had created virtual host igotestlocal.com, then go to http://igotestlocal.com/install/init in your browser
 
 ### Features
 
