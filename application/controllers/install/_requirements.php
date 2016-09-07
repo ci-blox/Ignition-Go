@@ -72,12 +72,13 @@ if (ini_get('allow_url_fopen') != "1") {
 	$requirement9 = "<span class='label label-success'>Enabled</span>";
 }
 
-if (!extension_loaded('imap')) {
+/* if (!extension_loaded('imap')) {
 	$error = true;
 	$requirement10 = "<span class='label label-danger'>Not enabled</span>";
 } else {
 	$requirement10 = "<span class='label label-success'>Enabled</span>";
 }
+*/
 
 if (!is_really_writable(APPPATH . 'logs//')) {
 	$error = true;
@@ -153,10 +154,6 @@ if (!is_really_writable(APPPATH . 'config/database.php')){
 		<tr>
 			<td>Allow allow_url_fopen</td>
 			<td><?php echo $requirement9; ?></td>
-		</tr>
-		<tr>
-			<td>IMAP PHP Extension</td>
-			<td><?php echo $requirement10; ?></td>
 		</tr>
 		<tr>
 			<td>Log folders writable</td>
