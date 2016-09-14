@@ -197,4 +197,12 @@ INSERT INTO `igo_settings` (`name`, `category`, `scope`, `value`) VALUES
 ('smtp_timeout', 'email', 'all', ''),
 ('smtp_user', 'common', 'all', '');
 
+
+CREATE TABLE IF NOT EXISTS `igo_schema_version` (
+	`type` VARCHAR(40) NOT NULL,
+	`version` INT(4) NOT NULL DEFAULT '0',
+	PRIMARY KEY (`type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+;
+
 # end install.sql
