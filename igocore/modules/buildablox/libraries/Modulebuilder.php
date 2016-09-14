@@ -315,13 +315,10 @@ class Modulebuilder
                     }
                 }
                 // Build the js view.
-                $data['action_name'] = 'js';
+                $data['action_name'] = '_' . $module_name_lower.'_js';
                 $data['action_label'] = $this->options['form_action_options'][$action_name];
-                $content['views'][$context_name]['js'] = $this->buildView($data);
+                $content['views'][$context_name]['_' . $module_name_lower.'_js'] = $this->buildView($data);
 
-                // Build the sub_nav view.
-                $data['action_name'] = 'sub_nav';
-                $content['views'][$context_name]['_sub_nav'] = $this->buildView($data);
             }
         }
 
@@ -332,7 +329,7 @@ class Modulebuilder
         $content['lang'] = $this->buildLang($field_total, $module_name, $module_name_lower);
 
         // Build the permissions migration file.
-        $content['acl_migration'] = $this->buildAclSql($data);
+        //$content['acl_migration'] = $this->buildAclSql($data);
 
         // If the DB is required and there are fields, build a model and migration.
         if ($field_total && $db_required != '') {
@@ -391,7 +388,7 @@ class Modulebuilder
         }
 
         // Return the content and database table name.
-        $data['acl_migration'] = $content['acl_migration'];
+        //$data['acl_migration'] = $content['acl_migration'];
         $data['build_config']  = $content['config'];
         $data['controllers']   = $content['controllers'];
         $data['db_migration']  = $content['db_migration'];
@@ -526,11 +523,11 @@ class Modulebuilder
      *
      * @return string The content of the permission migration file.
      */
-    private function buildAclSql($data)
+   /* private function buildAclSql($data)
     {
         return $this->CI->load->view('files/acl_migration', $data, true);
     }
-
+*/
     /**
      * Generate the content of the module config file.
      *
@@ -884,105 +881,5 @@ class Modulebuilder
         return $lang;
     }
 
-    /**
-     * Custom Form Validation Callback Rule
-     *
-     * Checks that one field doesn't match all the others.
-     *
-     * This code is not really portable. Would have been nice to create a rule
-     * that accepted an array.
-     *
-     * @param string  $str     Name of the field.
-     * @param integer $fieldno The position number of this field.
-     *
-     * @return boolean False if validation failed, else true.
-     */
-    protected function no_match($str, $fieldno)
-    {
-        for ($counter = 1; $this->field_total >= $counter; $counter++) {
-            if ($_POST["view_field_name$counter"] == ''
-                || $fieldno == $counter
-            ) {
-                // Nothing has been entered into this field, or the field being
-                // checked is the same as the field to which it will be compared.
-                continue;
-            }
-
-            if ($str == $_POST["view_field_name$counter"]) {
-                $this->CI->form_validation->set_message('no_match', 'lang:builder_validation_no_match');
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    //--------------------------------------------------------------------------
-    // Deprecated Methods (do not use)
-    //--------------------------------------------------------------------------
-
-    /**
-     * Generate the files required for the module
-     *
-     * @deprecated since 0.7.1 Use buildFiles().
-     *
-     * @param int    $field_total           The number of fields to add to the table
-     * @param string $module_name           The name given to the module
-     * @param array  $contexts              An array of contexts selected
-     * @param array  $action_names          An array of the controller actions (methods) required
-     * @param string $primary_key_field     The name of the primary key
-     * @param string $db_required           The database requirement setting (new, existing or none)
-     * @param array  $form_error_delimiters An array with the html delimiters for error messages
-     * @param string $module_description    A description for the module which appears in the config file
-     * @param int    $role_id               The id of the role which receives full access to the module
-     * @param string $table_name            The name of the table in the database
-     * @param int    $table_as_field_prefix Use table name as field prefix
-     *
-     * @return array An array with the content for the generated files
-     */
-    public function build_files(
-        $field_total,
-        $module_name,
-        $contexts,
-        $action_names,
-        $primary_key_field,
-        $db_required,
-        $form_error_delimiters,
-        $module_description,
-        $role_id,
-        $table_name,
-        $table_as_field_prefix
-    ) {
-        return $this->buildFiles(
-            array(
-                'action_names'          => $action_names,
-                'contexts'              => $contexts,
-                'db_required'           => $db_required,
-                'field_total'           => $field_total,
-                'form_error_delimiters' => $form_error_delimiters,
-                'module_description'    => $module_description,
-                'module_name'           => $module_name,
-                'primary_key_field'     => $primary_key_field,
-                'role_id'               => $role_id,
-                'table_as_field_prefix' => $table_as_field_prefix,
-                'table_name'            => $table_name,
-            )
-        );
-    }
-
-    /**
-     * Makes directory, returns true if exists or made.
-     *
-     * @deprecated since 0.7.1 Use mkdir() passing true as the third parameter.
-     *
-     * @param string $pathname The directory path.
-     * @param string $mode     The unix permissions on the directory eg (0775)
-     *
-     * @return boolean True if exists or made, false on failure.
-     */
-    private function mkdir_recursive($pathname, $mode)
-    {
-        return is_dir($pathname) || @mkdir($pathname, $mode, true);
-    }
 }
-// end /builder/libraries/modulebuilder.php
+// end /buildablox/libraries/modulebuilder.php

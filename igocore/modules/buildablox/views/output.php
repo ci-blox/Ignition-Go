@@ -26,17 +26,17 @@ else : ?>
 <?php
 endif;
 ?>
-<div class="alert">
+<div class="alert alert-info">
 	<button type='button' class='close' data-dismiss='alert'>&times;</button>
-	<?php printf(lang($mb_migration_result), anchor(SITE_AREA .'/developer/migrations#mod-tab', 'Migrations')) ;?>
+	<?php printf(lang($mb_migration_result), anchor('/migrations#mod-tab', 'Migrations')) ;?>
 </div>
-<?php
+<?php /*
 if ($acl_migration) : ?>
 <h4><?php echo lang('mb_out_acl'); ?></h4>
 <p><?php echo sprintf(lang('mb_out_acl_path'), $module_name_lower); ?></p>
 <?php
 endif;
-
+*/
 if ($build_config) : ?>
 <h4><?php echo lang('mb_out_config'); ?></h4>
 <p><?php echo lang('mb_out_config_path'); ?></p>

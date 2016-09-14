@@ -8,6 +8,7 @@ $primary_key_field = set_value("primary_key_field");
 //------------------------------------------------------------------------------
 
 $indexArgs = '';
+$indexStartup = '';
 $indexDelete = '';
 $indexPaginationUri = '';
 $indexPagination = '';
@@ -25,16 +26,23 @@ if ($db_required != '') {
 
         // Filter out soft deletes
         if ($useSoftDeletes) {
-            $indexFind = "
+            $indexFind = <<<EOT
 
         // Don't display soft-deleted records
-        \$this->{$module_name_lower}_model->where(\$this->{$module_name_lower}_model->get_deleted_field(), 0);";
+        \$this->{$module_name_lower}_model->where(\$this->{$module_name_lower}_model->get_deleted_field(), 0);
+EOT;
         }
     } else {
     // Admin controllers
-        $indexDelete = "// Deleting anything?
+		$indexStartup = <<<EOT
+		if (\$this->auth->is_logged_in() === false) {
+    		Template::redirect('/admin/login');
+ 		}
+EOT;
+        $indexDelete = <<<EOT
+		// Deleting anything?
 		if (isset(\$_POST['delete'])) {
-            \$this->auth->restrict(\$this->permissionDelete);
+            //$this->auth->restrict($this->permissionDelete);
 			\$checked = \$this->input->post('checked');
 			if (is_array(\$checked) && count(\$checked)) {
 
@@ -55,12 +63,15 @@ if ($db_required != '') {
 					Template::set_message(lang('{$module_name_lower}_delete_failure') . \$this->{$module_name_lower}_model->error, 'error');
 				}
 			}
-		}";
+		}
+EOT;
 
         // Setup paging
         if ($usePagination) {
-            $indexPaginationUri = "\$pagerUriSegment = 5;
-        \$pagerBaseUrl = site_url(SITE_AREA . '/{$controller_name_lower}/{$module_name_lower}/index') . '/';";
+            $indexPaginationUri = <<<EOT
+		\$pagerUriSegment = 3;
+        \$pagerBaseUrl = site_url('/{$controller_name_lower}/{$module_name_lower}/index') . '/';
+EOT;
         }
     }
 
@@ -69,31 +80,33 @@ if ($db_required != '') {
     // Finish setup of paging
     if ($usePagination) {
         $indexArgs = "\$offset = 0";
-        $indexPagination = "
-        \$limit  = \$this->settings_lib->item('site.list_limit') ?: 15;
-
+        $indexPagination = <<<EOT
+       \$pager = array(
+            'base_url'          => \$pagerBaseUrl,
+            'total_rows'        => \$this->{$module_name_lower}_model->count_all(),
+            'per_page'          => \$this->config->item('per_page'),
+            'uri_segment'       => \$pagerUriSegment,
+            'num_links'         => 9,
+            'use_page_numbers'  => FALSE  
+        );
+        
         \$this->load->library('pagination');
-        \$pager['base_url']    = \$pagerBaseUrl;
-        \$pager['total_rows']  = \$this->{$module_name_lower}_model->count_all();
-        \$pager['per_page']    = \$limit;
-        \$pager['uri_segment'] = \$pagerUriSegment;
-
         \$this->pagination->initialize(\$pager);
-        \$this->{$module_name_lower}_model->limit(\$limit, \$offset);";
+        \$this->{$module_name_lower}_model->limit(\$limit, \$offset);
+        \$data['total']          = \$pager['total_rows'];
+        \$data['pagination']     = \$this->pagination->create_links();
+        \$data['number']         = (int)\$this->uri->segment(\$pagerUriSegment) + 1;
+
+EOT;
     }
 
     // Result of find_all() will be filtered based on paging, if used, as well
     // as where clause to filter out soft-deleted fields in public index
-    $indexFind .= "
+    $indexFind .= <<<EOT
 		\$records = \$this->{$module_name_lower}_model->find_all();
 
-		Template::set('records', \$records);";
-}
-
-// If this is not the front controller, setup the toolbar title
-if ($controller_name_lower != $module_name_lower) {
-    $indexToolbarTitle = "
-    Template::set('toolbar_title', lang('{$module_name_lower}_manage'));";
+		Template::set('records', \$records);
+EOT;
 }
 
 //------------------------------------------------------------------------------
@@ -296,11 +309,7 @@ for ($counter = 1; $field_total >= $counter; $counter++) {
 				$constructorExtras .= "
 			Assets::add_js(Template::theme_url('js/editors/tiny_mce/tiny_mce.js'));
 			Assets::add_js(Template::theme_url('js/editors/tiny_mce/tiny_mce_init.js'));";
-			} elseif ($textarea_editor == 'xinha') {
-				$constructorExtras .= "
-			Assets::add_js(Template::theme_url('js/editors/xinha_conf.js'));
-			Assets::add_js(Template::theme_url('js/editors/xinha/XinhaCore.js'));";
-			}
+			} 
 
 			$textarea_included = true;
 		}
@@ -308,31 +317,34 @@ for ($counter = 1; $field_total >= $counter; $counter++) {
 }
 
 $constructorRestrict = '';
-$subNav = '';
 $loadModel = '';
 $baseClass = 'Front_Controller';
 
 // Is this an admin area controller?
 if ($controller_name_lower != $module_name_lower) {
     $baseClass = 'Admin_Controller';
-    $constructorRestrict = "
-        \$this->auth->restrict(\$this->permissionView);";
-	$subNav = "
-		Template::set_block('sub_nav', '{$controller_name_lower}/_sub_nav');";
+    $constructorRestrict = <<<EOT
+ \$this->load->library('securinator/Auth');
+EOT;
+	$constructorExtras .= <<<EOT
+ Template::set_theme('backend');
+EOT;
 
     // If the form error delimiters have been passed, set them in the constructor.
     if (! empty($form_error_delimiters)
         && isset($form_error_delimiters[0])
         && isset($form_error_delimiters[1])
     ) {
-        $constructorExtras .= "
-            \$this->form_validation->set_error_delimiters(\"{$form_error_delimiters[0]}\", \"{$form_error_delimiters[1]}\");";
+        $constructorExtras .= <<<EOT
+ \$this->form_validation->set_error_delimiters("{$form_error_delimiters[0]}", "{$form_error_delimiters[1]}");
+EOT;
     }
 }
 
 if ($db_required != '') {
-    $loadModel = "
-		\$this->load->model('{$module_name_lower}/{$module_name_lower}_model');";
+    $loadModel = <<<EOT
+ \$this->load->model('{$module_name_lower}/{$module_name_lower}_model');
+EOT;
 }
 
 $body = '';
@@ -411,10 +423,15 @@ $permissionModuleName = ucfirst($module_name_lower);
 $permissionControllerName = ucfirst($controller_name);
 $controller_name = ucwords($controller_name);
 
-echo "<?php defined('BASEPATH') || exit('No direct script access allowed');
+echo <<<EOT
+<?php defined('BASEPATH') || exit('No direct script access allowed');
 
 /**
  * {$controller_name} controller
+ * @created on : 
+ * @author :
+ * Copyright {year}
+ *
  */
 class {$controller_name} extends {$baseClass}
 {
@@ -434,9 +451,6 @@ class {$controller_name} extends {$baseClass}
 		{$constructorRestrict}{$loadModel}
         \$this->lang->load('{$module_name_lower}');
 		{$constructorExtras}
-        {$subNav}
-
-		Assets::add_module_js('{$module_name_lower}', '{$module_name_lower}.js');
 	}
 
 	/**
@@ -446,13 +460,17 @@ class {$controller_name} extends {$baseClass}
 	 */
 	public function index({$indexArgs})
 	{
-        {$indexDelete}
+		\$data = array();
+        {$indexStartup}
+		{$indexDelete}
         {$indexPaginationUri}
         {$indexPagination}
         {$indexFind}
         {$indexToolbarTitle}
-
+        foreach( \$data as \$key => \$value )
+            Template::set(\$key, \$value);
 		Template::render();
 	}
     {$body}
-}";
+}
+EOT;

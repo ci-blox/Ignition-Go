@@ -107,7 +107,7 @@ class Base_Controller extends MX_Controller
         if ($this->config->item('migrate.auto_core')
             || $this->config->item('migrate.auto_app')
         ) {
-            $this->load->library('migrations/migrations');
+            $this->load->library('migrations');
             $this->migrations->autoLatest();
         }
 

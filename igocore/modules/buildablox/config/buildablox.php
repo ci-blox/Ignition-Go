@@ -3,6 +3,13 @@
 /* destination folder for new blox */
 $config['buildablox']['output_path'] = APPPATH . '/modules/';
 
+/* Form actions to appear in the "Controller Types" list */
+$config['buildablox']['controller_types'] = array(
+    'Front'  => 'Public',
+    'Auth' => 'Authenticated',
+    'Admin'   => 'Admin',
+);
+
 /* Form actions to appear in the "Controller Actions" list */
 $config['buildablox']['form_action_options'] = array(
     'index'  => 'List',
