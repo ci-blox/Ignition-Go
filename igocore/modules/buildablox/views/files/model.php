@@ -124,7 +124,7 @@ if ( ! empty($rules)) {
 //------------------------------------------------------------------------------
 echo "<?php defined('BASEPATH') || exit('No direct script access allowed');
 
-class {$ucModuleName}_model extends BF_Model
+class {$ucModuleName}_model extends IGO_Model
 {
     {$fields}
 

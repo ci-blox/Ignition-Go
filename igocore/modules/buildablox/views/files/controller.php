@@ -42,7 +42,7 @@ EOT;
         $indexDelete = <<<EOT
 		// Deleting anything?
 		if (isset(\$_POST['delete'])) {
-            //$this->auth->restrict($this->permissionDelete);
+            //\$this->auth->restrict(\$this->permissionDelete);
 			\$checked = \$this->input->post('checked');
 			if (is_array(\$checked) && count(\$checked)) {
 
