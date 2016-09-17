@@ -341,7 +341,7 @@ class Modules
     {
         // Ensure the create_directory_map() function is available.
         if (! function_exists('create_directory_map')) {
-            get_instance()->load->helper('file');
+            get_instance()->load->helper('filedir');
         }
 
         $files = array();
@@ -463,7 +463,7 @@ class Modules
     {
         // Ensure the create_directory_map function is available.
         if (! function_exists('create_directory_map')) {
-            get_instance()->load->helper('file');
+            get_instance()->load->helper('filedir');
         }
 
         $map = array();
@@ -499,7 +499,8 @@ class Modules
     #Register your css js assets
     public static function register_asset( $asset )
     {
-        if( in_array($asset,self::$assets) === FALSE )
+     		if(!is_array(self::$assets) ||
+                in_array($asset,self::$assets) === FALSE )
         {
             self::$assets[] = $asset;
         }
