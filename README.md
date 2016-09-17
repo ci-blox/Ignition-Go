@@ -33,13 +33,13 @@ Type: ```bower install```
 Type: ```npm install gulp``` then<br>
 Type: ```gulp```
 
-6.In Apache, map the public folder to localhost or other url
+7. In Apache, map the public folder to localhost or other url
 Example: in your httpd-vhosts.conf file, add new <VirtualHost> section and restart Apache
 
-7.Create an empty mysql db
+8. Create an empty mysql db
 Example: use HeidiSQL and create both a database and a user with privileges to new database 
 
-8.Go to http://[your web root from step 5]/install/init in your browser to finish using install wizard 
+9. Go to http://[your web root from step 5]/install/init in your browser to finish using install wizard 
 eg if you had created virtual host igotestlocal.com, then go to http://igotestlocal.com/install/init in your browser
 
 ### Features
