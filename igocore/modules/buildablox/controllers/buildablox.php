@@ -20,6 +20,8 @@ class Buildablox extends Admin_Controller
         parent::__construct();
 
         $this->lang->load('builder');
+        $this->load->helper('file');
+        $this->load->helper('blox');
         $this->load->config('buildablox');
 
         $this->options = $this->config->item('buildablox');
@@ -30,11 +32,9 @@ class Buildablox extends Admin_Controller
             $this->form_validation->set_error_delimiters($this->options['form_error_delimiters'][0], $this->options['form_error_delimiters'][1]);
         }
 
-        Modules::register_asset('buildablox.css');
-        Modules::register_asset('buildablox.js');
+        Modules::register_asset('/assets/css/buildablox.css');
+        Modules::register_asset('/assets/js/buildablox.js');
 
-        Template::set_block('sub_nav', '_sub_nav');
-        Template::set_block('sidebar', 'sidebar');
     }
 
     /**
@@ -67,66 +67,18 @@ class Buildablox extends Admin_Controller
         // Check that the modules folder is writable
         Template::set('writable', $this->checkWritable());
         Template::set('modules', $configs);
-        Template::set('toolbar_title', lang('mb_toolbar_title_index'));
-
-        Template::render('two_left');
-    }
-
-    //--------------------------------------------------------------------
-    // !Context buildablox
-    //--------------------------------------------------------------------
-
-    /**
-     * Display the form which allows the user to create a context.
-     *
-     * @return  void
-     */
-    public function create_context()
-    {
-        // Form submittal?
-        if (isset($_POST['build'])) {
-            $this->form_validation->set_rules('context_name', 'lang:mb_context_name', 'required|trim|alpha_numeric');
-
-            if ($this->form_validation->run() !== false) {
-                // Validated!
-                $name       = $this->input->post('context_name');
-                $for_roles  = $this->input->post('roles');
-                $migrate    = $this->input->post('migrate') == 'on';
-
-                // Try to save the context, using the UI/Context helper
-                $this->load->library('ui/contexts');
-                if (Contexts::create_context($name, $for_roles, $migrate)) {
-                    Template::set_message(lang('mb_context_create_success'), 'success');
-                    redirect(SITE_AREA . '/buildablox');
-                }
-
-                // Creating the context failed
-                Template::set_message(lang('mb_context_create_error') . Contexts::errors(), 'error');
-            }
-        }
-
-        // Load roles for display in the form.
-        $this->load->model('securinator/role_model');
-        $this->role_model->select(
-            array(
-                'role_id',
-                'role_name',
-            )
-        )
-                         ->where('deleted', 0);
-
-        Template::set('roles', $this->role_model->find_all());
-        Template::set('toolbar_title', lang('mb_create_a_context'));
+        //Template::set('toolbar_title', lang('mb_toolbar_title_index'));
 
         Template::render();
     }
 
+
     //--------------------------------------------------------------------
-    // !Module buildablox
+    // Create module blox
     //--------------------------------------------------------------------
 
     /**
-     * Display the form which allows the user to create a module.
+     * Display the form which allows the user to create a module blox.
      *
      * @return void
      */
@@ -174,7 +126,7 @@ class Buildablox extends Admin_Controller
             $this->build_module($this->field_total);
             log_activity((int) $this->current_user->id, lang('mb_act_create') . ': ' . $this->input->post('module_name') . ' : ' . $this->input->ip_address(), 'buildablox');
 
-            Template::set_view('developer/output');
+            Template::set_view('output');
         }
 
         Template::set('error', array());
@@ -194,7 +146,7 @@ class Buildablox extends Admin_Controller
         // If there's no module to delete, redirect
         $module_name = $this->input->post('module');
         if (empty($module_name)) {
-            redirect(SITE_AREA . '/buildablox');
+            redirect('/buildablox');
         }
 
         //$this->auth->restrict('Modules.Delete');
@@ -204,7 +156,7 @@ class Buildablox extends Admin_Controller
             // Something went wrong while trying to delete the data
             Template::set_message(lang('mb_delete_trans_false'), $this->db->error, 'error');
 
-            redirect(SITE_AREA . '/buildablox');
+            redirect('/buildablox');
         }
 
         // Data deleted successfully, now try to remove the files.
@@ -219,7 +171,7 @@ class Buildablox extends Admin_Controller
             Template::set_message(lang('mb_delete_success') . lang('mb_delete_success_db_only'), 'info');
         }
 
-        redirect(SITE_AREA . '/developer/buildablox');
+        redirect('/buildablox');
     }
 
     //--------------------------------------------------------------------
@@ -256,16 +208,16 @@ class Buildablox extends Admin_Controller
         }
 
         // Get any permission ids
-        $this->load->model('permissions/permission_model');
-        $permissionKey = $this->permission_model->get_key();
-        $permissionIds = $this->permission_model->select($permissionKey)
+        $this->load->model('securinator/sec_permission_model');
+        $permissionKey = $this->sec_permission_model->get_key();
+        $permissionIds = $this->sec_permission_model->select($permissionKey)
                                                 ->like('name', $moduleName . '.', 'after')
                                                 ->find_all();
 
         // Undo any permissions that exist, from the roles as well
         if (! empty($permissionIds)) {
             foreach ($permissionIds as $row) {
-                $this->permission_model->delete($row->permission_id);
+                $this->sec_permission_model->delete($row->permission_id);
             }
         }
 
@@ -296,8 +248,6 @@ class Buildablox extends Admin_Controller
     /**
      * Prepare the variables used for the buildablox_form and set the view
      *
-     * @todo Allow configuration of defaultRoleWithFullAccess
-     *
      * @todo Ideally the field type variables would be set at a higher level for
      * consistent use throughout the buildablox
      *
@@ -308,21 +258,22 @@ class Buildablox extends Admin_Controller
      */
     private function prepareModuleForm($fieldTotal, $formError)
     {
-        $this->load->model('roles/role_model');
-        $this->role_model->select(array('role_id', 'role_name'))
+        $this->load->model('securinator/sec_role_model');
+        $this->sec_role_model->select(array('role', 'role_name'))
                          ->where('deleted', 0)
                          ->order_by('role_name');
 
-        $this->load->library('buildablox');
-        $boolFieldTypes = array_merge($this->buildablox->getBooleanTypes(), array('BIT', 'BOOL', 'TINYINT'));
-        $listFieldTypes = $this->buildablox->getListTypes();
-        $textFieldTypes = $this->buildablox->getTextTypes();
+        $this->load->library('Modulebuilder');
+        $boolFieldTypes = array_merge($this->modulebuilder->getBooleanTypes(), array('BIT', 'BOOL', 'TINYINT'));
+        $listFieldTypes = $this->modulebuilder->getListTypes();
+        $textFieldTypes = $this->modulebuilder->getTextTypes();
         $dbFieldTypes = array();
-        foreach (array_keys($this->buildablox->getDatabaseTypes()) as $key) {
+        foreach (array_keys($this->modulebuilder->getDatabaseTypes()) as $key) {
             $dbFieldTypes[$key] = $key;
         }
 
-        Template::set('availableContexts', config_item('contexts'));
+        Template::set('defaultRoleWithFullAccess','admin');
+        Template::set('availableContexts', $this->options['controller_types']);
         Template::set('boolFieldTypes', $boolFieldTypes);
         Template::set('db_field_types', $dbFieldTypes);
         Template::set('field_numbers', range(0, 20));
@@ -330,16 +281,14 @@ class Buildablox extends Admin_Controller
         Template::set('form_action_options', $this->options['form_action_options']);
         Template::set('form_error', $formError);
         Template::set('listFieldTypes', $listFieldTypes);
-        Template::set('roles', $this->role_model->as_array()->find_all());
+        Template::set('roles', $this->sec_role_model->as_array()->find_all());
         Template::set(
             'textarea_editors',
             array(
                 ''          => 'None',
                 'ckeditor'  => 'CKEditor',
-                'elrte'     => 'ElRte with ElFinder',
                 'markitup'  => 'MarkitUp!',
                 'tinymce'   => 'TinyMCE',
-                'xinha'     => 'Xinha',
             )
         );
         Template::set('textFieldTypes', $textFieldTypes);
@@ -364,7 +313,7 @@ class Buildablox extends Admin_Controller
             )
         );
 
-        Template::set_view('buildablox_form');
+        Template::set_view('modulebuilder_form');
     }
 
     /**
@@ -376,9 +325,7 @@ class Buildablox extends Admin_Controller
      */
     private function validate_form($field_total = 0)
     {
-        $this->form_validation->set_rules("contexts_content", 'lang:mb_contexts_content', "trim|is_numeric");
         $this->form_validation->set_rules("contexts_public", 'lang:mb_contexts_public', "trim|is_numeric");
-        $this->form_validation->set_rules("contexts_settings", 'lang:mb_contexts_settings', "trim|is_numeric");
         $this->form_validation->set_rules("module_db", 'lang:mb_module_db', "trim|alpha");
         $this->form_validation->set_rules("form_action_create", 'lang:mb_form_action_create', "trim|is_numeric");
         $this->form_validation->set_rules("form_action_delete", 'lang:mb_form_action_delete', "trim|is_numeric");
@@ -386,8 +333,8 @@ class Buildablox extends Admin_Controller
         $this->form_validation->set_rules("form_action_view", 'lang:mb_form_action_view', "trim|is_numeric");
         $this->form_validation->set_rules("form_error_delimiters", 'lang:mb_form_err_delims', "required|trim");
         $this->form_validation->set_rules("module_description", 'lang:mb_form_mod_desc', "trim|required");
-        $this->form_validation->set_rules("module_name", 'lang:mb_form_mod_name', "trim|required|callback__modulename_check");
-        $this->form_validation->set_rules("role_id", 'lang:mb_form_role_id', "trim|is_numeric");
+        $this->form_validation->set_rules("module_name", 'lang:mb_form_mod_name', "trim|required|alpha_dash");  //blox_modulename_check()");
+        $this->form_validation->set_rules("role_id", 'lang:mb_form_role_id', "trim");
 
         // If there's no database table, don't use the table validation
         if ($this->input->post('module_db')) {
@@ -419,15 +366,15 @@ class Buildablox extends Admin_Controller
             // Make sure the length field is required if the DB Field type
             // requires a length
             $no_length = array_merge(
-                $this->buildablox->getObjectTypes(),
-                $this->buildablox->getBooleanTypes(),
-                $this->buildablox->getDateTypes(),
-                $this->buildablox->getTimeTypes()
+                $this->modulebuilder->getObjectTypes(),
+                $this->modulebuilder->getBooleanTypes(),
+                $this->modulebuilder->getDateTypes(),
+                $this->modulebuilder->getTimeTypes()
             );
 
             $optional_length = array_diff(
-                $this->buildablox->getIntegerTypes(),
-                $this->buildablox->getBooleanTypes()
+                $this->modulebuilder->getIntegerTypes(),
+                $this->modulebuilder->getBooleanTypes()
             );
 
             for ($counter = 1; $field_total >= $counter; $counter++) {
@@ -440,16 +387,17 @@ class Buildablox extends Admin_Controller
                 // Better to do it this way round as this statement will be
                 // fullfilled more than the one below
                 if ($counter != 1) {
-                    $this->form_validation->set_rules("view_field_label$counter", $field_details_label . lang('mb_form_label'), 'trim|alpha_extra');
+                    $this->form_validation->set_rules("view_field_label$counter", $field_details_label . lang('mb_form_label'), 'trim|alpha_numeric_spaces');
                 } else {
                     // At least one field is required in the form
-                    $this->form_validation->set_rules("view_field_label$counter", $field_details_label . lang('mb_form_label'), 'trim|required|alpha_extra');
+                    $this->form_validation->set_rules("view_field_label$counter", $field_details_label . lang('mb_form_label'), 'trim|required|alpha_numeric_spaces');
                 }
 
                 $label = $this->input->post("view_field_label$counter");
                 $name_required = empty($label) ? '' : 'required|';
 
-                $this->form_validation->set_rules("view_field_name$counter", $field_details_label . lang('mb_form_fieldname'), "trim|{$name_required}callback__no_match[$counter]");
+                $fieldinfo = json_encode(array($counter, $field_total));
+                $this->form_validation->set_rules("view_field_name$counter", $field_details_label . lang('mb_form_fieldname'), "trim|{$name_required}blox_fieldno_check[$fieldinfo]");
                 $this->form_validation->set_rules("view_field_type$counter", $field_details_label . lang('mb_form_type'), "trim|required|alpha");
                 $this->form_validation->set_rules("db_field_type$counter", $field_details_label . lang('mb_form_dbtype'), "trim|alpha");
 
@@ -575,8 +523,8 @@ class Buildablox extends Admin_Controller
         $controller_name = preg_replace("/[ -]/", "_", $module_name);
         $module_name_lower = strtolower($controller_name);
 
-        $this->load->library('buildablox');
-        $file_data = $this->buildablox->buildFiles(
+        $this->load->library('modulebuilder');
+        $file_data = $this->modulebuilder->buildFiles(
             array(
                 'action_names'          => $action_names,
                 'contexts'              => $contexts,
@@ -635,7 +583,7 @@ class Buildablox extends Admin_Controller
         }
 
         // Load the migrations library
-        $this->load->library('migrations/migrations');
+        $this->load->library('migrations');
 
         // Run the migration install routine
         if ($this->migrations->install("{$data['module_name_lower']}_")) {
@@ -673,58 +621,5 @@ class Buildablox extends Admin_Controller
         return is_writable($this->options['output_path']);
     }
 
-    //--------------------------------------------------------------------------
-    // Form validation callbacks
-    //--------------------------------------------------------------------------
 
-    /**
-     * Form validation callback for the module name
-     *
-     * @param string $str String to check
-     *
-     * @return  bool
-     */
-    public function _modulename_check($str)
-    {
-        if (! preg_match("/^([A-Za-z \-]+)$/", $str)) {
-            $this->form_validation->set_message('_modulename_check', lang('mb_modulename_check'));
-            return false;
-        }
-
-        if (class_exists($str)) {
-            $this->form_validation->set_message('_modulename_check', lang('mb_modulename_check_class_exists'));
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Custom Form Validation Callback Rule
-     *
-     * Checks that one field doesn't match all the others.
-     * This code is not really portable. Would have been nice to create a rule
-     * that accepted an array
-     *
-     * @param string $str    String to check against the other fields
-     * @param array $fieldno The field number of this field
-     *
-     * @return bool
-     */
-    public function _no_match($str, $fieldno)
-    {
-        for ($counter = 1; $this->field_total >= $counter; $counter++) {
-            // Nothing has been entered into the current field or the current
-            // field is the same as the field to validate
-            if ($_POST["view_field_name$counter"] == '' || $fieldno == $counter) {
-                continue;
-            }
-
-            if ($str == $_POST["view_field_name{$counter}"]) {
-                $this->form_validation->set_message('_no_match', sprintf(lang('mb_validation_no_match'), lang('mb_form_field_details'), lang('mb_form_fieldname'), $fieldno, $counter));
-                return false;
-            }
-        }
-        return true;
-    }
-}
+ }
