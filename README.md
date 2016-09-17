@@ -26,7 +26,8 @@ Example: ```cd myigosite```
 4. Install Bower [bower](http://bower.io/): manager for bower components<br>
 Type: ```npm install -g bower```
 
-5. Install the bower components<br>
+5. Install all the NPM and bower components<br>
+Type: ```npm install``` then<br>
 Type: ```bower install```
 
 6. Install and run 'gulp' (note that gulp will run continuously in 'watch' mode, watching for css and js changes).<br>
