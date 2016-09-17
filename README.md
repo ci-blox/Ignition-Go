@@ -15,32 +15,32 @@ Please contact us to contribute.
 * **MySQL 5.5+ or MariaDb**
 
 ### Installing
-1.Install NPM [node.js](http://nodejs.org/): package manager for node modules
+1. Install NPM [node.js](http://nodejs.org/): package manager for node modules
 
-2.GIT clone this repository
-Example: git clone git clone https://github.com/ci-blox/Ignition-Go.git mynewsite
+2. GIT clone this repository<br>
+Example: ```git clone https://github.com/ci-blox/Ignition-Go.git myigosite```
 
-3. Change directory to new site/web app root
-Example: cd mynewsite
+3. Change directory to new site/web app root<br>
+Example: ```cd myigosite```
 
-4.Install Bower [bower](http://bower.io/): manager for bower components
-Example: npm install -g bower
+4. Install Bower [bower](http://bower.io/): manager for bower components<br>
+Type: ```npm install -g bower```
 
-5. Install the bower components
-Example: bower install
+5. Install the bower components<br>
+Type: ```bower install```
 
-5.Install and run 'gulp' (note that gulp will run continuously in 'watch' mode, watching for css and js changes).
-Example: npm install gulp
-         gulp
+6. Install and run 'gulp' (note that gulp will run continuously in 'watch' mode, watching for css and js changes).<br>
+Type: ```npm install gulp``` then<br>
+Type: ```gulp```
 
 6.In Apache, map the public folder to localhost or other url
 Example: in your httpd-vhosts.conf file, add new <VirtualHost> section and restart Apache
 
-6.Create an empty mysql db
+7.Create an empty mysql db
 Example: use HeidiSQL and create both a database and a user with privileges to new database 
 
-7.Go to http://[your web root from step 5]/install/init in your browser to finish using install wizard 
-eg ifyou had created virtual host igotestlocal.com, then go to http://igotestlocal.com/install/init in your browser
+8.Go to http://[your web root from step 5]/install/init in your browser to finish using install wizard 
+eg if you had created virtual host igotestlocal.com, then go to http://igotestlocal.com/install/init in your browser
 
 ### Features
 
