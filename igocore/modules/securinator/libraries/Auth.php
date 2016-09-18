@@ -754,8 +754,8 @@ class Auth
             return $this->permissions;
         }
 
-        if (! class_exists('permission_model', false)) {
-            $this->ci->load->model('permissions/permission_model');
+        if (! class_exists('Sec_permission_model', false)) {
+            $this->ci->load->model('securinator/sec_permission_model');
         }
 
         $this->permissions = array();
