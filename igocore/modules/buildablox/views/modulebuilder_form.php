@@ -3,8 +3,6 @@
 $sessionError = $this->session->flashdata('error');
 $validationErrors = validation_errors();
 
-// Wrapped the whole page in a div.buildablox so module-level CSS won't mess
-// up other pages
 ?>
 <div class='container buildablox'>
     <p class="intro"><?php e(lang('mb_create_note')); ?></p>
@@ -56,7 +54,7 @@ $validationErrors = validation_errors();
     // End Error Messages section
     //--------------------------------------------------------------------------
     ?>
-    <div class="admin-box">
+    <div class="module-builder admin-box">
         <?php
         // If we just append $field_total to the current_url(), failed form
         // validation results in multiple additions of $field_total, until it
@@ -175,7 +173,7 @@ $validationErrors = validation_errors();
             <fieldset id="db_details">
                 <legend><?php echo lang('mb_form_table_details'); ?></legend>
                 <div class="form-group">
-                    <div class="controls">
+                    <div class="controls col-md-9">
                         <a href="#" class="mb_show_advanced small"><?php echo lang('mb_form_show_advanced'); ?></a>
                     </div>
                 </div>
@@ -186,21 +184,21 @@ $validationErrors = validation_errors();
                 ?>
                 <div class="form-group mb_advanced<?php echo form_error('table_name') ? ' error' : ''; ?>">
                     <label for="table_name" class="control-label col-md-3"><?php echo lang('mb_form_table_name'); ?></label>
-                    <div class="controls">
+                    <div class="controls col-md-9">
                         <input name="table_name" id="table_name" type="text" value="<?php echo set_value('table_name'); ?>" placeholder="<?php echo lang('mb_form_table_name_ph'); ?>" />
                         <span class="help-inline"><?php echo form_error('table_name'); ?></span>
                     </div>
                 </div>
                 <div class="form-group mb_advanced<?php echo form_error('form_error_delimiters') ? ' error' : ''; ?>">
                     <label for="form_error_delimiters" class="control-label col-md-3"><?php echo lang('mb_form_err_delims'); ?></label>
-                    <div class="controls">
+                    <div class="controls col-md-9">
                         <input name="form_error_delimiters" id="form_error_delimiters" type="text" value="<?php echo set_value("form_error_delimiters", "<span class='error'>,</span>"); ?>" />
                         <span class="help-inline"><?php echo form_error('form_error_delimiters'); ?></span>
                     </div>
                 </div>
                 <div class="form-group mb_advanced">
                     <label for="textarea_editor" class="control-label col-md-3"><?php echo lang('mb_form_text_ed'); ?></label>
-                    <div class="controls">
+                    <div class="controls col-md-9">
                         <select name="textarea_editor" id="textarea_editor">
                         <?php foreach($textarea_editors as $val => $label):?>
                             <option value="<?php echo $val?>"><?php echo $label?></option>
@@ -209,7 +207,7 @@ $validationErrors = validation_errors();
                     </div>
                 </div>
                 <div class="form-group mb_advanced">
-                    <div class="controls">
+                    <div class="controls col-md-9">
                         <label for="use_pagination" class="checkbox">
                             <input type='checkbox' name="use_pagination" id="use_pagination" value="1" <?php echo set_checkbox('use_pagination', 1); ?> />
                             <?php echo lang('mb_form_use_pagination'); ?>
@@ -217,7 +215,7 @@ $validationErrors = validation_errors();
                     </div>
                 </div>
                 <div class="form-group mb_advanced">
-                    <div class="controls">
+                    <div class="controls col-md-9">
                         <label for="log_user" class="checkbox">
                             <input type='checkbox' name="log_user" id="log_user" value='1' <?php echo set_checkbox('log_user', 1); ?> />
                             <?php echo lang('mb_form_log_user'); ?>
@@ -225,7 +223,7 @@ $validationErrors = validation_errors();
                     </div>
                 </div>
                 <div class="form-group mb_advanced">
-                    <div class="controls">
+                    <div class="controls col-md-9">
                         <label for="use_soft_deletes" class="checkbox">
                             <input type='checkbox' name="use_soft_deletes" id="use_soft_deletes" value='1' <?php echo set_checkbox('use_soft_deletes', 1); ?> />
                             <?php echo lang('mb_form_soft_deletes'); ?>
@@ -234,7 +232,7 @@ $validationErrors = validation_errors();
                 </div>
                 <div class="form-group mb_advanced<?php echo form_error('soft_delete_field') ? ' error' : ''; ?>">
                     <label for="soft_delete_field" class="control-label col-md-3"><?php echo lang('mb_soft_delete_field'); ?></label>
-                    <div class="controls">
+                    <div class="controls col-md-9">
                         <input name="soft_delete_field" id="soft_delete_field" type="text" value="<?php echo set_value('soft_delete_field', lang('mb_soft_delete_field_ph')); ?>" />
                         <span class="help-inline match-existing-notes"><?php echo lang('mb_form_match_existing'); ?></span>
                         <span class="help-inline"><?php echo form_error('soft_delete_field'); ?></span>
@@ -242,14 +240,14 @@ $validationErrors = validation_errors();
                 </div>
                 <div class="form-group mb_advanced<?php echo form_error('deleted_by_field') ? ' error' : ''; ?>">
                     <label for="deleted_by_field" class="control-label col-md-3"><?php echo lang('mb_deleted_by_field'); ?></label>
-                    <div class="controls">
+                    <div class="controls col-md-9">
                         <input name="deleted_by_field" id="deleted_by_field" type="text" value="<?php echo set_value('deleted_by_field', lang('mb_deleted_by_field_ph')); ?>" />
                         <span class="help-inline match-existing-notes"><?php echo lang('mb_form_match_existing'); ?></span>
                         <span class="help-inline"><?php echo form_error('deleted_by_field'); ?></span>
                     </div>
                 </div>
                 <div class="form-group mb_advanced">
-                    <div class="controls">
+                    <div class="controls col-md-9">
                         <label for="use_created" class="checkbox">
                             <input type='checkbox' name="use_created" id="use_created" value='1' <?php echo set_checkbox('use_created', 1); ?> />
                             <?php echo lang('mb_form_use_created'); ?>
@@ -258,7 +256,7 @@ $validationErrors = validation_errors();
                 </div>
                 <div class="form-group mb_advanced<?php echo form_error('created_field') ? ' error' : ''; ?>">
                     <label for="created_field" class="control-label col-md-3"><?php echo lang('mb_form_created_field'); ?></label>
-                    <div class="controls">
+                    <div class="controls col-md-9">
                         <input name="created_field" id="created_field" type="text" value="<?php echo set_value('created_field', lang('mb_form_created_field_ph')); ?>" />
                         <span class="help-inline match-existing-notes"><?php echo lang('mb_form_match_existing'); ?></span>
                         <span class="help-inline"><?php echo form_error('created_field'); ?></span>
@@ -266,14 +264,14 @@ $validationErrors = validation_errors();
                 </div>
                 <div class="form-group mb_advanced<?php echo form_error('created_by_field') ? ' error' : ''; ?>">
                     <label for="created_by_field" class="control-label col-md-3"><?php echo lang('mb_form_created_by_field'); ?></label>
-                    <div class="controls">
+                    <div class="controls col-md-9">
                         <input name="created_by_field" id="created_by_field" type="text" value="<?php echo set_value('created_by_field', lang('mb_form_created_by_field_ph')); ?>" />
                         <span class="help-inline match-existing-notes"><?php echo lang('mb_form_match_existing'); ?></span>
                         <span class="help-inline"><?php echo form_error('created_by_field'); ?></span>
                     </div>
                 </div>
                 <div class="form-group mb_advanced">
-                    <div class="controls">
+                    <div class="controls col-md-9">
                         <label for="use_modified" class="checkbox">
                             <input type='checkbox' name="use_modified" id="use_modified" value='1' <?php echo set_checkbox('use_modified', 1); ?> />
                             <?php echo lang('mb_form_use_modified'); ?>
@@ -282,7 +280,7 @@ $validationErrors = validation_errors();
                 </div>
                 <div class="form-group mb_advanced<?php echo form_error('modified_field') ? ' error' : ''; ?>">
                     <label for="modified_field" class="control-label col-md-3"><?php echo lang('mb_form_modified_field'); ?></label>
-                    <div class="controls">
+                    <div class="controls col-md-9">
                         <input name="modified_field" id="modified_field" type="text" value="<?php echo set_value('modified_field', lang('mb_form_modified_field_ph')); ?>" />
                         <span class="help-inline match-existing-notes"><?php echo lang('mb_form_match_existing'); ?></span>
                         <span class="help-inline"><?php echo form_error('modified_field'); ?></span>
@@ -290,7 +288,7 @@ $validationErrors = validation_errors();
                 </div>
                 <div class="form-group mb_advanced<?php echo form_error('modified_by_field') ? ' error' : ''; ?>">
                     <label for="modified_by_field" class="control-label col-md-3"><?php echo lang('mb_form_modified_by_field'); ?></label>
-                    <div class="controls">
+                    <div class="controls col-md-9">
                         <input name="modified_by_field" id="modified_by_field" type="text" value="<?php echo set_value('modified_by_field', lang('mb_form_modified_by_field_ph')); ?>" />
                         <span class="help-inline match-existing-notes"><?php echo lang('mb_form_match_existing'); ?></span>
                         <span class="help-inline"><?php echo form_error('modified_by_field'); ?></span>
