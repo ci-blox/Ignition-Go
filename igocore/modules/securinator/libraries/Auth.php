@@ -759,7 +759,7 @@ class Auth
         }
 
         $this->permissions = array();
-        $perms = $this->ci->permission_model->find_all();
+        $perms = $this->ci->sec_permission_model->find_all();
         if (! empty($perms)) {
             foreach ($perms as $perm) {
                 $this->permissions[strtolower($perm->name)] = $perm->permission_id;
@@ -772,7 +772,7 @@ class Auth
     /**
      * Load the role permissions from the database.
      *
-     * @param integer $role_id The role id for which permissions are loaded. Uses
+     * @param string $role_id The role for which permissions are loaded. Uses
      * the current user's role ID if none is provided.
      *
      * @return void
@@ -787,12 +787,12 @@ class Auth
             return $this->role_permissions;
         }
 
-        if (! class_exists('role_permission_model', false)) {
-            $this->ci->load->model('roles/role_permission_model');
+        if (! class_exists('Sec_role_permission_model', false)) {
+            $this->ci->load->model('securinator/sec_role_permission_model');
         }
 
         $this->role_permissions[$role_id] = array();
-        $role_perms = $this->ci->role_permission_model->find_for_role($role_id);
+        $role_perms = $this->ci->sec_role_permission_model->find_for_role($role_id);
         if (! is_array($role_perms)) {
             return $this->role_permissions;
         }

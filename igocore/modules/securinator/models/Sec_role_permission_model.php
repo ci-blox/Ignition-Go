@@ -4,7 +4,7 @@
  *
  * Role to Permission mappings - permissions are assigned to roles
  */
-class Sec_permission_model extends IGO_Model
+class Sec_role_permission_model extends IGO_Model
 {
     /** @var string Name of the table. */
     protected $table_name = 'sec_role_permissions';
@@ -26,5 +26,18 @@ class Sec_permission_model extends IGO_Model
 
 
     //--------------------------------------------------------------------------
+
+
+    /**
+     * Return the permissions array for a single role.
+     *
+     * @param string $role The role to find permissions for.
+     *
+     * @return object
+     */
+    public function find_for_role($role = null)
+    {
+        return $this->select('permission_id')->where('role', $role)->find_all();
+    }
 
 }
