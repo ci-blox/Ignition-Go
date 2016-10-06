@@ -64,6 +64,13 @@ $route['api/v1/(:any)/(:num)']			= "api_v1/$1/index/$2";
 $route['api/v1/(:any)/(:num)/(:any)']	= "api_v1/$1/index/$2/$3";
 $route['api/v1/(:any)/(:any)']			= "api_v1/$1/$2";
 
+// Admin endpoints
+$route['admin']					= "admin";
+$route['admin/(:any)']					= "$1/admin";
+$route['admin/(:any)/(:num)']			= "$1/admin/index/$2";
+$route['admin/(:any)/(:num)/(:any)']	= "$1/admin/index/$2/$3";
+$route['admin/(:any)/(:any)']			= "$1/admin/$2";
+
 // API endpoints to latest version (need to change "api_v1" when there is a later version)
 $route['api']							= "api_v1";
 $route['api/(:any)']					= "api_v1/$1";

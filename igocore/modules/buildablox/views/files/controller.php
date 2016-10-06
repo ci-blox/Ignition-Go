@@ -92,7 +92,7 @@ EOT;
         
         \$this->load->library('pagination');
         \$this->pagination->initialize(\$pager);
-        \$this->{$module_name_lower}_model->limit(\$limit, \$offset);
+        \$this->{$module_name_lower}_model->limit(\$pager['per_page'], \$offset);
         \$data['total']          = \$pager['total_rows'];
         \$data['pagination']     = \$this->pagination->create_links();
         \$data['number']         = (int)\$this->uri->segment(\$pagerUriSegment) + 1;
@@ -103,9 +103,9 @@ EOT;
     // Result of find_all() will be filtered based on paging, if used, as well
     // as where clause to filter out soft-deleted fields in public index
     $indexFind .= <<<EOT
-		\$records = \$this->{$module_name_lower}_model->find_all();
-
-		Template::set('records', \$records);
+		\$data['records'] = \$this->{$module_name_lower}_model->find_all();
+       foreach( \$data as \$key => \$value )
+            Template::set(\$key, \$value);
 EOT;
 }
 
@@ -467,8 +467,6 @@ class {$controller_name} extends {$baseClass}
         {$indexPagination}
         {$indexFind}
         {$indexToolbarTitle}
-        foreach( \$data as \$key => \$value )
-            Template::set(\$key, \$value);
 		Template::render();
 	}
     {$body}

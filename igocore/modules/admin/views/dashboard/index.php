@@ -34,6 +34,17 @@
                     <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
                     </button>
                 </div>
+
+
+        <div class="box box-success ">
+            <div class="box-header with-border">
+                <h3 class="box-title">Developer Tools</h3>
+            </div>
+            <div class="box-body">
+                <p><a href='/buildablox'>Manage Blox</a></p>
+            </div>
+        </div>
+
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
