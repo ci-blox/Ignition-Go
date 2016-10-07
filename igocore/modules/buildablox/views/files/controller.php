@@ -269,8 +269,8 @@ $datetime_included = false;
 $textarea_included = false;
 
 $jQueryUI = "
-			Assets::add_css('flick/jquery-ui-1.8.13.custom.css');
-			Assets::add_js('jquery-ui-1.8.13.min.js');";
+			Modules::register_asset('flick/jquery-ui-1.8.13.custom.css');
+			Modules::register_asset('jquery-ui-1.8.13.min.js');";
 
 for ($counter = 1; $field_total >= $counter; $counter++) {
 	$db_field_type = set_value("db_field_type$counter");
@@ -288,8 +288,8 @@ for ($counter = 1; $field_total >= $counter; $counter++) {
 			}
 
 			$constructorExtras .= "
-			Assets::add_css('jquery-ui-timepicker.css');
-			Assets::add_js('jquery-ui-timepicker-addon.js');";
+			Modules::register_asset('jquery-ui-timepicker.css');
+			Modules::register_asset('jquery-ui-timepicker-addon.js');";
 			$datetime_included = true;
 		} elseif (in_array($db_field_type, $textTypes)
 			&& $textarea_included === false
@@ -297,18 +297,18 @@ for ($counter = 1; $field_total >= $counter; $counter++) {
 		) {
 			if ($textarea_editor == 'ckeditor') {
 				$constructorExtras .= "
-			Assets::add_js(Template::theme_url('js/editors/ckeditor/ckeditor.js'));";
+			Modules::register_asset(Template::theme_url('js/editors/ckeditor/ckeditor.js'));";
 			} elseif ($textarea_editor == 'markitup') {
 				$constructorExtras .= "
-			Assets::add_css(Template::theme_url('js/editors/markitup/skins/markitup/style.css'));
-			Assets::add_css(Template::theme_url('js/editors/markitup/sets/default/style.css'));
+			Modules::register_asset(Template::theme_url('js/editors/markitup/skins/markitup/style.css'));
+			Modules::register_asset(Template::theme_url('js/editors/markitup/sets/default/style.css'));
 
-			Assets::add_js(Template::theme_url('js/editors/markitup/jquery.markitup.js'));
-			Assets::add_js(Template::theme_url('js/editors/markitup/sets/default/set.js'));";
+			Modules::register_asset(Template::theme_url('js/editors/markitup/jquery.markitup.js'));
+			Modules::register_asset(Template::theme_url('js/editors/markitup/sets/default/set.js'));";
 			} elseif ($textarea_editor == 'tinymce') {
 				$constructorExtras .= "
-			Assets::add_js(Template::theme_url('js/editors/tiny_mce/tiny_mce.js'));
-			Assets::add_js(Template::theme_url('js/editors/tiny_mce/tiny_mce_init.js'));";
+			Modules::register_asset(Template::theme_url('js/editors/tiny_mce/tiny_mce.js'));
+			Modules::register_asset(Template::theme_url('js/editors/tiny_mce/tiny_mce_init.js'));";
 			} 
 
 			$textarea_included = true;
