@@ -1,5 +1,5 @@
-var gulp = require('gulp'),
-	changed = require('gulp-changed'),
+//var gulp = require('gulp'),
+//	changed = require('gulp-changed'),
 //	imagemin = require('gulp-imagemin'),
 //	config = require('../config').images,
 //	reload = require('browser-sync').reload;
