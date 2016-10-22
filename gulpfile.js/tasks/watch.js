@@ -8,7 +8,7 @@ gulp.task('watch:js-frontend', ['uglify:frontend'], browserSync.reload);
 gulp.task('watch:js-admin', ['uglify:admin'], browserSync.reload);
 gulp.task('watch:css-frontend', ['cssmin:frontend'], browserSync.reload);
 gulp.task('watch:css-admin', ['cssmin:admin'], browserSync.reload);
-gulp.task('watch:images', ['images'], browserSync.reload);
+//gulp.task('watch:images', ['images'], browserSync.reload);
 
 gulp.task('watch', function(callback) {
 
@@ -24,6 +24,6 @@ gulp.task('watch', function(callback) {
 	gulp.watch(config.css.src.admin, ['watch:css-admin']);
 
 	// watch images
-	gulp.watch(config.images.src, ['watch:images']);
+	//gulp.watch(config.images.src, ['watch:images']);
 
 });

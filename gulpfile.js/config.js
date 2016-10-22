@@ -123,12 +123,12 @@ module.exports = {
 		settings: {
 			outSourceMap: true
 		}
-	},
+	} //,
 
 	// imagemin
-	images: {
-		src: dir_asset + "/images/**/*.{png,jpg,gif}",
-		dest: dir_dist + "/images"
-	}
+	//images: {
+	//	src: dir_asset + "/images/**/*.{png,jpg,gif}",
+	//	dest: dir_dist + "/images"
+	//}
 
 };
