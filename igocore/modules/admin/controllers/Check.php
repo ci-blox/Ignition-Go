@@ -11,7 +11,7 @@ class Check extends Front_Controller
     /** @var array Site settings  */
     private $siteSettings;
     /** @var string $loginDest  */
-    private $loginDest = '/admin/dashboard/';
+    private $loginDest = '/admin/dashboard/index';
 
     public function __construct()
     {

@@ -30,7 +30,7 @@ Apply one or more of the following
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="/admin/dashboard" class="logo">
+    <a href="/admin/dashboard/index" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><strong>IGO</strong></span>
       <!-- logo for regular state and mobile devices -->
