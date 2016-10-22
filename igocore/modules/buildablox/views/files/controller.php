@@ -36,7 +36,7 @@ EOT;
     // Admin controllers
 		$indexStartup = <<<EOT
 		if (\$this->auth->is_logged_in() === false) {
-    		Template::redirect('/admin/login');
+    		Template::redirect('/admin/check/login');
  		}
 EOT;
         $indexDelete = <<<EOT
