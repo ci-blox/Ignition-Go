@@ -18,6 +18,7 @@ $lang['mb_table_name']			= 'Name';
 $lang['mb_table_version']		= 'Version';
 $lang['mb_table_author']		= 'Author';
 $lang['mb_table_description']	= 'Description';
+$lang['mb_actions']			= 'Actions';
 
 // OUTPUT page
 $lang['mb_out_success']			= 'The Module Blox was generated successfully! Below is the list of Controller, Model, View and other files that were generated. Model and SQL files will be included if you selected the "Generate Migration" option and a Javascript file if it was required during creation.';

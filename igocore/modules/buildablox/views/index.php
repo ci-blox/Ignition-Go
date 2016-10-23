@@ -13,7 +13,7 @@
 				<th><?php echo lang('mb_table_version'); ?></th>
 				<th><?php echo lang('mb_table_description'); ?></th>
 				<th><?php echo lang('mb_table_author'); ?></th>
-				<th><?php echo lang('mb_form_actions'); ?></th>
+				<th><?php echo lang('mb_actions'); ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -26,7 +26,7 @@
 				<td>
 					<?php echo form_open('/buildablox/delete'); ?>
 						<input type="hidden" name="module" value="<?php echo preg_replace("/[ -]/", "_", $config['name']); ?>">
-						<input type="submit" class="btn btn-danger" onclick="return confirm('<?php e(js_escape(lang('mb_delete_confirm'))) ?>');" value="<?php e(lang('mb_form_actions_delete')) ?>" />
+						<input type="submit" class="btn btn-danger btn-sm" onclick="return confirm('<?php e(js_escape(lang('mb_delete_confirm'))) ?>');" value="<?php e(lang('mb_form_actions_delete')) ?>" />
 					<?php echo form_close(); ?>
 				</td>
 			</tr>

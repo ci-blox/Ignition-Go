@@ -197,12 +197,35 @@ INSERT INTO `igo_settings` (`name`, `category`, `scope`, `value`) VALUES
 ('smtp_timeout', 'email', 'all', ''),
 ('smtp_user', 'common', 'all', '');
 
-
+# table schema version
 CREATE TABLE IF NOT EXISTS `igo_schema_version` (
 	`type` VARCHAR(40) NOT NULL,
 	`version` INT(4) NOT NULL DEFAULT '0',
 	PRIMARY KEY (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-;
+
+# menu definitions
+CREATE TABLE IF NOT EXISTS `igo_menu` (
+  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `menu_group` varchar(20) NOT NULL DEFAULT 'admin',
+  `parent_id` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `title` varchar(100) NOT NULL DEFAULT '',
+  `url` varchar(100) NOT NULL DEFAULT '',
+  `menu_order` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `status` tinyint(1) DEFAULT '1',
+  `level` tinyint(1) DEFAULT NULL,
+  `icon` varchar(100) DEFAULT NULL,
+  `description` varchar(150) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+# sample menu
+insert  into `igo_menu`(`id`,`parent_id`,`title`,`url`,`menu_order`,`status`,`level`,`icon`,`description`) values (1,0,'Admin Home','/dashboard/index',1,1,0,'fa fa-dashboard',NULL);
+insert  into `igo_menu`(`id`,`parent_id`,`title`,`url`,`menu_order`,`status`,`level`,`icon`,`description`) values (3,0,'Manage','#',3,1,2,'fa fa-sitemap',NULL);
+insert  into `igo_menu`(`id`,`parent_id`,`title`,`url`,`menu_order`,`status`,`level`,`icon`,`description`) values (6,3,'Link','#',1,1,1,'fa fa-shield',NULL);
+insert  into `igo_menu`(`id`,`parent_id`,`title`,`url`,`menu_order`,`status`,`level`,`icon`,`description`) values (7,3,'Another Link','#',2,1,0,NULL,NULL);
+insert  into `igo_menu`(`id`,`parent_id`,`title`,`url`,`menu_order`,`status`,`level`,`icon`,`description`) values (33,0,'Reports','#',5,1,0,'fa fa-bar-chart-o',NULL);
+insert  into `igo_menu`(`id`,`parent_id`,`title`,`url`,`menu_order`,`status`,`level`,`icon`,`description`) values (35,33,'Sample Summary','#',1,1,2,'',NULL);
+insert  into `igo_menu`(`id`,`parent_id`,`title`,`url`,`menu_order`,`status`,`level`,`icon`,`description`) values (36,33,'Sample Detail Report','#',3,1,2,'',NULL);
 
 # end install.sql

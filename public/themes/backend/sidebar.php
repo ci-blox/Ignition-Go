@@ -3,6 +3,9 @@
 
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
+ 
+ <?php
+if ( !isset($hide_search) || (!$hide_search) ) : ?>
       <!-- search form (Optional) -->
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
@@ -14,32 +17,73 @@
         </div>
       </form>
       <!-- /.search form -->
+<?php endif; ?>
+ <?php
+ /* Can pass in menu_data and menu_header */
+if ( isset($menu_data) && ($menu_data!=null) ) :
+    $refs = array();
+    $list = array();
+    foreach ($menu_data as $mdata)
+    {
+        $thisref = &$refs[ $mdata['menu_item_id'] ];
+        $thisref['menu_parent_id'] = $mdata['menu_parent_id'];
+        $thisref['menu_item_name'] = $mdata['menu_item_name'];
+        $thisref['url'] = $mdata['url'];
+        $thisref['icon'] = $mdata['icon'];
+        if ($mdata['menu_parent_id'] == 0)
+        {
+            $list[ $mdata['menu_item_id'] ] = &$thisref;
+        }
+        else
+        {
+            $refs[ $mdata['menu_parent_id'] ]['children'][ $mdata['menu_item_id'] ] = &$thisref;
+        }
+    }
 
-      <!-- Sidebar Menu -->
-      <ul class="sidebar-menu">
-        <li class="header">MANAGE</li>
-        <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
-          <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
-          </ul>
-        </li>
-      </ul>
-      <!-- /.sidebar-menu -->
+    function create_list( $arr, $ord)
+    {
+        if($ord==0){
+             $html = "\n<ul class='sidebar-menu'>\n";
+        } else
+        {
+             $html = "\n<ul class='treeview-menu'>\n";
+        }
 
-      <!-- Sidebar Menu -->
-      <ul class="sidebar-menu">
-        <li class="header">REPORTS</li>
-        <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-open"></i> <span>Sample Summary</span></a></li>
-        <li><a href="#"><i class="fa fa-open"></i> <span>Sample Detail Report</span></a></li>
-      </ul>
-      <!-- /.sidebar-menu -->
+        $html .= "<li class='header'>".(isset($menu_header)?$menu_header:"")."</li>\n";
+        
+        foreach ($arr as $key=>$v)
+        {
+            if (array_key_exists('children', $v))
+            {
+                $html .= "<li class='treeview'>\n";
+                $html .= '<a href="#">
+                                <i class="'.$v['icon'].'"></i>
+                                <span>'.$v['menu_item_name'].'</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>';
+ 
+                $html .= create_list($v['children'],1);
+                $html .= "</li>\n";
+            }
+            else{
+                    $html .= '<li><a href="'.$v['url'].'">';
+                    if($ord==0)
+                    {
+                        $html .=    '<i class="'.$v['icon'].'"></i>';
+                    }
+                    if($ord==1)
+                    {
+                        $html .=    '<i class="fa fa-angle-double-right"></i>';
+                    }
+                    $html .= $v['menu_item_name']."</a></li>\n";}
+        }
+        $html .= "</ul>\n";
+        return $html;
+    }
+    echo create_list( $list,0 );
+endif;
+?>
+         </section>
 
-    </section>
     <!-- /.sidebar -->
   </aside>

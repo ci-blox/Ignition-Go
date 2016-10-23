@@ -41,7 +41,7 @@ class Dashboard extends Front_Controller
     // -------------------------------------------------------------------------
 
     /**
-     * Present the login view and allow the user to login.
+     * Present the dashboard view.
      *
      * @return void
      */
@@ -51,8 +51,16 @@ class Dashboard extends Front_Controller
         if ($this->auth->is_logged_in() === false) {
  //           Template::redirect('/admin/check/login');
         }
+        $data = array();
+        // menu
+        $this->load->model('menu_model');
+        $this->menu_model->select('id as menu_item_id, parent_id as menu_parent_id, title as menu_item_name, concat("/admin",url) as url, menu_order, icon');
+        $this->menu_model->where('menu_group','admin');
+        $this->menu_model->order_by('menu_order');
+        $data['menu_data'] =  $this->menu_model->as_array()->find_all(); 
 
-    Template::render();
+        Template::set($data);
+        Template::render();
 
     }
 
