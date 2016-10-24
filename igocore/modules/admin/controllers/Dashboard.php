@@ -61,8 +61,8 @@ class Dashboard extends Front_Controller
 
         // users
         $this->load->model('users/user_model');
-        $this->users_model->where('active',1);
-        $data['usercount'] = $this->users_model->count_all();
+        $this->user_model->where('active',1);
+        $data['usercount'] = $this->user_model->count_all();
 
         Template::set($data);
         Template::render();
