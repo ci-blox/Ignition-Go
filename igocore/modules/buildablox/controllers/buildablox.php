@@ -69,6 +69,14 @@ class Buildablox extends Admin_Controller
         Template::set('modules', $configs);
         //Template::set('toolbar_title', lang('mb_toolbar_title_index'));
 
+        $data = array('page_title'=>lang('mb_page_title'),
+         'page_subtitle'=>'',
+         'page_breadcrumb'=>lang('mb_breadcrumb_title'));
+
+        $data['writable'] = $this->checkWritable();
+        $data['modules'] = $configs;
+
+        Template::set($data);
         Template::render();
     }
 
@@ -129,10 +137,14 @@ class Buildablox extends Admin_Controller
             Template::set_view('output');
         }
 
-        Template::set('error', array());
-        Template::set('writable', $this->checkWritable());
+        $data = array('page_title'=>lang('mb_page_title'),
+         'page_subtitle'=>'',
+         'page_breadcrumb'=>lang('mb_breadcrumb_title'));
 
-        //Template::set('toolbar_title', lang('mb_toolbar_title_create'));
+        $data['writable'] = $this->checkWritable();
+        $data['modules'] = $configs;
+
+        Template::set($data);
         Template::render();
     }
 

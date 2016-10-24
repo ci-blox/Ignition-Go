@@ -7,8 +7,8 @@
 
 // INDEX page
 $lang['mb_actions']				= 'Acciones';
-$lang['mb_create_button']		= 'Crear módulo';
-$lang['mb_create_link']			= 'Crear un nuevo módulo';
+$lang['mb_create_button']		= 'Crear módulo blox';
+$lang['mb_create_link']			= 'Crear un nuevo módulo blox';
 $lang['mb_create_note']			= 'Utiliza nuestro asistente wizbang para crear tu próximo módulo. Hacemos todo el trabajo pesado por ti mediante la generación de controladores, módelos, vistas y archivos de idioma.';
 $lang['mb_not_writable_note']	= 'Error: la carpeta application/modules no tiene permisos de escritura por lo que no podrá crear un módulo en el servidor. Por favor asigne los permisos de escritura a la carpeta y actualiza esta página.';
 $lang['mb_delete']				= 'Eliminar';
@@ -16,6 +16,8 @@ $lang['mb_generic_description']	= 'Su descripción aquí.';
 $lang['mb_installed_head']		= 'Módulos de aplicación instaldos';
 $lang['mb_module']				= 'Módulo';
 $lang['mb_no_modules']			= 'No hay módulos instalados.';
+$lang['mb_breadcrumb_title']     = 'Manage Blox';
+$lang['mb_page_title']          = 'Manage Blox';
 
 $lang['mb_table_name']			= 'Nombre';
 $lang['mb_table_version']		= 'Versión';

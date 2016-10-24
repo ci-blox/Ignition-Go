@@ -12,7 +12,8 @@ $lang['mb_generic_description']	= 'Your Description here.';
 $lang['mb_installed_head']		= 'Installed Application Blox';
 $lang['mb_module']				= 'Blox';
 $lang['mb_no_modules']			= 'No Blox Installed.';
-$lang['mb_toolbar_title_index'] = 'Manage Blox';
+$lang['mb_breadcrumb_title']    = 'Manage Blox';
+$lang['mb_page_title']          = 'Manage Blox';
 
 $lang['mb_table_name']			= 'Name';
 $lang['mb_table_version']		= 'Version';

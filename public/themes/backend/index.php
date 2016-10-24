@@ -43,14 +43,14 @@ Apply one or more of the following
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+     <section class="content-header">
       <h1>
-        Admin Dashboard
-        <small>Optional description</small>
+        <strong><?php echo (isset($page_title)?$page_title:'Admin Dashboard'); ?>
+        <small><strong><?php echo (isset($page_subtitle)?$page_subtitle:''); ?></small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Admin</a></li>
-        <li class="active">Dashboard</li>
+        <li><a href="/admin/dashboard/index"><i class="fa fa-dashboard"></i> Admin</a></li>
+        <li class="active"><?php echo (isset($page_breadcrumb)?$page_breadcrumb:(isset($page_title)?$page_title:'Dashboard')); ?></li>
       </ol>
     </section>
 

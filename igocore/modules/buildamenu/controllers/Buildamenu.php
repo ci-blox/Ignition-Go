@@ -65,7 +65,12 @@ class Buildamenu extends Admin_Controller
             $menuitem_id = $this->Menu_model->insert($params);
             redirect('buildamenu/index');
         }
-        $data = array('menuitem'=>array());
+
+        $data = array('page_title'=>'Manage Menus',
+         'page_subtitle'=>'Listing',
+         'page_breadcrumb'=>'Manage Menus');
+
+        $data['menuitem'] = array();
         if (!isset($_POST['menu_group']))
             $data['menuitem'] = array('menu_group'=>'admin', 'parent_id' =>0, 'menu_order' => 1, 'status'=>1,'level'=>0);
         Template::set($data);
@@ -113,6 +118,11 @@ class Buildamenu extends Admin_Controller
             $this->Menu_model->update($id,$params);            
             redirect('buildamenu/index');
         }
+
+        $data = array('page_title'=>'Manage Menus',
+         'page_subtitle'=>'Listing',
+         'page_breadcrumb'='Manage Menus');
+
         $data['menuitem'] = $menuitem;
         Template::set($data);
         Template::render();
