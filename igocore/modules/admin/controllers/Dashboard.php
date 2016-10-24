@@ -59,6 +59,11 @@ class Dashboard extends Front_Controller
         $this->menu_model->order_by('menu_order');
         $data['menu_data'] =  $this->menu_model->as_array()->find_all(); 
 
+        // users
+        $this->load->model('users/user_model');
+        $this->users_model->where('active',1);
+        $data['usercount'] = $this->users_model->count_all();
+
         Template::set($data);
         Template::render();
 

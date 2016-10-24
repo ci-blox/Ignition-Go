@@ -7,9 +7,9 @@
                 <h3 class="box-title">Welcome!</h3>
             </div>
             <div class="box-body">
-                <p>This is a demonstration page.</p>
+                <p>This page is for demonstration. This is a box with title, body text and footer.</p>
             </div>
-            <div class="box-footer">Box footer here</div>
+            <div class="box-footer">This is a box footer.</div>
         </div>
 
         <div class="box box-primary info-box">
@@ -18,7 +18,7 @@
             </a>
             <div class="info-box-content">
                 <span class="info-box-text">Total Users</span>
-                <span class="info-box-number">10</span>
+                <span class="info-box-number"><?php e($usercount); ?></span>
             </div>
         </div>
         
@@ -28,6 +28,7 @@
             </div>
             <div class="box-body">
                 <p><a href='/buildablox'>Manage Blox</a></p>
+                <p><a href='/buildamenu'>Manage Menus</a></p>
             </div>
         </div>
 
@@ -35,7 +36,7 @@
         <div class="box box-danger">
 
             <div class="box-header with-border">
-                <h3 class="box-title">Latest Users</h3>
+                <h3 class="box-title">Latest Users (Sample)</h3>
 
                 <div class="box-tools pull-right">
                     <span class="label label-danger">8 New</span>
@@ -94,7 +95,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer text-center">
-                <a href="javascript::" class="uppercase">View All Users</a>
+                <a href="javascript:alert('This needs to go to a user manager.')" class="uppercase">View All Users</a>
             </div>
             <!-- /.box-footer -->
         </div>
@@ -108,7 +109,7 @@
         <!-- MAP & BOX PANE -->
         <div class="box box-success">
             <div class="box-header with-border">
-                <h3 class="box-title">Visitors Report</h3>
+                <h3 class="box-title">Visitors Report (Sample)</h3>
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -548,7 +549,7 @@
         <!-- TABLE: LATEST ORDERS -->
         <div class="box box-warning">
             <div class="box-header with-border">
-                <h3 class="box-title">Latest Orders</h3>
+                <h3 class="box-title">Latest Orders (Sample)</h3>
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
