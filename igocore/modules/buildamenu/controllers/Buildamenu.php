@@ -73,7 +73,8 @@ class Buildamenu extends Admin_Controller
         $data['menuitem'] = array();
         if (!isset($_POST['menu_group']))
             $data['menuitem'] = array('menu_group'=>'admin', 'parent_id' =>0, 'menu_order' => 1, 'status'=>1,'level'=>0);
-        Template::set($data);
+        foreach( $data as $key => $value )
+            Template::set($key, $value);
         Template::render();
     }  
 
@@ -124,7 +125,8 @@ class Buildamenu extends Admin_Controller
          'page_breadcrumb'=>'Manage Menus');
 
         $data['menuitem'] = $menuitem;
-        Template::set($data);
+        foreach( $data as $key => $value )
+            Template::set($key, $value);
         Template::render();
     }
 

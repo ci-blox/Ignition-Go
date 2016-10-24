@@ -76,7 +76,8 @@ class Buildablox extends Admin_Controller
         $data['writable'] = $this->checkWritable();
         $data['modules'] = $configs;
 
-        Template::set($data);
+        foreach( $data as $key => $value )
+            Template::set($key, $value);
         Template::render();
     }
 
@@ -144,7 +145,8 @@ class Buildablox extends Admin_Controller
         $data['writable'] = $this->checkWritable();
         $data['modules'] = $configs;
 
-        Template::set($data);
+        foreach( $data as $key => $value )
+            Template::set($key, $value);
         Template::render();
     }
 
