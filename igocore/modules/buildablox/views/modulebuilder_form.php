@@ -148,7 +148,7 @@ $validationErrors = validation_errors();
                 <div class="form-group">
                     <label class='control-label col-sm-3' for='mb_module_db'><?php echo lang('mb_module_db'); ?></label>
                     <div class="controls col-sm-9" id='mb_module_db'>
-                     <div class="btn-group" data-toggle="buttons">
+                     <div class="btn-group dbopt" data-toggle="buttons">
                         <label class="btn btn-default" for="db_no">
                             <input name="module_db" id="db_no" type="radio" value="" <?php echo set_radio('module_db', '', true); ?> class="radio" />
                             <?php echo lang('mb_form_module_db_no'); ?>

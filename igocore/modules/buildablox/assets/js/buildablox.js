@@ -308,6 +308,11 @@ $('.faded input').on('blur', function() {
 });
 $('.faded input:focus').closest('.faded').addClass('faded-focus');
 
+/* switch no db / db new / db existing */
+$('.btn-group.dbopt').on('change', function(e) {
+     showTableProperties();
+});
+
 /*------------------------------------------------------------------------------
  * Update the table name when changing the module name
  */
