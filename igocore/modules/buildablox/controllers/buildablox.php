@@ -143,8 +143,7 @@ class Buildablox extends Admin_Controller
          'page_breadcrumb'=>lang('mb_breadcrumb_title'));
 
         $data['writable'] = $this->checkWritable();
-        $data['modules'] = $configs;
-
+ 
         foreach( $data as $key => $value )
             Template::set($key, $value);
         Template::render();
@@ -476,6 +475,13 @@ class Buildablox extends Admin_Controller
                 }
             }
 
+            /* set some defaults for Date / datetime */
+            if (strtoupper($type)=='DATE')
+                $max_length = '10';
+
+            else if (strtoupper($type)=='DATETIME')
+                $max_length = '39';
+                
             $newfields[] = array(
                 'name'          => isset($field->name) ? $field->name : '',
                 'type'          => strtoupper($type),
