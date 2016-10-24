@@ -121,7 +121,7 @@ class Buildamenu extends Admin_Controller
 
         $data = array('page_title'=>'Manage Menus',
          'page_subtitle'=>'Listing',
-         'page_breadcrumb'='Manage Menus');
+         'page_breadcrumb'=>'Manage Menus');
 
         $data['menuitem'] = $menuitem;
         Template::set($data);
