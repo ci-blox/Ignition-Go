@@ -29,9 +29,10 @@
 </div>
 </div>
 <?php /* echo theme_view('footer'); */ ?>
-<script src="<?php echo base_url(); ?>/components/jquery/dist/jquery.min.js"></script>
-<script src="<?php echo base_url(); ?>/components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src='<?php echo base_url('assets/js/app.min.js'); ?>'></script>
+<script src="<?php echo base_url(); ?>assets/dist/jquery.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/dist/bootstrap.min.js"></script>
+<script src='<?php echo base_url(); ?>assets/dist/app.min.js'></script>
+<script src='<?php echo base_url(); ?>assets/dist/frontend.min.js'></script>
 <script>
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', "<?php echo (isset($ga_account) ? $ga_account : 'UA-99999999-1'); ?>"]);

@@ -26,6 +26,10 @@ body {
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 
+body {
+	margin-top: 60px !important;
+}
+
 body > .container {
 	padding: 60px 15px 0;
 }
@@ -40,4 +44,14 @@ body > .container {
 
 code {
 	font-size: 80%;
+}
+
+/* top nav logo and app title */
+a.navbar-brand {
+	width:240px;
+}
+a.navbar-brand img {
+	width: 25px;
+    float: left;
+    margin-right: 10px;
 }

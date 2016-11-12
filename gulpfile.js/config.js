@@ -65,8 +65,8 @@ module.exports = {
 		src: {
 			frontend: [
 				// bower files
-				//dir_bower + '/bootstrap/dist/css/bootstrap.min.css',
-				dir_bower + '/font-awesome/css/font-awesome.min.css',
+				dir_bower + '/bootstrap/css/bootstrap-theme.css',
+				dir_bower + '/font-awesome/css/font-awesome.css',
 				// custom files
 				dir_asset + '/css/frontend.css'
 			],
@@ -97,7 +97,7 @@ module.exports = {
 		src: {
 			frontend: [
 				// bower files
-				dir_bower + '/jquery/dist/jquery.min.js',
+				dir_bower + '/jquery/dist/jquery.js',
 				//dir_bower + '/bootstrap/dist/js/bootstrap.min.js',
 				// custom files
 				dir_asset + '/js/frontend.js'
@@ -106,11 +106,11 @@ module.exports = {
 				// bower files (use jQuery 1.x for compatibility)
 				dir_bower + '/jquery-legacy/dist/jquery.js',
 				dir_bower + '/jquery-migrate/jquery-migrate.js',
-				dir_bower + '/admin-lte/bootstrap/js/bootstrap.min.js',
+				dir_bower + '/admin-lte/bootstrap/js/bootstrap.js',
 				//dir_bower + '/admin-lte/plugins/fastclick/fastclick.js',
-				dir_bower + '/admin-lte/dist/js/app.min.js',
+				dir_bower + '/admin-lte/dist/js/app.js',
 				//dir_bower + '/admin-lte/plugins/slimScroll/jquery.slimscroll.min.js',
-				dir_bower + '/Sortable/Sortable.min.js',
+				dir_bower + '/Sortable/Sortable.js',
 				// custom files
 				dir_asset + '/js/admin.js'
 			]

@@ -12,25 +12,25 @@
             <ul class="nav navbar-nav">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Themes <span class="caret"></span></a>
-                    <ul class="dropdown-menu" aria-labelledby="themes">
-                        <li><a href="./default/">Default</a></li>
+                    <ul class="dropdown-menu themelist" aria-labelledby="themes">
+                        <li><a data-theme="default" href="#">Default</a></li>
                         <li class="divider"></li>
-                        <li><a href="./cerulean/">Cerulean</a></li>
-                        <li><a href="./cosmo/">Cosmo</a></li>
-                        <li><a href="./cyborg/">Cyborg</a></li>
-                        <li><a href="./darkly/">Darkly</a></li>
-                        <li><a href="./flatly/">Flatly</a></li>
-                        <li><a href="./journal/">Journal</a></li>
-                        <li><a href="./lumen/">Lumen</a></li>
-                        <li><a href="./paper/">Paper</a></li>
-                        <li><a href="./readable/">Readable</a></li>
-                        <li><a href="./sandstone/">Sandstone</a></li>
-                        <li><a href="./simplex/">Simplex</a></li>
-                        <li><a href="./slate/">Slate</a></li>
-                        <li><a href="./spacelab/">Spacelab</a></li>
-                        <li><a href="./superhero/">Superhero</a></li>
-                        <li><a href="./united/">United</a></li>
-                        <li><a href="./yeti/">Yeti</a></li>
+                        <li><a data-theme="cerulean" href="#">Cerulean</a></li>
+                        <li><a data-theme="cosmo" href="#">Cosmo</a></li>
+                        <li><a data-theme="cyborg" href="#">Cyborg</a></li>
+                        <li><a data-theme="darkly" href="#">Darkly</a></li>
+                        <li><a data-theme="flatly" href="#">Flatly</a></li>
+                        <li><a data-theme="journal" href="#">Journal</a></li>
+                        <li><a data-theme="lumen" href="#">Lumen</a></li>
+                        <li><a data-theme="paper" href="#">Paper</a></li>
+                        <li><a data-theme="readable" href="#">Readable</a></li>
+                        <li><a data-theme="sandstone" href="#">Sandstone</a></li>
+                        <li><a data-theme="simplex" href="#">Simplex</a></li>
+                        <li><a data-theme="slate" href="#">Slate</a></li>
+                        <li><a data-theme="spacelab" href="#">Spacelab</a></li>
+                        <li><a data-theme="superhero" href="#">Superhero</a></li>
+                        <li><a data-theme="united" href="#">United</a></li>
+                        <li><a data-theme="yeti" href="#">Yeti</a></li>
                     </ul>
                 </li>
                 <li>
