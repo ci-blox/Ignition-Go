@@ -1,16 +1,16 @@
 # Ignition Go     | <a style="text-align:right" href='https://pledgie.com/campaigns/30957'><img alt='Click here to lend your support to: Ignition Go - development fund and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/30957.png?skin_name=chrome' border='0' ></a>
 A Modular App Building Framework - complete with front end, REST api and admin area
-- [Soon] create and reuse "blox" to build enterprise class web applications
+- create "blox" modules to build enterprise class web applications
 - uses Codeigniter 3.x and Bootstrap 3.x
 - can be used as a quickstart project starter/boilerplate
-- *What are blox?* "Blox" are just pluggable modules or applets that are commonly used in web applications. Ignition Go will include a web-based generator. Planned example "blox" include bulk emailer, dashboard, report manager, and many more!!!  
+- *What are blox?* "Blox" are just pluggable modules or applets that are commonly used in web applications. Ignition Go includes a web-based generator. Planned example "blox" would be a bulk emailer, report manager, and many more!!!  
 
 ### In progress (see below folder structure for progress), contact us to help build the most amazing web app builder ever!  
 Please contact us to contribute.
 
 ### Server Requirements (Preferred)
 
-* **PHP 5.4+** ideal version to use is [PHP 5.6](http://php.net/manual/en/migration56.new-features.php) but minimum is [PHP 5.4](http://php.net/manual/en/migration54.new-features.php) for this project. Use of [GuzzlePHP](http://guzzlephp.com) requires PHP 5.5
+* **PHP 5.5+** ideal version to use is [PHP 5.6](http://php.net/manual/en/migration56.new-features.php) (http://php.net/manual/en/migration55.new-features.php) for this project. 
 * **Apache 2.2+** with rewrite mod enabled
 * **MySQL 5.5+ or MariaDb**
 
@@ -32,9 +32,10 @@ Type: ```bower install```
 
 6. Install and run 'gulp' (note that gulp will run continuously in 'watch' mode, watching for css and js changes).<br>
 Type: ```npm install gulp``` then<br>
-Type: ```gulp```
+EITHER type: ```gulp```
+OR..  type: ```gulp serve```
 
-7. In Apache, map the public folder to localhost or other url
+7. (Optional) In Apache, map the public folder to localhost or other url
 Example: in your httpd-vhosts.conf file, add new <VirtualHost> section and restart Apache
 
 8. Create an empty mysql db
@@ -56,18 +57,18 @@ Ignition Go will be a jumpstart for your rapid development:
 * User authentication for Admin Panel (Login, Change Password, et al)
 * Preset layouts and templates
 * Preset asset pipeline (e.g. minify scripts, image optimization) via Gulp (reference from [gulp-starter 2.0 branch](https://github.com/greypants/gulp-starter/tree/2.0))
-* Buildablox blox and form builder to generate blox and CRUD form views with Bootstrap theme, form validation
+* Buildablox blox module/form builder to generate blox and CRUD form views with Bootstrap theme, form validation
 * Breadcrumb and Pagination handling
 * Multilingual support
 * Email config setup
 * CLI utility functions (e.g. cron job, database backup)
 * Guzzle client integrated as library
-* Frontend theme (default) is integrated to work easily with over 16 free Bootswatch themes
+* Frontend theme (default) is integrated to preview and work easily with over 16 free Bootswatch themes
 
 
 ### Folder Structure
 
-Planned folder structure (not all folders shown). **=not available yet
+Folder structure (most but not all folders shown). **=not available yet
 
 ```
 application/                    --- Main application (CodeIgniter) source folder
@@ -100,7 +101,7 @@ application/                    --- Main application (CodeIgniter) source folder
 public/                         --- SITE ROOT (point Apache here)
 public/assets/
     css/                        --- Custom CSS files append to each site
-    dist/ **                    --- Minified scripts, stylesheets and optimized images via Gulp tasks
+    dist/                       --- Minified scripts, stylesheets (and optionally) optimized images via Gulp tasks
     fonts/                      --- Font files copied via Gulp tasks
     img/                        --- Source image files before optimization
     js/                         --- Custom CSS files append to each site
@@ -113,11 +114,17 @@ ignitcore/system/                         --- CodeIgniter core files (clean CI3 
 
 ### Asset Customization (e.g. additional js/css files)
 
-A gulp file (**gulpfile.js**) is included. It utilizes package and component tools from these sites:
+A gulp configuration (**gulpfile.js**) is included. It utilizes package and component tools from these sites:
 * NPM [node.js](http://nodejs.org/): package manager for node modules
 * Bower [bower](http://bower.io/): manager for bower components 
 * GulpJS [gulp](http://gulpjs.com/): task runner to compile, combine, and minify
 * Guzzle [guzzle](http://guzzlephp.com/): integrated for use as a REST client or for complex curl operations
+
+### Documentation
+There are several markdown files with information on various features.  Here is a listing of some key concepts documents:
+* [Ignition-Go Controllers](http://ci-blox.github.io/Ignition-Go/DocControllers.html)
+* [Ignition-Go Models](http://ci-blox.github.io/Ignition-Go/DocModels.html)
+* [Ignition-Go Views and Themes (the Template library)](http://ci-blox.github.io/Ignition-Go/DocViewsThemes.html)
 
 ### Acknowledgements
 Special thanks to the [Bonfire](http://cibonfire.com) project and those who contributed to it - many features and infrastructure concepts were inspired or incorporated outright from that project.  Also thanks to all the projects like GuzzlePHP and countless others that are open source, whose components are incorporated and allow this initiative to exist.
