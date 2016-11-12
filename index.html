@@ -4,7 +4,7 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Ignition-Go : Codeigniter Modular App Building Framework - create and reuse &quot;blox&quot; to build enterprise class web applications">
+    <meta name="description" content="Ignition-Go : Codeigniter 3 Modular App Building Framework - to build enterprise class web applications">
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
@@ -19,7 +19,7 @@
           <a id="forkme_banner" href="https://github.com/ci-blox/Ignition-Go">View on GitHub</a>
 
           <h1 id="project_title">Ignition-Go</h1>
-          <h2 id="project_tagline">Codeigniter Modular App Building Framework - create and reuse &quot;blox&quot; to build enterprise class web applications</h2>
+          <h2 id="project_tagline">Codeigniter 3 Modular App Building Framework - to build enterprise class web applications</h2>
 
             <section id="downloads">
               <a class="zip_download_link" href="https://github.com/ci-blox/Ignition-Go/zipball/master">Download this project as a .zip file</a>
@@ -34,20 +34,17 @@
         <h1>
 <a id="ignition-go" class="anchor" href="#ignition-go" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ignition Go</h1>
 
-<p>A Modular App Building Framework - create and reuse "blox" to build enterprise class web applications</p>
+<p>A Modular App Building Framework - to build enterprise class web applications</p>
 
 <ul>
 <li>uses Codeigniter 3.x and Bootstrap 3.x</li>
 <li>can be used as a quickstart project starter/boilerplate</li>
 <li>
-<em>What are blox?</em> "Blox" are just pluggable modules or applets that are commonly used in web applications. Ignition Go will include a web-based generator.</li>
+<em>What are blox?</em> "Blox" are just pluggable modules or applets that are commonly used in web applications. Ignition Go includes a web-based module generator.</li>
 </ul>
 
 <h3>
-<a id="coming-soon-contact-us-to-help-build-the-most-amazing-web-app-builder-ever" class="anchor" href="#coming-soon-contact-us-to-help-build-the-most-amazing-web-app-builder-ever" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contact us to help build the most amazing web app builder ever!</h3>
-
-<p>Please contact us to help...
-Planned example "blox" include bulk emailer, dashboard, report manager, and many more!!!  </p>
+<p>Planned example "blox" modules include bulk emailer, report manager, and more!!!  </p>
 
 <h3>
 <a id="server-requirements-preferred" class="anchor" href="#server-requirements-preferred" aria-hidden="true"><span class="octicon octicon-link"></span></a>Server Requirements (Preferred)</h3>
@@ -57,7 +54,7 @@ Planned example "blox" include bulk emailer, dashboard, report manager, and many
 <strong>PHP 5.5+</strong> (mainly for <a href="http://php.net/manual/en/function.password-hash.php">password_hash()</a> and <a href="http://php.net/manual/en/function.password-verify.php">password_verify()</a> functions as used in this project); and also the usage of <a href="http://php.net/manual/en/migration54.new-features.php">shortcut syntax</a> in this project needs  <strong>5.4+</strong> and above.</li>
 <li>
 <strong>Apache 2.2+</strong> with rewrite mod enabled</li>
-<li><strong>MySQL 5.5+</strong></li>
+<li><strong>MySQL 5.5+ or MariaDB</strong></li>
 </ul>
 
 <h3>
@@ -75,7 +72,7 @@ Planned example "blox" include bulk emailer, dashboard, report manager, and many
 <li>User authentication (optional) for Frontend Website (Sign Up, Login, Forgot Password, et al)</li>
 <li>User authentication for Admin Panel (Login, Change Password, et al)</li>
 <li>Preset layouts and templates</li>
-<li>Preset asset pipeline (e.g. minify scripts, image optimization) via Gulp (reference from <a href="https://github.com/greypants/gulp-starter/tree/2.0">gulp-starter 2.0 branch</a>)</li>
+<li>Preset asset pipeline (e.g. minify scripts, stylesheets) via Gulp (reference from <a href="https://github.com/greypants/gulp-starter/tree/2.0">gulp-starter 2.0 branch</a>)</li>
 <li>Buildablox blox and form builder to generate blox and CRUD form views with Bootstrap theme, form validation</li>
 <li>Breadcrumb and Pagination handling</li>
 <li>Multilingual support</li>
@@ -128,11 +125,11 @@ public/assets/
 gulpfile.js/                    --- Task runner following gulp-starter 2.0 practice
 sql/                            --- MySQL files
 ignitcore/                         --- Ignition Go core files
-ignitcore/system/                         --- CodeIgniter core files (unchanged as clean CI3 installation)
+ignitcore/system/                         --- CodeIgniter core files (only minor changes for modules otherwise a clean CI3 installation)
 
 ### Asset Customization (e.g. additional js/css files)
 
-A gulp file (**gulpfile.js**) is included. It utilizes package and component tools from these sites:
+A gulp file configuration (**gulpfile.js**) is included. It utilizes package and component tools from these sites:
 * NPM [node.js](http://nodejs.org/): package manager for node modules
 * Bower [bower](http://bower.io/): manager for bower components 
 * GulpJS [gulp](http://gulpjs.com/): task runner to compile, combine, and minify
