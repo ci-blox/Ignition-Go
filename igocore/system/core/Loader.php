@@ -307,6 +307,7 @@ class CI_Loader {
 			elseif ( ! class_exists('CI_Model', FALSE))
 			{
 				require_once(BASEPATH.'core'.DIRECTORY_SEPARATOR.'Model.php');
+				require_once(IGOPATH.'core'.DIRECTORY_SEPARATOR.'IGO_Model.php');
 			}
 
 			$class = config_item('subclass_prefix').'Model';

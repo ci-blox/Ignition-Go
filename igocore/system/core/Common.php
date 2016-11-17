@@ -174,7 +174,7 @@ if ( ! function_exists('load_class'))
             $name = 'IGO_' . $class;
             if (class_exists($name, FALSE) === FALSE)
             {
-                require_once(IGOPATH . $directory . '/IGO_' . $class . '.php');
+                require_once(IGOPATH . $directory . '/' . $name . '.php');
             }
         }
 
