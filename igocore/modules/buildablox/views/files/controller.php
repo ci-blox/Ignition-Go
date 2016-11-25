@@ -124,8 +124,7 @@ if ($db_required != '') {
 			if (\$insert_id = \$this->save_{$module_name_lower}()) {
 				log_activity(\$this->auth->user_id(), lang('{$module_name_lower}_act_create_record') . ': ' . \$insert_id . ' : ' . \$this->input->ip_address(), '{$module_name_lower}');
 				Template::set_message(lang('{$module_name_lower}_create_success'), 'success');
-
-				redirect('/{$controller_name_lower}/{$module_name_lower}');
+				redirect('". (($controller_name_lower == $module_name_lower)?'':'/admin') ."/{$controller_name_lower}/{$module_name_lower}');
 			}
 
             // Not validation error
@@ -144,7 +143,7 @@ if ($db_required != '') {
 			if (\$this->save_{$module_name_lower}('update', \$id)) {
 				log_activity(\$this->auth->user_id(), lang('{$module_name_lower}_act_edit_record') . ': ' . \$id . ' : ' . \$this->input->ip_address(), '{$module_name_lower}');
 				Template::set_message(lang('{$module_name_lower}_edit_success'), 'success');
-				redirect('/{$controller_name_lower}/{$module_name_lower}');
+				redirect('". (($controller_name_lower == $module_name_lower)?'':'/admin') ."/{$controller_name_lower}/{$module_name_lower}');
 			}
 
             // Not validation error
@@ -162,7 +161,7 @@ if ($db_required != '') {
 				log_activity(\$this->auth->user_id(), lang('{$module_name_lower}_act_delete_record') . ': ' . \$id . ' : ' . \$this->input->ip_address(), '{$module_name_lower}');
 				Template::set_message(lang('{$module_name_lower}_delete_success'), 'success');
 
-				redirect('/{$controller_name_lower}/{$module_name_lower}');
+				redirect('". (($controller_name_lower == $module_name_lower)?'':'/admin') ."/{$controller_name_lower}/{$module_name_lower}');
 			}
 
             Template::set_message(lang('{$module_name_lower}_delete_failure') . \$this->{$module_name_lower}_model->error, 'error');
@@ -202,7 +201,7 @@ $mb_edit = "
 		if (empty(\$id)) {
 			Template::set_message(lang('{$module_name_lower}_invalid_id'), 'error');
 
-			redirect('/{$controller_name_lower}/{$module_name_lower}');
+			redirect('". (($controller_name_lower == $module_name_lower)?'':'/admin') ."/{$controller_name_lower}/{$module_name_lower}');
 		}
         {$editSave}
         {$editDelete}
