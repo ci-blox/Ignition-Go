@@ -292,6 +292,7 @@ class Modulebuilder
 
         // Each context has a controller and a set of views.
         foreach ($contexts as $key => $context_name) {
+            $data['module_name_lower'] = $module_name_lower;
             if ($context_name == 'public') {
                 // Public controllers are named after the module.
                 $data['controller_name'] = $module_name_lower;

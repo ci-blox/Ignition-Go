@@ -104,7 +104,7 @@ if (\$can_delete) {
 <div class='admin-box'>
 	<h3><?php echo lang('{$module_name_lower}_area_title'); ?></h3>
 <?php if (\$can_edit) : ?>
-    <button class='btn btn-success' onclick=\"window.location='<?php echo site_url((($controller_name_lower == $module_name_lower)?'':'/admin').'/{$module_name_lower}/create') . '/'; ?>';\"><i class=\"glyphicon glyphicon-plus\"></i> Add</button>
+    <button class='btn btn-success' onclick=\"window.location='". site_url((($controller_name == $module_name_lower)?'':'/admin'))."/{$module_name_lower}/create'><i class=\"glyphicon glyphicon-plus\"></i> Add</button>
 <?php endif; ?>	
 	<?php echo form_open(\$this->uri->uri_string()); ?>
 		<table class='table table-striped'>

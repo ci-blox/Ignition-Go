@@ -69,7 +69,7 @@ EOT;
         // Setup paging
         if ($usePagination) {
             $indexPaginationUri = <<<EOT
-		\$pagerUriSegment = 3;
+		\$pagerUriSegment = 4;
         \$pagerBaseUrl = site_url('/{$controller_name_lower}/{$module_name_lower}/index') . '/';
 EOT;
         }
