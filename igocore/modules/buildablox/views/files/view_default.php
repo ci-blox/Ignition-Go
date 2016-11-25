@@ -29,7 +29,7 @@ for ($counter = 1; $field_total >= $counter; $counter++) {
     if (is_array($validation_rules)) {
         foreach ($validation_rules as $key => $value) {
             if ($value == 'required') {
-                $required = " . lang('bf_form_label_required')";
+                $required = " . '*'";
                 $required_attribute = true;
             }
         }
@@ -85,8 +85,8 @@ for ($counter = 1; $field_total >= $counter; $counter++) {
         case 'checkbox':
             $viewFields .= PHP_EOL . "
             <div class=\"form-group<?php echo form_error('{$field_name}') ? ' error' : ''; ?>\">
-                <div class='controls'>
-                    <label class='checkbox' for='{$form_name}'>
+                <div class='checkbox'>
+                    <label for='{$form_name}'>
                         <input type='checkbox' id='{$form_name}' name='{$form_name}' " . ($required_attribute ? "required='required' " : "") . " value='1' <?php echo set_checkbox('{$form_name}', 1, isset(\${$module_name_lower}->{$field_name}) && \${$module_name_lower}->{$field_name} == 1); ?> />
                         <?php echo lang('{$module_name_lower}_field_{$field_name}'){$required}; ?>
                     </label>
@@ -135,7 +135,6 @@ if ($action_name != 'create') {
     $delete_permission = preg_replace("/[ -]/", "_", ucfirst($module_name)) . '.' . ucfirst($controller_name) . '.Delete';
     $delete = "
             <?php if (\$this->auth->has_permission('{$delete_permission}')) : ?>
-                <?php echo lang('bf_or'); ?>
                 <button type='submit' name='delete' formnovalidate class='btn btn-danger' id='delete-me' onclick=\"return confirm('<?php e(js_escape(lang('{$module_name_lower}_delete_confirm'))); ?>');\">
                     <span class='icon-trash icon-white'></span>&nbsp;<?php echo lang('{$module_name_lower}_delete_record'); ?>
                 </button>
