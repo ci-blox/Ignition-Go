@@ -161,7 +161,7 @@ endif;
 \$id = isset(\${$module_name_lower}->{$primary_key_field}) ? \${$module_name_lower}->{$primary_key_field} : '';
 
 ?>
-<div class='admin-box'>
+<div class='admin-box container'>
     <h3>{$module_name}</h3>
     <?php echo form_open(\$this->uri->uri_string(), 'class=\"form-horizontal\"'); ?>
         <fieldset>
@@ -169,8 +169,7 @@ endif;
         </fieldset>
         <fieldset class='form-actions'>
             <input type='submit' name='save' class='btn btn-primary' value=\"<?php echo lang('{$module_name_lower}_action_{$action_name}'); ?>\" />
-            <?php echo lang('bf_or'); ?>
-            <?php echo anchor(SITE_AREA . '/" . strtolower($controller_name) . "/{$module_name_lower}', lang('{$module_name_lower}_cancel'), 'class=\"btn btn-warning\"'); ?>
+            <?php echo anchor('/" . strtolower($controller_name) . "/{$module_name_lower}', lang('{$module_name_lower}_cancel'), 'class=\"btn btn-warning\"'); ?>
             {$delete}
         </fieldset>
     <?php echo form_close(); ?>

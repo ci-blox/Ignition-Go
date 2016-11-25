@@ -85,7 +85,7 @@ for ($counter = 1; $field_total >= $counter; $counter++) {
             }
 
 			if ($value == 'unique') {
-				$value .= "[{$dbPrefix}{$table_name}.{$field_name},{$dbPrefix}{$table_name}.{$primary_key_field}]";
+				$value = "is_unique[{$dbPrefix}{$table_name}.{$field_name}]";
 			}
             $tempRules[] = $value;
 		}
