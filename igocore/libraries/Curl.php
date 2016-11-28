@@ -2,7 +2,7 @@
 
 /**
  * CodeIgniter Curl Class
- *
+ * DEPRECATED -USE GUZZLE INSTEAD.
  * Work with remote servers via cURL much easier than using the native PHP bindings.
  *
  * @package        	CodeIgniter
