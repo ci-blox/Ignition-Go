@@ -270,7 +270,7 @@ $path = "..";
 	}
 
 	// Repeat for IGOCORE
-        echo $igocore_path;
+        //echo $igocore_path;
 	if (($_temp = realpath($igocore_path)) !== FALSE)
 	{
 		$igocore_path = $_temp.DIRECTORY_SEPARATOR;
