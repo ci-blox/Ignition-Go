@@ -1,6 +1,8 @@
-<?php defined('BASEPATH') || exit('No direct script access allowed');
+<?php
+
+defined('BASEPATH') || exit('No direct script access allowed');
 /**
- *Menu Model
+ *Menu Model.
  *
  * menu definitions
  */
@@ -25,6 +27,4 @@ class Menu_model extends IGO_Model
     protected $set_modified = false;
 
     //--------------------------------------------------------------------------
-
-    
 }

@@ -1,5 +1,6 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -14,27 +15,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 // Store the requested URL, which will sometimes be different from previous URL.
 $hook['pre_controller'][] = array(
-    'class'    => 'App_hooks',
+    'class' => 'App_hooks',
     'function' => 'saveRequested',
     'filename' => 'App_hooks.php',
     'filepath' => 'hooks',
-    'params'   => ''
+    'params' => '',
 );
 
 // Allow performance of good redirects to previous pages.
 $hook['post_controller'][] = array(
-    'class'    => 'App_hooks',
+    'class' => 'App_hooks',
     'function' => 'prepRedirect',
     'filename' => 'App_hooks.php',
     'filepath' => 'hooks',
-    'params'   => ''
+    'params' => '',
 );
 
 // Check whether the site is in maintenance mode.
 $hook['post_controller_constructor'][] = array(
-    'class'    => 'App_hooks',
+    'class' => 'App_hooks',
     'function' => 'checkSiteStatus',
     'filename' => 'App_hooks.php',
     'filepath' => 'hooks',
-    'params'   => ''
+    'params' => '',
 );

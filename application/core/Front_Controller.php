@@ -1,20 +1,21 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+if (!defined('BASEPATH')) {
+    exit('No direct script access allowed');
+}
 
 /**
- * Front Controller
+ * Front Controller.
  *
  * This class provides a common place to handle any tasks that need to
  * be done for all public-facing controllers.
- *
  */
 class Front_Controller extends Base_Controller
 {
-
     //--------------------------------------------------------------------
 
     /**
-     * Class constructor
-     *
+     * Class constructor.
      */
     public function __construct()
     {
@@ -24,14 +25,15 @@ class Front_Controller extends Base_Controller
 
         $this->load->library('template');
         $this->load->language('application');
- 
+
         $this->set_current_user();
 
         Events::trigger('after_front_controller');
-    }//end __construct()
+    }
+
+//end __construct()
 
     //--------------------------------------------------------------------
-
 }
 
 /* End of file Front_Controller.php */
