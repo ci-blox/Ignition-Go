@@ -6,17 +6,39 @@ php:
   - 7.0
   - 7.1
 
-sudo: false
+global:
+  - CI=true
+  - CI_ENV=testing
 
+# Recommended by Travis support
+sudo: required
+dist: precise
+
+env:
+  - DB=mysqli
+  - DB=postgres
+
+services:
+  - mysql
+  - postgresql
+
+script:
+  - php vendor/bin/phpunit -v
+
+before_install:
+#  - cp .env.example .env
+#  - if [[ $TRAVIS_PHP_VERSION != 7.1 ]] ; then phpenv config-rm xdebug.ini; fi
+  - mysql -e "create database IF NOT EXISTS test;" -uroot;
+  - mysql -e "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'test';" -uroot
+  - psql -c 'create database test;' -U postgres
+
+install: travis_retry composer install --no-interaction --no-scripts --prefer-source --no-suggest
 
 before_script:
+  - composer install --prefer-source
   - npm install -g gulp
   - npm install -g bower
   - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
   - bower install -f
 
-before_install:
-  - cp .env.example .env
-  - if [[ $TRAVIS_PHP_VERSION != 7.1 ]] ; then phpenv config-rm xdebug.ini; fi
 
-install: travis_retry composer install --no-interaction --no-scripts --prefer-source --no-suggest

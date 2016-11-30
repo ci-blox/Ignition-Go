@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit
+        convertWarningsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertErrorsToExceptions="true"
+        backupStaticAttributes="false"
+        processIsolation="false"
+        stopOnFailure="false"
+        backupGlobals="false"
+        syntaxCheck="false"
+        colors="true">
+    <testsuites>
+        <testsuite name="IgnitionGo">
+            <directory>./tests/</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
