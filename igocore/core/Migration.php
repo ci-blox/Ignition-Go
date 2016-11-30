@@ -1,8 +1,10 @@
-<?php defined('BASEPATH') || exit('No direct script access allowed');
+<?php
+
+defined('BASEPATH') || exit('No direct script access allowed');
 
 
 /**
- * Migration Interface
+ * Migration Interface.
  *
  * All migrations should implement this, forces up() and down() and gives access
  * to the CI super-global.
@@ -29,7 +31,7 @@ abstract class Migration
     abstract public function down();
 
     /**
-     * Getter method
+     * Getter method.
      *
      * @param mixed $var
      *
