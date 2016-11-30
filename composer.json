@@ -1,0 +1,28 @@
+{
+    "description": "Codeigniter Modular App Building Framework - create and reuse 'blox'",
+	"name": "ci-blox/ignition-go",
+	"type": "project",
+	"homepage": "https://ciblox.com",
+	"license": "MIT",
+    "version": "1.0.0",
+	"support": {
+		"forum": "https://github.com/ci-blox/ignition-go",
+		"wiki": "https://github.com/ci-blox/ignition-go/wiki",
+		"source": "https://github.com/ci-blox/ignition-go"
+	},
+	"autoload": {
+		"psr-4": {
+		}
+	},
+	"require": {
+		"php": ">=5.5"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "5.3.*"
+	},
+	"scripts": {
+		"post-update-cmd": [
+			"composer dump-autoload"
+		]
+	}
+}

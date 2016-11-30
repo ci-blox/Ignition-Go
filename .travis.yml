@@ -35,7 +35,7 @@ before_install:
 #install: travis_retry composer install --no-interaction --no-scripts --prefer-source --no-suggest
 
 before_script:
-#  - composer install --prefer-source
+  - composer install --prefer-source
   - npm install -g gulp
   - npm install -g bower
   - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
