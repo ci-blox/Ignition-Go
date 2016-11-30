@@ -1,4 +1,4 @@
-# Ignition Go     | <a style="text-align:right" href='https://pledgie.com/campaigns/30957'><img alt='Click here to lend your support to: Ignition Go - development fund and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/30957.png?skin_name=chrome' border='0' ></a>
+# Ignition Go     | <a style="text-align:right" href='https://pledgie.com/campaigns/30957'><img alt='Click here to lend your support to: Ignition Go - development fund and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/30957.png?skin_name=chrome' border='0' ></a> <img src="https://travis-ci.org/ci-blox/Ignition-Go.svg?branch=master"/>
 A Modular App Building Framework - complete with front end, REST api and admin area
 - create "blox" modules to build enterprise class web applications
 - uses Codeigniter 3.x and Bootstrap 3.x
@@ -10,11 +10,11 @@ Please contact us to contribute.
 
 ### Server Requirements (Preferred)
 
-* **PHP 5.5+** ideal version to use is [PHP 5.6](http://php.net/manual/en/migration56.new-features.php) (http://php.net/manual/en/migration55.new-features.php) for this project. 
+* **PHP 5.6, 7.0, 7.1** will run lower but version to use is [PHP 5.6](http://php.net/manual/en/migration56.new-features.php) (http://php.net/manual/en/migration55.new-features.php) for this project. 
 * **Apache 2.2+** with rewrite mod enabled
 * **MySQL 5.5+ or MariaDb**
 
-### Installing
+### Installing (MUST DO ALL STEPS!)
 1. Install NPM [node.js](http://nodejs.org/): package manager for node modules
 
 2. GIT clone this repository<br>
@@ -35,7 +35,7 @@ Type: ```npm install gulp``` then<br>
 EITHER type: ```gulp```
 OR..  type: ```gulp serve```
 
-7. (Optional) In Apache, map the public folder to localhost or other url
+7. (Optional, required in production) In Apache, map the public folder to localhost or other url
 Example: in your httpd-vhosts.conf file, add new <VirtualHost> section and restart Apache
 
 8. Create an empty mysql db
@@ -47,11 +47,11 @@ eg if you had created virtual host igotestlocal.com, then go to http://igotestlo
 ### Features
 
 Ignition Go will be a jumpstart for your rapid development:
-* Multi-faceted (e.g. Frontend Website, Admin Panel, and API) website in a single application
+* Multi-faceted (e.g. Frontend Website, Authorized User Area, Admin Panel, and API) website in a single application
 * Modular design using CodeIgniter HMVC extension
 * Custom config files (sites.php, locale.php) for easy configuration of website behavior
 * Admin Panel with AdminLTE v2 theme
-* Includes usage of [Sortable](http://rubaxa.github.io/Sortable/) library and many other 3rd party optional libraries
+* Includes usage of [Sortable](http://rubaxa.github.io/Sortable/) library and many other 3rd party optional libraries via Bower, Composer, or NPM
 * API Site to handle RESTful endpoints
 * User authentication (optional) for Frontend Website (Sign Up, Login, Forgot Password, et al)
 * User authentication for Admin Panel (Login, Change Password, et al)
@@ -62,7 +62,7 @@ Ignition Go will be a jumpstart for your rapid development:
 * Multilingual support
 * Email config setup
 * CLI utility functions (e.g. cron job, database backup)
-* Guzzle client integrated as library
+* Guzzle client integrated as library (use instead of Curl)
 * Frontend theme (default) is integrated to preview and work easily with over 16 free Bootswatch themes
 
 
