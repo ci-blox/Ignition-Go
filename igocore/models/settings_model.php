@@ -1,9 +1,10 @@
-<?php defined('BASEPATH') || exit('No direct script access allowed');
+<?php
+
+defined('BASEPATH') || exit('No direct script access allowed');
 /**
- * Settings Model
+ * Settings Model.
  *
  * Retrieves and updates settings in the database.
- *
  */
 class Settings_model extends IGO_Model
 {
@@ -13,16 +14,16 @@ class Settings_model extends IGO_Model
     /** @var string Name of the primary key. */
     protected $key = 'name';
 
-    /** @var boolean Use soft deletes or not. */
+    /** @var bool Use soft deletes or not. */
     protected $soft_deletes = false;
 
     /** @var string The date format to use. */
     protected $date_format = 'datetime';
 
-    /** @var boolean Set the created time automatically on a new record. */
+    /** @var bool Set the created time automatically on a new record. */
     protected $set_created = false;
 
-    /** @var boolean Set the modified time automatically on editing a record. */
+    /** @var bool Set the modified time automatically on editing a record. */
     protected $set_modified = false;
 
     /**
@@ -41,7 +42,7 @@ class Settings_model extends IGO_Model
         }
 
         // Setup the field/value check.
-        if (! is_array($field)) {
+        if (!is_array($field)) {
             $field = array($field => $value);
         }
 
@@ -54,7 +55,7 @@ class Settings_model extends IGO_Model
         $results = $this->find_all();
 
         $resultArray = array();
-        if (! empty($results) && is_array($results)) {
+        if (!empty($results) && is_array($results)) {
             foreach ($results as $record) {
                 $resultArray[$record->name] = $record->value;
             }

@@ -1,5 +1,6 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -51,33 +52,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'home';
 $route['404_override'] = 'error';
-$route['translate_uri_dashes'] = FALSE;
+$route['translate_uri_dashes'] = false;
 
-/**
+/*
  * Custom routes Ignition Go
  */
 
 // API endpoints to specific version
-$route['api/v1']						= "api_v1";
-$route['api/v1/(:any)']					= "api_v1/$1";
-$route['api/v1/(:any)/(:num)']			= "api_v1/$1/index/$2";
-$route['api/v1/(:any)/(:num)/(:any)']	= "api_v1/$1/index/$2/$3";
-$route['api/v1/(:any)/(:any)']			= "api_v1/$1/$2";
+$route['api/v1'] = 'api_v1';
+$route['api/v1/(:any)'] = 'api_v1/$1';
+$route['api/v1/(:any)/(:num)'] = 'api_v1/$1/index/$2';
+$route['api/v1/(:any)/(:num)/(:any)'] = 'api_v1/$1/index/$2/$3';
+$route['api/v1/(:any)/(:any)'] = 'api_v1/$1/$2';
 
 // Admin endpoints
-$route['admin']					= "admin";
-$route['admin/(:any)']					= "$1/admin";
-$route['admin/(:any)/(:num)']			= "$1/admin/index/$2";
-$route['admin/(:any)/(:num)/(:any)']	= "$1/admin/index/$2/$3";
-$route['admin/(:any)/create']	= "$1/admin/create/";
-$route['admin/(:any)/(:any)/(:num)']	= "$1/admin/$2/$3";
+$route['admin'] = 'admin';
+$route['admin/(:any)'] = '$1/admin';
+$route['admin/(:any)/(:num)'] = '$1/admin/index/$2';
+$route['admin/(:any)/(:num)/(:any)'] = '$1/admin/index/$2/$3';
+$route['admin/(:any)/create'] = '$1/admin/create/';
+$route['admin/(:any)/(:any)/(:num)'] = '$1/admin/$2/$3';
 
 // API endpoints to latest version (need to change "api_v1" when there is a later version)
-$route['api']							= "api_v1";
-$route['api/(:any)']					= "api_v1/$1";
-$route['api/(:any)/(:num)']				= "api_v1/$1/index/$2";
-$route['api/(:any)/(:num)/(:any)']		= "api_v1/$1/index/$2/$3";
-$route['api/(:any)/(:any)']				= "api_v1/$1/$2";
+$route['api'] = 'api_v1';
+$route['api/(:any)'] = 'api_v1/$1';
+$route['api/(:any)/(:num)'] = 'api_v1/$1/index/$2';
+$route['api/(:any)/(:num)/(:any)'] = 'api_v1/$1/index/$2/$3';
+$route['api/(:any)/(:any)'] = 'api_v1/$1/$2';
 
 
 // Authentication
@@ -93,4 +94,3 @@ $route['reset_password/(:any)/(:any)'] = 'users/reset_password/$1/$2';
 $route['activate'] = 'users/activate';
 $route['activate/(:any)'] = 'users/activate/$1';
 $route['resend_activation'] = 'users/resend_activation';
-
