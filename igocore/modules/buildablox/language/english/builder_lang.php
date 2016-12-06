@@ -48,8 +48,12 @@ $lang['mb_field_note']			= '<p><b>NOTE : FOR ALL FIELDS</b><br />If DB field typ
 
 $lang['mb_form_errors']			= 'Please correct the errors below.';
 $lang['mb_form_mod_details']	= 'Details';
+$lang['mb_form_entity_name']		= 'Entity Name';
+$lang['mb_form_entity_name_ph']		= 'eg Customer, Product, ToDo';
+$lang['mb_form_entity_plural']		= 'Entity Plural';
+$lang['mb_form_entity_plural_ph'] = 'eg Customers , Products, ToDos';
 $lang['mb_form_mod_name']		= 'Blox Name';
-$lang['mb_form_mod_name_ph']	= 'Forums, Blog, ToDo';
+$lang['mb_form_mod_name_ph']	= 'eg Customers, ProductCatalog, Blog, ToDo';
 $lang['mb_form_mod_desc']		= 'Description';
 $lang['mb_form_mod_desc_ph']	= 'Your Blox description';
 $lang['mb_form_contexts']		= 'Controller Types Required';

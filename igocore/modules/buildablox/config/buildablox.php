@@ -16,6 +16,7 @@ $config['buildablox']['form_action_options'] = array(
     'create' => 'Create',
     'edit'   => 'Edit',
     'delete' => 'Delete',
+    'listing'  => 'List Ajax'
 );
 
 /* "Validation Rules" in each field's details/options */

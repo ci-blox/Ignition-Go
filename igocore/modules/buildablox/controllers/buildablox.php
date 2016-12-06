@@ -241,7 +241,7 @@ class Buildablox extends Admin_Controller
             // Drop the table
             $this->load->model("{$moduleName}/{$modelName}", 'mt');
             $mtTableName = $this->mt->get_table();
-
+            // TODO disallow removal of core tables
             // If the model has a table and it exists in the database, drop it
             if (! empty($mtTableName) && $this->db->table_exists($mtTableName)) {
                 $this->dbforge->drop_table($mtTableName);
@@ -300,7 +300,6 @@ class Buildablox extends Admin_Controller
             array(
                 ''          => 'None',
                 'ckeditor'  => 'CKEditor',
-                'markitup'  => 'MarkitUp!',
                 'tinymce'   => 'TinyMCE',
             )
         );
@@ -319,6 +318,7 @@ class Buildablox extends Admin_Controller
             array(
                 'input'    => 'INPUT',
                 'checkbox' => 'CHECKBOX',
+                'image'    => 'IMAGE',
                 'password' => 'PASSWORD',
                 'radio'    => 'RADIO',
                 'select'   => 'SELECT',
@@ -510,6 +510,8 @@ class Buildablox extends Admin_Controller
         $form_error_delimiters  = explode(',', $this->input->post('form_error_delimiters'));
         $module_description     = $this->input->post('module_description');
         $module_name            = $this->input->post('module_name');
+        $entity_1 = $this->input->post('enitity_name');
+        $entity_2 = $this->input->post('enitity_plural');
         $primary_key_field      = $this->input->post('primary_key_field');
         $role_id                = $this->input->post('role_id');
         $table_name             = strtolower(preg_replace("/[ -]/", "_", $this->input->post('table_name')));

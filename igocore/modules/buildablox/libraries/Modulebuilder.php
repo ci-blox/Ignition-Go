@@ -655,6 +655,7 @@ class Modulebuilder
                 $view_name = 'index';
                 break;
             case 'index':
+            case 'listing':
             case 'index_front':
             case 'delete':
             case 'js':
@@ -707,9 +708,9 @@ class Modulebuilder
         $ret_val = array('status' => true);
 
         // Make all of the directories required within the $modulePath
-        @mkdir("{$modulePath}/assets/", DIR_WRITE_MODE);
-        @mkdir("{$modulePath}/assets/css/", DIR_WRITE_MODE);
-        @mkdir("{$modulePath}/assets/js/", DIR_WRITE_MODE);
+        //@mkdir("{$modulePath}/assets/", DIR_WRITE_MODE);
+        //@mkdir("{$modulePath}/assets/css/", DIR_WRITE_MODE);
+        //@mkdir("{$modulePath}/assets/js/", DIR_WRITE_MODE);
         @mkdir("{$modulePath}/config/", DIR_WRITE_MODE);
         @mkdir("{$modulePath}/controllers/", DIR_WRITE_MODE);
         @mkdir("{$modulePath}/views/", DIR_WRITE_MODE);
