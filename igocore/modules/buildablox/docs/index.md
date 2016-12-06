@@ -1,6 +1,6 @@
-# Module Builder
+# Module Blox Builder
 
-Module Builder is available in the Developer context and requires some knowledge of database table design, column types and form layout. It is intended to create some skeleton code for you that you can then continue working with. It cannot modify existing files and will overwrite files if you try.
+Module Blox Builder is available in the Admin section and requires some knowledge of database table design, column types and form layout. It is intended to create some skeleton code for you that you can then continue working with. It cannot modify existing files and will overwrite files if you try.
 
 ## Building a module
 
