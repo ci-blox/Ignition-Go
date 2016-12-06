@@ -122,7 +122,7 @@ A gulp configuration (**gulpfile.js**) is included. It utilizes package and comp
 
 ### Documentation
 There are several markdown files with information on various features.  Here is a listing of some key concepts documents:
-* [Ignition-Go Module Blox](http://ci-blox.github.io/Ignition-Go/DocBuildaBlox.html)
+* [Ignition-Go Module Blox](http://ci-blox.github.io/Ignition-Go/DocBuildABlox.html)
 * [Ignition-Go Controllers](http://ci-blox.github.io/Ignition-Go/DocControllers.html)
 * [Ignition-Go Models](http://ci-blox.github.io/Ignition-Go/DocModels.html)
 * [Ignition-Go Views and Themes (the Template library)](http://ci-blox.github.io/Ignition-Go/DocViewsThemes.html)
