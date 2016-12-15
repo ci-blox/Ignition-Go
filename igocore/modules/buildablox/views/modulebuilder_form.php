@@ -100,6 +100,15 @@ $validationErrors = validation_errors();
                 // Module Details - Advanced Options
                 //--------------------------------------------------------------
                 ?>
+<script>
+jQuery("#entity_name").on('keydown',function(e){
+    var nval = jQuery("#entity_name").val();
+    if (jQuery("#entity_plural").val()==''||nval==jQuery("#entity_plural").val())  
+        jQuery("#entity_plural").val(nval);
+    if (jQuery("#module_name").val()==''||nval.toLowerCase()==jQuery("#module_name").val())  
+        jQuery("#module_name").val(nval.toLowerCase());
+});
+</script>                
                 <div class="form-group mb_advanced<?php echo form_error('module_description') ? ' error' : ''; ?>">
                     <div class="col-sm-3"><label for="module_description" class="control-label"><?php echo lang('mb_form_mod_desc'); ?></label></div>
                     <div class="controls col-sm-9">
@@ -411,39 +420,45 @@ $validationErrors = validation_errors();
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class='col-sm-3'><label class="control-label" id="<?php echo $validationLbl; ?>"><?php echo lang('mb_form_rules'); ?></label></div>
-                        <div class="controls col-sm-9" aria-labelledby="<?php echo $validationLbl; ?>" role="group">
-                            <?php
-                            echo form_error("cont_validation_rules{$count}[]");
-                            foreach ($validation_rules as $validation_rule) :
-                                $validationRulesRuleCount = "validation_rules_{$validation_rule}{$count}";
-                                $validationRulesCount = "validation_rules{$count}[]";
-                            ?>
-                            <span class="faded">
-                                <div class='col-sm-3'><label class="inline checkbox" for="<?php echo $validationRulesRuleCount; ?>">
-                                    <input name="<?php echo $validationRulesCount; ?>" id="<?php echo $validationRulesRuleCount; ?>" type="checkbox" value="<?php echo $validation_rule; ?>" <?php echo set_checkbox($validationRulesCount, $validation_rule); ?> />
-                                    <?php echo lang("mb_form_{$validation_rule}"); ?>
-                                </label></div>
-                            </span>
-                            <?php endforeach; ?>
-                            <a class="small mb_show_advanced_rules" href="#"><em><?php echo lang('mb_form_show_more'); ?></em></a>
+                        <div class="row">
+                            <div class='col-sm-3'><label class="control-label" id="<?php echo $validationLbl; ?>"><?php echo lang('mb_form_rules'); ?></label></div>
+                            <div class="controls col-sm-9" aria-labelledby="<?php echo $validationLbl; ?>" role="group">
+                                <?php
+                                echo form_error("cont_validation_rules{$count}[]");
+                                foreach ($validation_rules as $validation_rule) :
+                                    $validationRulesRuleCount = "validation_rules_{$validation_rule}{$count}";
+                                    $validationRulesCount = "validation_rules{$count}[]";
+                                ?>
+                                <span class="faded">
+                                    <div>
+                                        <label class="inline checkbox" for="<?php echo $validationRulesRuleCount; ?>">
+                                            <input name="<?php echo $validationRulesCount; ?>" id="<?php echo $validationRulesRuleCount; ?>" type="checkbox" value="<?php echo $validation_rule; ?>" <?php echo set_checkbox($validationRulesCount, $validation_rule); ?> />
+                                            <?php echo lang("mb_form_{$validation_rule}"); ?>
+                                        </label>
+                                    </div>
+                                </span>
+                                <?php endforeach; ?>
+                                <a class="small mb_show_advanced_rules" href="#"><em><?php echo lang('mb_form_show_more'); ?></em></a>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group mb_advanced">
-                        <div class='col-sm-3'><label class="control-label" id="<?php echo $validLimitLbl; ?>"><?php echo lang('mb_form_rules_limits'); ?></label></div>
-                        <div class="controls col-sm-9" aria-labelledby="<?php echo $validLimitLbl; ?>" role="group">
-                            <?php
-                            foreach ($validation_limits as $validation_limit) :
-                                $validationRulesLimitCount = "validation_rules_{$validation_limit}{$count}";
-                                $validationRulesCount = "validation_rules{$count}[]";
-                            ?>
-                            <span class="faded">
-                                <div class='col-sm-3'><label class="btn btn-default" for="<?php echo $validationRulesLimitCount; ?>">
-                                    <input name="<?php echo $validationRulesCount; ?>" id="<?php echo $validationRulesLimitCount; ?>" type="radio" value="<?php echo $validation_limit; ?>" <?php echo set_radio($validationRulesCount, $validation_limit); ?> />
-                                    <?php echo lang("mb_form_{$validation_limit}"); ?>
-                                </label>
-                            </span>
-                            <?php endforeach; ?>
+                        <div class="row">
+                            <div class='col-sm-3'><label class="control-label" id="<?php echo $validLimitLbl; ?>"><?php echo lang('mb_form_rules_limits'); ?></label></div>
+                            <div class="controls col-sm-9" aria-labelledby="<?php echo $validLimitLbl; ?>" role="group">
+                                <?php
+                                foreach ($validation_limits as $validation_limit) :
+                                    $validationRulesLimitCount = "validation_rules_{$validation_limit}{$count}";
+                                    $validationRulesCount = "validation_rules{$count}[]";
+                                ?>
+                                <span class="faded">
+                                    <label class="btn btn-default" for="<?php echo $validationRulesLimitCount; ?>">
+                                        <input name="<?php echo $validationRulesCount; ?>" id="<?php echo $validationRulesLimitCount; ?>" type="radio" value="<?php echo $validation_limit; ?>" <?php echo set_radio($validationRulesCount, $validation_limit); ?> />
+                                        <?php echo lang("mb_form_{$validation_limit}"); ?>
+                                    </label>
+                                </span>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
                     </div>
                 </fieldset>

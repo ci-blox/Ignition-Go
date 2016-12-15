@@ -364,7 +364,7 @@ function delete_<?php echo strtolower($entity_1); ?>(id)
     {
         // ajax delete data to database
         $.ajax({
-            url : "<?php echo site_url(/$module_name_lower.'//ajax_delete'); ?>/"+id,
+            url : "<?php echo site_url($module_name_lower.'//ajax_delete'); ?>/"+id,
             type: "POST",
             dataType: "JSON",
             success: function(data)
