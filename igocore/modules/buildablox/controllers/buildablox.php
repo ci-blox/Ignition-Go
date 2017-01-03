@@ -556,6 +556,7 @@ class Buildablox extends Admin_Controller
                 'db_required'           => $db_required,
                 'deleted_by_field'      => $deleted_by_field,
                 'entity_name_single'    => $entity_1,
+                'entity_name_single_lower' => strtolower($entity_1),
                 'entity_name_plural'    => $entity_2,
                 'entity_name_plural_lower' => strtolower($entity_2),
                 'field_total'           => $field_total,

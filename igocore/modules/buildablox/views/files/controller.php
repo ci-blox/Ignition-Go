@@ -637,9 +637,9 @@ class {$controller_name} extends {$baseClass}
 	public function __construct()
 	{
 		parent::__construct();
-        Template::set('page_title', lang('{$module_name_lower}_area_title'));
 		{$constructorRestrict}{$loadModel}
         \$this->lang->load('{$module_name_lower}');
+        Template::set('page_title', lang('{$module_name_lower}_area_title'));
 		{$constructorExtras}
 	}
 
