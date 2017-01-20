@@ -77,7 +77,7 @@
 
 <h3><code>$key</code></h3>
 
-<p>The var <code>$key</code> should be the name of the primary key for your table. BF_Model requires that your table has primary key. If it doesn't you should extend Model and will need to write your own methods to interface with the database. The <code>$key</code> is expected to be linked to an INT field.</p>
+<p>The var <code>$key</code> should be the name of the primary key for your table. IGO_Model requires that your table has primary key. If it doesn't you should extend Model and will need to write your own methods to interface with the database. The <code>$key</code> is expected to be linked to an INT field.</p>
 
 <h3><code>$soft_deletes</code></h3>
 
@@ -525,9 +525,9 @@ $this-&gt;model-&gt;delete_where($wheres);
 
 <h2>Chainable Methods</h2>
 
-<p>Thanks to CodeIgniter's <a href="http://www.codeigniter.com/user_guide/#database-reference">ActiveRecord</a> library, it is very simply to modify the BF_Model's methods. This can be done through either chainable methods or by extending methods.</p>
+<p>Thanks to CodeIgniter's <a href="http://www.codeigniter.com/user_guide/#database-reference">ActiveRecord</a> library, it is very simply to modify the IGO_Model's methods. This can be done through either chainable methods or by extending methods.</p>
 
-<p>Chainable methods are a feature of PHP 5 and higher that allow you to return the results of one function into another, and to keep this 'chain' of events continuing through several functions. Bonfire duplicates several of the stock ActiveRecord methods in BF_Model to make it simple and elegant to customize your queries.</p>
+<p>Chainable methods are a feature of PHP 5 and higher that allow you to return the results of one function into another, and to keep this 'chain' of events continuing through several functions. Bonfire duplicates several of the stock ActiveRecord methods in IGO_Model to make it simple and elegant to customize your queries.</p>
 
 <p>Bonfire's model supports chaining for most of the ActiveRecord methods available, including:</p>
 
@@ -599,7 +599,7 @@ $results = $this-&gt;model-&gt;where($wheres)-&gt;find_all();
 
 <p>Sometimes, you might want to do some additional processing to the database results before passing it on to the controller. This is another perfect example of when to extend the model's method.</p>
 
-<p>To extend an existing method, you simply create a new method in your model that accepts the same parameters as the original BF_Model method.</p>
+<p>To extend an existing method, you simply create a new method in your model that accepts the same parameters as the original IGO_Model method.</p>
 
 <pre><code>// Extend the existing functionality.
 public function find($id=null)
@@ -617,7 +617,7 @@ public function find($id=null)
 
 <h2>Modify Query in Controller</h2>
 
-<p>You can modify a query in your model for a single use by using CodeIgniter's ActiveRecord commands in your controllers. Since BF_Model uses the ActiveRecord commands, the changes in your controller will affect the results of the next query in your model.</p>
+<p>You can modify a query in your model for a single use by using CodeIgniter's ActiveRecord commands in your controllers. Since IGO_Model uses the ActiveRecord commands, the changes in your controller will affect the results of the next query in your model.</p>
 
 <pre><code>// In your controller.
 $this-&gt;db-&gt;join('other_table', 'link_field = users.id', 'left');

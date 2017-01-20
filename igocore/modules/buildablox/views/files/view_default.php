@@ -162,7 +162,9 @@ endif;
 
 ?>
 <div class='admin-box container'>
-    <h3>{$module_name}</h3>
+    <h3>
+   		<?php echo lang('{$module_name}_area_title'); ?>
+    </h3>
     <?php echo form_open(\$this->uri->uri_string(), 'class=\"form-horizontal\"'); ?>
         <fieldset>
             {$viewFields}

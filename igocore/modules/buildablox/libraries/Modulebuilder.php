@@ -219,7 +219,7 @@ class Modulebuilder
         $usePagination  = isset($data['usePagination']) ? $data['usePagination'] : false;
         $useSoftDeletes = isset($data['useSoftDeletes']) ? $data['useSoftDeletes'] : false;
 
-        // Model fields, defaults based on BF_Model.
+        // Model fields, defaults based on IGO_Model.
         $created_field     = isset($data['created_field']) ? $data['created_field'] : 'created_on';
         $created_by_field  = isset($data['created_by_field']) ? $data['created_by_field'] : 'created_by';
         $soft_delete_field = isset($data['soft_delete_field']) ? $data['soft_delete_field'] : 'deleted';
