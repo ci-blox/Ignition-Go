@@ -121,5 +121,4 @@ class Users extends Front_Controller
         $meta_fields = config_item('user_meta_fields');
         Template::set('meta_fields', $meta_fields);
     }
-    
 }

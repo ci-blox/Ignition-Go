@@ -13,7 +13,7 @@
         </div>
 
         <div class="box box-primary info-box">
-            <a href="user">
+            <a href="../users">
                 <span class="info-box-icon"><i class="fa fa-users"></i></span>
             </a>
             <div class="info-box-content">
