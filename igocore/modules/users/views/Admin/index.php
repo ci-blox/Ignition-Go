@@ -13,6 +13,7 @@ if ($can_delete) {
 	<h3>
 		<?php echo lang('usermaint_area_title'); ?>
 	</h3>
+	<a href="/admin/users/create" class="btn btn-sm btn-info btn-flat pull-left">Create User</a>
 	<?php echo form_open($this->uri->uri_string()); ?>
          <table class="table table-hover table-condensed">
 			<thead>
@@ -27,15 +28,15 @@ if ($can_delete) {
 					<th><?php echo lang('usermaint_field_first_name'); ?></th>
 					<th><?php echo lang('usermaint_field_last_name'); ?></th>
 					<th><?php echo lang('usermaint_field_last_login'); ?></th>
-					<th><?php echo lang('usermaint_field_last_ip'); ?></th>
-					<th><?php echo lang('usermaint_field_banned'); ?></th>
+					<!--<th><?php //echo lang('usermaint_field_last_ip'); ?></th>-->
+					<!--<th><?php //echo lang('usermaint_field_banned'); ?></th>-->
 					<th><?php echo lang('usermaint_field_display_name'); ?></th>
-					<th><?php echo lang('usermaint_field_timezone'); ?></th>
-					<th><?php echo lang('usermaint_field_language'); ?></th>
-					<th><?php echo lang('usermaint_field_active'); ?></th>
+					<!--<th><?php //echo lang('usermaint_field_timezone'); ?></th>-->
+					<!--<th><?php //echo lang('usermaint_field_language'); ?></th>-->
+					<!--<th><?php //echo lang('usermaint_field_active'); ?></th>-->
 					<th><?php echo lang('usermaint_field_created_on'); ?></th>
 					<th><?php echo lang('usermaint_field_modified_on'); ?></th>
-					<th><?php echo lang('usermaint_field_deleted'); ?></th>
+					<th><?php echo lang('usermaint_field_status'); ?></th>
 				</tr>
 			</thead>
 			<?php if ($has_records) : ?>
@@ -70,16 +71,17 @@ if ($can_delete) {
 					<td><?php e($record->first_name); ?></td>
 					<td><?php e($record->last_name); ?></td>
 					<td><?php e($record->last_login); ?></td>
-					<td><?php e($record->last_ip); ?></td>
-					<td><?php e($record->banned); ?></td>
+					<!--<td><?//php e($record->last_ip); ?></td>-->
+					<!--<td><?php //e($record->banned); ?></td>-->
 					<td><?php e($record->display_name); ?></td>
-					<td><?php e($record->timezone); ?></td>
-					<td><?php e($record->language); ?></td>
-					<td><?php e($record->active); ?></td>
-					<td><?php e($record->activate_hash); ?></td>
+					<!--<td><?php //e($record->timezone); ?></td>-->
+					<!--<td><?//php e($record->language); ?></td>-->
+					<!--<td><?php //e($record->active); ?></td>-->
+					<!--<td><?php //e($record->activate_hash); ?></td>-->
 					<td><?php e($record->created_on); ?></td>
 					<td><?php e($record->modified_on); ?></td>
-					<td><?php echo $record->deleted > 0 ? lang('usermaint_true') : lang('usermaint_false'); ?></td>
+					<!--<td><?php //echo $record->deleted > 0 ? lang('usermaint_true') : lang('usermaint_false'); ?></td>-->
+					<td><?php if($record->deleted==1) {echo "Deleted";} else if($record->banned==1){echo "Banned";}else{echo "Active";} ?></td>
 				</tr>
 				<?php
 					endforeach;

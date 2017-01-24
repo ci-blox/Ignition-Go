@@ -31,52 +31,52 @@ class User_model extends IGO_Model
     protected $validation_rules = array(
         array(
             'field' => 'password',
-            'label' => 'lang:us_password',
-            'rules' => 'max_length[120]|valid_password|matches[pass_confirm]',
+            'label' => 'lang:usermaint_field_password',
+            'rules' => 'trim|min_length[5]|max_length[120]|regex_match[/[A-Za-z0-9-_?!.]+/]',
         ),
         array(
             'field' => 'pass_confirm',
-            'label' => 'lang:us_password_confirm',
-            'rules' => '',
+            'label' => 'lang:usermaint_field_password_confirm',
+            'rules' => 'matches[password]',
         ),
         array(
             'field' => 'first_name',
-            'label' => 'lang:us_first_name',
+            'label' => 'lang:usermaint_field_first_name',
             'rules' => 'trim|max_length[50]',
         ),
         array(
             'field' => 'last_name',
-            'label' => 'lang:us_last_name',
+            'label' => 'lang:usermaint_field_last_name',
             'rules' => 'trim|max_length[50]',
         ),
         array(
             'field' => 'display_name',
-            'label' => 'lang:us_display_name',
+            'label' => 'lang:usermaint_field_display_name',
             'rules' => 'trim|max_length[255]',
         ),
         array(
             'field' => 'language',
-            'label' => 'lang:us_language',
+            'label' => 'lang:usermaint_field_language',
             'rules' => 'required|trim',
         ),
         array(
-            'field' => 'timezones',
-            'label' => 'lang:us_timezone',
+            'field' => 'timezone',
+            'label' => 'lang:usermaint_field_timezone',
             'rules' => 'required|trim|max_length[40]',
         ),
         array(
             'field' => 'username',
-            'label' => 'lang:us_username',
+            'label' => 'lang:usermaint_field_username',
             'rules' => 'trim|max_length[30]',
         ),
         array(
             'field' => 'email',
-            'label' => 'lang:us_email',
+            'label' => 'lang:usermaint_field_email',
             'rules' => 'required|trim|valid_email|max_length[254]',
         ),
         array(
             'field' => 'role',
-            'label' => 'lang:us_role',
+            'label' => 'lang:usermaint_field_role',
             'rules' => 'trim',
         ),
     );
@@ -85,12 +85,12 @@ class User_model extends IGO_Model
     protected $insert_validation_rules = array(
         array(
             'field' => 'password',
-            'label' => 'lang:us_password',
+            'label' => 'lang:usermaint_field_password',
             'rules' => 'required',
         ),
         array(
             'field' => 'pass_confirm',
-            'label' => 'lang:us_password_confirm',
+            'label' => 'lang:usermaint_field_password_confirm',
             'rules' => 'required',
         ),
     );
@@ -943,5 +943,6 @@ class User_model extends IGO_Model
             'left'
         );
     }
+    
 }
 //end User_model

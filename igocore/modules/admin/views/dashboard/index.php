@@ -13,7 +13,7 @@
         </div>
 
         <div class="box box-primary info-box">
-            <a href="user">
+            <a href="../users">
                 <span class="info-box-icon"><i class="fa fa-users"></i></span>
             </a>
             <div class="info-box-content">
@@ -21,7 +21,6 @@
                 <span class="info-box-number"><?php e($usercount); ?></span>
             </div>
         </div>
-        
         <div class="box box-success ">
             <div class="box-header with-border">
                 <h3 class="box-title">Developer Tools</h3>
