@@ -165,9 +165,11 @@ class API_Controller extends MX_Controller {
 		}
 		
 		
-		// 		TODO: sanitize $mParams
-		$this->mParams = $params;
-		
+		$this->mParams = array();
+		//	sanitize  $mParams
+		foreach ($params as $key => $value) {
+			$this->mParams[$key] = sanitizeString($value);
+		}
 	}
 	
 	// render json

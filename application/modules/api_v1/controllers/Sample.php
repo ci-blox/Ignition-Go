@@ -41,6 +41,7 @@ class Sample extends API_Controller {
 	// [POST] /sample
 	protected function create_item()
 	{
+		$this->load->helper('array');
 		$params = elements(array('filter', 'valid', 'fields', 'here'), $this->mParams);
 		$this->to_created();
 	}
@@ -48,6 +49,7 @@ class Sample extends API_Controller {
 	// [PUT] /sample/{id}
 	protected function update_item($id)
 	{
+		$this->load->helper('array');
 		$params = elements(array('filter', 'valid', 'fields', 'here'), $this->mParams);
 		$this->to_accepted();
 	}
