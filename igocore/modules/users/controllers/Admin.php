@@ -70,18 +70,18 @@ class Admin extends Admin_Controller
 				}
 			}
 		}
-      $pagerUriSegment = 4;
-      $pagerBaseUrl = site_url('/admin/users/') . '/';
+        $pagerUriSegment = 4;
+        $pagerBaseUrl = site_url('/admin/users/') . '/';
                $pager = array(
             'base_url'          => $pagerBaseUrl,
             'total_rows'        => $this->user_model->count_all(),
             //'per_page'          => $this->config->item('per_page'),
-			'per_page'			=> 10,
+			'per_page'			=> 5,
             'uri_segment'       => $pagerUriSegment,
             'num_links'         => 9,
             'use_page_numbers'  => FALSE,
 			'page_query_string' => FALSE
-       );
+        );
         
         $this->load->library('pagination');
         $this->pagination->initialize($pager);
@@ -206,7 +206,6 @@ class Admin extends Admin_Controller
 
         // Validate the data
         $this->form_validation->set_rules($this->user_model->get_validation_rules($type));
-        $this->form_validation->set_rules($this->user_model->get_validation_rules());
         if ($this->form_validation->run() === false) {
             return false;
         }

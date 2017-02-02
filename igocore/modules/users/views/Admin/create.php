@@ -65,6 +65,36 @@ $id = isset($usermaint->id) ? $usermaint->id : '';
                 </div>
             </div>
 
+            <!--<div class="form-group<?//php echo form_error('password_hash') ? ' error' : ''; ?>">
+                <?//php echo form_label(lang('usermaint_field_password_hash'), 'password_hash', array('class' => 'control-label')); ?>
+                <div class='controls'>
+                    <input id='password_hash' type='text' name='password_hash' maxlength='255' value="<?//php echo set_value('password_hash', isset($usermaint->password_hash) ? $usermaint->password_hash : ''); ?>" />
+                    <span class='help-inline'><?//php echo form_error('password_hash'); ?></span>
+                </div>
+            </div>-->
+
+            <!--<div class="form-group<?//php echo form_error('reset_hash') ? ' error' : ''; ?>">
+                <?//php echo form_label(lang('usermaint_field_reset_hash'), 'reset_hash', array('class' => 'control-label')); ?>
+                <div class='controls'>
+                    <input id='reset_hash' type='text' name='reset_hash' maxlength='40' value="<?//php echo set_value('reset_hash', isset($usermaint->reset_hash) ? $usermaint->reset_hash : ''); ?>" />
+                    <span class='help-inline'><?//php echo form_error('reset_hash'); ?></span>
+                </div>
+            </div>-->
+            <div class="form-group<?php echo form_error('password') ? ' error' : ''; ?>">
+                <?php echo form_label(lang('usermaint_field_password'), 'password', array('class' => 'control-label')); ?>
+                <div class='controls'>
+                    <input id='password' type='text' name='password' maxlength='255' value="" />
+                    <span class='help-inline'><?php echo form_error('password'); ?></span>
+                </div>
+            </div>
+
+            <div class="form-group<?php echo form_error('pass_confirm') ? ' error' : ''; ?>">
+                <?php echo form_label(lang('usermaint_field_password_confirm'), 'reset_hash', array('class' => 'control-label')); ?>
+                <div class='controls'>
+                    <input id='pass_confirm' type='text' name='pass_confirm' maxlength='255' value="<?php //echo set_value('pass_confirm', isset($usermaint->pass_confirm) ? $usermaint->pass_confirm : ''); ?>" />
+                    <span class='help-inline'><?php echo form_error('pass_confirm'); ?></span>
+                </div>
+            </div>
             <div class="form-group<?php echo form_error('last_login') ? ' error' : ''; ?>">
                 <?php echo form_label(lang('usermaint_field_last_login'), 'last_login', array('class' => 'control-label')); ?>
                 <div class='controls'>
