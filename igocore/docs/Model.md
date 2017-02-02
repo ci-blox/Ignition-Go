@@ -77,7 +77,7 @@ The var `$table_name` should be set to the name of the table in your database. I
 
 ### `$key`
 
-The var `$key` should be the name of the primary key for your table. BF_Model requires that your table has primary key. If it doesn't you should extend Model and will need to write your own methods to interface with the database. The `$key` is expected to be linked to an INT field.
+The var `$key` should be the name of the primary key for your table. IGO_Model requires that your table has primary key. If it doesn't you should extend Model and will need to write your own methods to interface with the database. The `$key` is expected to be linked to an INT field.
 
 ### `$soft_deletes`
 
@@ -575,9 +575,9 @@ A chainable method that specifies the model should return the results as a JSON 
 
 ## Chainable Methods
 
-Thanks to CodeIgniter's [ActiveRecord](http://www.codeigniter.com/user_guide/#database-reference) library, it is very simply to modify the BF_Model's methods. This can be done through either chainable methods or by extending methods.
+Thanks to CodeIgniter's [ActiveRecord](http://www.codeigniter.com/user_guide/#database-reference) library, it is very simply to modify the IGO_Model's methods. This can be done through either chainable methods or by extending methods.
 
-Chainable methods are a feature of PHP 5 and higher that allow you to return the results of one function into another, and to keep this 'chain' of events continuing through several functions. Bonfire duplicates several of the stock ActiveRecord methods in BF_Model to make it simple and elegant to customize your queries.
+Chainable methods are a feature of PHP 5 and higher that allow you to return the results of one function into another, and to keep this 'chain' of events continuing through several functions. Bonfire duplicates several of the stock ActiveRecord methods in IGO_Model to make it simple and elegant to customize your queries.
 
 Bonfire's model supports chaining for most of the ActiveRecord methods available, including:
 
@@ -653,7 +653,7 @@ While it is possible to modify the query via the chainable methods any time you 
 
 Sometimes, you might want to do some additional processing to the database results before passing it on to the controller. This is another perfect example of when to extend the model's method.
 
-To extend an existing method, you simply create a new method in your model that accepts the same parameters as the original BF_Model method.
+To extend an existing method, you simply create a new method in your model that accepts the same parameters as the original IGO_Model method.
 
 ```
 // Extend the existing functionality.
@@ -673,7 +673,7 @@ public function find($id=null)
 
 ## Modify Query in Controller
 
-You can modify a query in your model for a single use by using CodeIgniter's ActiveRecord commands in your controllers. Since BF_Model uses the ActiveRecord commands, the changes in your controller will affect the results of the next query in your model.
+You can modify a query in your model for a single use by using CodeIgniter's ActiveRecord commands in your controllers. Since IGO_Model uses the ActiveRecord commands, the changes in your controller will affect the results of the next query in your model.
 
 ```
 // In your controller.

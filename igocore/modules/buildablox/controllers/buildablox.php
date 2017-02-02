@@ -555,6 +555,10 @@ class Buildablox extends Admin_Controller
                 'created_field'         => $created_field,
                 'db_required'           => $db_required,
                 'deleted_by_field'      => $deleted_by_field,
+                'entity_name_single'    => $entity_1,
+                'entity_name_single_lower' => strtolower($entity_1),
+                'entity_name_plural'    => $entity_2,
+                'entity_name_plural_lower' => strtolower($entity_2),
                 'field_total'           => $field_total,
                 'form_error_delimiters' => $form_error_delimiters,
                 'logUser'               => $logUser,
@@ -615,22 +619,6 @@ class Buildablox extends Admin_Controller
         }
 
         Template::set($data);
-    }
-
-    /**
-     * Check that the Modules folder is writable
-     *
-     * @deprecated since 0.7.1 use checkWritable() instead
-     *
-     * @todo This method was marked private in the DocBlock but is public, since
-     * it is now deprecated, just need to ensure it is not used elsewhere before
-     * it is deleted.
-     *
-     * @return  bool
-     */
-    public function _check_writeable()
-    {
-        return $this->checkWritable();
     }
 
     /**

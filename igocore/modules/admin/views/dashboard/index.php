@@ -21,7 +21,6 @@
                 <span class="info-box-number"><?php e($usercount); ?></span>
             </div>
         </div>
-        
         <div class="box box-success ">
             <div class="box-header with-border">
                 <h3 class="box-title">Developer Tools</h3>

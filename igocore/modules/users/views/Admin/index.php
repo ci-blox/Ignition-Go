@@ -13,6 +13,7 @@ if ($can_delete) {
 	<h3>
 		<?php echo lang('usermaint_area_title'); ?>
 	</h3>
+	<a href="/admin/users/create" class="btn btn-sm btn-info btn-flat pull-left">Create User</a>
 	<?php echo form_open($this->uri->uri_string()); ?>
          <table class="table table-hover table-condensed">
 			<thead>

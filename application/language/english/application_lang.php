@@ -1,4 +1,11 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+$lang['app_and'] = 'and';
+$lang['app_or']	= 'or';
+$lang['app_form_label_required'] = '*';
+$lang['app_with_selected']	= 'with selected';
+
+
+$lang['us_access_logs']				= 'Access Logs';
 
 $lang['us_account_deleted']			= 'Unfortunately your account has been deleted. It has not yet been purged and <strong>may still</strong> be restored. Contact the administrator at %s.';
 

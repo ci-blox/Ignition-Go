@@ -370,7 +370,7 @@ $mb_create = "
 		\$this->auth->restrict(\$this->permissionCreate);
         {$createSave}
 
-		Template::set('toolbar_title', lang('{$module_name_lower}_action_create'));
+		Template::set('subpage_title', lang('{$module_name_lower}_action_create'));
 
 		Template::render();
 	}";
@@ -397,7 +397,7 @@ $mb_edit = "
         {$editDelete}
         {$editFind}
 
-		Template::set('toolbar_title', lang('{$module_name_lower}_edit_heading'));
+		Template::set('subpage_title', lang('{$module_name_lower}_edit_heading'));
 		Template::render();
 	}";
 
@@ -639,6 +639,7 @@ class {$controller_name} extends {$baseClass}
 		parent::__construct();
 		{$constructorRestrict}{$loadModel}
         \$this->lang->load('{$module_name_lower}');
+        Template::set('page_title', lang('{$module_name_lower}_area_title'));
 		{$constructorExtras}
 	}
 
