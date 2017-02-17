@@ -3,7 +3,7 @@
 
 /** * API Controller * * Base Controller for API module * */
 
-class API_Controller extends Base_Controller {
+class API_Controller extends MX_Controller {
 	
 	const HTTP_SUCCESS = 200;
 	
@@ -20,7 +20,6 @@ class API_Controller extends Base_Controller {
 	const HTTP_SERVICE_UNAVAILABLE = 503;
 	const HTTP_GATEWAY_TIMEOUT = 504;
 	
-	
 	// 	Combined paramters from:
 	// 	1. GET parameter (query string from URL)
 	// 	2. POST body (from form data)
@@ -34,14 +33,10 @@ class API_Controller extends Base_Controller {
 		
 		parent::__construct();
 		
-		
 		$this->load->model('users/user_model');
-		
 		$this->load->library('securinator/Auth');
 		
-		
 		$this->verify_token();
-		
 		$this->parse_request();
 		
 	}
@@ -53,7 +48,7 @@ class API_Controller extends Base_Controller {
 	{
 		
 		// 		TODO: implement API Key or JWT handling
-		$this->mUser = NULL;
+		$this->current_user = NULL;
 		
 		// $valid === $this->auth->login(
 		// 		$this->input->post('username'),
@@ -68,7 +63,8 @@ class API_Controller extends Base_Controller {
 	protected function verify_method($method, $error_response = NULL, $error_code = HTTP_NOT_FOUND)
 	{
 		
-		if ($this->mMethod!=strtoupper($method))
+		$meth = $this->input->method(TRUE);
+		if ($meth != strtoupper($method))
 		{
 			
 			if ($error_response===NULL)
@@ -111,7 +107,8 @@ class API_Controller extends Base_Controller {
 		
 		
 		// 		request body
-		if ( in_array($this->mMethod, array('POST', 'PUT')) )
+		$meth = $this->input->method(TRUE);
+		if ( in_array($meth, array('POST', 'PUT')) )
 		{
 			
 			$content_type = $this->input->server('CONTENT_TYPE');
@@ -168,12 +165,24 @@ class API_Controller extends Base_Controller {
 		}
 		
 		
-		// 		TODO: sanitize $mParams
-		$this->mParams = $params;
-		
+		$this->mParams = array();
+		//	sanitize  $mParams
+		foreach ($params as $key => $value) {
+			$this->mParams[$key] = sanitizeString($value);
+		}
 	}
 	
-	
+	// render json
+    public function render_json($response, $statuscode = '200')
+	{
+		$this->output
+        ->set_status_header($statuscode)
+        ->set_content_type('application/json', 'utf-8')
+        ->set_output(json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES))
+        ->_display();
+		exit; 
+	}
+
 	// 	param
 	// 	shortcut method to get single value from parameters
 	protected function param($key, $default_val = NULL)
@@ -211,7 +220,7 @@ class API_Controller extends Base_Controller {
 		$subitem = strtolower($this->uri->rsegment(4));
 		
 		
-		switch($this->mMethod)
+		switch($this->input->method(TRUE))
 		{
 			
 			case 'GET':

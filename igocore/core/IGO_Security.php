@@ -66,4 +66,37 @@ class IGO_Security extends CI_Security
 
         return parent::csrf_verify();
     }
+
+    /*
+    * sanitizeString - used for API, eg when using variables in json
+    */
+    public function sanitizeString($string) {
+        $string = strip_tags($string);
+        $string = preg_replace('/%([a-fA-F0-9][a-fA-F0-9])/', '--$1--', $string);
+        $string = str_replace('%', '', $string);
+        $string = preg_replace('/--([a-fA-F0-9][a-fA-F0-9])--/', '%$1', $string);
+
+        $string = remove_accents($string);
+
+        //$string = strtolower($string);
+        // @TODO  retrieve $arr_stop_words from Locale user custom list. as editable in /oc-admin/index.php?page=languages
+        //        and do a 
+        //        str_replace($arr_stop_words, '', $string);
+        $string = preg_replace('/&.+?;/', '', $string);
+        $string = str_replace(array('.','\'','--'), '-', $string);
+        $string = preg_replace('/\s+/', '-', $string);
+        $string = preg_replace('|[\p{Ps}\p{Pe}\p{Pi}\p{Pf}\p{Po}\p{S}\p{Z}\p{C}\p{No}]+|u', '', $string);
+
+        if( is_utf8($string) ) {
+            $string = urlencode($string);
+            // mdash & ndash
+            $string = str_replace(array('%e2%80%93', '%e2%80%94'), '-', strtolower($string));
+        }
+
+        $string = preg_replace('/-+/', '-', $string);
+        $string = trim($string, '-');
+
+        return $string;
+    }
+
 }
