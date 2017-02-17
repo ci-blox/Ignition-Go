@@ -22,7 +22,7 @@ class Users extends Front_Controller
 
         $this->lang->load('users');
         
-        $this->siteSettings = $this->settings_lib->find_all();
+        $this->siteSettings = $this->settings->find_all();
  
         if ($this->siteSettings['auth.password_show_labels'] == 1) {
             Assets::add_module_js('users', 'password_strength.js');
@@ -47,7 +47,7 @@ class Users extends Front_Controller
 
         $this->load->helper('date');
 
-        $this->load->config('address');
+        $this->load->config('countries');
         $this->load->helper('address');
 
         $this->load->config('user_meta');
@@ -114,7 +114,7 @@ class Users extends Front_Controller
         $this->load->model('roles/role_model');
         $this->load->helper('date');
 
-        $this->load->config('address');
+        $this->load->config('countries');
         $this->load->helper('address');
 
         $this->load->config('user_meta');
