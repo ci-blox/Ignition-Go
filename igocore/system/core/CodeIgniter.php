@@ -6,7 +6,7 @@
  *
  * This content is released under the MIT License (MIT)
  *
- * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+ * Copyright (c) 2014 - 2017, British Columbia Institute of Technology
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
+ * @copyright	Copyright (c) 2014 - 2017, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
@@ -55,7 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @var	string
  *
  */
-	const CI_VERSION = '3.1.2';
+	const CI_VERSION = '3.1.4';
 
 /*
  * ------------------------------------------------------
@@ -67,7 +67,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		require_once(APPPATH.'config/'.ENVIRONMENT.'/constants.php');
 	}
 
-	require_once(APPPATH.'config/constants.php');
+	if (file_exists(APPPATH.'config/constants.php'))
+	{
+		require_once(APPPATH.'config/constants.php');
+	}
 
 /*
  * ------------------------------------------------------
@@ -398,18 +401,15 @@ if ( ! is_php('5.4'))
 	$e404 = FALSE;
 	$class = ucfirst($RTR->class);
 	$method = $RTR->method;
-	if (empty($class))
+
+	if (empty($class) OR ! file_exists(APPPATH.'controllers/'.$RTR->directory.$class.'.php'))
 	{
 		$e404 = TRUE;
 	}
 	else
 	{
-        // Check for IGO controller if Application controller was not found.
-        if (file_exists(APPPATH.'controllers/'.$RTR->directory.$class.'.php')) {
 		require_once(APPPATH.'controllers/'.$RTR->directory.$class.'.php');
-        } elseif (file_exists(IGOPATH . 'controllers/' . $RTR->directory . $class . '.php')) {
-            require_once(IGOPATH . 'controllers/' . $RTR->directory . $class . '.php');
-        } 
+
 		if ( ! class_exists($class, FALSE) OR $method[0] === '_' OR method_exists('CI_Controller', $method))
 		{
 			$e404 = TRUE;
