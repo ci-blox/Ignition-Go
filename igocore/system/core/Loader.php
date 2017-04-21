@@ -307,6 +307,7 @@ class CI_Loader {
 			elseif ( ! class_exists('CI_Model', FALSE))
 			{
 				require_once(BASEPATH.'core'.DIRECTORY_SEPARATOR.'Model.php');
+				require_once(IGOPATH.'core'.DIRECTORY_SEPARATOR.'IGO_Model.php');
 			}
 
 			$class = config_item('subclass_prefix').'Model';
@@ -609,6 +610,13 @@ class CI_Loader {
 					$ext_loaded = TRUE;
 				}
 			}
+
+            // Look for IGO helper extension.
+            if (file_exists(IGOPATH . "helpers/IGO_{$helper}.php"))
+            {
+                include_once(IGOPATH . "helpers/IGO_{$helper}.php");
+                $ext_loaded = TRUE;
+            }
 
 			// If we have loaded extensions - check if the base one is here
 			if ($ext_loaded === TRUE)
