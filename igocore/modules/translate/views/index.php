@@ -33,7 +33,7 @@
         endif;
         ++$cnt;
         echo '<div class="col-sm-4">';
-        echo '<a class="" href="'.$linkUrl.'/'.$file.'">'.$file.'</a>';
+        echo '<a class="" href="'.$linkUrl.'/'.str_replace('.php','',$file).'">'.$file.'</a>';
         echo '</div>';
         if ($cnt > $brk) :
             echo '</div>';
