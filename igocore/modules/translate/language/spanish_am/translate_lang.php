@@ -13,6 +13,7 @@ $lang['translate_language']     = 'Idioma';
 $lang['translate_other']        = 'Otro...';
 $lang['translate_select']       = 'Seleccionar';
 $lang['translate_file']         = 'Archivo';
+$lang['translate_files']         = 'Archivos';
 $lang['translate_translate']    = 'Traducir';
 $lang['translate_new_lang']     = 'Nuevo Idioma';
 

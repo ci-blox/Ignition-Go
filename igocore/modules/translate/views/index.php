@@ -13,7 +13,7 @@
         </select>
         <div id="new_lang_field" style="display: none;">
             <label for="new_lang"><?php echo (lang('translate_new_lang')); ?></label>
-            <input type="text" name="new_lang" id="new_lang" value="<?php echo set_valuecho ('new_lang'); ?>" class="form-control">
+            <input type="text" name="new_lang" id="new_lang" value="<?php echo set_value('new_lang'); ?>" class="form-control">
         </div>
         <input type="submit" name="select_lang" class="btn btn-primary form-control btn-sm" value="<?php echo (lang('translate_select')); ?>">
     <?php echo form_close(); ?>

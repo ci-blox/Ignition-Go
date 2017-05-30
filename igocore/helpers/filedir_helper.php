@@ -94,7 +94,7 @@ if (!function_exists('create_directory_map')) {
                 if (($directory_depth < 1 || $new_depth > 0)
                     && is_dir($source_dir.$file)
                 ) {
-                    $filedata[$file] = bcDirectoryMap(
+                    $filedata[$file] = create_directory_map(
                         $source_dir.$file.DIRECTORY_SEPARATOR,
                         $new_depth,
                         $hidden

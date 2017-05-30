@@ -99,13 +99,14 @@ class Translate_lib
      */
     public function translate($text)
     {
-/* TODO        $url = sprintf(self::$urlFormat[$this->langEngine]['url'], rawurlencode($text), $this->langFrom, $this->langTo);
+        /* TODO 
+        $url = sprintf(self::$urlFormat[$this->langEngine]['url'], rawurlencode($text), $this->langFrom, $this->langTo);
         $result = get($url); */
         $result = false;
         if (! $result) {
             return false;
         }
-
+        
         // Clean result to prevent JSON syntax errors
         $result = preg_replace('!,+!', ',', $result); // Remove repeated commas
         $result = str_replace('[,', '[', $result); // Remove extra comma after bracket

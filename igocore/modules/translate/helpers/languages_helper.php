@@ -39,11 +39,11 @@ if (! function_exists('list_languages')) {
      */
     function list_languages()
     {
-        if (! function_exists('bcDirectoryMap')) {
-            get_instance()->load->helper('directory');
+        if (! function_exists('create_directory_map')) {
+            get_instance()->load->helper('filedir');
         }
 
-        return bcDirectoryMap(APPPATH . 'language', 1);
+        return create_directory_map(APPPATH . 'language', 1);
     }
 }
 
