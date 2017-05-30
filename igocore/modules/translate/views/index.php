@@ -22,7 +22,7 @@
 <!-- Core -->
 <div class="admin-box row">
 <div class="col-sm-12">
-    <h3><?php echo lang('translate_core'); ?> <span class="subhead"><?php echo count($lang_files) . ' ' . lang('bf_files'); ?></span></h3>
+    <h3><?php echo lang('translate_core'); ?> <span class="subhead"><?php echo count($lang_files) . ' ' . lang('translate_files'); ?></span></h3>
     <?php
     $linkUrl = site_url("/translate/edit/{$trans_lang}");
     $cnt = 1;
