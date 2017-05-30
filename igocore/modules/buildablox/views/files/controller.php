@@ -69,7 +69,7 @@ EOT;
         // Setup paging
         if ($usePagination) {
             $indexPaginationUri = <<<EOT
-		\$pagerUriSegment = 4;
+		\$pagerUriSegment = 3;
         \$pagerBaseUrl = site_url('/{$controller_name_lower}/{$module_name_lower}/index') . '/';
 EOT;
         }
@@ -87,12 +87,19 @@ EOT;
             'per_page'          => \$this->config->item('per_page'),
             'uri_segment'       => \$pagerUriSegment,
             'num_links'         => 9,
-            'use_page_numbers'  => FALSE  
+            'use_page_numbers'  => TRUE,
+            'page_query_string' => FALSE  
         );
         
         \$this->load->library('pagination');
         \$this->pagination->initialize(\$pager);
-        \$this->{$module_name_lower}_model->limit(\$pager['per_page'], \$offset);
+        if(\$this->uri->segment(\$pagerUriSegment) && (int)\$this->uri->segment(\$pagerUriSegment) > 0){
+			\$this->{$module_name_lower}_model->limit(\$pager['per_page'], \$pager['per_page']*(\$offset-1));
+		}
+		else{
+			\$this->{$module_name_lower}_model->limit(\$pager['per_page'], \$offset);
+		}
+ 
         \$data['total']          = \$pager['total_rows'];
         \$data['pagination']     = \$this->pagination->create_links();
         \$data['number']         = (int)\$this->uri->segment(\$pagerUriSegment) + 1;
@@ -112,7 +119,8 @@ EOT;
 // List (Ajax)
 if ($db_required != '') {
 
-$mb_listing = "
+$mb_listing = <<<EOT
+/* sample ajax controller */
     public function ajax_list()
     {
         \$this->load->helper('url');
@@ -296,7 +304,8 @@ $mb_listing = "
         }
     }
  
-}";
+}
+EOT;;
 }
 
 //------------------------------------------------------------------------------
