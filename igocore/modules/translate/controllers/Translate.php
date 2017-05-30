@@ -37,6 +37,10 @@ class Translate extends Admin_Controller
      */
     public function index($transLang = '')
     {
+        $data = array('page_title'=>lang('translate_translate'),
+         'page_subtitle'=>lang('translate_title_index'),
+         'page_breadcrumb'=>lang('translate_breadcrumb_title'));
+
         if (empty($transLang)) {
             $config =& get_config();
             $transLang = isset($config['language']) ? $config['language'] : 'english';
@@ -88,6 +92,10 @@ class Translate extends Admin_Controller
      */
     public function edit($transLang = '', $langFile = '')
     {
+       $data = array('page_title'=>lang('translate_title_index'),
+         'page_subtitle'=> sprintf(lang('translate_title_edit'), $langFile, ucfirst($transLang)),
+         'page_breadcrumb'=>lang('translate_breadcrumb_title'));
+
         $config =& get_config();
         $origLang = isset($config['language']) ? $config['language'] : 'english';
         $chkd = array();
@@ -167,7 +175,8 @@ class Translate extends Admin_Controller
         Template::set('chkd', $chkd);
         Template::set('orig_lang', $origLang);
         Template::set('trans_lang', $transLang);
-        Template::set('toolbar_title', sprintf(lang('translate_title_edit'), $langFile, ucfirst($transLang)));
+         foreach( $data as $key => $value )
+            Template::set($key, $value);
         Template::render();
     }
 
