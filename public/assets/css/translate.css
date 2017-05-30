@@ -1,0 +1,19 @@
+﻿/* index */
+.subhead {
+	font-size: 10pt;
+	font-weight: bold;
+	line-height: 20px;
+	padding: 10px;
+	vertical-align: middle;
+	text-rendering: optimizelegibility;
+}
+/* edit */
+.gobottom {
+	margin-right: 2px;
+}
+.gotop {
+	margin: 5px 2px;
+}
+span.filename {
+	letter-spacing: -0.03em;
+}
