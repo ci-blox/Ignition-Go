@@ -37,10 +37,6 @@ class Translate extends Admin_Controller
      */
     public function index($transLang = '')
     {
-        $data = array('page_title'=>lang('translate_translate'),
-         'page_subtitle'=>lang('translate_title_index'),
-         'page_breadcrumb'=>lang('translate_breadcrumb_title'));
-
         if (empty($transLang)) {
             $config =& get_config();
             $transLang = isset($config['language']) ? $config['language'] : 'english';
@@ -51,6 +47,10 @@ class Translate extends Admin_Controller
             $transLang = $this->input->post('trans_lang') == 'other' ?
                 $this->input->post('new_lang') : $this->input->post('trans_lang');
         }
+
+        $data = array('page_title'=>lang('translate_translate'),
+         'page_subtitle'=> sprintf(lang('translate_title_index'), ucfirst($transLang)),
+         'page_breadcrumb'=>lang('translate_breadcrumb_title'));
 
         // If the selected language is not in the list of languages, add it.
         if (! in_array($transLang, $this->langs)) {
@@ -92,13 +92,13 @@ class Translate extends Admin_Controller
      */
     public function edit($transLang = '', $langFile = '')
     {
-       $data = array('page_title'=>lang('translate_title_index'),
-         'page_subtitle'=> sprintf(lang('translate_title_edit'), $langFile, ucfirst($transLang)),
-         'page_breadcrumb'=>lang('translate_breadcrumb_title'));
-
         $config =& get_config();
         $origLang = isset($config['language']) ? $config['language'] : 'english';
         $chkd = array();
+
+       $data = array('page_title'=>lang('translate_translate'),
+         'page_subtitle'=> sprintf(lang('translate_title_edit'), $langFile, ucfirst($transLang)),
+         'page_breadcrumb'=>lang('translate_breadcrumb_title'));
 
         if ($langFile) {
             // Save the file...
@@ -106,7 +106,7 @@ class Translate extends Admin_Controller
                 // If the file saves successfully, redirect to the index.
                 if (save_lang_file($langFile, $transLang, $_POST['lang'])) {
                     Template::set_message(lang('translate_save_success'), 'success');
-                    redirect(SITE_AREA . "/developer/translate/index/{$transLang}");
+                    redirect("/translate/index/{$transLang}");
                 }
 
                 Template::set_message(lang('translate_save_fail'), 'error');
@@ -167,15 +167,18 @@ class Translate extends Admin_Controller
                 }
             }
 
-            Template::set('orig', $orig);
-            Template::set('new', $new);
-            Template::set('lang_file', $langFile);
+            $data['orig'] = $orig;
+            $data['new'] = $new;
+            $data['lang_file'] = $langFile;
         }
 
-        Template::set('chkd', $chkd);
-        Template::set('orig_lang', $origLang);
-        Template::set('trans_lang', $transLang);
-         foreach( $data as $key => $value )
+        $data['chkd'] = $chkd;
+        $data['orig_lang'] = $origLang;
+        $data['trans_lang'] = $transLang;
+       
+        $data['page_subtitle'] = sprintf(lang('translate_title_edit'), $langFile, ucfirst($transLang));       
+
+        foreach( $data as $key => $value )
             Template::set($key, $value);
         Template::render();
     }

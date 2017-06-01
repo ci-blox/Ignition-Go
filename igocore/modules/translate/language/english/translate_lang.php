@@ -2,6 +2,7 @@
 
 $lang['translate_title_edit']  = '%s: Translate to %s';
 $lang['translate_title_index'] = 'Translate to %s';
+$lang['translate_breadcrumb_title'] = 'Manage Translations';
 
 $lang['translate_no_modules'] = 'No Modules found with language files.';
 $lang['translate_no_core']    = 'No Core language files found.';

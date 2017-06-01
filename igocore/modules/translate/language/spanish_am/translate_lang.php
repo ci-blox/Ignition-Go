@@ -2,6 +2,7 @@
 
 $lang['translate_title_edit']  = '%s: Traducir a %s';
 $lang['translate_title_index'] = 'Traducir a %s';
+$lang['translate_breadcrumb_title'] = 'Traducir';
 
 $lang['translate_no_modules']  = 'No se encontraron módulos con archivo de idioma.';
 $lang['translate_no_core']     = 'No se encontro el archivo de idioma base.';

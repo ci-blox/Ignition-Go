@@ -21,15 +21,23 @@
                 <span class="info-box-number"><?php e($usercount); ?></span>
             </div>
         </div>
+        <?php /* hide if blox and menu module removed */ 
+        if (Modules::controller_exists('buildablox', 'buildablox') || Modules::controller_exists('buildamenu', 'buildamenu')) : ?>
         <div class="box box-success ">
             <div class="box-header with-border">
                 <h3 class="box-title">Developer Tools</h3>
             </div>
             <div class="box-body">
+                <?php if (Modules::controller_exists('buildablox', 'buildablox')) : ?>
                 <p><a href='/buildablox'>Manage Blox</a></p>
+                <?php endif; ?>
                 <p><a href='/buildamenu'>Manage Menus</a></p>
+                <?php if (modules::controller_exists('translate', 'translate')) : ?>
+                <p><a href='/translate'>Manage Translations</a></p>
+                <?php endif; ?>
             </div>
         </div>
+        <?php endif; ?>
 
         <!-- USERS LIST -->
         <div class="box box-danger">
