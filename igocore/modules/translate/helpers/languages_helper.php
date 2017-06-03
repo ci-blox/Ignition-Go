@@ -83,6 +83,8 @@ if (! function_exists('list_lang_files')) {
 
                 if (is_array($files)) {
                     foreach ($files as $file) {
+                        if ($file=='index.html')
+                            continue;
                         $langFiles[$type][] = $file;
                     }
                 }
@@ -112,7 +114,7 @@ if (! function_exists('find_lang_files')) {
 
         $files = array();
         foreach (glob("{$path}*_lang.php") as $filename) {
-            $files[] = basename($filename);
+             $files[] = basename($filename);
         }
 
         return $files;

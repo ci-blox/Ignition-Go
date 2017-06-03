@@ -99,14 +99,20 @@ class Translate_lib
      */
     public function translate($text)
     {
-        /* TODO 
+        /* @TODO dont use old curl library * /
+        $this->ci->load->library('curl');
         $url = sprintf(self::$urlFormat[$this->langEngine]['url'], rawurlencode($text), $this->langFrom, $this->langTo);
-        $result = get($url); */
+        $result = $this->ci->curl->simple_get($url); */
         $result = false;
+        if (class_exists('Stichoza\GoogleTranslate\TranslateClient'))
+           $result = Stichoza\GoogleTranslate\TranslateClient::translate($this->langFrom, $this->langTo, $text);
+        else 
+           log_message('error','Google translate requires translateclient class. Use "composer require stichoza/google-translate-php
+"'); 
         if (! $result) {
             return false;
         }
-        
+
         // Clean result to prevent JSON syntax errors
         $result = preg_replace('!,+!', ',', $result); // Remove repeated commas
         $result = str_replace('[,', '[', $result); // Remove extra comma after bracket

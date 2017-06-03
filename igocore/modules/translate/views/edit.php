@@ -8,7 +8,7 @@
         <fieldset>
             <legend>
                 <?php if (count($orig) > 30) : ?>
-                <button class="gobottom pull-right btn btn-small"><span class="icon icon-arrow-down"></span></button>
+                <button class="gobottom pull-right btn btn-small"><i class="fa fa-arrow-down"></i></button>
                 <?php endif; ?>
                 <h3><?php echo lang('translate_file'); ?>: <span class='filename'><?php echo $lang_file; ?></span></h3>
             </legend>
@@ -25,14 +25,14 @@
                         <td colspan='3'>
                             <?php
                             if ($orig_lang != $trans_lang) :
-                                echo lang('translate_with_selected');
+                                echo lang('app_with_selected');
                             ?>
                             <input type="submit" name="translate" class="btn translate-sel" value="<?php echo lang('translate_translate'); ?>" />
                             <?php
                             endif;
                             if (count($orig) > 30) :
                             ?>
-                            <button class="gotop pull-right btn btn-small"><span class="icon icon-arrow-up"></span></button>
+                            <button class="gotop pull-right btn btn-small"><i class="fa fa-arrow-up"></i></button>
                             <?php endif; ?>
                         </td>
                     </tr>
@@ -55,10 +55,10 @@
             </table>
         </fieldset>
         <fieldset class="form-actions">
-            <input type="submit" name="save" class="btn btn-primary" value="<?php e(lang('us_action_save')); ?>" />
+            <input type="submit" name="save" class="btn btn-primary" value="<?php e(lang('app_save')); ?>" />
             <a href="<?php
                 echo site_url('/translate/index') . '/';
-                echo $trans_lang; ?>"><?php e(lang('us_action_cancel')); ?></a>
+                echo $trans_lang; ?>"><?php e(lang('app_cancel')); ?></a>
         </fieldset>
     <?php
         echo form_close();

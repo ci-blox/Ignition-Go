@@ -101,6 +101,7 @@ class Translate extends Admin_Controller
          'page_breadcrumb'=>lang('translate_breadcrumb_title'));
 
         if ($langFile) {
+            $langFile .= '.php';
             // Save the file...
             if (isset($_POST['save'])) {
                 // If the file saves successfully, redirect to the index.

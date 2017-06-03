@@ -1,4 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+$lang['app_cancel'] = 'Cancel';
+$lang['app_save'] = 'Save';
 $lang['app_and'] = 'and';
 $lang['app_or']	= 'or';
 $lang['app_form_label_required'] = '*';
