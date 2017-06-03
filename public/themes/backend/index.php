@@ -1,8 +1,18 @@
-<?php $adm_url = base_url('components').'/admin-lte/';
-$adm_skincolor = 'purple';
-$adm_layout = 'layout-boxed';
+<?php 
+$CI = &get_instance();
+$CI->load->config('admin');
+
+$adm_url = base_url('components').'/admin-lte/';
+$adm_skincolor = $CI->config->item('adm_skin');
+$adm_layout = $CI->config->item('adm_layout');
+$adm_layout = $adm_layout!=null?'layout-'.$adm_layout:null;
+$adm_logo_use_ttl = $CI->config->item('adm_logo_use_site_title'); 
+$adm_logo = $CI->config->item('adm_logo'); 
+$adm_logo_m = $CI->config->item('adm_logo_mini'); // = '<b>I</b>GO';
+$adm_footer_right = $CI->config->item('adm_footer_right'); 
+
 /* <!--
-OPTIONS:
+OPTIONS, set in admin.config:
 =================
 Apply one or more of the following
 |---------------------------------------------------------|
@@ -32,9 +42,9 @@ Apply one or more of the following
     <!-- Logo -->
     <a href="/admin/dashboard/index" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><strong>IGO</strong></span>
+      <span class="logo-mini"><?php echo $adm_logo_m; ?></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><strong><?php echo (isset($site_title)?$site_title:'Ignition Go'); ?></strong></span>
+      <span class="logo-lg"><strong><?php echo ($adm_logo_use_ttl && isset($site_title) ? $site_title : $adm_logo); ?></strong></span>
     </a>
 <?php
     echo theme_view('navbar');
@@ -64,14 +74,12 @@ Apply one or more of the following
 
     </section>
     <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
 
   <!-- Main Footer -->
   <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
-      Anything you want
+      <?php echo $adm_footer_right; ?>
     </div>
     <!-- Default to the left -->
     <strong>Copyright &copy; <?php echo date('Y').(class_exists('Settings') &&  settings_item('site.company') ? settings_item('site.company').'. ' : ' The Ignition Go Team. '); ?></strong> All rights reserved.
@@ -151,6 +159,8 @@ Apply one or more of the following
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
+  </div>
+  <!-- /.content-wrapper -->
 </div>
 <!-- ./wrapper -->
 
