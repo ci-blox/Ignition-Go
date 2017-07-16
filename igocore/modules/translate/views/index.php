@@ -48,7 +48,10 @@
 <!-- Modules -->
 <div class="admin-box row">
     <div class="col-sm-11">
-        <h3><?php echo lang('translate_modules'); ?> <span class="subhead"><?php echo count($modules) . ' ' . lang('translate_files'); ?></span></h3>
+        <h3><?php echo lang('translate_modules'); ?> <span class="subhead">
+            <?php if (! empty($modules) && is_array($modules)) echo count($modules) . ' ' . lang('translate_files'); ?>
+            </span>
+        </h3>
         <?php
         if (! empty($modules) && is_array($modules)) :
         $linkUrl = site_url("/translate/edit/{$trans_lang}");

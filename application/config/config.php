@@ -554,9 +554,9 @@ $config['site.default_user_timezone'] = 'UM8';
 // These paths are checked in the order listed when attempting to locate blox,
 // whether loading a library, helper, or routes file.
 //
-$config['blox_locations'] = array(
-    realpath(APPPATH) . '/blox/' => '../../application/modules/',
-    realpath(IGOPATH) . '/blox/' => '../../igocore/modules/',
+$config['modules_locations'] = array(
+    realpath(APPPATH) . '/modules/' => '../../application/modules/',
+    realpath(IGOPATH) . '/modules/' => '../../igocore/modules/',
 );
 
 //------------------------------------------------------------------------------
