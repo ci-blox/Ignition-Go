@@ -1,4 +1,6 @@
-<?php defined('BASEPATH') || exit('No direct script access allowed');
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
 /*
 |--------------------------------------------------------------------------
 | Display Debug backtrace
@@ -90,7 +92,7 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 |
 */
 // -----------------------------------------------------------------------------
-defined('IGOCORE_VERSION') || define('IGOCORE_VERSION', 'v0.1.0');
+defined('IGOCORE_VERSION') || define('IGOCORE_VERSION', 'v1.0.0b2');
 
 // -----------------------------------------------------------------------------
 // The 'App Area' allows you to specify the base folder used for all of the 
