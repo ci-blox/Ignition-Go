@@ -8,7 +8,7 @@
    <link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico">
    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="stylesheet" href="<?php echo base_url(); ?>components/bootstrap-default/css/bootstrap.css" />
+    <link rel="stylesheet" href="<?php echo base_url(); ?>components/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="<?php echo base_url(); ?>components/font-awesome/css/font-awesome.min.css">
 	<?php // Stylesheets ?>
 	<link href='<?php echo base_url('assets/css/app.min.css'); ?>' rel='stylesheet'>
