@@ -1,20 +1,20 @@
-# Ignition Go     | <a style="text-align:right" href='https://pledgie.com/campaigns/30957'><img alt='Click here to lend your support to: Ignition Go - development fund and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/30957.png?skin_name=chrome' border='0' ></a> <img src="https://travis-ci.org/ci-blox/Ignition-Go.svg?branch=master"/>
+# Ignition Go     | <a style="text-align:right" href='https://pledgie.com/campaigns/30957'><img alt='Click here to lend your support to: Ignition Go - development fund and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/30957.png?skin_name=chrome' border='0' ></a><small>  &nbsp;Status:</small> <img src="https://travis-ci.org/ci-blox/Ignition-Go.svg?branch=master"/><img src="https://styleci.io/repos/49680592/shield?style=plastic&branch=master" />
 A Modular (HMVC) App Building Framework - complete with front end, REST api and admin area
 - create "blox" modules to build enterprise class web applications
 - uses Codeigniter 3.x and Bootstrap 3.x
 - can be used as a quickstart project starter/boilerplate
 - *What are blox?* "Blox" are just pluggable modules or applets that are commonly used in web applications. Ignition Go includes a web-based generator. Planned example "blox" would be a bulk emailer, report manager, and many more!!!  
 
-### In progress (see below folder structure for progress), contact us to help build the most amazing web app builder ever!  
+### Help wanted: contact us to help build the most amazing web app builder ever!  
 Please contact us to contribute.
 
 ### Server Requirements (Preferred)
 
-* **PHP 5.6, 7.0, 7.1** will run lower but version to use is [PHP 5.6](http://php.net/manual/en/migration56.new-features.php) (http://php.net/manual/en/migration55.new-features.php) for this project. 
+* **PHP 5.6, 7.0, 7.1** you can run in lower (5.4/5.5) but lowest recommended version to use is [PHP 5.6](http://php.net/manual/en/migration56.new-features.php) (http://php.net/manual/en/migration55.new-features.php) for this project. 
 * **Apache 2.2+** with rewrite mod enabled
 * **MySQL 5.5+ or MariaDb**
 
-### Installing (MUST DO ALL STEPS!)
+### Installing (MUST DO ALL STEPS if not using Quickstart!)
 1. Install NPM [node.js](http://nodejs.org/): package manager for node modules
 
 2. GIT clone this repository<br>
@@ -41,15 +41,16 @@ Example: in your httpd-vhosts.conf file, add new <VirtualHost> section and resta
 8. Create an empty mysql db
 Example: use HeidiSQL and create both a database and a user with privileges to new database 
 
-9. Go to http://[your web root from step 5]/install/init in your browser to finish using install wizard 
+9. Go to http://[your web root from step 7]/install/init in your browser to finish using install wizard 
 eg if you had created virtual host igotestlocal.com, then go to http://igotestlocal.com/install/init in your browser
 
 ### Features
 
-Ignition Go will be a jumpstart for your rapid development:
+Ignition Go is a jumpstart for your rapid development:
 * Multi-faceted (e.g. Frontend Website, Authorized User Area, Admin Panel, and API) website in a single application
 * Modular design using CodeIgniter HMVC extension
 * Custom config files (sites.php, locale.php) for easy configuration of website behavior
+* Frontend with multiple themes (with over 16 free Bootswatch themes)
 * Admin Panel with AdminLTE v2 theme
 * Includes usage of [Sortable](http://rubaxa.github.io/Sortable/) library and many other 3rd party optional libraries via Bower, Composer, or NPM
 * API Site to handle RESTful endpoints
@@ -63,7 +64,7 @@ Ignition Go will be a jumpstart for your rapid development:
 * Email config setup
 * CLI utility functions (e.g. cron job, database backup)
 * Guzzle client integrated as library (use instead of Curl)
-* Frontend theme (default) is integrated to preview and work easily with over 16 free Bootswatch themes
+* Use gulp serve to instantly see updates to code
 
 
 ### Folder Structure
@@ -94,7 +95,7 @@ application/                    --- Main application (CodeIgniter) source folder
         api/                    --- A module specific for REST API endpoints
         buildablox/             --- A module to generate and add/remove blox
         securinator/            --- A module for roles, permissions, security settings
-        translate/ **           --- A module to auto-generate translations
+        translate/              --- A module to edit  (and auto-generate**) translations
     third_party/
         MX/                     --- Required for HMVC extension
     views/                      --- Views for Frontend Website
@@ -128,4 +129,4 @@ There are several markdown files with information on various features.  Here is 
 * [Ignition-Go Views and Themes (the Template library)](http://ci-blox.github.io/Ignition-Go/DocViewsThemes.html)
 
 ### Acknowledgements
-Special thanks to the [Bonfire](http://cibonfire.com) project and those who contributed to it - many features and infrastructure concepts were inspired or incorporated outright from that project.  Also thanks to all the projects like GuzzlePHP and countless others that are open source, whose components are incorporated and allow this initiative to exist.
+Special thanks to the [Bonfire](http://cibonfire.com) project and those who contributed to it - many features and infrastructure concepts were inspired or incorporated outright from that project.  Also thanks to all the projects like GuzzlePHP and countless others that are open source, whose components are incorporated and allow this initiative to exist.  Finally, thanks especially to the CodeIgniter team, with whom CodeIgniter continues to thrive!
