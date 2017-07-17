@@ -99,5 +99,5 @@ $foreign_characters = array(
 	'/Ю/' => 'Yu',
 	'/ю/' => 'yu',
 	'/Я/' => 'Ya',
-	'/я/' => 'ya'
+	'/я/' => 'ya',
 );
