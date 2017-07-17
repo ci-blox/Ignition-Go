@@ -1,5 +1,5 @@
 # Ignition Go     | <a style="text-align:right" href='https://pledgie.com/campaigns/30957'><img alt='Click here to lend your support to: Ignition Go - development fund and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/30957.png?skin_name=chrome' border='0' ></a> <img src="https://travis-ci.org/ci-blox/Ignition-Go.svg?branch=master"/>
-A Modular App Building Framework - complete with front end, REST api and admin area
+A Modular (HMVC) App Building Framework - complete with front end, REST api and admin area
 - create "blox" modules to build enterprise class web applications
 - uses Codeigniter 3.x and Bootstrap 3.x
 - can be used as a quickstart project starter/boilerplate

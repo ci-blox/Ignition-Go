@@ -1,6 +1,5 @@
 <?php
-
-defined('BASEPATH') or exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -20,7 +19,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |
 | Please see the user guide for complete details:
 |
-|	http://codeigniter.com/user_guide/general/routing.html
+|	https://codeigniter.com/user_guide/general/routing.html
 |
 | -------------------------------------------------------------------------
 | RESERVED ROUTES
@@ -79,7 +78,6 @@ $route['api/(:any)'] = 'api_v1/$1';
 $route['api/(:any)/(:num)'] = 'api_v1/$1/index/$2';
 $route['api/(:any)/(:num)/(:any)'] = 'api_v1/$1/index/$2/$3';
 $route['api/(:any)/(:any)'] = 'api_v1/$1/$2';
-
 
 // Authentication
 $route[LOGIN_URL] = 'users/check/login';

@@ -196,11 +196,24 @@ $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
 | use segment based URLs.
 |
 */
-$config['allow_get_array'] = TRUE;
 $config['enable_query_strings'] = FALSE;
 $config['controller_trigger'] = 'c';
 $config['function_trigger'] = 'm';
 $config['directory_trigger'] = 'd';
+
+/*
+|--------------------------------------------------------------------------
+| Allow $_GET array
+|--------------------------------------------------------------------------
+|
+| By default CodeIgniter enables access to the $_GET array.  If for some
+| reason you would like to disable it, set 'allow_get_array' to FALSE.
+|
+| WARNING: This feature is DEPRECATED and currently available only
+|          for backwards compatibility purposes!
+|
+*/
+$config['allow_get_array'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------
@@ -541,9 +554,9 @@ $config['site.default_user_timezone'] = 'UM8';
 // These paths are checked in the order listed when attempting to locate blox,
 // whether loading a library, helper, or routes file.
 //
-$config['blox_locations'] = array(
-    realpath(APPPATH) . '/blox/' => '../../application/modules/',
-    realpath(IGOPATH) . '/blox/' => '../../igocore/modules/',
+$config['modules_locations'] = array(
+    realpath(APPPATH) . '/modules/' => '../../application/modules/',
+    realpath(IGOPATH) . '/modules/' => '../../igocore/modules/',
 );
 
 //------------------------------------------------------------------------------

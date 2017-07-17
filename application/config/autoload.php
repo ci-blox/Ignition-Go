@@ -50,8 +50,9 @@ $autoload['packages'] = array(
 | -------------------------------------------------------------------
 |  Auto-load Libraries
 | -------------------------------------------------------------------
-| These are the classes located in the system/libraries folder
-| or in your application/libraries folder.
+| These are the classes located in system/libraries/ or your
+| application/libraries/ directory, with the addition of the
+| 'database' library, which is somewhat of a special case.
 |
 | Prototype:
 |
@@ -70,7 +71,7 @@ $autoload['libraries'] = array('session','database');
 | -------------------------------------------------------------------
 |  Auto-load Drivers
 | -------------------------------------------------------------------
-| These classes are located in the system/libraries/ folder or in your
+| These classes are located in system/libraries/ or in your
 | application/libraries/ directory, but are also placed inside their
 | own subdirectory and they extend the CI_Driver_Library class. They
 | offer multiple interchangeable driver options.

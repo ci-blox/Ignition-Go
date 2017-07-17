@@ -21,27 +21,60 @@
 </div>
 <!-- Core -->
 <div class="admin-box row">
-<div class="col-sm-12">
-    <h3><?php echo lang('translate_core'); ?> <span class="subhead"><?php echo count($lang_files) . ' ' . lang('translate_files'); ?></span></h3>
-    <?php
-    $linkUrl = site_url("/translate/edit/{$trans_lang}");
-    $cnt = 1;
-    $brk = 3;
-    foreach ($lang_files as $file) :
-        if ($cnt == 1) :
-          echo '<div class="row">';
-        endif;
-        ++$cnt;
-        echo '<div class="col-sm-4">';
-        echo '<a class="" href="'.$linkUrl.'/'.str_replace('.php','',$file).'">'.$file.'</a>';
-        echo '</div>';
-        if ($cnt > $brk) :
+    <div class="col-sm-11">
+        <h3><?php echo lang('translate_core'); ?> <span class="subhead"><?php echo count($lang_files) . ' ' . lang('translate_files'); ?></span></h3>
+        <?php
+        $linkUrl = site_url("/translate/edit/{$trans_lang}");
+        $cnt = 1;
+        $brk = 3;
+        foreach ($lang_files as $file) :
+            if ($cnt == 1) :
+                echo '<div class="row">';
+            endif;
+            ++$cnt;
+            echo '<div class="col-sm-4">';
+            echo '<a class="" href="'.$linkUrl.'/'.str_replace('.php','',$file).'">'.$file.'</a>';
             echo '</div>';
-            $cnt = 1;
-        endif;
-    endforeach;
-    if ($cnt != 1) :
-     echo '</div>';
-    endif; ?>
+            if ($cnt > $brk) :
+                echo '</div>';
+                $cnt = 1;
+            endif;
+        endforeach;
+        if ($cnt != 1) :
+        echo '</div>';
+        endif; ?>
+    </div>
 </div>
+<!-- Modules -->
+<div class="admin-box row">
+    <div class="col-sm-11">
+        <h3><?php echo lang('translate_modules'); ?> <span class="subhead">
+            <?php if (! empty($modules) && is_array($modules)) echo count($modules) . ' ' . lang('translate_files'); ?>
+            </span>
+        </h3>
+        <?php
+        if (! empty($modules) && is_array($modules)) :
+        $linkUrl = site_url("/translate/edit/{$trans_lang}");
+        $cnt = 1;
+        $brk = 3;
+        foreach ($modules as $file) :
+            if ($cnt == 1) :
+                echo '<div class="row">';
+            endif;
+            ++$cnt;
+            echo '<div class="col-sm-4">';
+            echo '<a class="" href="'.$linkUrl.'/'.str_replace('.php','',$file).'">'.$file.'</a>';
+            echo '</div>';
+            if ($cnt > $brk) :
+                echo '</div>';
+                $cnt = 1;
+            endif;
+        endforeach;
+        if ($cnt != 1) :
+        echo '</div>';
+        endif; 
+        else :
+            echo lang('translate_no_modules').'</div>'; 
+        endif; ?>
+    </div>
 </div>
