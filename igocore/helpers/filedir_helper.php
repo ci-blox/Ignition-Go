@@ -59,7 +59,6 @@ if (!function_exists('get_filenames_by_extension')) {
     }
 }
 
-
 if (!function_exists('create_directory_map')) {
     /**
      * Create a Directory Map.

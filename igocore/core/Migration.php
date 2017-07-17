@@ -2,7 +2,6 @@
 
 defined('BASEPATH') || exit('No direct script access allowed');
 
-
 /**
  * Migration Interface.
  *

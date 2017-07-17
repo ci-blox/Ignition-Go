@@ -79,7 +79,6 @@ $route['api/(:any)/(:num)'] = 'api_v1/$1/index/$2';
 $route['api/(:any)/(:num)/(:any)'] = 'api_v1/$1/index/$2/$3';
 $route['api/(:any)/(:any)'] = 'api_v1/$1/$2';
 
-
 // Authentication
 $route[LOGIN_URL] = 'users/check/login';
 $route[LOGIN_BACKEND_URL] = 'admin/check/login';
