@@ -7,8 +7,9 @@
         echo isset($page_title) ? "{$page_title} : " : '';
         e(class_exists('Settings') ? settings_item('site.title') : 'Ignition Go');
     ?></title>
-  <!-- Bootstrap 3.3.x-->
-  <link rel="stylesheet" href="<?php echo $adm_url; ?>bootstrap/css/bootstrap.min.css">
+  <!-- Bootstrap 3-->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/bootstrap.min.css">
+  <?php /* the below css files are combined into admin.min.css 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -18,7 +19,7 @@
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect.
-  -->
+  --> */ ?>
   <link rel="stylesheet" href="<?php echo $adm_url; ?>dist/css/skins/skin-<?php echo $adm_skincolor; ?>.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="<?php echo $adm_url; ?>plugins/iCheck/square/blue.css">
