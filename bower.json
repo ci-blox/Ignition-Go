@@ -18,8 +18,10 @@
     "bootstrap": "~3.*",
     "font-awesome": "~4.*",
     "ionicons": "~2.*",
-    "jquery-legacy": "jquery#1.11.*",
     "jquery-migrate": "1.2.*",
     "Sortable": "1.*"
+  },
+    "resolutions": {
+    "jquery": "^3.2.1"
   }
 }
