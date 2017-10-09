@@ -52,6 +52,8 @@ module.exports = {
 			],
 			scripts: [
 				// js files
+				dir_bower + '/jquery/dist/jquery.min.js',
+				dir_bower + '/bootstrap/dist/js/bootstrap.min.js',
 			]
 		},
 		dest: {
@@ -65,18 +67,19 @@ module.exports = {
 		src: {
 			frontend: [
 				// bower files
-				dir_bower + '/bootstrap/css/bootstrap-theme.css',
+				dir_bower + '/bootstrap/dist/css/bootstrap.css',
+				dir_bower + '/bootstrap/dist/css/bootstrap-theme.css',
 				dir_bower + '/font-awesome/css/font-awesome.css',
 				// custom files
 				dir_asset + '/css/frontend.css'
 			],
 			admin: [
 				// bower files
-				dir_bower + '/admin-lte/bootstrap/css/bootstrap.min.css',
-				dir_bower + '/font-awesome/css/font-awesome.min.css',
+				dir_bower + '/bootstrap/dist/css/bootstrap.css',
+				dir_bower + '/font-awesome/css/font-awesome.css',
 				dir_bower + '/ionicons/css/ionicons.min.css',
 				dir_bower + '/admin-lte/dist/css/AdminLTE.min.css',
-				dir_bower + '/admin-lte/dist/css/skins/_all-skins.css',
+				//dir_bower + '/admin-lte/dist/css/skins/_all-skins.css',
 				// custom files
 				dir_asset + '/css/admin.css'
 			]
@@ -97,18 +100,18 @@ module.exports = {
 		src: {
 			frontend: [
 				// bower files
-				dir_bower + '/jquery/dist/jquery.js',
+				// dir_bower + '/jquery/dist/jquery.js',
 				//dir_bower + '/bootstrap/dist/js/bootstrap.min.js',
 				// custom files
 				dir_asset + '/js/frontend.js'
 			],
 			admin: [
-				// bower files (use jQuery 1.x for compatibility)
-				dir_bower + '/jquery-legacy/dist/jquery.js',
+				// bower files 
+				//dir_bower + '/jquery-legacy/dist/jquery.js',
 				dir_bower + '/jquery-migrate/jquery-migrate.js',
 				dir_bower + '/admin-lte/bootstrap/js/bootstrap.js',
 				//dir_bower + '/admin-lte/plugins/fastclick/fastclick.js',
-				dir_bower + '/admin-lte/dist/js/app.js',
+				dir_bower + '/admin-lte/dist/js/adminlte.js',
 				//dir_bower + '/admin-lte/plugins/slimScroll/jquery.slimscroll.min.js',
 				dir_bower + '/Sortable/Sortable.js',
 				// custom files
