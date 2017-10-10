@@ -46,19 +46,23 @@ module.exports = {
 		src: {
 			fonts: [
 				// bower files
-				dir_bower + '/bootstrap/dist/fonts/**',
-				dir_bower + '/font-awesome/fonts/**',
-				dir_bower + '/ionicons/fonts/**'
+				dir_bower + '/bootstrap/dist/fonts/*',
+				dir_bower + '/font-awesome/fonts/*',
+				dir_bower + '/ionicons/fonts/*'
 			],
 			scripts: [
 				// js files
 				dir_bower + '/jquery/dist/jquery.min.js',
 				dir_bower + '/bootstrap/dist/js/bootstrap.min.js',
+			],
+			csslib: [
+				dir_bower + '/bootstrap/dist/css/bootstrap.css'				
 			]
 		},
 		dest: {
 			fonts: dir_fonts,
-			scripts: dir_dist
+			scripts: dir_dist,
+			csslib: dir_dist
 		}
 	},
 
@@ -67,7 +71,6 @@ module.exports = {
 		src: {
 			frontend: [
 				// bower files
-				dir_bower + '/bootstrap/dist/css/bootstrap.css',
 				dir_bower + '/bootstrap/dist/css/bootstrap-theme.css',
 				dir_bower + '/font-awesome/css/font-awesome.css',
 				// custom files
@@ -75,7 +78,6 @@ module.exports = {
 			],
 			admin: [
 				// bower files
-				dir_bower + '/bootstrap/dist/css/bootstrap.css',
 				dir_bower + '/font-awesome/css/font-awesome.css',
 				dir_bower + '/ionicons/css/ionicons.min.css',
 				dir_bower + '/admin-lte/dist/css/AdminLTE.min.css',
@@ -120,7 +122,7 @@ module.exports = {
 		},
 		dest: dir_dist,
 		dest_file: {
-			frontend: 'app.min.js',
+			frontend: 'frontend.min.js',
 			admin: 'admin.min.js'
 		},
 		settings: {
