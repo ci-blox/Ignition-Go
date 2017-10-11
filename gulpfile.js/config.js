@@ -56,7 +56,7 @@ module.exports = {
 				dir_bower + '/bootstrap/dist/js/bootstrap.min.js',
 			],
 			csslib: [
-				dir_bower + '/bootstrap/dist/css/bootstrap.css'				
+				dir_bower + '/bootstrap/dist/css/bootstrap.min.css'				
 			]
 		},
 		dest: {
