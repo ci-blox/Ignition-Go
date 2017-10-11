@@ -31,7 +31,7 @@ class Front_Controller extends Base_Controller
         Events::trigger('after_front_controller');
     }
 
-//end __construct()
+    //end __construct()
 
     //--------------------------------------------------------------------
 }
