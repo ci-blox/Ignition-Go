@@ -85,11 +85,13 @@ class Init extends MX_Controller
 			}
 
 			if($this->error === '' && $this->input->post('step') && $this->input->post('step') == 3){
-				$database = file_get_contents(APPPATH . '../sql/install.sql');
+				$dbsql = file_get_contents(APPPATH . '../sql/install.sql');
 				$this->load->database();
-				if(mysqli_multi_query($this->db->conn_id, $database)){
-					$this->clean_up_db_query();
-                    $this->load->model('users/user_model');
+				$this->load->model('users/user_model');
+				$this->db->trans_start();
+				$this->db->query($dbsql);
+				//if(mysqli_multi_query($this->db->conn_id, $dbsql)){
+				//	$this->clean_up_db_query();
 					$data['password'] = $this->input->post('admin_passwordr');
 					$data['username'] = $this->input->post('admin_email');
 					$data['email'] = $this->input->post('admin_email');
@@ -104,14 +106,15 @@ class Init extends MX_Controller
 						{
 							show_error($config_path.' should be writable. Database imported successfuly. And admin user added successfuly. You can set manualy in application/config at bottom $config["installed"]  = "true"');
 						}
-
+						$this->db->trans_complete();
+						
 						//update_config_installed();
 						$passed_steps[1] = true;
 						$passed_steps[2] = true;
 						$passed_steps[3] = true;
 						$step = 4;
 					}
-				}
+				//}
 			} else {
 				$error = $this->error;
 			}
