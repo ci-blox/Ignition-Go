@@ -33,31 +33,37 @@ class Init extends MX_Controller
 
 			if($this->input->post('step') && $this->input->post('step') == 2){
 
-				if($this->input->post('hostname') == ''){
-					$this->error = 'Hostname is required';
-				} else if ($this->input->post('database') == '') {
-					$this->error = 'Enter database name';
-				} else if($this->input->post('password') == '' && strpos(site_url(),'localhost') === false){
-					$this->error = 'Enter database password';
-				} else if ($this->input->post('username') == ''){
-					$this->error = 'Enter database username';
-				}
-				$step = 2;
-				$passed_steps[1] = true;
-				if($this->error === ''){
+				if(isset($_POST['skip']) && $this->input->post('skip') == '1'){
+					$passed_steps[1] = true;
 					$passed_steps[2] = true;
-					$link = @mysqli_connect($this->input->post('hostname'), $this->input->post('username'), $this->input->post('password'), $this->input->post('database'));
-					if (!$link) {
-					    $this->error .= "Error: Unable to connect to MySQL." . PHP_EOL;
-					    $this->error .= "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
-					    $this->error .= "Debugging error: " . mysqli_connect_error() . PHP_EOL;
-					} else {
-						$debug .= "Success: A proper connection to MySQL was made! The ".$this->input->post('database')." database is great." . PHP_EOL;
-						$debug .= "Host information: " . mysqli_get_host_info($link) . PHP_EOL;
-						if($this->write_db_config()){
-							$step = 3;
+					$step = 3;
+				} else {
+					if($this->input->post('hostname') == ''){
+						$this->error = 'Hostname is required';
+					} else if ($this->input->post('database') == '') {
+						$this->error = 'Enter database name';
+					} else if($this->input->post('password') == '' && strpos(site_url(),'localhost') === false){
+						$this->error = 'Enter database password';
+					} else if ($this->input->post('username') == ''){
+						$this->error = 'Enter database username';
+					}
+					$step = 2;
+					$passed_steps[1] = true;
+					if($this->error === ''){
+						$passed_steps[2] = true;
+						$link = @mysqli_connect($this->input->post('hostname'), $this->input->post('username'), $this->input->post('password'), $this->input->post('database'));
+						if (!$link) {
+							$this->error .= "MySQLi Error: Unable to connect to MySQL." . PHP_EOL;
+							$this->error .= "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+							$this->error .= "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+						} else {
+							$debug .= "Success: A proper connection to MySQL using MySQLi was made! The ".$this->input->post('database')." database is great." . PHP_EOL;
+							$debug .= "Host information: " . mysqli_get_host_info($link) . PHP_EOL;
+							if($this->write_db_config()){
+								$step = 3;
+							}
+							mysqli_close($link);
 						}
-						mysqli_close($link);
 					}
 				}
 			} else if($this->input->post('step') && $this->input->post('step') == 3){
