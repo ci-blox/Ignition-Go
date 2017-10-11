@@ -80,7 +80,7 @@ module.exports = {
 				// bower files
 				dir_bower + '/font-awesome/css/font-awesome.css',
 				dir_bower + '/ionicons/css/ionicons.min.css',
-				dir_bower + '/admin-lte/dist/css/AdminLTE.min.css',
+				//dir_bower + '/admin-lte/dist/css/AdminLTE.min.css',
 				//dir_bower + '/admin-lte/dist/css/skins/_all-skins.css',
 				// custom files
 				dir_asset + '/css/admin.css'
