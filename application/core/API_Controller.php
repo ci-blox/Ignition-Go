@@ -18,120 +18,120 @@ class API_Controller extends MX_Controller
     const HTTP_SERVICE_UNAVAILABLE = 503;
     const HTTP_GATEWAY_TIMEOUT = 504;
 
-	// 	Combined paramters from:
-	// 	1. GET parameter (query string from URL)
-	// 	2. POST body (from form data)
-	// 	3. POST body (from JSON body)
-	protected $mParams;
+    // 	Combined paramters from:
+    // 	1. GET parameter (query string from URL)
+    // 	2. POST body (from form data)
+    // 	3. POST body (from JSON body)
+    protected $mParams;
 
-	// 	Constructor
-	public function __construct()
-	{
-	    parent::__construct();
+    // 	Constructor
+    public function __construct()
+    {
+        parent::__construct();
 
-	    $this->load->model('users/user_model');
-	    $this->load->library('securinator/Auth');
+        $this->load->model('users/user_model');
+        $this->load->library('securinator/Auth');
 
-	    $this->verify_token();
-	    $this->parse_request();
-	}
+        $this->verify_token();
+        $this->parse_request();
+    }
 
-	// 	verify_token
-	// 	Verify access token (e.g. API Key, JSON Web Token)
-	protected function verify_token()
-	{
+    // 	verify_token
+    // 	Verify access token (e.g. API Key, JSON Web Token)
+    protected function verify_token()
+    {
 
 		// 		TODO: implement API Key or JWT handling
-		$this->current_user = NULL;
+        $this->current_user = NULL;
 
-		// $valid === $this->auth->login(
+        // $valid === $this->auth->login(
 		// 		$this->input->post('username'),
 		// 		$this->input->post('password'),
 		// 		0
 		// )
-	}
+    }
 
-	// 	verify_method
-	// 	Verify request method
-	protected function verify_method($method, $error_response = NULL, $error_code = HTTP_NOT_FOUND)
-	{
-	    $meth = $this->input->method(TRUE);
-	    if ($meth != strtoupper($method)) {
-	        if ($error_response === NULL) {
-	            $this->to_error_method_not_allowed();
-	        } else {
-	            $this->render_json($error_response, $error_code);
-	        }
-	    }
-	}
+    // 	verify_method
+    // 	Verify request method
+    protected function verify_method($method, $error_response = NULL, $error_code = HTTP_NOT_FOUND)
+    {
+        $meth = $this->input->method(TRUE);
+        if ($meth != strtoupper($method)) {
+            if ($error_response === NULL) {
+                $this->to_error_method_not_allowed();
+            } else {
+                $this->render_json($error_response, $error_code);
+            }
+        }
+    }
 
-	// 	verify_permission
-	// 	Verify user access
-	protected function verify_permission($perm, $error_response = NULL, $error_code = HTTP_NOT_FOUND)
-	{
-	    if (empty($this->current_user) || (!$this->Auth->has_permission(strtolower($perm)))) {
-	        if ($error_response === NULL) {
-	            $this->to_error_unauthorized();
-	        } else {
-	            $this->render_json($error_response, $error_code);
-	        }
-	    }
-	}
+    // 	verify_permission
+    // 	Verify user access
+    protected function verify_permission($perm, $error_response = NULL, $error_code = HTTP_NOT_FOUND)
+    {
+        if (empty($this->current_user) || (!$this->Auth->has_permission(strtolower($perm)))) {
+            if ($error_response === NULL) {
+                $this->to_error_unauthorized();
+            } else {
+                $this->render_json($error_response, $error_code);
+            }
+        }
+    }
 
-	// 	parse_request
-	// 	Parse request to obtain request info (method, body)
-	protected function parse_request()
-	{
+    // 	parse_request
+    // 	Parse request to obtain request info (method, body)
+    protected function parse_request()
+    {
 
 		// 		GET parameters
-		$params = $this->input->get();
+        $params = $this->input->get();
 
-		// 		request body
-		$meth = $this->input->method(TRUE);
-	    if (in_array($meth, array('POST', 'PUT'))) {
-	        $content_type = $this->input->server('CONTENT_TYPE');
+        // 		request body
+        $meth = $this->input->method(TRUE);
+        if (in_array($meth, array('POST', 'PUT'))) {
+            $content_type = $this->input->server('CONTENT_TYPE');
 
-	        $is_form_request = ($content_type == 'application/x-www-form-urlencoded');
+            $is_form_request = ($content_type == 'application/x-www-form-urlencoded');
 
-	        $is_json_request = ($content_type == 'application/json' || $content_type == 'application/json; charset=UTF-8');
+            $is_json_request = ($content_type == 'application/json' || $content_type == 'application/json; charset=UTF-8');
 
-	        if ($is_form_request) {
+            if ($is_form_request) {
 
 				// 	check CodeIgniter input
-				$form_data = $this->input->post();
+                $form_data = $this->input->post();
 
-	            if (!empty($form_data)) {
+                if (!empty($form_data)) {
 
 					// 	save parameters from form body
-					$params = array_merge($params, $form_data);
-	            } else {
+                    $params = array_merge($params, $form_data);
+                } else {
 
 					// 	query string from text body
-					$data = file_get_contents('php://input');
+                    $data = file_get_contents('php://input');
 
-	                parse_str($data, $temp);
+                    parse_str($data, $temp);
 
-	                $params = array_merge($params, $temp);
-	            }
-	        } elseif ($is_json_request) {
+                    $params = array_merge($params, $temp);
+                }
+            } elseif ($is_json_request) {
 
 				// 	JSON from text body
-				$data = file_get_contents('php://input');
+                $data = file_get_contents('php://input');
 
-	            if (!empty($data)) {
-	                $params = array_merge($params, json_decode(trim($data), TRUE));
-	            }
-	        }
-	    }
+                if (!empty($data)) {
+                    $params = array_merge($params, json_decode(trim($data), TRUE));
+                }
+            }
+        }
 
-	    $this->mParams = array();
-		//	sanitize  $mParams
-		foreach ($params as $key => $value) {
-		    $this->mParams[$key] = sanitizeString($value);
-		}
-	}
+        $this->mParams = array();
+        //	sanitize  $mParams
+        foreach ($params as $key => $value) {
+            $this->mParams[$key] = sanitizeString($value);
+        }
+    }
 
-	// render json
+    // render json
     public function render_json($response, $statuscode = '200')
     {
         $this->output
@@ -142,37 +142,37 @@ class API_Controller extends MX_Controller
         exit;
     }
 
-	// 	param
-	// 	shortcut method to get single value from parameters
-	protected function param($key, $default_val = NULL)
-	{
-	    if (empty($this->mParams[$key])) {
-	        return $default_val;
-	    } else {
-	        return $this->mParams[$key];
-	    }
-	}
+    // 	param
+    // 	shortcut method to get single value from parameters
+    protected function param($key, $default_val = NULL)
+    {
+        if (empty($this->mParams[$key])) {
+            return $default_val;
+        } else {
+            return $this->mParams[$key];
+        }
+    }
 
-	/**
-	 * Basic RESTful endpoints.
-	 *
-	 * For instance, the following URL patterns will be consumed by Items controller
-	 * 	[GET] /items					=> get_items()
-	 * 	[GET] /items/{id}				=> get_item(id)
-	 * 	[GET] /items/{id}/{subitem}		=> get_subitems(id, subitem)
-	 * 	[POST] /items 					=> create_item()
-	 * 	[POST] /items/{id}/{subitem}	=> create_subitem(id, subitem)
-	 * 	[PUT] /items/{id}				=> update_item(id)
-	 * 	[DELETE] /items/{id}			=> remove_item(id)	 *
-	 * Other custom endpoints can be added into the child controller instead, e.g.:
-	 * 	[GET] /items/hello 				=> should call hello() function inside Items controller	 */
-	public function index()
-	{
-	    $item_id = $this->uri->rsegment(3);
+    /**
+     * Basic RESTful endpoints.
+     *
+     * For instance, the following URL patterns will be consumed by Items controller
+     * 	[GET] /items					=> get_items()
+     * 	[GET] /items/{id}				=> get_item(id)
+     * 	[GET] /items/{id}/{subitem}		=> get_subitems(id, subitem)
+     * 	[POST] /items 					=> create_item()
+     * 	[POST] /items/{id}/{subitem}	=> create_subitem(id, subitem)
+     * 	[PUT] /items/{id}				=> update_item(id)
+     * 	[DELETE] /items/{id}			=> remove_item(id)	 *
+     * Other custom endpoints can be added into the child controller instead, e.g.:
+     * 	[GET] /items/hello 				=> should call hello() function inside Items controller	 */
+    public function index()
+    {
+        $item_id = $this->uri->rsegment(3);
 
-	    $subitem = strtolower($this->uri->rsegment(4));
+        $subitem = strtolower($this->uri->rsegment(4));
 
-	    switch ($this->input->method(TRUE)) {
+        switch ($this->input->method(TRUE)) {
 
 			case 'GET':
 			if (!empty($subitem)) {
@@ -220,13 +220,13 @@ class API_Controller extends MX_Controller
 			break;
 
 		}
-	}
+    }
 
-	/**	 * Functions to be override by child controllers	 */
-	protected function get_items()
-	{
-	    $this->to_not_implemented();
-	}
+    /**	 * Functions to be override by child controllers	 */
+    protected function get_items()
+    {
+        $this->to_not_implemented();
+    }
 
     protected function get_item($id)
     {
@@ -279,12 +279,12 @@ class API_Controller extends MX_Controller
         $this->to_not_implemented($data);
     }
 
-	/**	 * Wrapper functions to return responses
-	 * Reference: http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html	 */
-	protected function to_response($data)
-	{
-	    $this->render_json($data);
-	}
+    /**	 * Wrapper functions to return responses
+     * Reference: http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html	 */
+    protected function to_response($data)
+    {
+        $this->render_json($data);
+    }
 
     protected function to_created()
     {
@@ -300,19 +300,19 @@ class API_Controller extends MX_Controller
         $this->render_json($data, 201);
     }
 
-	/**
-	 * Wrapper function to return error	 */
-	protected function to_error($msg = 'An error occurs', $code = HTTP_SUCCESS, $additional_data = array())
-	{
-	    $data = array('error' => $msg);
+    /**
+     * Wrapper function to return error	 */
+    protected function to_error($msg = 'An error occurs', $code = HTTP_SUCCESS, $additional_data = array())
+    {
+        $data = array('error' => $msg);
 
-		// 		(optional) append additional data
-		if (!empty($additional_data)) {
-		    $data['data'] = $additional_data;
-		}
+        // 		(optional) append additional data
+        if (!empty($additional_data)) {
+            $data['data'] = $additional_data;
+        }
 
-	    $this->render_json($data, $code);
-	}
+        $this->render_json($data, $code);
+    }
 
     protected function to_error_bad_request()
     {
@@ -343,23 +343,23 @@ class API_Controller extends MX_Controller
     {
 
 		// 		show "not implemented" info only during development mode
-		if (ENVIRONMENT == 'development') {
-		    $trace = debug_backtrace();
+        if (ENVIRONMENT == 'development') {
+            $trace = debug_backtrace();
 
-		    $caller = $trace[1];
+            $caller = $trace[1];
 
-		    $data['url'] = current_url();
+            $data['url'] = current_url();
 
-		    $data['controller'] = $this->mCtrler;
+            $data['controller'] = $this->mCtrler;
 
-		    $data['function'] = $caller['function'];
+            $data['function'] = $caller['function'];
 
-		    $data = array_merge($data, $additional_data);
+            $data = array_merge($data, $additional_data);
 
-		    $this->to_error('Not Implemented', 501, $data);
-		} else {
-		    $this->to_error_not_found();
-		}
+            $this->to_error('Not Implemented', 501, $data);
+        } else {
+            $this->to_error_not_found();
+        }
     }
 }
 
