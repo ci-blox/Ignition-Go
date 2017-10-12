@@ -8,10 +8,9 @@
    <link rel="shortcut icon" href="<?php echo base_url(); ?>favicon.ico">
    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="stylesheet" href="<?php echo base_url(); ?>components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="<?php echo base_url(); ?>components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/bootstrap.min.css" />
 	<?php // Stylesheets ?>
-	<link href='<?php echo base_url('assets/css/app.min.css'); ?>' rel='stylesheet'>
+	<link href='<?php echo base_url(); ?>assets/dist/app.min.css' rel='stylesheet'>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="../../components/html5shiv/dist/html5shiv.js"></script>
@@ -107,12 +106,18 @@
           <input type="text" class="form-control" name="password">
         </div>
         <div class="text-center">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="skip" value="1" />Skip this step (only if already set up)
+          </label>
+         </div>
          <button type="submit" class="btn btn-primary">Check Database</button>
        </div>
        <?php echo form_close(); ?>
        <?php } else if($step == 3){ ?>
        <?php echo form_open($this->uri->uri_string()); ?>
        <?php echo form_hidden('step',$step); ?>
+       <p>Enter an email and password to use for the Site Admin user. 
        <div class="form-group">
          <label for="admin_email" class="control-label">Email</label>
          <input type="email" class="form-control" name="admin_email" id="admin_email">
@@ -127,7 +132,7 @@
         <input type="password" class="form-control" name="admin_passwordr" id="admin_passwordr">
       </div>
       <div class="text-center">
-        <button type="submit" class="btn btn-primary">Install</button>
+        <button type="submit" class="btn btn-primary">Finish Install</button>
       </div>
       <?php echo form_close(); ?>
 

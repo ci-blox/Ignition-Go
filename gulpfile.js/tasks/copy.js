@@ -11,4 +11,9 @@ gulp.task('copy:scripts', function() {
 		.pipe(gulp.dest(config.dest.scripts));
 });
 
-gulp.task('copy', ['copy:fonts', 'copy:scripts']);
+gulp.task('copy:csslib', function() {
+	gulp.src(config.src.csslib)
+		.pipe(gulp.dest(config.dest.csslib));
+});
+
+gulp.task('copy', ['copy:fonts', 'copy:scripts', 'copy:csslib']);

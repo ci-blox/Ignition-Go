@@ -31,7 +31,6 @@
 <?php /* echo theme_view('footer'); */ ?>
 <script src="<?php echo base_url(); ?>assets/dist/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/dist/bootstrap.min.js"></script>
-<script src='<?php echo base_url(); ?>assets/dist/app.min.js'></script>
 <script src='<?php echo base_url(); ?>assets/dist/frontend.min.js'></script>
 <script>
     var _gaq = _gaq || [];

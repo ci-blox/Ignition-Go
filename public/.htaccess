@@ -140,6 +140,8 @@ AddDefaultCharset utf-8
   Satisfy All
 </FilesMatch>
 
+# Redirect for font-awesome font files - we want them in assets/fonts
+redirect /font-awesome/ /assets/
 
 # ----------------------------------------------------------------------
 # Start rewrite engine

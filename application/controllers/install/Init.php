@@ -33,31 +33,37 @@ class Init extends MX_Controller
 
 			if($this->input->post('step') && $this->input->post('step') == 2){
 
-				if($this->input->post('hostname') == ''){
-					$this->error = 'Hostname is required';
-				} else if ($this->input->post('database') == '') {
-					$this->error = 'Enter database name';
-				} else if($this->input->post('password') == '' && strpos(site_url(),'localhost') === false){
-					$this->error = 'Enter database password';
-				} else if ($this->input->post('username') == ''){
-					$this->error = 'Enter database username';
-				}
-				$step = 2;
-				$passed_steps[1] = true;
-				if($this->error === ''){
+				if(isset($_POST['skip']) && $this->input->post('skip') == '1'){
+					$passed_steps[1] = true;
 					$passed_steps[2] = true;
-					$link = @mysqli_connect($this->input->post('hostname'), $this->input->post('username'), $this->input->post('password'), $this->input->post('database'));
-					if (!$link) {
-					    $this->error .= "Error: Unable to connect to MySQL." . PHP_EOL;
-					    $this->error .= "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
-					    $this->error .= "Debugging error: " . mysqli_connect_error() . PHP_EOL;
-					} else {
-						$debug .= "Success: A proper connection to MySQL was made! The ".$this->input->post('database')." database is great." . PHP_EOL;
-						$debug .= "Host information: " . mysqli_get_host_info($link) . PHP_EOL;
-						if($this->write_db_config()){
-							$step = 3;
+					$step = 3;
+				} else {
+					if($this->input->post('hostname') == ''){
+						$this->error = 'Hostname is required';
+					} else if ($this->input->post('database') == '') {
+						$this->error = 'Enter database name';
+					} else if($this->input->post('password') == '' && strpos(site_url(),'localhost') === false){
+						$this->error = 'Enter database password';
+					} else if ($this->input->post('username') == ''){
+						$this->error = 'Enter database username';
+					}
+					$step = 2;
+					$passed_steps[1] = true;
+					if($this->error === ''){
+						$passed_steps[2] = true;
+						$link = @mysqli_connect($this->input->post('hostname'), $this->input->post('username'), $this->input->post('password'), $this->input->post('database'));
+						if (!$link) {
+							$this->error .= "MySQLi Error: Unable to connect to MySQL." . PHP_EOL;
+							$this->error .= "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+							$this->error .= "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+						} else {
+							$debug .= "Success: A proper connection to MySQL using MySQLi was made! The ".$this->input->post('database')." database is great." . PHP_EOL;
+							$debug .= "Host information: " . mysqli_get_host_info($link) . PHP_EOL;
+							if($this->write_db_config()){
+								$step = 3;
+							}
+							mysqli_close($link);
 						}
-						mysqli_close($link);
 					}
 				}
 			} else if($this->input->post('step') && $this->input->post('step') == 3){
@@ -79,11 +85,13 @@ class Init extends MX_Controller
 			}
 
 			if($this->error === '' && $this->input->post('step') && $this->input->post('step') == 3){
-				$database = file_get_contents(APPPATH . '../sql/install.sql');
+				$dbsql = file_get_contents(APPPATH . '../sql/install.sql');
 				$this->load->database();
-				if(mysqli_multi_query($this->db->conn_id, $database)){
-					$this->clean_up_db_query();
-                    $this->load->model('users/user_model');
+				$this->load->model('users/user_model');
+				$this->db->trans_start();
+				$this->db->query($dbsql);
+				//if(mysqli_multi_query($this->db->conn_id, $dbsql)){
+				//	$this->clean_up_db_query();
 					$data['password'] = $this->input->post('admin_passwordr');
 					$data['username'] = $this->input->post('admin_email');
 					$data['email'] = $this->input->post('admin_email');
@@ -98,14 +106,15 @@ class Init extends MX_Controller
 						{
 							show_error($config_path.' should be writable. Database imported successfuly. And admin user added successfuly. You can set manualy in application/config at bottom $config["installed"]  = "true"');
 						}
-
+						$this->db->trans_complete();
+						
 						//update_config_installed();
 						$passed_steps[1] = true;
 						$passed_steps[2] = true;
 						$passed_steps[3] = true;
 						$step = 4;
 					}
-				}
+				//}
 			} else {
 				$error = $this->error;
 			}

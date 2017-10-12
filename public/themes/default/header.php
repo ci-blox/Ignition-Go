@@ -9,8 +9,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="<?php e(isset($meta_description) ? $meta_description : ''); ?>">
     <meta name="author" content="<?php e(isset($meta_author) ? $meta_author : ''); ?>">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>components/bootstrap/dist/css/bootstrap.css" />
-	<?php /* Stylesheets - gulp combines all in gulpfile.js/config.js into one */ ?>
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/bootstrap.min.css" />
+	<?php /* Stylesheets - gulp combines/minifies css as defined in gulpfile.js/config.js into one */ ?>
 	<link href='<?php echo base_url(); ?>assets/dist/app.min.css' rel='stylesheet'>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
