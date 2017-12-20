@@ -53,9 +53,9 @@ class Init extends MX_Controller
 						$passed_steps[2] = true;
 						$link = @mysqli_connect($this->input->post('hostname'), $this->input->post('username'), $this->input->post('password'), $this->input->post('database'));
 						if (!$link) {
-							$this->error .= "MySQLi Error: Unable to connect to MySQL." . PHP_EOL;
-							$this->error .= "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
-							$this->error .= "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+							$this->error .= "MySQLi Error: Unable to connect to database." . PHP_EOL;
+							$this->error .= "Errno: " . mysqli_connect_errno() . PHP_EOL;
+							$this->error .= "Error: " . mysqli_connect_error() . PHP_EOL;
 						} else {
 							$debug .= "Success: A proper connection to MySQL using MySQLi was made! The ".$this->input->post('database')." database is great." . PHP_EOL;
 							$debug .= "Host information: " . mysqli_get_host_info($link) . PHP_EOL;
@@ -86,34 +86,45 @@ class Init extends MX_Controller
 
 			if($this->error === '' && $this->input->post('step') && $this->input->post('step') == 3){
 				$dbsql = file_get_contents(APPPATH . '../sql/install.sql');
+				$dbsqlar = explode(";", $dbsql);
 				$this->load->database();
 				$this->load->model('users/user_model');
 				$this->db->trans_start();
-				$this->db->query($dbsql);
+				foreach ($dbsqlar as $key => $dbsqlstep) {
+					if ( ! $this->db->simple_query($dbsqlstep))
+					{
+						$dberror = $this->db->error(); // Has keys 'code' and 'message'
+						show_error($error." SQL step:".$dbsqlstep); 
+						$this->error = "Problem in install sql: ".print_r($dberror, true);
+						return;
+					}
+				}
 				//if(mysqli_multi_query($this->db->conn_id, $dbsql)){
 				//	$this->clean_up_db_query();
-					$data['password'] = $this->input->post('admin_passwordr');
-					$data['username'] = $this->input->post('admin_email');
-					$data['email'] = $this->input->post('admin_email');
-					$data['created_on'] = date('Y-m-d H:i:s');
-					$data['role'] = 'admin';
-					$data['active'] = 1;
-                    $data['first_name'] = 'Site';
-                    $data['last_name'] = 'Admin';
+				
+				// insert an admin
+				$data['password'] = $this->input->post('admin_passwordr');
+				$data['username'] = $this->input->post('admin_email');
+				$data['email'] = $this->input->post('admin_email');
+				$data['created_on'] = date('Y-m-d H:i:s');
+				$data['role'] = 'admin';
+				$data['active'] = 1;
+				$data['first_name'] = 'Site';
+				$data['last_name'] = 'Admin';
 
-        			if($this->user_model->insert($data)){
-						if (!is_really_writable($config_path))
-						{
-							show_error($config_path.' should be writable. Database imported successfuly. And admin user added successfuly. You can set manualy in application/config at bottom $config["installed"]  = "true"');
-						}
-						$this->db->trans_complete();
-						
-						//update_config_installed();
-						$passed_steps[1] = true;
-						$passed_steps[2] = true;
-						$passed_steps[3] = true;
-						$step = 4;
+				if($this->user_model->insert($data)){
+					if (!is_really_writable($config_path))
+					{
+						show_error($config_path.' should be writable. Database imported successfuly. And admin user added successfuly. You can set manualy in application/config at bottom $config["installed"]  = "true"');
 					}
+					$this->db->trans_complete();
+	
+					//update_config_installed();
+					$passed_steps[1] = true;
+					$passed_steps[2] = true;
+					$passed_steps[3] = true;
+					$step = 4;
+				}
 				//}
 			} else {
 				$error = $this->error;

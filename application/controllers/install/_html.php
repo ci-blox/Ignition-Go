@@ -108,7 +108,7 @@
         <div class="text-center">
         <div class="checkbox">
           <label>
-            <input type="checkbox" name="skip" value="1" />Skip this step (only if already set up)
+            <input type="checkbox" name="skip" value="1" />Skip this step (only if already set up config/database.php)
           </label>
          </div>
          <button type="submit" class="btn btn-primary">Check Database</button>
@@ -132,7 +132,7 @@
         <input type="password" class="form-control" name="admin_passwordr" id="admin_passwordr">
       </div>
       <div class="text-center">
-        <button type="submit" class="btn btn-primary">Finish Install</button>
+        <button type="submit" class="btn btn-primary">Create Tables and Finish Install</button>
       </div>
       <?php echo form_close(); ?>
 

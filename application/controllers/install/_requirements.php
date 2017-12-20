@@ -7,12 +7,19 @@ if (phpversion() < "5.4") {
 	$requirement1 = "<span class='label label-success'>v." . phpversion() . "</span>";
 }
 
+if (!file_exists($_SERVER['DOCUMENT_ROOT'].'/themes/default/index.php')) {
+	$error = true;
+    echo base_url();
+	$requirement2 = "<span class='label label-danger'>Document root is pointed incorrectly. Your root should be the public folder.";
+} else {
+	$requirement2 = "<span class='label label-success'>OK</span>";
+}
 if (!file_exists($_SERVER['DOCUMENT_ROOT'].'/components/font-awesome/css/font-awesome.min.css')) {
 	$error = true;
     echo base_url();
-	$requirement2 = "<span class='label label-danger'>Bower was not run. Run <em>bower update</em> at the command line to load dependencies like Font-Awesome.";
+	$requirement2a = "<span class='label label-danger'>Bower was not run. Run <em>bower update</em> at the command line to load dependencies like Font-Awesome.";
 } else {
-	$requirement2 = "<span class='label label-success'>OK</span>";
+	$requirement2a = "<span class='label label-success'>OK</span>";
 }
 
 if (!file_exists($_SERVER['DOCUMENT_ROOT'].'/assets/dist/app.min.css')) {
@@ -120,8 +127,12 @@ if (!is_really_writable(APPPATH . 'config/database.php')){
 			<td><?php echo $requirement1; ?></td>
 		</tr>
 		<tr>
-			<td>Bower Components Installed</td>
+			<td>Document Root Set to Public</td>
 			<td><?php echo $requirement2; ?></td>
+		</tr>
+		<tr>
+			<td>Bower Components Installed</td>
+			<td><?php echo $requirement2a; ?></td>
 		</tr>
 		<tr>
 			<td>NPM Installed and Gulp Executed</td>
