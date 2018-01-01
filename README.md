@@ -5,12 +5,12 @@ A Modular (HMVC) App Building Framework - complete with front end, REST api and 
 - can be used as a quickstart project starter/boilerplate
 - *What are blox?* "Blox" are just pluggable modules or applets that are commonly used in web applications. Ignition Go includes a web-based generator. Planned example "blox" would be a bulk emailer, report manager, and many more!!!  
 
-### Help wanted: contact us to help build the most amazing web app builder ever!  
+### Help wanted: contact us to help enhance this amazing web app builder!  
 Please contact us to contribute.
 
 ### Server Requirements (Preferred)
 
-* **PHP 5.6, 7.0, 7.1** you can run in lower (5.4/5.5) but lowest recommended version to use is [PHP 5.6](http://php.net/manual/en/migration56.new-features.php) (http://php.net/manual/en/migration55.new-features.php) for this project. 
+* **PHP 5.6, 7.1, 7.2** you can run in lower (5.4/5.5) but lowest recommended version to use is [PHP 5.6](http://php.net/manual/en/migration56.new-features.php) (http://php.net/manual/en/migration55.new-features.php) for this project. 
 * **Apache 2.2+** with rewrite mod enabled
 * **MySQL 5.5+ or MariaDb**
 
@@ -18,17 +18,18 @@ Please contact us to contribute.
 1. Install NPM [node.js](http://nodejs.org/): package manager for node modules
 
 2. GIT clone this repository<br>
-Example: ```git clone https://github.com/ci-blox/Ignition-Go.git myigosite```
+Example: ```git clone https://github.com/ci-blox/Ignition-Go.git myigoapp```
 
 3. Change directory to new site/web app root<br>
-Example: ```cd myigosite```
+Example: ```cd myigoapp```
 
 4. Install Bower [bower](http://bower.io/): manager for bower components<br>
 Type: ```npm install -g bower```
 
-5. Install all the NPM and bower components<br>
-Type: ```npm install``` then<br>
-Type: ```bower install```
+5. Install all the packages and bower components<br>
+Type: ```npm install``` <br>
+-OR- ```yarn install``` <br>
+Then type: ```bower install```
 
 6. Install and run 'gulp' (note that gulp will run continuously in 'watch' mode, watching for css and js changes).<br>
 Type: ```npm install gulp``` then<br>

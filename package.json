@@ -5,29 +5,27 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ci-blox/ignition-go"
-  },
-  "author": 
-    "boblennes",
+  "repository": "https://github.com/ci-blox/ignition-go",
+  "author": "boblennes",
   "license": "MIT",
   "devDependencies": {
-    "lodash":"^4.17.4",
-    "minimatch":"^3.0.4",
     "browser-sync": "^2.18.2",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-changed": "*",
+    "gulp-clean-css": "^3.7.0",
     "gulp-concat": "*",
     "gulp-connect-php": "*",
-    "gulp-clean-css": "^3.7.0",
     "gulp-notify": "*",
+    "gulp-rename": "^1.2.2",
     "gulp-sequence": "*",
     "gulp-sourcemaps": "*",
-    "gulp-rename": "^1.2.2",    
     "gulp-uglify": "^1.2.0",
     "gulp-watch": "*",
+    "lodash": "^4.17.4",
+    "minimatch": "^3.0.4",
     "require-dir": "*"
-  }
+  },
+  "main": "index.php",
+  "private": false
 }
