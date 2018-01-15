@@ -293,7 +293,7 @@ class Modulebuilder
         // Each context has a controller and a set of views.
         foreach ($contexts as $key => $context_name) {
             $data['module_name_lower'] = $module_name_lower;
-            if ($context_name == 'public') {
+            if (strtolower($context_name) == 'public') {
                 // Public controllers are named after the module.
                 $data['controller_name'] = $module_name_lower;
                 $content['controllers'][$module_name_lower] = $this->buildController($data);
@@ -310,6 +310,7 @@ class Modulebuilder
                 // Build the admin views.
                 foreach ($action_names as $key => $action_name) {
                     if ($action_name != 'delete') {
+                        $data['entity_1'] = $module_name_lower;
                         $data['action_name'] = $action_name;
                         $data['action_label'] = $this->options['form_action_options'][$action_name];
                         $content['views'][$context_name][$action_name] = $this->buildView($data);
