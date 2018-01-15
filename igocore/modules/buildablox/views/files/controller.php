@@ -2,6 +2,25 @@
 
 $controller_name_lower = strtolower($controller_name);
 $primary_key_field = set_value("primary_key_field");
+$createSave = '';
+$editSave = '';
+$editDelete = '';
+$editFind = '';
+$mb_create='';
+$mb_edit='';
+$mb_listing='';
+$mb_save='';
+$constructorExtras = '';
+$date_included     = false;
+$datetime_included = false;
+$textarea_included = false;
+$jQueryUI = '';
+$counter=0;
+$db_field_type='';
+$view_datepicker='';
+$constructorRestrict = '';
+$loadModel = '';
+$baseClass = 'Front_Controller';
 
 //------------------------------------------------------------------------------
 // Index
@@ -305,17 +324,12 @@ $mb_listing = <<<EOT
     }
  
 }
-EOT;;
+EOT;
 }
 
 //------------------------------------------------------------------------------
 // Create
 //------------------------------------------------------------------------------
-
-$createSave = '';
-$editSave = '';
-$editDelete = '';
-$editFind = '';
 
 if ($db_required != '') {
     $createSave = "
@@ -333,7 +347,8 @@ if ($db_required != '') {
 		}";
 
     $editFind = "
-        Template::set('{$module_name_lower}', \$this->{$module_name_lower}_model->find(\$id));";
+        Template::set('{$module_name_lower}', \$this->{$module_name_lower}_model->find(\$id));
+        ";
 
     $editSave = "
 		if (isset(\$_POST['save'])) {
@@ -351,7 +366,8 @@ if ($db_required != '') {
 			}
 		}";
 
-	if (in_array('delete', $action_names)) {
+    $editDelete='';
+	if (is_array($action_names) && in_array('delete', $action_names)) {
         $editDelete = "
 		elseif (isset(\$_POST['delete'])) {
 			\$this->auth->restrict(\$this->permissionDelete);
@@ -461,11 +477,6 @@ $mb_save = "
 //--------------------------------------------------------------------
 // Constructor
 //--------------------------------------------------------------------
-$constructorExtras = '';
-$date_included     = false;
-$datetime_included = false;
-$textarea_included = false;
-
 $jQueryUI = "
 			Modules::register_asset('flick/jquery-ui-1.8.13.custom.css');
 			Modules::register_asset('jquery-ui-1.8.13.min.js');";
@@ -514,10 +525,6 @@ for ($counter = 1; $field_total >= $counter; $counter++) {
 	}
 }
 
-$constructorRestrict = '';
-$loadModel = '';
-$baseClass = 'Front_Controller';
-
 // Is this an admin area controller?
 if ($controller_name_lower != $module_name_lower) {
     $baseClass = 'Admin_Controller';
@@ -551,7 +558,7 @@ $body = '';
 // Check whether this is the front controller
 if ($controller_name_lower != $module_name_lower) {
 	// Create
-	if (in_array('create', $action_names)) {
+	if (is_array($action_names) &&in_array('create', $action_names)) {
 		$body .= $mb_create;
 		$body = str_replace('{create_permission}', preg_replace("/[ -]/", "_", ucfirst($module_name)) . '.' . ucfirst($controller_name) . '.Create', $body);
 	}
