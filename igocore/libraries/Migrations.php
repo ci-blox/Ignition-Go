@@ -312,7 +312,7 @@ class Migrations
      */
     public function install($type = '')
     {
-        $latestVersion = $this->getLatestVersion($type);
+      echo $type;  $latestVersion = $this->getLatestVersion($type);
         if ($latestVersion > 0) {
             return $this->version($latestVersion, $type);
         }

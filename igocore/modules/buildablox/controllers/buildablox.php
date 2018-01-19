@@ -48,7 +48,10 @@ class Buildablox extends Admin_Controller
     public function index()
     {
         $modules = Modules::list_modules(true);
+        $mod_migrations = $this->get_db_versions();
+
         $configs = array();
+
 
         foreach ($modules as $module) {
             $configs[$module] = Modules::config($module);
@@ -60,6 +63,10 @@ class Buildablox extends Admin_Controller
                 // and, if it is, pull it from the application_lang file.
                 $configs[$module]['name'] = lang(str_replace('lang:', '', $configs[$module]['name']));
             }
+
+            if (isset($mod_migrations[$module]) )
+                $configs[$module]['dbversions'] = $mod_migrations[$module];
+
         }
         // Sort the module list (by the name of each module's folder)
         ksort($configs);
@@ -545,7 +552,7 @@ class Buildablox extends Admin_Controller
         $controller_name = preg_replace("/[ -]/", "_", $module_name);
         $module_name_lower = strtolower($controller_name);
 
-        $this->load->library('modulebuilder');
+        $this->load->library('Modulebuilder');
         $file_data = $this->modulebuilder->buildFiles(
             array(
                 'action_names'          => $action_names,
@@ -609,10 +616,10 @@ class Buildablox extends Admin_Controller
         }
 
         // Load the migrations library
-        $this->load->library('migrations');
-
+        $this->load->library('Migrations');
+              
         // Run the migration install routine
-        if ($this->migrations->install("{$data['module_name_lower']}_")) {
+        if ($this->migrations->install($data['module_name_lower'].'_')) {
             $data['mb_migration_result'] = 'mb_out_tables_success';
         } else {
             $data['mb_migration_result'] = 'mb_out_tables_error';
@@ -620,6 +627,92 @@ class Buildablox extends Admin_Controller
 
         Template::set($data);
     }
+
+
+    /**
+     * Get all db versions available for the modules
+     *
+     * @return array Array of available versions for each module
+     */
+    private function get_db_versions()
+    {
+        $modules = Modules::files(null, 'migrations');
+        if ($modules === false) {
+            return false;
+        }
+
+        // Sort modules by key (module directory name)
+        ksort($modules);
+
+        // Get the installed version of all of the modules (modules which have
+        // not been installed will not be included)
+        $this->load->library('Migrations');
+        $installedVersions = $this->migrations->getModuleVersions();
+        $modVersions = array();
+
+        // Add the migration data for each module
+        foreach ($modules as $module => &$mod) {
+            if (! array_key_exists('migrations', $mod)) {
+                continue;
+            }
+
+            // Sort module migrations in reverse order
+            arsort($mod['migrations']);
+
+            /**
+             * @internal Calculating the latest version from the migration list
+             * saves ~20% of the load time when a lot of modules (tested with >
+             * 50) are listed. However, it requires the controller to know more
+             * about the format of the migration filenames than may be desirable.
+             * If that is the case, the 'latest_version' key below can be
+             * populated with the result of:
+             * $this->migrations->getVersion("{$module}_", true)
+             */
+
+            // Add the installed version, latest version, and list of migrations
+            $modVersions[$module] = array(
+                'installed' => isset($installedVersions["{$module}_"]) ? $installedVersions["{$module}_"] : 0,
+                'latest'    => intval(substr(current($mod['migrations']), 0, 3), 10),
+                'migrations'        => $mod['migrations'],
+            );
+        }
+
+        return $modVersions;
+    }
+
+
+    /* domigrate */
+    function domigrate($ver) {
+            $ret='';
+            // Load the migrations library
+            $this->load->library('Migrations');
+            $config['migration_enabled'] = true;
+            $this->config->set_item('migration_enabled', 'true');
+            $mod = $this->input->post('module');
+            $type = strtolower($mod.'_');
+            // Run the migration install routine
+            if ($this->migrations->install($type)) {
+                $ret = 'mb_out_tables_success';
+            } else {
+                $ret = 'mb_out_tables_error';
+            }
+            $result = $this->migrations->version($ver, $type);
+            $errorMessage = $this->migrations->getErrorMessage();
+            if ($result !== false && strlen($errorMessage) == 0) {
+                if ($result === 0) {
+                    Template::set_message(lang('migrations_uninstall_success'), 'success');
+
+                } else {
+                    Template::set_message(sprintf(lang('migrations_migrate_success'), $result), 'success');
+                }
+            } else {
+                log_message(lang('migrations_migrate_error') . "\n{$errorMessage}", 'error');
+                Template::set_message(lang('migrations_migrate_error') . "<br />{$errorMessage}", 'error');
+            }
+               $this->config->set_item('migration_enabled', 'false');
+            redirect('buildablox');
+        
+}
 
     /**
      * Verify that the Modules folder is writable

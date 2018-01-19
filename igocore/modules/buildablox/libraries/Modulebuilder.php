@@ -295,8 +295,9 @@ class Modulebuilder
             $data['module_name_lower'] = $module_name_lower;
             if (strtolower($context_name) == 'public') {
                 // Public controllers are named after the module.
-                $data['controller_name'] = $module_name_lower;
-                $content['controllers'][$module_name_lower] = $this->buildController($data);
+                $ctname = ucfirst($module_name_lower);
+                $data['controller_name'] = $ctname;
+                $content['controllers'][$ctname] = $this->buildController($data);
 
                 // Build the public view.
                 $data['action_name'] = 'index_front';
@@ -808,11 +809,11 @@ class Modulebuilder
 
                 switch ($type) {
                     case 'acl_migration':
-                        $file_name = "001_Install_{$file_name}_permissions";
+                        $file_name = "002_Install_{$file_name}_permissions";
                         $path = "{$modulePath}/migrations";
                         break;
                     case 'db_migration':
-                        $file_name = "002_Install_{$table_name}";
+                        $file_name = "001_Install_{$table_name}";
                         $path = "{$modulePath}/migrations";
                         break;
                     case 'model':
