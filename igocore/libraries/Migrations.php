@@ -45,7 +45,7 @@ class Migrations
     /**
      * The maximum migrations schema version currently supported by the library.
      */
-    const MAX_SCHEMA_VERSION = 3;
+    const MAX_SCHEMA_VERSION = 2;
 
     /** @var object The CodeIgniter instance. */
     protected $_ci;
@@ -278,25 +278,12 @@ class Migrations
             return self::$schemaVersion[self::CORE_MIGRATIONS];
         }
 
-        if ($this->getLibraryVersion() > 1) {
-            // New schema table layout
-            $type = empty($type) ? self::CORE_MIGRATIONS : $type;
-            $row = $this->_ci->db->where('type', $type)
-                                 ->get($this->migrationsTable)
-                                 ->row();
-
-            self::$schemaVersion[$type] = isset($row->version) ? $row->version: 0;
-
-            return self::$schemaVersion[$type];
-        }
-
-        // Old schema table layout
-        $row = $this->_ci->db->get($this->migrationsTable)
+        $type = empty($type) ? self::CORE_MIGRATIONS : $type;
+        $row = $this->_ci->db->where('type', $type)
+                             ->get($this->migrationsTable)
                              ->row();
 
-        $schema = "{$type}version";
-
-        self::$schemaVersion[$type] = isset($row->$schema) ? $row->$schema : 0;
+        self::$schemaVersion[$type] = isset($row->version) ? $row->version: 0;
 
         return self::$schemaVersion[$type];
     }
@@ -312,7 +299,8 @@ class Migrations
      */
     public function install($type = '')
     {
-      echo $type;  $latestVersion = $this->getLatestVersion($type);
+        $latestVersion = $this->getLatestVersion($type);
+        
         if ($latestVersion > 0) {
             return $this->version($latestVersion, $type);
         }
@@ -461,7 +449,7 @@ class Migrations
         // If there is nothing to do, quit
         if ($migrations === array()) {
             if ($this->verbose) {
-                echo "Nothing to do, bye!\n";
+                echo "Nothing to do here.\n";
             }
 
             return true;
@@ -594,20 +582,6 @@ class Migrations
     //--------------------------------------------------------------------------
 
     /**
-     * Check for the existence of a particular column. Primarily used for the
-     * "old" schema.
-     *
-     * @param string $columnName Name of the column to find in the table.
-     *
-     * @return bool True if the column exists, else false.
-     */
-    private function checkMigrationsColumn($columnName)
-    {
-        $row = $this->_ci->db->get($this->migrationsTable)->row();
-        return isset($row->$columnName);
-    }
-
-    /**
      * Create the migrations table.
      *
      * @param int $schemaVersion The version of the schema for which the table
@@ -628,84 +602,31 @@ class Migrations
         $fields     = array();
         $primaryKey = '';
 
-        switch ($schemaVersion) {
-            // Not a significant version difference, but at least it matches the
-            // definition in /bonfire/migrations/023_Modify_schema_version_type.php
-            case 3:
-                $fields = array(
-                    'type' => array(
-                        'type'       => 'varchar',
-                        'constraint' => 40,
-                        'null'       => false,
-                    ),
-                    'version' => array(
-                        'type'       => 'int',
-                        'constraint' => 4,
-                        'default'    => 0,
-                    ),
-                );
-                $primaryKey = 'type';
-                $data = array(
-                    'type'    => self::CORE_MIGRATIONS,
-                    'version' => 0,
-                );
-                break;
-
-            // The "new" schema
-            case 2:
-                $fields = array(
-                    'type' => array(
-                        'type'       => 'varchar',
-                        'constraint' => 20,
-                        'null'       => false,
-                    ),
-                    'version' => array(
-                        'type'       => 'int',
-                        'constraint' => 4,
-                        'default'    => 0,
-                    ),
-                );
-                $primaryKey = 'type';
-                $data = array(
-                    'type'    => self::CORE_MIGRATIONS,
-                    'version' => 0,
-                );
-                break;
-
-            // The "old" schema
-            case 1:
-                $fields = array(
-                    'version' => array(
-                        'type'       => 'int',
-                        'constraint' => 4,
-                        'default'    => 0,
-                        'null'       => false,
-                    ),
-                    'app_version' => array(
-                        'type'       => 'int',
-                        'constraint' => 4,
-                        'default'    => 0,
-                        'null'       => false,
-                    ),
-                );
-
-                // This isn't really a primary key, but it doesn't really
-                // matter, as this is a 1-row table
-                $primaryKey = 'version';
-                $data = array(
-                    'version'     => 0,
-                    'app_version' => 0,
-                );
-                break;
-        }
-
+        $fields = array(
+            'type' => array(
+                'type'       => 'varchar',
+                'constraint' => 40,
+                'null'       => false,
+            ),
+            'version' => array(
+                'type'       => 'int',
+                'constraint' => 4,
+                'default'    => 0,
+            ),
+        );
+        $primaryKey = 'type';
+        $data = array(
+            'type'    => self::CORE_MIGRATIONS,
+            'version' => 0,
+        );
+        
         // If $fields and $primaryKey aren't set, the table won't be created.
         if (empty($fields) || empty($primaryKey)) {
             $this->setError('Invalid schema selected for creation of migrations table.');
             return false;
         }
 
-        // Load DBForge and create the table
+        // Load DBForge and create the schema version table
         $this->_ci->load->dbforge();
         $this->_ci->dbforge->add_field($fields);
         $this->_ci->dbforge->add_key($primaryKey, true);
@@ -750,35 +671,10 @@ class Migrations
      * Determine which version of the database table for migrations is currently
      * in use.
      *
-     * This function does not currently help in determining the constraint on
-     * the 'type' column (the difference between versions 2 and 3 is whether the
-     * constraint is 20 or 40), as the db drivers don't currently return this
-     * information for all databases.
-     *
-     * @return int    A number indicating the version of the table in use, or 0
-     * if the version could not be determined. 1 is returned for the "old"
-     * version, 3 is returned for the "new" version.
+     * @return int    A number indicating the version of the table in use
      */
     private function getLibraryVersion()
     {
-        if (self::$migrationsSchemaVersion) {
-            return self::$migrationsSchemaVersion;
-        }
-
-        $row = $this->_ci->db->get($this->migrationsTable, 1)->row();
-
-        // Given no definite way to check between versions 2 and 3, we'll assume
-        // version 3 if the type column is available
-        if (isset($row->type)) {
-            self::$migrationsSchemaVersion = self::MAX_SCHEMA_VERSION;
-        } elseif (isset($row->app_version)) {
-            // If the type column is unavailable, check for the app_version column
-            self::$migrationsSchemaVersion = 1;
-        } else {
-            // If neither column is available, who knows?
-            self::$migrationsSchemaVersion = 0;
-        }
-
         return self::$migrationsSchemaVersion;
     }
 
@@ -795,52 +691,25 @@ class Migrations
     private function updateVersion($version, $type = '')
     {
         logit("[Migrations] Schema {$type} updated to: {$version}");
-        if ($this->getLibraryVersion() > 1) {
-            // New schema table layout
-            $type = empty($type) ? self::CORE_MIGRATIONS : $type;
+      
+        // default to core
+        $type = empty($type) ? self::CORE_MIGRATIONS : $type;
 
-            // Get the current version for this type
-            $currentVersion = $this->getVersion($type);
+        // Get the current version for this type
+        $currentVersion = $this->getVersion($type);
 
-            // Remove the row for this type when moving down to 0
-            if ($version == 0) {
-                if (empty($currentVersion)) {
-                    // If the version was not found, just exit
-                    return;
-                }
-
-                // If the version was found, remove it
-                $result = $this->_ci->db->delete(
-                    $this->migrationsTable,
-                    array('type' => $type)
-                );
-
-                // Cache the version
-                if ($result) {
-                    self::$schemaVersion[$type] = $version;
-                }
-
-                return $result;
+        // Remove the row for this type when moving down to 0
+        if ($version == 0) {
+            if (empty($currentVersion)) {
+                // If the version was not found, just exit
+                return;
             }
 
-            // When moving to a version other than 0...
-            // If the version was not found, insert it
-            if (empty($currentVersion) && $currentVersion !== '0') {
-                $result = $this->_ci->db->insert(
-                    $this->migrationsTable,
-                    array(
-                        'type'    => $type,
-                        'version' => $version,
-                    )
-                );
-            } else {
-                // If the version was found, update it
-                $result = $this->_ci->db->update(
-                    $this->migrationsTable,
-                    array('version' => $version),
-                    array('type'    => $type)
-                );
-            }
+            // If the version was found, remove it
+            $result = $this->_ci->db->delete(
+                $this->migrationsTable,
+                array('type' => $type)
+            );
 
             // Cache the version
             if ($result) {
@@ -850,29 +719,24 @@ class Migrations
             return $result;
         }
 
-        // The old schema...
-        // Does the column exist?
-        if (! $this->checkMigrationsColumn("{$type}version")) {
-            // If the column doesn't exist, create it...
-            $this->_ci->load->dbforge();
-            $this->_ci->dbforge->add_column(
+        // When moving to a version other than 0...
+        // If the version was not found, insert it
+        if (empty($currentVersion) && $currentVersion !== '0') {
+            $result = $this->_ci->db->insert(
                 $this->migrationsTable,
                 array(
-                    "{$type}version" => array(
-                        'type'       => 'int',
-                        'constraint' => 4,
-                        'null'       => true,
-                        'default'    => 0,
-                    )
+                    'type'    => $type,
+                    'version' => $version,
                 )
             );
+        } else {
+            // If the version was found, update it
+            $result = $this->_ci->db->update(
+                $this->migrationsTable,
+                array('version' => $version),
+                array('type'    => $type)
+            );
         }
-
-        // Update the version in the column
-        $result = $this->_ci->db->update(
-            $this->migrationsTable,
-            array("{$type}version" => $version)
-        );
 
         // Cache the version
         if ($result) {
@@ -880,5 +744,5 @@ class Migrations
         }
 
         return $result;
-    }
+    }   
 }

@@ -27,4 +27,18 @@ class Sec_permission_model extends IGO_Model
 
     //--------------------------------------------------------------------------
 
+    function insert_default_permissions($module, $controller) {
+
+        $acts = array('Create', 'Edit', 'Delete', 'View');
+        $ret = array();
+        foreach ($acts as $act) {
+            $idata = array('name'=> $module. '.' . $controller . '.' . $act,
+                            'description' => $act . ' for ' . $module,
+                            'status' => 'active'
+            );
+            $this->insert($idata);
+            $ret[] =  $this->db->insert_id();
+        }
+        return $ret;
+    }
 }

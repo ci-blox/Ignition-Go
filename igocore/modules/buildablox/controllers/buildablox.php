@@ -215,18 +215,12 @@ class Buildablox extends Admin_Controller
     {
         $this->load->dbforge();
         $this->db->trans_begin();
-
-        // Drop the migration record - old Migration schema method
+   
+        // Drop the Migration record
         $moduleNameLower = preg_replace("/[ -]/", "_", strtolower($moduleName));
-        if ($this->db->field_exists("{$moduleNameLower}_version", 'schema_version')) {
-            $this->dbforge->drop_column('schema_version', "{$moduleNameLower}_version");
-        }
-
-        // Drop the Migration record - new Migration schema method
-        if ($this->db->field_exists('version', 'schema_version')) {
-            $this->db->delete('schema_version', array('type' => $moduleNameLower . '_'));
-        }
-
+        
+        $this->db->delete('schema_version', array('type' => $moduleNameLower . '_'));
+        
         // Get any permission ids
         $this->load->model('securinator/sec_permission_model');
         $permissionKey = $this->sec_permission_model->get_key();
@@ -595,26 +589,6 @@ class Buildablox extends Admin_Controller
 
         $data = $data + $file_data;
 
-        // @todo Need to test whether this section can be removed... Only the
-        // migrations library should know anything about the structure of the
-        // migration versions in the database.
-        //
-        // Allow for the Old method - update the schema first to prevent errors
-        // in duplicate column names due to Migrations.php caching db columns
-        if (! $this->db->field_exists('version', 'schema_version')) {
-            $this->dbforge->add_column(
-                'schema_version',
-                array(
-                    $data['module_name_lower'] . '_version' => array(
-                        'type'          => 'INT',
-                        'constraint'    => 4,
-                        'null'          => true,
-                        'default'       => 0,
-                    ),
-                )
-            );
-        }
-
         // Load the migrations library
         $this->load->library('Migrations');
               
@@ -686,13 +660,14 @@ class Buildablox extends Admin_Controller
             $ret='';
             // Load the migrations library
             $this->load->library('Migrations');
+
             $config['migration_enabled'] = true;
-            $this->config->set_item('migration_enabled', 'true');
             $mod = $this->input->post('module');
             $type = strtolower($mod.'_');
             // Run the migration install routine
             if ($this->migrations->install($type)) {
                 $ret = 'mb_out_tables_success';
+                $this->migrations->updateVersion($type, $ver);
             } else {
                 $ret = 'mb_out_tables_error';
             }
@@ -709,7 +684,9 @@ class Buildablox extends Admin_Controller
                 log_message(lang('migrations_migrate_error') . "\n{$errorMessage}", 'error');
                 Template::set_message(lang('migrations_migrate_error') . "<br />{$errorMessage}", 'error');
             }
-               $this->config->set_item('migration_enabled', 'false');
+            
+            $this->config->set_item('migration_enabled', 'false');
+            
             redirect('buildablox');
         
 }

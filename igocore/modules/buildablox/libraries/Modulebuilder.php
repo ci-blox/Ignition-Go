@@ -289,6 +289,9 @@ class Modulebuilder
         $field_total = empty($field_total) && $db_required != '' ? 1 : $field_total;
 
         // Build the files
+        // load acl models
+        $this->CI->load->model('securinator/sec_permission_model');
+        $this->CI->load->model('securinator/sec_role_permission_model');
 
         // Each context has a controller and a set of views.
         foreach ($contexts as $key => $context_name) {
@@ -307,6 +310,14 @@ class Modulebuilder
                 // Admin controllers are named after the context.
                 $data['controller_name'] = $context_name;
                 $content['controllers'][$context_name] = $this->buildController($data);
+
+                // insert ACL
+                $permissionModuleName = ucfirst($module_name_lower);
+                $permissionController = ucfirst($context_name);
+                $ids = $this->CI->sec_permission_model->insert_default_permissions($permissionModuleName, $permissionController);
+                foreach ($ids as $permid) {
+                    $this->CI->sec_role_permission_model->insert(array('role'=>$role_id,'permission_id'=>$permid));
+                }
 
                 // Build the admin views.
                 foreach ($action_names as $key => $action_name) {
