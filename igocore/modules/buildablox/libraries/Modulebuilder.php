@@ -320,7 +320,7 @@ class Modulebuilder
                 }
 
                 // Build the admin views.
-                foreach ($action_names as $key => $action_name) {
+                foreach ($action_names as $action_name) {
                     if ($action_name != 'delete') {
                         $data['entity_1'] = $module_name_lower;
                         $data['action_name'] = $action_name;
@@ -330,7 +330,7 @@ class Modulebuilder
                 }
                 // Build the js view.
                 $data['action_name'] = '_' . $module_name_lower.'_js';
-                $data['action_label'] = $this->options['form_action_options'][$action_name];
+                $data['action_label'] = '';
                 $content['views'][$context_name]['_' . $module_name_lower.'_js'] = $this->buildView($data);
 
             }

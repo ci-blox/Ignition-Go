@@ -50,7 +50,7 @@ for ($counter = 1; $field_total >= $counter; $counter++) {
     else {
         $table_records .= "
 				<?php if (\$can_edit) : ?>
-					<td><?php echo anchor('/" . strtolower($controller_name) . "/{$module_name_lower}/edit/' . \$record->{$primary_key_field}, {$pencil_icon} \$record->{$field_name}); ?></td>
+					<td><?php echo anchor(site_url('/" . strtolower($controller_name) . "/{$module_name_lower}/edit/' . \$record->{$primary_key_field}), {$pencil_icon} \$record->{$field_name}); ?></td>
 				<?php else : ?>
 					<td><?php e(\$record->{$field_name}); ?></td>
 				<?php endif; ?>";
@@ -110,7 +110,7 @@ if (\$can_delete) {
 				</h3>
 				<div class='box-tools'>
 					<?php if (\$can_edit) : ?>
-					<a href='<?php echo site_url(' /admin/{$module_name_lower}/create '); ?>' class='btn btn-success btn-sm'>Add</a>
+					<a href='<?php echo site_url('/" . strtolower($controller_name) . "/{$module_name_lower}/create'); ?>' class='btn btn-success btn-sm'>Add</a>
 					<?php endif; ?>
 				</div>
 			</div>

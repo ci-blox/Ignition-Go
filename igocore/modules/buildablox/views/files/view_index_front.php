@@ -48,7 +48,6 @@ $hiddenFields .= ")";
 // Output the view
 //------------------------------------------------------------------------------
 echo "<?php
-
 \$hiddenFields = {$hiddenFields};
 ?>
 <h1 class='page-header'>

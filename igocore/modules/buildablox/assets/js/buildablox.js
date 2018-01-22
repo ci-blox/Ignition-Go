@@ -160,7 +160,7 @@ function storeFormData() {
 		}
 
 		if (fldId && fldVal) {
-			localStorage[fldId] = fldVal;
+			localStorage.setItem('mb.'+fldId, fldVal);
 		}
 	});
 }
@@ -185,14 +185,10 @@ function getFormData() {
 
 	for (i = 0; i < localStorage.length; i++) {
 		key = localStorage.key(i);
-    	value = localStorage[key];
-
-        // If the key contains a '/', it was most likely set by some other script.
-        // (DataTables v1.10 raises this issue by using the page's URL as the key
-        // when the stateSave option is enabled.)
-        if (key.indexOf('/') > -1) {
-            continue;
-        }
+		if (key.substr(0,3)!='mb.') 
+			continue;
+		key = key.substring(3);
+		value = localStorage.getItem(key);
 
 		/* Restore the checked state of checkbox/radio buttons */
 		if ($('#' + key).is(':checkbox, :radio')) {
@@ -206,10 +202,11 @@ function getFormData() {
 		}
 
 		$('#' + key).val(value);
+		localStorage.removeItem(key);
 	}
 
 	/* Remove the data from localStorage when the form has been restored */
-	localStorage.clear();
+	//localStorage.clear();
 }
 
 /*------------------------------------------------------------------------------
@@ -222,7 +219,7 @@ if (localStorage.length >= 1) {
 /*------------------------------------------------------------------------------
  * User is choosing # of fields, store all the data in LocalStorage
  */
-$('#field_numbers a').click(function() {
+$('#field_numbers a').on('click', function(e) {
 	storeFormData();
 });
 
@@ -241,14 +238,14 @@ showTableProperties();
 /*------------------------------------------------------------------------------
  * Toggle module table
  */
-$('input[name=module_db]').click(function() {
+$('input[name=module_db]').on('click', function() {
 	showTableProperties();
 });
 
 /*------------------------------------------------------------------------------
  * Toggle advanced options
  */
-$('.mb_show_advanced').click(function(e) {
+$('.mb_show_advanced').on('click', function(e) {
 	/** The animation options passed into the toggle method */
 	var anim = blox.builder.animation,
 	/** The id value of the closest fieldset element */
@@ -263,7 +260,7 @@ $('.mb_show_advanced').click(function(e) {
 /*------------------------------------------------------------------------------
  * Toggle Validation Rules "...toggle more rules..." section
  */
-$('.mb_show_advanced_rules').click(function(e) {
+$('.mb_show_advanced_rules').on('click', function(e) {
 	/** The animation options passed into the toggle method */
 	var anim = blox.builder.animation;
 
@@ -277,7 +274,7 @@ $('.mb_show_advanced_rules').click(function(e) {
  * Uses the div:not to not affect the visibility options of the "...toggle more
  * rules..." section of the Validation Rules
  */
-$('.body legend').click(function() {
+$('.body legend').on('click', function() {
 	/** The animation options passed into the toggle method */
 	var anim = blox.builder.animation,
 	/** The name of the "close" icon to display on legend elements */
@@ -317,3 +314,13 @@ $('.btn-group.dbopt').on('change', function(e) {
  * Update the table name when changing the module name
  */
 $('#module_name, #table_name').on('click focus blur', {valueToPrep: '', setTableName: true}, blox.builder.prepTableName);
+
+$(document).ready(function() {
+$("#entity_name").on('keyup',function(e){
+    var nval = $("#entity_name").val();
+    if ($("#entity_plural").val()==''||nval.substr(0,$("#entity_plural").val().length)==$("#entity_plural").val())  
+        $("#entity_plural").val(nval);
+    if ($("#module_name").val()==''||nval.toLowerCase().substr(0,$("#module_name").val().length)==$("#module_name").val())  
+        $("#module_name").val(nval.toLowerCase());
+});
+});

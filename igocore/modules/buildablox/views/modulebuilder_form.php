@@ -4,8 +4,8 @@ $sessionError = $this->session->flashdata('error');
 $validationErrors = validation_errors();
 
 ?>
-<div class='container buildablox'>
-    <p class="intro"><?php e(lang('mb_create_note')); ?></p>
+<div class='content-header buildablox'>
+    <p class="intro" style='margin-top:-30px;'><?php e(lang('mb_create_note')); ?></p>
     <div class="alert alert-info">
         <a class="close" data-dismiss="alert">&times;</a>
         <?php echo lang('mb_form_note'); ?>
@@ -54,7 +54,11 @@ $validationErrors = validation_errors();
     // End Error Messages section
     //--------------------------------------------------------------------------
     ?>
-    <div class="module-builder admin-box">
+    <div class='row'>
+    <div class='col-md-12'>
+        <div class='box box-primary'>
+            <div class='box-body'>
+<div class="module-builder admin-box">
         <?php
         // If we just append $field_total to the current_url(), failed form
         // validation results in multiple additions of $field_total, until it
@@ -80,7 +84,7 @@ $validationErrors = validation_errors();
                         <span class="help-inline"><?php echo form_error('entity_name'); ?></span>
                     </div>
                 </div>
-                <div class="form-group<?php echo form_error('entity_name') ? ' error' : ''; ?>">
+                <div class="form-group<?php echo form_error('entity_plural') ? ' error' : ''; ?>">
                     <div class="col-sm-3"><label for="entity_plural" class="control-label"><?php echo lang('mb_form_entity_plural'); ?></label></div>
                     <div class="controls col-sm-9">
                         <input name="entity_plural" id="entity_plural" type="text" value="<?php echo set_value("entity_plural"); ?>" placeholder="<?php echo lang('mb_form_entity_plural_ph'); ?>" />
@@ -94,21 +98,6 @@ $validationErrors = validation_errors();
                         <span class="help-inline"><?php echo form_error('module_name'); ?></span>
                     </div>
                 </div>
-                        <div class="col-sm-12"><a href="#" class="mb_show_advanced small"><?php echo lang('mb_form_show_advanced'); ?></a></div>
-                <?php
-                //--------------------------------------------------------------
-                // Module Details - Advanced Options
-                //--------------------------------------------------------------
-                ?>
-<script>
-jQuery("#entity_name").on('keydown',function(e){
-    var nval = jQuery("#entity_name").val();
-    if (jQuery("#entity_plural").val()==''||nval==jQuery("#entity_plural").val())  
-        jQuery("#entity_plural").val(nval);
-    if (jQuery("#module_name").val()==''||nval.toLowerCase()==jQuery("#module_name").val())  
-        jQuery("#module_name").val(nval.toLowerCase());
-});
-</script>                
                 <div class="form-group mb_advanced<?php echo form_error('module_description') ? ' error' : ''; ?>">
                     <div class="col-sm-3"><label for="module_description" class="control-label"><?php echo lang('mb_form_mod_desc'); ?></label></div>
                     <div class="controls col-sm-9">
@@ -116,43 +105,52 @@ jQuery("#entity_name").on('keydown',function(e){
                         <span class="help-inline"><?php echo form_error('module_description'); ?></span>
                     </div>
                 </div>
+                        <div class="col-sm-12"><a href="#" class="mb_show_advanced small"><?php echo lang('mb_form_show_advanced'); ?></a></div>
+                <?php
+                //--------------------------------------------------------------
+                // Module Details - Advanced Options
+                ?>
+                //--------------------------------------------------------------
                 <div class="form-group mb_advanced">
                     <div class="col-sm-3"><label class="control-label" id="contexts_label"><?php echo lang('mb_form_contexts'); ?></label></div>
-                    <div class="controls col-sm-9 checkbox-group" aria-labelledby="contexts_label" role="group">
+                        <div class="col-sm-9">
+                        <style>
+                        .div.checkbox {
+                          margin-right: 10px;
+                        }
+                        </style>
                         <?php
                         // Build the checkboxes for each available Controller type
                         foreach ($availableContexts as $context) :
-                        ?>
-                        <label class="checkbox" for="contexts_<?php echo $context; ?>">
+                            ?>
+                        <div class="checkbox">
+                        <label>
                             <input name="contexts[]" id="contexts_<?php echo $context; ?>" type="checkbox" value="<?php echo $context; ?>" checked="checked" />
                             <?php echo ucwords($context); ?>
                         </label>
+                      </div>
                         <?php endforeach; ?>
+                        </div>
                     </div>
                 </div>
+                <div style='clear:left;'></div>
                 <div class="form-group mb_advanced<?php echo form_error('form_action') ? ' error' : ''; ?>">
                     <?php echo form_error("form_action"); ?>
                     <div class="col-sm-3"><label class="control-label" id="form_action_label"><?php echo lang('mb_form_actions'); ?></label></div>
-                    <div class="controls col-sm-9" aria-labelledby="form_action_label" role="group">
-                        <?php
-                        // Build the checkboxes for the Controller Actions
-                        foreach($form_action_options as $action => $label) :
-                        ?>
-                        <label class="checkbox" for="form_action_<?php echo $action; ?>">
-                            <?php
-                            $data = array(
-                                'name'        => 'form_action[]',
-                                'id'          => "form_action_{$action}",
-                                'value'       => $action,
-                                'checked'     => 'checked',
-                            );
-                            echo form_checkbox($data);
-                            echo $label;
-                            ?>
-                        </label>
-                        <?php endforeach;?>
+                    <div class="col-sm-9" aria-labelledby="form_action_label">
+                        <?php   
+                        // checkboxes for the Controller Actions
+                        foreach($form_action_options as $action => $label) : ?>
+                            <div class="checkbox">
+                            <label>
+                                <input name="form_action[]" id='form_action_<?php echo $action; ?>' type="checkbox" value="<?php echo $action; ?>" checked="checked" />
+                                <?php echo ucwords($label); ?>
+                           </label>
+                          </div>
+                       <?php endforeach; ?>
                     </div>
                 </div>
+                <div style='clear:left;'></div>
                 <div class="form-group mb_advanced">
                     <label class="control-label col-sm-3" for="role_id"><?php echo lang('mb_form_role_id'); ?></label>
                     <div class="controls col-sm-9">
@@ -168,6 +166,7 @@ jQuery("#entity_name").on('keydown',function(e){
                 // End of Module Details - Advanced Options
                 //--------------------------------------------------------------
                 ?>
+                <div style='clear:left;'></div>
                 <div class="form-group">
                     <label class='control-label col-sm-3' for='mb_module_db'><?php echo lang('mb_module_db'); ?></label>
                     <div class="controls col-sm-9" id='mb_module_db'>
@@ -188,6 +187,7 @@ jQuery("#entity_name").on('keydown',function(e){
                     </div>
                 </div>
             </fieldset>
+            <div style='clear:left;'></div>
             <?php
             //------------------------------------------------------------------
             // Table Details
@@ -340,7 +340,7 @@ jQuery("#entity_name").on('keydown',function(e){
                         $field_num_count = count($field_numbers);
                         $lastFieldNumIndex = $field_num_count - 1;
                         for ($ndx = 0; $ndx < $field_num_count; $ndx++) :
-                        ?>
+                            ?>
                         <a href="<?php echo site_url('/buildablox/create_module/' . $field_numbers[$ndx]); ?>"<?php echo $field_numbers[$ndx] == $field_total ? ' class="current"' : ''; ?>>
                             <?php echo $field_numbers[$ndx]; ?>
                         </a><?php echo $ndx < $lastFieldNumIndex ? ' | ' : ''; ?>
@@ -364,7 +364,7 @@ jQuery("#entity_name").on('keydown',function(e){
                     $dbFieldLength  = "db_field_length_value{$count}";
                     $validationLbl  = "validation_label{$count}";
                     $validLimitLbl  = "validation_limit_label{$count}";
-                ?>
+                    ?>
                 <fieldset id="field<?php echo $count; ?>_details">
                     <legend><?php echo lang('mb_form_field_details') . " {$count}"; ?></legend>
                     <?php if ($count == 1) : ?>
@@ -387,7 +387,7 @@ jQuery("#entity_name").on('keydown',function(e){
                             <span class="help-inline"><?php
                                 echo form_error($viewFieldName) ? form_error($viewFieldName) . '<br />' : '';
                                 echo lang('mb_form_fieldname_help');
-                            ?></span>
+                                ?></span>
                         </div>
                     </div>
                     <?php
@@ -401,14 +401,14 @@ jQuery("#entity_name").on('keydown',function(e){
                             $default_field_type = 'checkbox';
                         }
                     }
-
+                    
                     echo form_dropdown($viewFieldType, $view_field_types, set_value($viewFieldType, $default_field_type), lang('mb_form_type'), '', '<span class="help-inline">' . form_error($viewFieldType) . '</span>');
                     echo form_dropdown($dbFieldType, $db_field_types, set_value($dbFieldType, isset($existing_table_fields[$count]) ? $existing_table_fields[$count]['type'] : ''), lang('mb_form_dbtype'), '', '<span class="help-inline">' . form_error($dbFieldType) . '</span>');
-
+                    
                     $default_max_len = '';
                     if (isset($existing_table_fields[$count])
-                        && ! in_array($existing_table_fields[$count]['type'], $textFieldTypes)
-                       ) {
+                    && ! in_array($existing_table_fields[$count]['type'], $textFieldTypes)
+                    ) {
                         $default_max_len = in_array($existing_table_fields[$count]['type'], $listFieldTypes) ? $existing_table_fields[$count]['values'] : $existing_table_fields[$count]['max_length'];
                     }
                     ?>
@@ -428,7 +428,7 @@ jQuery("#entity_name").on('keydown',function(e){
                                 foreach ($validation_rules as $validation_rule) :
                                     $validationRulesRuleCount = "validation_rules_{$validation_rule}{$count}";
                                     $validationRulesCount = "validation_rules{$count}[]";
-                                ?>
+                                    ?>
                                 <span class="faded">
                                     <div>
                                         <label class="inline checkbox" for="<?php echo $validationRulesRuleCount; ?>">
@@ -450,7 +450,7 @@ jQuery("#entity_name").on('keydown',function(e){
                                 foreach ($validation_limits as $validation_limit) :
                                     $validationRulesLimitCount = "validation_rules_{$validation_limit}{$count}";
                                     $validationRulesCount = "validation_rules{$count}[]";
-                                ?>
+                                    ?>
                                 <span class="faded">
                                     <label class="btn btn-default" for="<?php echo $validationRulesLimitCount; ?>">
                                         <input name="<?php echo $validationRulesCount; ?>" id="<?php echo $validationRulesLimitCount; ?>" type="radio" value="<?php echo $validation_limit; ?>" <?php echo set_radio($validationRulesCount, $validation_limit); ?> />
@@ -472,5 +472,8 @@ jQuery("#entity_name").on('keydown',function(e){
                 ?>
             </fieldset>
         <?php echo form_close(); ?>
+    </div>
+    </div>
+    </div>
     </div>
 </div>

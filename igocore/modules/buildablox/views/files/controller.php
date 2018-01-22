@@ -337,7 +337,7 @@ if ($db_required != '') {
 			if (\$insert_id = \$this->save_{$module_name_lower}()) {
 				log_activity(\$this->auth->user_id(), lang('{$module_name_lower}_act_create_record') . ': ' . \$insert_id . ' : ' . \$this->input->ip_address(), '{$module_name_lower}');
 				Template::set_message(lang('{$module_name_lower}_create_success'), 'success');
-				redirect(site_url('". (($controller_name_lower == $module_name_lower)?'':'/admin') ."/{$controller_name_lower}/{$module_name_lower}'));
+				redirect(site_url('". (($controller_name_lower == $module_name_lower)?'':'/'."/{$controller_name_lower}")."/{$module_name_lower}'));
 			}
 
             // Not validation error
@@ -412,11 +412,12 @@ $mb_edit = "
 	 */
 	public function edit()
 	{
-		\$id = \$this->uri->segment(5);
+        \$last_seg = count(\$this->uri->segments);
+        \$id = \$this->uri->segment(\$last_seg);
 		if (empty(\$id)) {
 			Template::set_message(lang('{$module_name_lower}_invalid_id'), 'error');
 
-			redirect(site_url('". (($controller_name_lower == $module_name_lower)?'':'/admin') ."/{$controller_name_lower}/{$module_name_lower}'));
+			redirect(site_url('". (($controller_name_lower == $module_name_lower)?'':"/{$controller_name_lower}/")."{$module_name_lower}'));
 		}
         {$editSave}
         {$editDelete}
