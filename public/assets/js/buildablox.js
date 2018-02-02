@@ -311,18 +311,35 @@ $('.btn-group.dbopt').on('change', function(e) {
 });
 
 /*------------------------------------------------------------------------------
- * Update the table name when changing the module name
+ * Update the table name when changing the module or entity name
  */
-$('#module_name, #table_name').on('click focus blur', {valueToPrep: '', setTableName: true}, blox.builder.prepTableName);
+$('#module_name').on('click focus blur', {valueToPrep: '', setTableName: true}, blox.builder.prepTableName);
+$('#entity_name').on('click focus blur', {valueToPrep: '', setTableName: true}, blox.builder.prepTableName);
 
 $(document).ready(function() {
-$("#entity_name").on('keyup',function(e){
-    var nval = $("#entity_name").val();
-	if ($("#entity_plural").val()==''||nval.substr(0,$("#entity_plural").val().length)+'s'==$("#entity_plural").val())  
-	$("#entity_plural").val(nval+'s');
-	if ($("#module_name").val()==''||nval.toLowerCase().substr(0,$("#module_name").val().length)==$("#module_name").val())  
-	$("#module_name").val(nval.toLowerCase());
-	if ($("#module_description").val()==''||nval.toLowerCase().substr(0,$("#module_description").val().length)+" Blox Module"==$("#module_descriptiom").val())  
-	$("#module_description").val(nval+" Blox Module");
-});
+	$("#entity_name").on('input',function() {
+		$(this).val($(this).val().replace(/[^a-z0-9 _]/ig,''));
+		var nval = $(this).val();
+		if ($("#entity_plural").val()==''||nval.substr(0,Math.min($("#entity_plural").val().length-1,nval.length))==$("#entity_plural").val().substr(0,$("#entity_plural").val().length-1))  
+			$("#entity_plural").val(nval+'s');
+		if ($("#module_name").val()==''||nval.toLowerCase().substr(0,$("#module_name").val().length)==$("#module_name").val())  
+			$("#module_name").val(nval.toLowerCase());
+		if ($("#module_description").val().length<15||nval.toLowerCase().substr(0,$("#module_description").val().length)+" Blox Module"==$("#module_descriptiom").val())  
+			$("#module_description").val(nval+" Blox Module");
+	  });
+	$("#entity_plural").on('input',function() {
+		$(this).val($(this).val().replace(/[^a-z0-9 _]/ig,''));
+	  });
+	$("#module_name").on('input',function() {
+		$(this).val($(this).val().replace(/[^a-z0-9_]/ig,''));
+	  });
+	$("#entity_name").on('keyup',function(e){
+		var nval = $("#entity_name").val().trim();
+		if ($("#entity_plural").val().length<4||nval.substr(0,Math.min($("#entity_plural").val().length-1,nval.length-1))==$("#entity_plural").val().substr(0,$("#entity_plural").val().length-1))  
+			$("#entity_plural").val(nval+'s');
+		if ($("#module_name").val().length<3||nval.toLowerCase().substr(0,$("#module_name").val().length)==$("#module_name").val())  
+			$("#module_name").val(nval.toLowerCase());
+		if ($("#module_description").val().length<15||nval.toLowerCase().substr(0,$("#module_description").val().length)+" Blox Module"==$("#module_descriptiom").val())  
+			$("#module_description").val(nval+" Blox Module");
+	});
 });

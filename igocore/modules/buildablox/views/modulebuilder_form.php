@@ -98,22 +98,21 @@ $validationErrors = validation_errors();
                         <span class="help-inline"><?php echo form_error('module_name'); ?></span>
                     </div>
                 </div>
-                <div class="form-group mb_advanced<?php echo form_error('module_description') ? ' error' : ''; ?>">
+                <div class="form-group<?php echo form_error('module_description') ? ' error' : ''; ?>">
                     <div class="col-sm-3"><label for="module_description" class="control-label"><?php echo lang('mb_form_mod_desc'); ?></label></div>
                     <div class="controls col-sm-9">
                         <input name="module_description" id="module_description" type="text" value="<?php echo set_value("module_description", lang('mb_form_mod_desc_ph')); ?>" placeholder="<?php echo lang('mb_form_mod_desc_ph'); ?>" />
                         <span class="help-inline"><?php echo form_error('module_description'); ?></span>
                     </div>
                 </div>
-                        <div class="col-sm-12"><a href="#" class="mb_show_advanced small"><?php echo lang('mb_form_show_advanced'); ?></a></div>
                 <?php
                 //--------------------------------------------------------------
-                // Module Details - Advanced Options
+                // Module Details 
                 //--------------------------------------------------------------
                 ?>
-                <div class="form-group mb_advanced">
-                    <div class="col-sm-3"><label class="control-label" id="contexts_label"><?php echo lang('mb_form_contexts'); ?></label></div>
-                        <div class="col-sm-9">
+                <div class="form-group">
+                    <div class="col-sm-5"><label class="control-label" id="contexts_label"><?php echo lang('mb_form_contexts'); ?></label></div>
+                        <div class="col-sm-7">
                         <style>
                         .div.checkbox {
                           margin-right: 10px;
@@ -134,7 +133,7 @@ $validationErrors = validation_errors();
                     </div>
                 </div>
                 <div style='clear:left;'></div>
-                <div class="form-group mb_advanced<?php echo form_error('form_action') ? ' error' : ''; ?>">
+                <div class="form-group <?php echo form_error('form_action') ? ' error' : ''; ?>">
                     <?php echo form_error("form_action"); ?>
                     <div class="col-sm-3"><label class="control-label" id="form_action_label"><?php echo lang('mb_form_actions'); ?></label></div>
                     <div class="col-sm-9" aria-labelledby="form_action_label">
@@ -151,9 +150,9 @@ $validationErrors = validation_errors();
                     </div>
                 </div>
                 <div style='clear:left;'></div>
-                <div class="form-group mb_advanced">
-                    <label class="control-label col-sm-3" for="role_id"><?php echo lang('mb_form_role_id'); ?></label>
-                    <div class="controls col-sm-9">
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="role_id"><?php echo lang('mb_form_role_id'); ?></label>
+                    <div class="controls col-sm-8">
                         <select name="role_id" id="role_id">
                             <?php foreach ($roles as $role): ?>
                             <option value="<?php echo $role['role']; ?>"<?php echo $defaultRoleWithFullAccess == $role['role'] ? ' selected="selected"' : ''; ?>><?php e($role['role_name']); ?></option>
@@ -163,7 +162,7 @@ $validationErrors = validation_errors();
                 </div>
                 <?php
                 //--------------------------------------------------------------
-                // End of Module Details - Advanced Options
+                // End of Module Details 
                 //--------------------------------------------------------------
                 ?>
                 <div style='clear:left;'></div>
