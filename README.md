@@ -1,11 +1,14 @@
 # Ignition Go     | <a style="text-align:right" href='https://pledgie.com/campaigns/30957'><img alt='Click here to lend your support to: Ignition Go - development fund and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/30957.png?skin_name=chrome' border='0' ></a><small>  &nbsp;Status:</small> <img src="https://travis-ci.org/ci-blox/Ignition-Go.svg?branch=master"/><img src="https://styleci.io/repos/49680592/shield?style=plastic&branch=master" />
-A Modular (HMVC) App Building Framework - complete with front end, REST api and admin area
+A Modular (HMVC) App Building Framework - complete with front end, REST api, and admin area
+
+NOTE: GREAT NEWS: WE HAVE UPDATED TO BOOTSTRAP 4 AND USE YARN INSTEAD OF NPM / BOWER NOW. (if you want the old Bootstrap 3.3 see the releases)
+
 - create "blox" modules to build enterprise class web applications
-- uses Codeigniter 3.x and Bootstrap 3.x
+- uses Codeigniter 3.x and now Bootstrap 4.0.x
 - can be used as a quickstart project starter/boilerplate
 - *What are blox?* "Blox" are just pluggable modules or applets that are commonly used in web applications. Ignition Go includes a web-based generator. Planned example "blox" would be a bulk emailer, report manager, and many more!!!  
 
-### Help wanted: contact us to help enhance this amazing web app builder!  
+### Help wanted please: contact us to help enhance this amazing web app builder!  
 Please contact us to contribute.
 
 ### Server Requirements (Preferred)
@@ -15,6 +18,9 @@ Please contact us to contribute.
 * **MySQL 5.5+ or MariaDb**
 
 ### Installing (MUST DO ALL STEPS if not using Quickstart!)
+
+****NOTE: WE USE YARN NOW SO SKIP STEPS 1, 4, 5 AND part of 6.  THIS DOCUMENT WILL BE UPDATED SOON!!!
+
 1. Install NPM [node.js](http://nodejs.org/): package manager for node modules
 
 2. GIT clone this repository<br>
@@ -23,16 +29,16 @@ Example: ```git clone https://github.com/ci-blox/Ignition-Go.git myigoapp```
 3. Change directory to new site/web app root<br>
 Example: ```cd myigoapp```
 
-4. Install Bower [bower](http://bower.io/): manager for bower components<br>
+4. (DEPRECATED- INSTALL Yarn) Install Bower [bower](http://bower.io/): manager for bower components<br>
 Type: ```npm install -g bower```
 
-5. Install all the packages and bower components<br>
+5. (NPM IS DEPRECATED) Install all the packages and bower components<br>
 Type: ```npm install``` <br>
 -OR- ```yarn install``` <br>
 Then type: ```bower install```
 
 6. Install and run 'gulp' (note that gulp will run continuously in 'watch' mode, watching for css and js changes).<br>
-Type: ```npm install gulp``` then<br>
+Type: ```yarn install ``` then<br>
 EITHER type: ```gulp```
 OR..  type: ```gulp serve```
 
@@ -48,12 +54,12 @@ eg if you had created virtual host igotestlocal.com, then go to http://igotestlo
 ### Features
 
 Ignition Go is a jumpstart for your rapid development:
-* Multi-faceted (e.g. Frontend Website, Authorized User Area, Admin Panel, and API) website in a single application
+* Multi-faceted (e.g. Frontend Website, Authorized User Only modules, Admin Panel, and API) website in a single application
 * Modular design using CodeIgniter HMVC extension
 * Custom config files (sites.php, locale.php) for easy configuration of website behavior
 * Frontend with multiple themes (with over 16 free Bootswatch themes)
 * Admin Panel with AdminLTE v2 theme
-* Includes usage of [Sortable](http://rubaxa.github.io/Sortable/) library and many other 3rd party optional libraries via Bower, Composer, or NPM
+* Includes usage of many other 3rd party optional libraries via Composer, NPM or Yarn
 * API Site to handle RESTful endpoints
 * User authentication (optional) for Frontend Website (Sign Up, Login, Forgot Password, et al)
 * User authentication for Admin Panel (Login, Change Password, et al)
@@ -118,7 +124,7 @@ ignitcore/system/                         --- CodeIgniter core files (clean CI3 
 
 A gulp configuration (**gulpfile.js**) is included. It utilizes package and component tools from these sites:
 * NPM [node.js](http://nodejs.org/): package manager for node modules
-* Bower [bower](http://bower.io/): manager for bower components 
+* (DEPRECATED) Bower [bower](http://bower.io/): manager for bower components 
 * GulpJS [gulp](http://gulpjs.com/): task runner to compile, combine, and minify
 * Guzzle [guzzle](http://guzzlephp.com/): integrated for use as a REST client or for complex curl operations
 
