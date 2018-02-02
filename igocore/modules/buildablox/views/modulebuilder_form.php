@@ -109,8 +109,8 @@ $validationErrors = validation_errors();
                 <?php
                 //--------------------------------------------------------------
                 // Module Details - Advanced Options
-                ?>
                 //--------------------------------------------------------------
+                ?>
                 <div class="form-group mb_advanced">
                     <div class="col-sm-3"><label class="control-label" id="contexts_label"><?php echo lang('mb_form_contexts'); ?></label></div>
                         <div class="col-sm-9">
