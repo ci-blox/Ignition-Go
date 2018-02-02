@@ -511,8 +511,8 @@ class Buildablox extends Admin_Controller
         $form_error_delimiters  = explode(',', $this->input->post('form_error_delimiters'));
         $module_description     = $this->input->post('module_description');
         $module_name            = $this->input->post('module_name');
-        $entity_1 = $this->input->post('enitity_name');
-        $entity_2 = $this->input->post('enitity_plural');
+        $entity_1 = $this->input->post('entity_name');
+        $entity_2 = $this->input->post('entity_plural');
         $primary_key_field      = $this->input->post('primary_key_field');
         $role_id                = $this->input->post('role_id');
         $table_name             = strtolower(preg_replace("/[ -]/", "_", $this->input->post('table_name')));

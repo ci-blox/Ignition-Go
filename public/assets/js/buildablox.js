@@ -319,10 +319,10 @@ $(document).ready(function() {
 $("#entity_name").on('keyup',function(e){
     var nval = $("#entity_name").val();
 	if ($("#entity_plural").val()==''||nval.substr(0,$("#entity_plural").val().length)+'s'==$("#entity_plural").val())  
-	$("#entity_plural").val(nval)+'s';
+	$("#entity_plural").val(nval+'s');
 	if ($("#module_name").val()==''||nval.toLowerCase().substr(0,$("#module_name").val().length)==$("#module_name").val())  
 	$("#module_name").val(nval.toLowerCase());
 	if ($("#module_description").val()==''||nval.toLowerCase().substr(0,$("#module_description").val().length)+" Blox Module"==$("#module_descriptiom").val())  
-	$("#module_description").val(nval)+" Blox Module";
+	$("#module_description").val(nval+" Blox Module");
 });
 });

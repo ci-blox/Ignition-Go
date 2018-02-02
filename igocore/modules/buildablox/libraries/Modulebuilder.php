@@ -293,6 +293,10 @@ class Modulebuilder
         $this->CI->load->model('securinator/sec_permission_model');
         $this->CI->load->model('securinator/sec_role_permission_model');
 
+        // Build at least the admin module if no controller types picked
+        if (count($contexts)<1)
+            $contexts = array("Admin"=>"Admin");
+        
         // Each context has a controller and a set of views.
         foreach ($contexts as $key => $context_name) {
             $data['module_name_lower'] = $module_name_lower;
