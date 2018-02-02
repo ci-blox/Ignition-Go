@@ -1,18 +1,33 @@
-<div class="navbar navbar-inverse navbar-fixed-top navbar-transparent">
-    <div class="container">
-        <div class="navbar-header">
-            <a href="./" class="navbar-brand"><img src="../../assets/img/logo-nav.png">Ignition Go</a>
-            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+<nav class="navbar navbar-expand-md bg-primary fixed-top navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" href="./" title="Igmitipn Go home" id="Navbar index">
+      <img src="../../assets/img/logo-nav.png"" class="d-inline-block" alt="I Go logo" style="padding-bottom: 5px;" width="24"><b> Ignition Go</b></a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent"
+       aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span> </button>
+      <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+        <ul class="navbar-nav bg-primary">
+          <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+         aria-expanded="false" href="#">Themes</a>
+        <div class="dropdown-menu themelist" aria-labelledby="navbarDropdownMenuLink">
+      <a class="dropdown-item" data-theme="default" href="#">Default</a>
+      <a class="dropdown-item" data-theme="flat" href="#">Flat</a>
+          <a class="dropdown-item" data-theme="aquamarine" href="#">Aquamarine</a>
+          <a class="dropdown-item" data-theme="elegant" href="#">Elegant</a>
+          <a class="dropdown-item" data-theme="neon" href="#">Neon</a>
+          <a class="dropdown-item" href="#">Something else here</a>
         </div>
-        <div class="navbar-collapse collapse" id="navbar-main">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Themes <span class="caret"></span></a>
-                    <ul class="dropdown-menu themelist" aria-labelledby="themes">
+      </li>
+       <li class="nav-item mx-1">
+         <a class="nav-link" href="/home/elements">Elements</a>
+          </li>
+       <li class="nav-item mx-1">            
+          <a class="nav-link" href="/home/help/">Help</a>
+      </li>
+<!-- li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Themes BS3</span></a>
+                    <ul class="dropdown-menu themelist3" aria-labelledby="themes">
                         <li><a data-theme="default" href="#">Default</a></li>
                         <li class="divider"></li>
                         <li><a data-theme="cerulean" href="#">Cerulean</a></li>
@@ -32,25 +47,48 @@
                         <li><a data-theme="united" href="#">United</a></li>
                         <li><a data-theme="yeti" href="#">Yeti</a></li>
                     </ul>
-                </li>
-                <li>
-                    <a href="/home/elements">Elements</a>
-                </li>
-                <li>
-                    <a href="/home/help/">Help</a>
-                </li>
+                </li -->
+        </ul>
+        <?php if (empty($current_user)): ?>
+                <a class="btn btn-secondary mx-2" href="<?php echo site_url(LOGIN_URL); ?>">
+      <?php e(lang('us_action_login')); ?>
+    </a>
+    <?php else : ?>
+    <ul class="navbar-nav bg-primary">
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+              <span class="d-none d-sm-inline-block"> <i class="fa fa-user"></i> My Account</span>
+            </a>
+            <ul class="dropdown-menu scale-up" style="min-width:190px;">
+              <!-- User image -->
+              <li class="user-header">
+                <i class="fa fa-user fa-2x"></i>
+                <p>
+                  <?php echo $current_user->username; ?>
+                </p>
+              </li>
+              <!-- Menu Body -->
+              <li class="user-body">
+              </li>
+              <!-- Menu Footer-->
+              <div class="user-footer">
+                <div class="pull-left">
+                  <a <?php echo check_method( 'profile'); ?> class="btn btn-sm btn-default" href="
+                    <?php echo site_url('users/profile'); ?>">
+                    <?php e(lang('us_user_settings')); ?>
+                  </a>
+                </div>
+                <div class="pull-right">
+                  <a class="btn btn-sm btn-default" href="<?php echo site_url('logout'); ?>">
+                    <?php e(lang('us_action_logout')); ?>
+                  </a>
+                </div>
+              </div>
             </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="http://builtwithbootstrap.com/" target="_blank">Built With Bootstrap</a></li>
-                <?php if (empty($current_user)): ?>
-                <li><a href="<?php echo site_url(LOGIN_URL); ?>"><?php e(lang('us_action_login')); ?></a></li>
-                <?php else : ?>
-                <li <?php echo check_method('profile'); ?>><a href="<?php echo site_url('users/profile'); ?>"><?php e(lang('us_user_settings')); ?></a></li>
-                <li><a href="<?php echo site_url('logout'); ?>"><?php e(lang('us_action_logout')); ?></a></li>
-                <?php endif; ?>
-            </ul>
-
-        </div>
-    </div>
-</div>
+          </li>
+</ul>
+    <?php endif; ?>
+  </div>
+  </div>
+</nav>
+<!-- end navbar -->

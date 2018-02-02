@@ -39,75 +39,84 @@
         </div>
         <?php endif; ?>
 
-        <!-- USERS LIST -->
-        <div class="box box-danger">
+ <!-- Calendar -->
+ <div class="box box-solid bg-green-gradient">
+ <div class="box-header">
+   <i class="fa fa-calendar"></i>
 
-            <div class="box-header with-border">
-                <h3 class="box-title">Latest Users (Sample)</h3>
+   <h3 class="box-title">Calendar</h3>
+   <!-- tools box -->
+   <div class="pull-right box-tools">
+     <!-- button with a dropdown -->
+     <div class="btn-group">
+       <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
+         <i class="fa fa-bars"></i></button>
+       <ul class="dropdown-menu pull-right" role="menu">
+         <li><a href="#">Add new event</a></li>
+         <li><a href="#">Clear events</a></li>
+         <li class="divider"></li>
+         <li><a href="#">View calendar</a></li>
+       </ul>
+     </div>
+     <button type="button" class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
+     </button>
+     <button type="button" class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i>
+     </button>
+   </div>
+   <!-- /. tools -->
+ </div>
+ <!-- /.box-header -->
+ <div class="box-body no-padding">
+   <!--The calendar -->
+   <div id="calendar" style="width: 100%"></div>
+ </div>
+ <!-- /.box-body -->
+ <div class="box-footer text-black">
+   <div class="row">
+     <div class="col-sm-6">
+       <!-- Progress bars -->
+       <div class="clearfix">
+         <span class="pull-left">Task #1</span>
+         <small class="pull-right">90%</small>
+       </div>
+       <div class="progress xs">
+         <div class="progress-bar progress-bar-green" style="width: 90%;"></div>
+       </div>
 
-                <div class="box-tools pull-right">
-                    <span class="label label-danger">8 New</span>
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
-                    </button>
-                </div>
+       <div class="clearfix">
+         <span class="pull-left">Task #2</span>
+         <small class="pull-right">70%</small>
+       </div>
+       <div class="progress xs">
+         <div class="progress-bar progress-bar-green" style="width: 70%;"></div>
+       </div>
+     </div>
+     <!-- /.col -->
+     <div class="col-sm-6">
+       <div class="clearfix">
+         <span class="pull-left">Task #3</span>
+         <small class="pull-right">60%</small>
+       </div>
+       <div class="progress xs">
+         <div class="progress-bar progress-bar-green" style="width: 60%;"></div>
+       </div>
 
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-                <ul class="users-list clearfix">
-                    <li>
-                        <img src="<?php echo site_url('components').'/admin-lte/'; ?>dist/img/user1-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Alexander Pierce</a>
-                        <span class="users-list-date">Today</span>
-                    </li>
-                    <li>
-                        <img src="<?php echo site_url('components').'/admin-lte/'; ?>dist/img/user8-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Norman</a>
-                        <span class="users-list-date">Yesterday</span>
-                    </li>
-                    <li>
-                        <img src="<?php echo site_url('components').'/admin-lte/'; ?>dist/img/user7-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Jane</a>
-                        <span class="users-list-date">12 Jan</span>
-                    </li>
-                    <li>
-                        <img src="<?php echo site_url('components').'/admin-lte/'; ?>dist/img/user6-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">John</a>
-                        <span class="users-list-date">12 Jan</span>
-                    </li>
-                    <li>
-                        <img src="<?php echo site_url('components').'/admin-lte/'; ?>dist/img/user2-160x160.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Alexander</a>
-                        <span class="users-list-date">13 Jan</span>
-                    </li>
-                    <li>
-                        <img src="<?php echo site_url('components').'/admin-lte/'; ?>dist/img/user5-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Sarah</a>
-                        <span class="users-list-date">14 Jan</span>
-                    </li>
-                    <li>
-                        <img src="<?php echo site_url('components').'/admin-lte/'; ?>dist/img/user4-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Nora</a>
-                        <span class="users-list-date">15 Jan</span>
-                    </li>
-                    <li>
-                        <img src="<?php echo site_url('components').'/admin-lte/'; ?>dist/img/user3-128x128.jpg" alt="User Image">
-                        <a class="users-list-name" href="#">Nadia</a>
-                        <span class="users-list-date">15 Jan</span>
-                    </li>
-                </ul>
-                <!-- /.users-list -->
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer text-center">
-                <a href="javascript:alert('This needs to go to a user manager.')" class="uppercase">View All Users</a>
-            </div>
-            <!-- /.box-footer -->
-        </div>
-        <!--/.box -->
-    </div>
+       <div class="clearfix">
+         <span class="pull-left">Task #4</span>
+         <small class="pull-right">40%</small>
+       </div>
+       <div class="progress xs">
+         <div class="progress-bar progress-bar-green" style="width: 40%;"></div>
+       </div>
+     </div>
+     <!-- /.col -->
+   </div>
+   <!-- /.row -->
+ </div>
+</div>
+<!-- /.box -->
+
+</div>
     <!-- /.col -->
 
 

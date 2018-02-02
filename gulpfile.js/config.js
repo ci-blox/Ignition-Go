@@ -3,11 +3,12 @@
  */
 
 // basic paths
-var dir_bower = "./public/components",
+var dir_packages = "./node_modules",
 	dir_public = "./public",
 	dir_asset = "./public/assets",
 	dir_dist = dir_asset + "/dist",
 	dir_fonts = dir_asset + "/fonts";
+	dir_scss = dir_asset + "/scss";
 
 module.exports = {
 
@@ -45,23 +46,32 @@ module.exports = {
 	copy: {
 		src: {
 			fonts: [
-				// bower files
-				dir_bower + '/bootstrap/dist/fonts/*',
-				dir_bower + '/font-awesome/fonts/*',
-				dir_bower + '/ionicons/fonts/*'
+				// font files to copy
+				// dir_packages + '/bootstrap/dist/fonts/*',
+				dir_packages + '/font-awesome/fonts/*',
+				dir_packages + '/ionicons/dist/fonts/*'
 			],
 			scripts: [
 				// js files
-				dir_bower + '/jquery/dist/jquery.min.js',
-				dir_bower + '/bootstrap/dist/js/bootstrap.min.js',
+				dir_packages + '/jquery/dist/jquery.min.js',
+				dir_packages + '/popper.js/dist/umd/popper.min.js',
+				dir_packages + '/bootstrap/dist/js/bootstrap.min.js',
+				dir_packages + '/admin-lte/dist/js/AdminLTE.min.js'
+			],
+			scssbootstrap: [
+				dir_packages + '/bootstrap/scss/**'				
 			],
 			csslib: [
-				dir_bower + '/bootstrap/dist/css/bootstrap.min.css'				
+				dir_packages + '/bootstrap/dist/css/bootstrap.min.css',				
+				dir_packages + '/admin-lte/dist/css/AdminLTE.min.css',
+				dir_packages + '/admin-lte/dist/css/skins/_all-skins.css',
+				dir_packages + '/admin-lte/dist/css/skins/skin-purple.min.css'
 			]
 		},
 		dest: {
 			fonts: dir_fonts,
 			scripts: dir_dist,
+			scssbootstrap: dir_scss + '/bootstrap',
 			csslib: dir_dist
 		}
 	},
@@ -70,18 +80,18 @@ module.exports = {
 	css: {
 		src: {
 			frontend: [
-				// bower files
-				dir_bower + '/bootstrap/dist/css/bootstrap-theme.css',
-				dir_bower + '/font-awesome/css/font-awesome.css',
+				// yarn files
+				dir_packages + '/bootstrap/dist/css/bootstrap-theme.css',
+				dir_packages + '/font-awesome/css/font-awesome.css',
 				// custom files
 				dir_asset + '/css/frontend.css'
 			],
 			admin: [
-				// bower files
-				dir_bower + '/font-awesome/css/font-awesome.css',
-				dir_bower + '/ionicons/css/ionicons.min.css',
-				//dir_bower + '/admin-lte/dist/css/AdminLTE.min.css',
-				//dir_bower + '/admin-lte/dist/css/skins/_all-skins.css',
+				// yarn files
+				dir_packages + '/font-awesome/css/font-awesome.css',
+				dir_packages + '/ionicons/css/ionicons.min.css',
+				//dir_packages + '/admin-lte/dist/css/AdminLTE.min.css',
+				//dir_packages + '/admin-lte/dist/css/skins/_all-skins.css',
 				// custom files
 				dir_asset + '/css/admin.css'
 			]
@@ -101,21 +111,21 @@ module.exports = {
 	js: {
 		src: {
 			frontend: [
-				// bower files
-				// dir_bower + '/jquery/dist/jquery.js',
-				//dir_bower + '/bootstrap/dist/js/bootstrap.min.js',
+				// yarn files
+				// dir_packages + '/jquery/dist/jquery.js',
+				//dir_packages + '/bootstrap/dist/js/bootstrap.min.js',
 				// custom files
 				dir_asset + '/js/frontend.js'
 			],
 			admin: [
-				// bower files 
-				//dir_bower + '/jquery-legacy/dist/jquery.js',
-				dir_bower + '/jquery-migrate/jquery-migrate.js',
-				dir_bower + '/admin-lte/bootstrap/js/bootstrap.js',
-				//dir_bower + '/admin-lte/plugins/fastclick/fastclick.js',
-				dir_bower + '/admin-lte/dist/js/adminlte.js',
-				//dir_bower + '/admin-lte/plugins/slimScroll/jquery.slimscroll.min.js',
-				dir_bower + '/Sortable/Sortable.js',
+				// yarn files 
+				//dir_packages + '/jquery-legacy/dist/jquery.js',
+				//dir_packages + '/jquery-migrate/jquery-migrate.js',
+				dir_packages + '/bootstrap/js/bootstrap.js',
+				//dir_packages + '/admin-lte/plugins/fastclick/fastclick.js',
+				dir_packages + '/admin-lte/dist/js/adminlte.js',
+				dir_packages + '/jquery-slimscroll/jquery.slimscroll.min.js',
+				dir_packages + '/Sortable/Sortable.js',
 				// custom files
 				dir_asset + '/js/admin.js'
 			]

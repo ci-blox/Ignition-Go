@@ -1,10 +1,9 @@
 <div class="container">
 <div class="row" text-align="center">
-	<div class="col-md-8 col-md-offset-2">
-	<h1>Welcome to Ignition Go!</h1>
-
-	<p class="lead">Kickstart your applications with Ignition Go.</p>
-	</div>
+	<div class="page-header">
+<h1>Welcome to Ignition Go! </h1>
+<p class="lead">Kickstart your applications with Ignition Go.</p>
+</div>
 </div>
 </div>
 <div class="container">
@@ -40,8 +39,8 @@
       <div class="panel-body">
 	  <img src=""></a>
         <ul>
-		<li><a href="https://codeigniter.com" target="_blank">><i class="fa fa-external-link"></i> CodeIgniter <?php echo CI_VERSION; ?></a> is a proven PHP framework. In order to make the best use of it, you should be comfortable with CodeIgniter and its <a href="http://ellislab.com/codeigniter/user-guide/" target="_blank"><i class="fa fa-external-link"></i>documentation</a> first.</li>
-		<li>Interface is <a href="http://bootstrap.com"><i class="fa fa-external-link"></i> Bootstrap 3.x</a> UI framework and <a href="http://jquery.com/"><i class="fa fa-external-link"></i> jQuery</a> as the Javascript engine.</li>
+		<li><a href="https://codeigniter.com" target="_blank"><i class="fa fa-external-link"></i> CodeIgniter <?php echo CI_VERSION; ?></a> is a proven PHP framework. In order to make the best use of it, you should be comfortable with CodeIgniter and its <a href="http://ellislab.com/codeigniter/user-guide/" target="_blank"><i class="fa fa-external-link"></i>documentation</a> first.</li>
+		<li>Interface is <a href="http://getbootstrap.com"><i class="fa fa-external-link"></i> Bootstrap 4.x</a> UI framework and <a href="http://jquery.com/"><i class="fa fa-external-link"></i> jQuery</a> as the Javascript engine.</li>
 		<li>Ignition-Go uses a <a href="https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc"><i class="fa fa-external-link"></i> modular system</a> that allows code re-use, and overriding core modules with custom modules.</li>
 		</ul>
       </div>

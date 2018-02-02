@@ -2,30 +2,32 @@
 <html lang="en">
 <?php echo theme_view('header'); ?>
 <body id="home">
-<div class="splash">
-<div class="container">
-<?php
+	<?php
     echo theme_view('navbar');
-?>
+	?>
+<div class="container">
 	<section class="content">
 		<?php if (isset($enable_breadcrumb) && !empty($enable_breadcrumb)): ?>
 			<?php echo theme_view('breadcrumb') ?>
 		<?php endif ?>
-		<?php echo Template::message();
-    echo isset($content) ? $content : Template::content(); ?>
-	</section>
+		<?php echo Template::message(); ?>
+<?php  echo isset($content) ? $content : Template::content(); ?>
+</section>
 </div>
+<div class="clear"></div>
 <div class="footer">
-	<div class="container">
+<div class="container">
+	<div class="row">
 		<?php if (ENVIRONMENT=='development'): ?>
-			<p class="pull-right text-muted">
+			<div class="col pull-right text-muted"><small>
 				CI Version: <strong><?php echo CI_VERSION; ?></strong>, 
 				Elapsed: <strong>{elapsed_time}</strong> sec, 
 				Memory Usage: <strong>{memory_usage}</strong>
-			</p>
+</small></div>
 		<?php endif; ?>
-		<p class="text-muted">&copy; <?php echo date('Y').(class_exists('Settings') &&  settings_item('site.company') ? settings_item('site.company').'. ' : ' The Ignition Go Team. '); ?> All rights reserved.</p>
+		<div class="col text-muted"><small>&copy; <?php echo date('Y').(class_exists('Settings') &&  settings_item('site.company') ? settings_item('site.company').'. ' : ' The Ignition Go Team. '); ?> All rights reserved.</small></div>
 	</div>
+</div>
 </div>
 </div>
 <?php /* echo theme_view('footer'); */ ?>

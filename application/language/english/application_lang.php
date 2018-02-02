@@ -59,6 +59,7 @@ $lang['us_failed_logins_note']		= '<p>Congratulations!</p><p>All of your users h
 $lang['us_banned_admin_note']		= 'This user has been banned from the site.';
 $lang['us_banned_msg']				= 'This account does not have permission to enter the site.';
 
+$lang['us_username']				= 'Username';
 $lang['us_first_name']				= 'First Name';
 $lang['us_last_name']				= 'Last Name';
 $lang['us_address']					= 'Address';
@@ -70,5 +71,6 @@ $lang['us_no_states']				= 'There are no states/provences/counties/regions for t
 $lang['us_no_countries']			= 'Unable to find any countries. Create them in the address config file.';
 $lang['us_country']					= 'Country';
 $lang['us_zipcode']					= 'Zipcode';
+$lang['us_timezone']				= 'Timezone';
 
 $lang['us_user_settings']           = 'Settings';

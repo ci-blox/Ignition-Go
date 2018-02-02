@@ -99,7 +99,7 @@ defined('IGOCORE_VERSION') || define('IGOCORE_VERSION', 'v1.0.0b2');
 // in the app. By default, this is set to '/admin', but this does not make sense
 // for all applications.
 // -----------------------------------------------------------------------------
-defined('SITE_AREA') || define('SITE_AREA', 'admin');
+defined('SITE_AREA') || define('SITE_AREA', 'en');
 
 // -----------------------------------------------------------------------------
 // The 'LOGIN_URL' and 'REGISTER_URL' constant allows changing of the url where

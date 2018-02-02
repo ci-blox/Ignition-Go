@@ -1,0 +1,263 @@
+/*!
+* Neon Pingendo template (https://templates.pingendo.com)
+* Based on: Bootstrap v4.0.0 (https://getbootstrap.com)
+* Copyright 2014-2018 Pingendo (https://pingendo.com)
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:200');
+  
+// Options
+// 
+// Quickly modify global styling by enabling or disabling optional features.
+  
+$enable-rounded:            true;
+$enable-shadows:            false;
+$enable-transitions:        true;
+$enable-hover-media-query:  false;
+$enable-grid-classes:       true;
+$enable-print-styles:       true;
+
+// Variables
+//
+// Colors
+
+$theme-colors: (
+  primary: #f1cd31,
+  secondary: #f70655,
+  light: #f3f3f3,
+  dark: #303030,
+  info: #009ac0,
+  success: #28a745,
+  warning: #ffc107,
+  danger: #dc3545
+);
+
+$body-bg: #111;
+
+$body-color: #efefef;
+$body-color-inverse: invert($body-color) !default;
+$link-color: #f1cd31;
+
+$link-hover-color:      white;
+$link-hover-decoration: none;
+
+
+// Fonts
+$font-family-base: Montserrat;
+$headings-font-family: Montserrat;
+$font-weight-normal: 200;
+$headings-font-weight: 200;
+$lead-font-size:   1.30rem;
+$line-height-base: 1.8;
+
+$spacer: 1.5rem;
+
+// Components
+$border-width: 													1px;
+$border-radius: 												0.75rem;
+$border-radius-lg: 											$border-radius * 1.2;
+$border-radius-sm: 											$border-radius * .4;
+$component-active-color :								map-get($theme-colors,"dark");
+
+// Buttons
+$input-btn-padding-x-lg:    						1.1rem;
+$input-btn-padding-x:       						1rem !default;
+
+// Cards
+$card-border-width:        							0px;
+$card-bg: 															rgba(#333,.5);
+
+// Breadcrumb
+$breadcrumb-bg: 												transparent !default;
+$breadcrumb-active-color:       				map-get($theme-colors,"light");
+
+// Carousel
+$carousel-caption-width:      					100% !default;
+$carousel-indicator-height:							6px !default;
+
+//Images
+$thumbnail-border-color:      					map-get($theme-colors,"primary");
+
+// Forms
+$form-group-margin-bottom:       0rem;
+
+// Nav tabs
+$nav-tabs-border-color:									map-get($theme-colors,"primary");
+$nav-tabs-link-hover-border-color:      transparent;
+$nav-tabs-link-active-color:  					$component-active-color;
+$nav-tabs-link-active-bg:               map-get($theme-colors,"primary");
+$nav-tabs-link-active-border-color:     $nav-tabs-border-color;
+
+// Nav pills
+$nav-pills-link-active-color: 					$component-active-color !default;
+
+// Navbar
+$navbar-light-color:                		rgba(black,.6);
+
+// Pagination
+$pagination-bg:                        	$body-bg;
+$pagination-border-color:              	map-get($theme-colors,"dark");
+$pagination-hover-bg:                  	$body-bg;
+$pagination-hover-border-color:        	$pagination-border-color;
+$pagination-active-color:              	$component-active-color;
+$pagination-active-bg:                 	map-get($theme-colors,"primary");
+$pagination-active-border-color:       	map-get($theme-colors,"dark");
+
+// List group
+$list-group-bg:                  				$body-bg;
+$list-group-border-color:        				map-get($theme-colors,"dark");
+$list-group-hover-bg:                 	$body-bg;
+$list-group-active-color:             	$component-active-color;
+$list-group-action-color:             	$link-color;
+$list-group-active-border-color:      	map-get($theme-colors,"dark");
+$list-group-action-hover-color:       	map-get($theme-colors,"light");
+$list-group-action-active-color:      	$body-color !default;
+$list-group-action-active-bg:         	transparent;
+
+// Horizontal rule
+$hr-border-color: 											rgba(map-get($theme-colors,"primary"),.75);
+
+// Tables
+$table-accent-bg:               				rgba(map-get($theme-colors,"light"),.05);
+$table-inverse-bg:              				rgba(map-get($theme-colors,"light"),.5);
+$table-hover-bg:                				rgba(map-get($theme-colors,"light"),.1);
+$table-border-color:            				map-get($theme-colors,"dark");
+
+$font-size-base: 0.85rem;
+
+
+@import 'bootstrap/bootstrap';
+
+html,body {
+   height:100%;
+}
+
+.section-fade-in-out {
+  position: relative;
+  color:white;
+  background-size:cover;
+  background-position: center;
+  &:before {
+    position: absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height: 100%;
+    content: ' ';
+    background: linear-gradient($body-bg, transparentize($body-bg, 0.2),transparentize($body-bg, 0.8),transparentize($body-bg, 0.2), $body-bg);
+	}
+}
+
+.section-fade-in {
+	position: relative;
+  color:white;
+  background-size:cover;
+  background-position: center;
+  &:before {
+    position: absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height: 100%;
+    content: ' ';
+    background: linear-gradient($body-bg, transparentize($body-bg, 0.2),transparentize($body-bg, 0.8));
+	}
+}
+
+.section-fade-out {
+	position: relative;
+  color:white;
+  background-size:cover;
+  background-position: center;
+  &:before {
+    position: absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height: 100%;
+    content: ' ';
+    background: linear-gradient(transparentize($body-bg, 0.8),transparentize($body-bg, 0.2), $body-bg);
+	}
+}
+
+.shadowed {
+  box-shadow: 0px 0px 10px #000;
+}
+
+.carousel {
+	.carousel-caption {
+    padding-top:50px;
+    padding-bottom:20px;
+	  bottom:0px;
+		background: linear-gradient(transparent 10%, transparentize($body-bg, 0) 100%);
+	}
+  
+	.carousel-control-next, .carousel-control-prev {
+    opacity:0.85;
+  }
+  
+  .carousel-indicators {
+    bottom: 0px;
+  }
+}
+
+mark {
+  &.primary {
+  background-color: map-get($theme-colors,"primary");
+  color: black;
+  }
+  &.secondary {
+  background-color: map-get($theme-colors,"secondary");
+  color: white;
+  }
+}
+
+.cover {
+ min-height: 100%; 
+}
+
+/* Animate state between .navbar and .navbar-ontop */
+.navbar  {
+  transition: background-color .5s ease-out;
+}
+
+.navbar-ontop {
+  background-color: transparent !important;
+}
+
+/* Animate on entrance */
+
+.animate-in-down {
+  transition: all 1.3s ease-out;
+	position:relative;
+  opacity:1;
+  top:0px;
+  &.out-of-viewport {
+    top:40px;
+    opacity:0;
+  }
+}
+
+
+.animate-in-left {
+  transition: all 1.0s ease-out;
+	position:relative;
+  opacity:1;
+	left:0%;
+  &.out-of-viewport {
+    opacity:0;
+      left:-5%;
+  }
+}
+
+
+.animate-in-right {
+  transition: all 1.0s ease-out;
+	position:relative;
+  opacity:1;
+	left:0%;
+  &.out-of-viewport {
+    opacity:0;
+    left:5%;
+  }
+}

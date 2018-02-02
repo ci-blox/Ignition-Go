@@ -16,14 +16,14 @@ OPTIONS, set in admin.config:
 =================
 Apply one or more of the following
 |---------------------------------------------------------|
-| SKIN COLOR    | skin-blue                               |
+| SKINS         | skin-blue                               |
 |               | skin-black                              |
 |               | skin-purple                             |
 |               | skin-yellow                             |
 |               | skin-red                                |
 |               | skin-green                              |
 |---------------------------------------------------------|
-|LAYOUT OPTIONS | fixed                                   |
+|LAYOUT OPTIONS | layout-fixed                            |
 |               | layout-boxed                            |
 |               | layout-top-nav                          |
 |               | sidebar-collapse                        |
@@ -36,33 +36,44 @@ Apply one or more of the following
 <?php echo theme_view('header', array('adm_url'=>$adm_url,'adm_skincolor'=>$adm_skincolor)); ?>
 <body class="hold-transition skin-<?php echo $adm_skincolor;?> <?php echo $adm_layout;?>">
 <div class="wrapper">
-      <!-- Main Header -->
-  <header class="main-header">
-
+    <!-- Main Header -->
+    <nav class="main-header navbar navbar-sticky-top bg-<?php echo $adm_skincolor;?> navbar-dark">
     <!-- Logo -->
-    <a href="/admin/dashboard/index" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><?php echo $adm_logo_m; ?></span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><strong><?php echo ($adm_logo_use_ttl && isset($site_title) ? $site_title : $adm_logo); ?></strong></span>
-    </a>
+    <a class="navbar-brand text-xs-center" href="#">
+      <span class="logo hidden-md-down"><strong><?php echo ($adm_logo_use_ttl && isset($site_title) ? $site_title : $adm_logo); ?></strong></span>
+      <span class="logo logo-mini"><?php echo $adm_logo_m; ?></span>
+    </a>  
 <?php
-    echo theme_view('navbar');
+    echo theme_view('navbar'); ?>
+  </nav>
+  <!-- /.navbar -->
+<?php
    echo theme_view('sidebar');
 ?>  
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-     <section class="content-header">
-      <h1>
-        <strong><?php echo (isset($page_title)?$page_title:'Admin Dashboard'); ?>
-        <small><strong><?php echo (isset($page_subtitle)?$page_subtitle:''); ?></small>
+    <div class="content-header container-fluid">
+      <div class="row">
+        <div class="col-sm-6">
+        <h1><strong><?php echo (isset($page_title)?$page_title:'Admin Dashboard'); ?></strong>
+        <small><strong><?php echo (isset($page_subtitle)?$page_subtitle:''); ?></strong></small>
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="/admin/dashboard/index"><i class="fa fa-dashboard"></i> Admin</a></li>
-        <li class="active"><?php echo (isset($page_breadcrumb)?$page_breadcrumb:(isset($page_title)?$page_title:'Dashboard')); ?></li>
+      </div><!-- /.col -->
+        <div class="col-sm-6">
+        <nav aria-label="breadcrumb">
+           <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="<?php echo base_url(); ?>">Home</a></li>
+        <?php if (strpos($_SERVER['REQUEST_URI'], '/dashboard/index') < 1) : ?>
+        <li class="breadcrumb-item"><a href="<?php echo base_url().'/admin/dashboard/index'; ?>">Dashboard</a></li>
+        <?php endif; ?>
+            <li class="breadcrumb-item active"><?php echo (isset($page_breadcrumb)?$page_breadcrumb:(isset($page_title)?$page_title:'Dashboard')); ?></li>
       </ol>
-    </section>
+    </nav>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div>
+    <!-- /.content-header -->
 
     <!-- Main content -->
     <section class="content">
@@ -168,10 +179,11 @@ Apply one or more of the following
 
 <!-- jQuery -->
 <script src="<?php echo base_url(); ?>assets/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.x -->
+<!-- Bootstrap 4.x -->
+<script src="<?php echo base_url(); ?>assets/dist/popper.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/dist/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
-<script src="<?php echo $adm_url; ?>dist/js/adminlte.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/dist/adminlte.min.js"></script>
 <!-- Custom Admin -->
 <script src="<?php echo base_url(); ?>assets/dist/admin.min.js"></script>
 

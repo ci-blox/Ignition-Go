@@ -13,6 +13,7 @@ class Buildamenu extends Admin_Controller
     {
         parent::__construct();
         $this->load->model('Menu_model');
+        $this->lang->load('Buildamenu');
     } 
 
     /*
@@ -20,7 +21,10 @@ class Buildamenu extends Admin_Controller
      */
     function index($menu_group='')
     {
-        $data = array();
+        $data = array('page_title'=>lang('mb_page_title'),
+        'page_subtitle'=>'',
+        'page_breadcrumb'=>lang('mb_breadcrumb_title'));
+
         $data['current_group'] = 'admin';        
         if ($menu_group) {
             $this->Menu_model->where('menu_group', $menu_group);
@@ -28,6 +32,13 @@ class Buildamenu extends Admin_Controller
         }
         $this->Menu_model->order_by('level,menu_order');
         $data['menuitems'] = $this->Menu_model->as_array()->find_all();
+    
+   // side menu
+       $this->load->model('menu_model');
+       $this->menu_model->select('id as menu_item_id, parent_id as menu_parent_id, title as menu_item_name, concat("/admin",url) as url, menu_order, icon');
+       $this->menu_model->where('menu_group','admin');
+       $this->menu_model->order_by('menu_order');
+       $data['menu_data'] =  $this->menu_model->as_array()->find_all(); 
 
         Template::set($data);
         Template::render();

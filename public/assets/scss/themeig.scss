@@ -1,0 +1,243 @@
+/*!
+* Ignition Go default template (https://ciblox.com)
+* Based on: Bootstrap v4.0.0 (https://getbootstrap.com)
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto:200,300,400,700');
+
+  
+// Options
+// 
+// Quickly modify global styling by enabling or disabling optional features.
+  
+$enable-rounded:            false;
+$enable-shadows:            false;
+$enable-transitions:        true;
+$enable-hover-media-query:  false;
+$enable-grid-classes:       true;
+$enable-print-styles:       true;
+
+// Variables
+//
+// Colors
+
+// Brand Colors
+$blue: #007bff;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #e83e8c;
+$red: #dc3545;
+$orange: #fd7e14;
+$yellow: #ffc107;
+$green: #28a745;
+$teal: #20c997;
+$cyan: #17a2b8;
+$white: #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #868e96;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black: #000;
+$grays: (100: $gray-100, 200: $gray-200, 300: $gray-300, 400: $gray-400, 500: $gray-500, 600: $gray-600, 700: $gray-700, 800: $gray-800, 900: $gray-900);
+$theme-colors: (primary: $blue, secondary: $gray-600, success: $green, info: $cyan, warning: $yellow, danger: $red, light: $gray-100, dark: $gray-800);
+$colors: (blue: $blue, indigo: $indigo, purple: $purple, pink: $pink, red: $red, orange: $orange, yellow: $yellow, green: $green, teal: $teal, cyan: $cyan, white: $white, gray: $gray-600,gray-dark: $gray-800);
+$theme-color-interval: 8%;
+
+
+$body-bg: white;
+$body-color: #333;
+$body-color-inverse: invert($body-color) !default;
+$link-color: #FF473B;
+
+
+// Fonts
+
+$font-family-base: 'Open Sans',sans-serif;
+$headings-font-family: 'Roboto';
+$font-weight-normal: 400;
+$display-font-weight: 600;
+$headings-font-weight: 400;
+$display1-weight:     400 !default;
+$display2-weight:     400 !default;
+$display3-weight:     400 !default;
+$display4-weight:     400 !default;
+$lead-font-size:   1.30rem;
+
+$spacer: 1.5rem;
+$container-max-widths: (sm: 540px, md: 720px, lg: 960px, xl: 960px);
+
+// Components
+$border-width: 1px !default;
+
+// Buttons
+$input-btn-padding-x:       1rem !default;
+$input-btn-padding-x-lg:    1.25rem;
+
+// Cards
+$card-border-width:        1px;
+
+// Breadcrumb
+$breadcrumb-bg: 											transparent !default;
+
+// Carousel
+$carousel-caption-width:            	100% !default;
+$carousel-indicator-height:           6px !default;
+
+// Forms
+$form-group-margin-bottom:       0rem;
+
+
+$border-radius: 0.6rem;
+$border-radius-lg: $border-radius * 1.2;
+$border-radius-sm: $border-radius * .8;
+
+
+@import 'bootstrap/bootstrap';
+
+
+html,body {
+   height:100%;
+}
+
+body > * {
+  background-position: center;
+}
+
+.section-primary {
+	position: relative;
+  background-size:cover;
+  background-position: center;
+  color:white;
+  &:before {
+    position: absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height: 100%;
+    content: ' ';
+    background: rgba(map-get($theme-colors,"primary"),.75);
+	}
+}
+
+.section-secondary {
+	position: relative;
+  background-size:cover;
+  background-position: center;
+  color:white;
+  &:before {
+    position: absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height: 100%;
+    content: ' ';
+    background: rgba(map-get($theme-colors,"secondary"),.75);
+	}
+}
+
+.section-info {
+	position: relative;
+  background-size:cover;
+  background-position: center;
+  color:white;
+  &:before {
+    position: absolute;
+    top:0px;
+    left:0px;
+    width:100%;
+    height: 100%;
+    content: ' ';
+    background: rgba(map-get($theme-colors,"info"),.75);
+	}
+}
+
+.inset-shadowed {
+  box-shadow: inset 0px 0px 45px #555;
+}
+
+.shadowed {
+  box-shadow: 0px 0px 5px #555;
+}
+
+.carousel {
+	.carousel-caption {
+    padding-top:10px;
+    padding-bottom:10px;
+	  bottom:40px;
+		background: $body-bg;
+    color: $body-color;
+	}
+  .carousel-control-next, .carousel-control-prev {
+    opacity:0.85;
+  }
+  .carousel-indicators {
+    bottom: 0px;
+  }
+  p {
+    margin-bottom: 0px;
+  }
+}
+
+.border-light {
+  border: 3px solid white;
+}
+
+.btn-outline-light:hover {
+      color: map-get($theme-colors,"dark");
+ }
+
+.cover {
+ min-height: 100%; 
+}
+
+/* Animate state between .navbar and .navbar-ontop */
+.navbar  {
+  transition: background-color .5s ease-out;
+}
+
+.navbar-ontop {
+  background-color: transparent !important;
+}
+
+/* Animate on entrance */
+
+.animate-in-down {
+  transition: all 1.3s ease-out;
+	position:relative;
+  opacity:1;
+  top:0px;
+  &.out-of-viewport {
+    top:40px;
+    opacity:0;
+  }
+}
+
+
+.animate-in-left {
+  transition: all 1.0s ease-out;
+	position:relative;
+  opacity:1;
+	left:0%;
+  &.out-of-viewport {
+    opacity:0;
+      left:-5%;
+  }
+}
+
+
+.animate-in-right {
+  transition: all 1.0s ease-out;
+	position:relative;
+  opacity:1;
+	left:0%;
+  &.out-of-viewport {
+    opacity:0;
+    left:5%;
+  }
+}

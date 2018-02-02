@@ -1,5 +1,5 @@
 <div class="pull-right">
-	<a href="<?php echo site_url('buildamenu/add'); ?>" class="btn btn-success">Add</a> 
+	<a href="<?php echo site_url('buildamenu/add'); ?>" class="btn btn-success"><?php echo lang('mb_create_button'); ?></a> 
 </div>
 
 <table class="table table-striped table-bordered">
