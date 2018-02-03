@@ -7,6 +7,7 @@ $adm_skincolor = $CI->config->item('adm_skin');
 $adm_layout = $CI->config->item('adm_layout');
 $adm_layout = $adm_layout!=null?'layout-'.$adm_layout:null;
 $adm_logo_use_ttl = $CI->config->item('adm_logo_use_site_title'); 
+$adm_brandtext = $CI->config->item('adm_brandtext'); 
 $adm_logo = $CI->config->item('adm_logo'); 
 $adm_logo_m = $CI->config->item('adm_logo_mini'); // = '<b>I</b>GO';
 $adm_footer_right = $CI->config->item('adm_footer_right'); 
@@ -39,9 +40,11 @@ Apply one or more of the following
     <!-- Main Header -->
     <nav class="main-header navbar navbar-sticky-top bg-<?php echo $adm_skincolor;?> navbar-dark">
     <!-- Logo -->
-    <a class="navbar-brand text-xs-center" href="#">
-      <span class="logo hidden-md-down"><strong><?php echo ($adm_logo_use_ttl && isset($site_title) ? $site_title : $adm_logo); ?></strong></span>
-      <span class="logo logo-mini"><?php echo $adm_logo_m; ?></span>
+    <a class="navbar-brand" href="#">
+    <?php if (!empty($adm_logo)) : ?>
+    <img src="<?php echo ($adm_logo); ?>" width="30" height="30" class="d-inline-block align-top" alt="logo">
+<?php endif;
+echo ($adm_logo_use_ttl && isset($site_title) ? $site_title : (isset($adm_brandtext)?$adm_brandtext:"")); ?>
     </a>  
 <?php
     echo theme_view('navbar'); ?>

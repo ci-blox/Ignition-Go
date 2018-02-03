@@ -13,7 +13,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     |
     */
     $config['adm_logo_use_site_title'] = true;
-    $config['adm_logo'] = '<strong>Ignition GO</strong>';
+    $config['adm_logo'] = '';
+    $config['adm_brandtext'] = '<strong>Ignition GO</strong>';
     $config['adm_logo_mini'] = '<strong>I</strong>GO';
     /*
     |--------------------------------------------------------------------------

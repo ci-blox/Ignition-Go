@@ -1,9 +1,9 @@
     <!-- Left navbar links -->
-    <ul class="nav navbar-nav">
+    <!--ul class="nav navbar-nav">
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
       </li>
-    </ul>
+    </ul !-->
 
     <!-- Right navbar links -->
     <ul class="nav navbar-nav bg-primary">
@@ -12,7 +12,7 @@
         <div class="dropdown-menu" style="min-width:190px;">
         <i class="fa fa-user fa-2x"></i>
                 <p>
-                  <?php echo $current_user->username; ?>
+                  <?php echo isset($current_user) ? $current_user->username :''; ?>
                 </p>
                 <div class="pull-left">
                   <a <?php echo check_method( 'profile'); ?> class="btn btn-sm btn-default" href="
