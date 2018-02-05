@@ -1,15 +1,20 @@
 # Ignition Go     | <a style="text-align:right" href='https://pledgie.com/campaigns/30957'><img alt='Click here to lend your support to: Ignition Go - development fund and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/30957.png?skin_name=chrome' border='0' ></a><small>  &nbsp;Status:</small> <img src="https://travis-ci.org/ci-blox/Ignition-Go.svg?branch=master"/><img src="https://styleci.io/repos/49680592/shield?style=plastic&branch=master" />
 A Modular (HMVC) App Building Framework - complete with front end, REST api, and admin area
 
-NOTE: GREAT NEWS: WE HAVE UPDATED TO BOOTSTRAP 4 AND USE YARN INSTEAD OF NPM / BOWER NOW. (if you want the old Bootstrap 3.3 see the releases)
+GREAT NEWS: WE HAVE UPDATED TO BOOTSTRAP 4 AND USE YARN INSTEAD OF NPM / BOWER NOW. (if you want the old Bootstrap 3.3 see the releases)
 
 - create "blox" modules to build enterprise class web applications
 - uses Codeigniter 3.x and now Bootstrap 4.0.x
 - can be used as a quickstart project starter/boilerplate
 - *What are blox?* "Blox" are just pluggable modules or applets that are commonly used in web applications. Ignition Go includes a web-based generator. Planned example "blox" would be a bulk emailer, report manager, and many more!!!  
 
-### Help wanted please: contact us to help enhance this amazing web app builder!  
-Please contact us to contribute.
+### Documentation
+There are several markdown files with information on various features.  Here is a listing of some key concepts documents:
+* [Ignition-Go Securinator ACL](http://ci-blox.github.io/Ignition-Go/DocACL.html)
+* [Ignition-Go Module Blox](http://ci-blox.github.io/Ignition-Go/DocBuildABlox.html)
+* [Ignition-Go Controllers](http://ci-blox.github.io/Ignition-Go/DocControllers.html)
+* [Ignition-Go Models](http://ci-blox.github.io/Ignition-Go/DocModels.html)
+* [Ignition-Go Views and Themes (the Template library)](http://ci-blox.github.io/Ignition-Go/DocViewsThemes.html)
 
 ### Server Requirements (Preferred)
 
@@ -17,11 +22,11 @@ Please contact us to contribute.
 * **Apache 2.2+** with rewrite mod enabled
 * **MySQL 5.5+ or MariaDb**
 
-### Installing (MUST DO ALL STEPS if not using Quickstart!)
+### Installing 
 
-****NOTE: WE USE YARN NOW SO SKIP STEPS 1, 4, 5 AND part of 6.  THIS DOCUMENT WILL BE UPDATED SOON!!!
+****NOTE: WE USE YARN NOW not Bower 
 
-1. Install NPM [node.js](http://nodejs.org/): package manager for node modules
+1. Install NPM [node.js](http://nodejs.org/): package manager for node modules, and [install Yarn] (https://yarnpkg.com/lang/en/docs/install/) 
 
 2. GIT clone this repository<br>
 Example: ```git clone https://github.com/ci-blox/Ignition-Go.git myigoapp```
@@ -29,23 +34,18 @@ Example: ```git clone https://github.com/ci-blox/Ignition-Go.git myigoapp```
 3. Change directory to new site/web app root<br>
 Example: ```cd myigoapp```
 
-4. (DEPRECATED- INSTALL Yarn) Install Bower [bower](http://bower.io/): manager for bower components<br>
-Type: ```npm install -g bower```
+4. Install all the packages and components <br>
+Type: ```yarn install``` <br>
 
-5. (NPM IS DEPRECATED) Install all the packages and bower components<br>
-Type: ```npm install``` <br>
--OR- ```yarn install``` <br>
-Then type: ```bower install```
-
-6. Install and run 'gulp' (note that gulp will run continuously in 'watch' mode, watching for css and js changes).<br>
-Type: ```yarn install ``` then<br>
+5. Install and run 'gulp' (note that gulp will run continuously in 'watch' mode, watching for css and js changes).<br>
+ ``` then<br>
 EITHER type: ```gulp```
 OR..  type: ```gulp serve```
 
-7. (Optional, required in production) In Apache, map the public folder to localhost or other url
+6. (Optional, required in production) In Apache, map the public folder to localhost or other url
 Example: in your httpd-vhosts.conf file, add new <VirtualHost> section and restart Apache
 
-8. Create an empty mysql db
+7. Create an empty mysql db
 Example: use HeidiSQL and create both a database and a user with privileges to new database 
 
 9. Go to http://[your web root from step 7]/install/init in your browser to finish using install wizard 
@@ -128,12 +128,8 @@ A gulp configuration (**gulpfile.js**) is included. It utilizes package and comp
 * GulpJS [gulp](http://gulpjs.com/): task runner to compile, combine, and minify
 * Guzzle [guzzle](http://guzzlephp.com/): integrated for use as a REST client or for complex curl operations
 
-### Documentation
-There are several markdown files with information on various features.  Here is a listing of some key concepts documents:
-* [Ignition-Go Module Blox](http://ci-blox.github.io/Ignition-Go/DocBuildABlox.html)
-* [Ignition-Go Controllers](http://ci-blox.github.io/Ignition-Go/DocControllers.html)
-* [Ignition-Go Models](http://ci-blox.github.io/Ignition-Go/DocModels.html)
-* [Ignition-Go Views and Themes (the Template library)](http://ci-blox.github.io/Ignition-Go/DocViewsThemes.html)
+### Help wanted please: contact us to help enhance this amazing web app builder!  
+Please contact us to contribute.
 
 ### Acknowledgements
 Special thanks to the [Bonfire](http://cibonfire.com) project and those who contributed to it - many features and infrastructure concepts were inspired or incorporated outright from that project.  Also thanks to all the projects like GuzzlePHP and countless others that are open source, whose components are incorporated and allow this initiative to exist.  Finally, thanks especially to the CodeIgniter team, with whom CodeIgniter continues to thrive!
