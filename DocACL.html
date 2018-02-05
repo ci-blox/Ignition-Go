@@ -1,0 +1,228 @@
+<div class="container">
+
+
+    <div class="page">
+        <div>
+            <h1>ACL - Users, Roles and Permissions</h1>
+
+            <p>The ACL mechanism named Securinator in Ignition Go utilizes a Role-Based Access Control (RBAC) system for authorization.
+                This simple mechanism provides enough granularity and flexibility for most situations.</p>
+
+            <ul>
+                <li>
+                    <a href="#roles">Roles</a>
+                </li>
+                <li>
+                    <a href="#permissions">Role Permissions</a>
+                </li>
+                <li>
+                    <a href="#access">Access Control</a>
+                </li>
+            </ul>
+
+            <p>
+                <a name="roles" href=" ">
+                    <title></title>
+                </a>
+            </p>
+
+            <h2>Roles</h2>
+
+            <p>A user id is assigned to a role and the role is tied to permissions. Two roles are required in the core system.
+                They are Administrator and User. Two additional roles are provided: Support (intended to be a subset of administrator)
+                and Manager. Here is a suggested role setup:
+            </p>
+
+            <h3>User</h3>
+
+            <p>This is the default role that anyone registering to the site is given. As such, it will typically have very limited
+                rights to most of the site.</p>
+
+            <h3>Administrator</h3>
+
+            <p>The Administrator is the highest level user of the site. This is often the client that you are creating the site
+                for. This is the 'owner' of the site and, as such, is typically given the most power of the site operators.
+                By default, this role usually gets tied to permissions over the entire site.</p>
+
+            <h3>Support</h3>
+
+            <p> The Support role typically has near-Adminstrator capability, but there are still some sensitive areas that the
+                Administrator might not want them to have access to.</p>
+
+            <h3>Manager</h3>
+
+            <p> This role is intended to have more capability than a basic user.</p>
+
+            <p>
+                The attributes of the role are:</p>
+
+            <ul>
+                <li>
+                    <strong>Role</strong> - The internal alphanumeric id key of the role. </li>
+                <li>
+                    <strong>Role Name</strong> - The name of the role as you want it to appear to users. It should not have spaces
+                    or special characters, though you can use underscores in their place.</li>
+                <li>
+                    <strong>Description</strong> - can be used for a full description and/or comments if needed.</li>
+                <li>
+                    <strong>Login Destination</strong> - This is the relative path that a user is directed to when they login. For
+                    example, you can force all admins to be directed to the main admin page by setting this value to
+                    <code>/admin/dashboard</code>. Alternatively, you could have other roles be directed to their own dashboard
+                    or account management page by entering the appropriate relative URL here.</li>
+                <li>
+                    <strong>Default</strong> - The role assigned to new users when they register.</li>
+                <li>
+                    <strong>Can Delete</strong>Give the power to delete certain roles, while keeping some safe from accidental or
+                    malicious removal.</li>
+                <li>
+                    <strong>Deleted</strong> - Tag deleted role.</li>
+            </ul>
+
+            <p>
+                <a name="permissions" href=" ">
+                    <title></title>
+                </a>
+            </p>
+
+            <h2>Permissions</h2>
+
+            <p>Permissions are typically described in 3-part, human-readable formats that allow for nearly any type of permission
+                to be created.</p>
+
+            <h3>Naming Permissions</h3>
+
+            <p>Permissions are named based on three parts. Core permissions follow this format:</p>
+
+            <pre><code class="matlab"><span class="transposed_variable">App.</span><span class="transposed_variable">action.</span>permission
+    <span class="transposed_variable">e.g.</span> <span class="transposed_variable">Site.</span><span class="transposed_variable">Signin.</span>Allow
+    </code></pre>
+
+            <p>Modules use the following naming convention:</p>
+
+            <pre><code class="matlab"><span class="transposed_variable">module.</span><span class="transposed_variable">controllertype.</span>action
+    <span class="transposed_variable">e.</span><span class="transposed_variable">g.</span> <span class="transposed_variable">App.</span><span class="transposed_variable">Roles.</span>View
+    </code></pre>
+
+            <ul>
+                <li>
+                    <strong>Module</strong> is typically the name of your module, or a portion of it.</li>
+                <li>
+                    <strong>Context</strong> can be one of several things depending on your needs.</li>
+                <li>
+                    <strong>Action</strong> is a single action that can be checked. Common actions are View, Add, and Manage, but
+                    can be whatever you need. Common actions are Manage, View, Edit, Delete.</li>
+            </ul>
+
+            <p>
+                <a name="permisions" href=" ">
+                    <title></title>
+                </a>
+            </p>
+
+            <h3>Permissions</h3>
+
+            <p>Permissions can easily be created.
+                <p>Each permission has the following three attributes:</p>
+
+                <ul>
+                    <li>
+                        <strong>Name</strong> is the permission itself, following the naming scheme outlined above.</li>
+                    <li>
+                        <strong>Description</strong> is a short string describing the permission and it’s use. This is only used
+                        for display in the Permissions overview page.</li>
+                    <li>
+                        <strong>Status</strong> allows permissions to still be available in the system, but not to actually be used.
+                        This can be used as a placeholder for in-development features.</li>
+                </ul>
+
+                <p>
+                    <a name="access" href=" ">
+                        <title></title>
+                    </a>
+                </p>
+
+                <h3>Assigning Permissions</h3>
+
+                <p>Permissions can be assigned to roles through the
+                    <code>Edit Role</code> screen. Alternatively, they can be assigned to all roles at once by viewing the
+                    <code>Permission Matrix</code>, available from both the Roles and Permissions screen.</p>
+
+
+                <h2>Restricting Access</h2>
+
+                <p>The
+                    <code>Auth</code> library provides several useful methods to restrict access, or check access, from any place
+                    in your application. If not already loaded, you can load the Auth library with the following code:</p>
+
+                <pre><code class="perl"><span class="variable">$this</span>-&gt;load-&gt;library(<span class="string">'users/auth'</span>);
+    </code></pre>
+
+                <p>
+                    <a name="access" href=" ">
+                        <title></title>
+                    </a>
+                </p>
+
+                <h3>
+                    <code>restrict()</code>
+                </h3>
+
+                <p>The
+                    <code>restrict()</code> method can be used to protect an entire method or even class. If used without any parameters,
+                    it will simply verify that the user is logged in. If they are not, it will redirect them to the login
+                    page.</p>
+
+                <pre><code class="perl"><span class="variable">$this</span>-&gt;auth-&gt;restrict();
+    </code></pre>
+
+                <p>You can require that a user has a certain Permission granted by passing the name of the permission as the
+                    first parameter. You do not have to match the case of the original permission string, as it will be converted
+                    to lowercase prior to checking.</p>
+
+                <pre><code class="perl"><span class="variable">$this</span>-&gt;auth-&gt;restrict(<span class="string">'App.Users.Manage'</span>);
+    </code></pre>
+
+                <p>If a user does not have the required permission granted to them, they will be directed to their previous
+                    page. You can change the URI they are redirected to by passing it in as the second parameter. This can
+                    be either a relative or full URI path.</p>
+
+                <pre><code class="perl"><span class="variable">$this</span>-&gt;auth-&gt;restrict(<span class="string">'App.Users.Manage'</span>, <span class="string">'/get-outtat-here.html'</span>);
+    </code></pre>
+
+
+                <h3>
+                    <code>has_permission()</code>
+                </h3>
+
+                <p>The
+                    <code>has_permission()</code> method allows you to check if the current logged-in user has a specified permission.
+                    You pass the name of the permission to check in as the first parameter.</p>
+
+                <pre><code class="erlang"><span class="function"><span class="title">if</span> <span class="params">( ! <span class="function_name">has_permission</span>('<span class="variable">App</span>.<span class="variable">Users</span>.<span class="variable">Manage</span>'))</span>
+    {
+        . . .
+    }
+    </span></code></pre>
+
+                <p>
+                    <a name="permission_exists" href=" ">
+                        <title></title>
+                    </a>
+                </p>
+
+                <h3>
+                    <code>permission_exists()</code>
+                </h3>
+
+                <p>This function allows you to quickly check whether a permission exists in the databse or not. Simply pass
+                    in the permission name to check as the first parameter.</p>
+
+                <pre><code class="erlang"><span class="function"><span class="title">if</span> <span class="params">(<span class="function_name">permission_exists</span>('<span class="variable">App</span>.<span class="variable">Users</span>.<span class="variable">Manage</span>'))</span>
+    {
+        . . .
+    }
+    </span></code></pre>
+
+        </div>
+
+    </div>
