@@ -7,11 +7,11 @@
   - [Configuration](configuration.md)
 
 - Key Concepts
-  - [Ignition-Go ACL: Users, Roles and Permissions](http://ci-blox.github.io/Ignition-Go/DocACL.html)
-  - [Ignition-Go Module Blox](http://ci-blox.github.io/Ignition-Go/DocBuildABlox.html)
-  - [Ignition-Go Controllers](http://ci-blox.github.io/Ignition-Go/DocControllers.html)
-  - [Ignition-Go Models](http://ci-blox.github.io/Ignition-Go/DocModels.html)
-  - [Ignition-Go Views and Themes (the Template library)](http://ci-blox.github.io/Ignition-Go/DocViewsThemes.html)
+  - [Ignition-Go ACL: Users, Roles and Permissions](concepts/ACL.md)
+  - [Ignition-Go Module Blox](concepts/ModuleBlox.md)
+  - [Ignition-Go Controllers](concepts/Controller.md)
+  - [Ignition-Go Models](concepts/Model.md)
+  - [Ignition-Go Views and Themes (the Template library)](concepts/ViewsThemes.md)
 
 - Deployment Guide
   - [Deploy](deploy.md)
