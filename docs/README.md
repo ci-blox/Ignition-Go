@@ -1,68 +1,20 @@
-# Ignition Go     |  [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NV6YA38KWC8U4)
-<small>  &nbsp;Status:</small> <img src="https://travis-ci.org/ci-blox/Ignition-Go.svg?branch=master"/> <img src="https://styleci.io/repos/49680592/shield?style=plastic&branch=master" />
+# Ignition Go     
 
 A Modular (HMVC) App Building Framework - complete with front end, REST api, and admin area
 
-*GREAT NEWS: WE HAVE UPDATED TO BOOTSTRAP 4 AND USE YARN INSTEAD OF NPM / BOWER NOW. (if you want the old Bootstrap 3.3 see the previous releases)*
+CURRENTLY USES BOOTSTRAP 4 AND USES YARN INSTEAD OF NPM / BOWER NOW. (if you want the old Bootstrap 3.3 see the previous releases)
 
 - create "blox" modules to build enterprise class web applications
-- uses Codeigniter 3.x and now Bootstrap 4.0.x
+- uses Codeigniter 3.x,  Bootstrap 4.0.x
 - can be used as a quickstart project starter/boilerplate
 - *What are blox?* "Blox" are just pluggable modules or applets that are commonly used in web applications. Ignition Go includes a web-based generator. Planned example "blox" would be a bulk emailer, report manager, and many more!!!  
 
-### Documentation
-There are several markdown files with information on various features.  Here is a listing of some key concepts documents:
-* [Ignition-Go Securinator ACL](http://ci-blox.github.io/Ignition-Go/DocACL.html)
-* [Ignition-Go Module Blox](http://ci-blox.github.io/Ignition-Go/DocBuildABlox.html)
-* [Ignition-Go Controllers](http://ci-blox.github.io/Ignition-Go/DocControllers.html)
-* [Ignition-Go Models](http://ci-blox.github.io/Ignition-Go/DocModels.html)
-* [Ignition-Go Views and Themes (the Template library)](http://ci-blox.github.io/Ignition-Go/DocViewsThemes.html)
-
-See the /docs folder for more.
 
 ### Server Requirements (Preferred)
 
 * **PHP 5.6, 7.1, 7.2** you can run in lower (5.4/5.5) but lowest recommended version to use is [PHP 5.6](http://php.net/manual/en/migration56.new-features.php) (http://php.net/manual/en/migration55.new-features.php) for this project. 
 * **Apache 2.2+** with rewrite mod enabled
 * **MySQL 5.5+ or MariaDb**
-
-### Installing 
-
-****NOTE: WE USE YARN NOW not Bower 
-
-1. GIT clone this repository
-
-Example: git clone https://github.com/ci-blox/Ignition-Go.git myigoapp
-
-2. Either:<br>
-a) map your webserver to the 'public' folder to use pre-installed versions of packages<br>
-(skip to step 7)<br>
--or-<br>
-b) use Yarn and Gulpjs (recommended)
-
-3. Install NPM [node.js](http://nodejs.org/): package manager for node modules, and [install Yarn] (https://yarnpkg.com/lang/en/docs/install/) 
-
-4. Change directory to new site/web app root<br>
-Example: ```cd myigoapp```
-
-5. Install all the packages and components <br>
-Type: ```yarn install``` <br>
-
-6. Run 'gulp' (note that gulp will run continuously in 'watch' mode, watching for css and js changes).<br> then<br>
-EITHER type: ```gulp```<br>
-OR..  type: ```gulp serve```
-
-7. (Optional, required if no gulp or in production) In Apache, map the 'public' folder to localhost or other url
-
-Example: in your httpd-vhosts.conf file, add new ```<VirtualHost>``` section and restart Apache
-
-8. Create an empty mysql database and a user
-
-Example: use HeidiSQL and create both a database and a user with privileges to new database 
-
-9. Go to http://[your-web-root-from-step-7]/install/init in your browser to finish using install wizard 
-
-eg if you had created virtual host igotestlocal.com, then go to http://igotestlocal.com/install/init in your browser
 
 
 ### Features
@@ -137,13 +89,17 @@ ignitcore/system/                         --- CodeIgniter core files (clean CI3 
 ### Asset Customization (e.g. additional js/css files)
 
 A gulp configuration (**gulpfile.js**) is included. It utilizes package and component tools from these sites:
-* NPM [node.js](http://nodejs.org/): package manager for node modules
-* (DEPRECATED) Bower [bower](http://bower.io/): manager for bower components 
-* GulpJS [gulp](http://gulpjs.com/): task runner to compile, combine, and minify
-* Guzzle [guzzle](http://guzzlephp.com/): integrated for use as a REST client or for complex curl operations
+* Yarn [yarnpkg.com](https://yarnpkg.com/en/): package manager for dependencies
+* GulpJS [gulpjs](http://gulpjs.com/): task runner to compile, combine, and minify
+* Guzzle [guzzlephp](http://guzzlephp.com/): integrated for use as a REST client or for complex curl operations
 
-### Help wanted please: contact us to help enhance this amazing web app builder!  
-Please contact us to contribute.
+### Documentation
+There are several markdown files with information on various features.  Here is a listing of some key concepts documents:
+* [Ignition-Go ACL: Users, Roles and Permissions](http://ci-blox.github.io/Ignition-Go/DocACL.html)
+* [Ignition-Go Module Blox](http://ci-blox.github.io/Ignition-Go/DocBuildABlox.html)
+* [Ignition-Go Controllers](http://ci-blox.github.io/Ignition-Go/DocControllers.html)
+* [Ignition-Go Models](http://ci-blox.github.io/Ignition-Go/DocModels.html)
+* [Ignition-Go Views and Themes (the Template library)](http://ci-blox.github.io/Ignition-Go/DocViewsThemes.html)
 
 ### Acknowledgements
 Special thanks to the [Bonfire](http://cibonfire.com) project and those who contributed to it - many features and infrastructure concepts were inspired or incorporated outright from that project.  Also thanks to all the projects like GuzzlePHP and countless others that are open source, whose components are incorporated and allow this initiative to exist.  Finally, thanks especially to the CodeIgniter team, with whom CodeIgniter continues to thrive!
