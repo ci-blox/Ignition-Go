@@ -1,6 +1,6 @@
 <?php
 $error = false;
-if (phpversion() < "5.4") {
+if (phpversion() < "5.6") {
 	$error = true;
 	$requirement1 = "<span class='label label-warning'>Your PHP version is " . phpversion() . "</span>";
 } else {
@@ -14,13 +14,13 @@ if (!file_exists($_SERVER['DOCUMENT_ROOT'].'/themes/default/index.php')) {
 } else {
 	$requirement2 = "<span class='label label-success'>OK</span>";
 }
-if (!file_exists($_SERVER['DOCUMENT_ROOT'].'/components/font-awesome/css/font-awesome.min.css')) {
+/*if (!file_exists($_SERVER['DOCUMENT_ROOT'].'/components/font-awesome/css/font-awesome.min.css')) {
 	$error = true;
     echo base_url();
 	$requirement2a = "<span class='label label-danger'>Bower was not run. Run <em>bower update</em> at the command line to load dependencies like Font-Awesome.";
 } else {
 	$requirement2a = "<span class='label label-success'>OK</span>";
-}
+}*/
 
 if (!file_exists($_SERVER['DOCUMENT_ROOT'].'/assets/dist/app.min.css')) {
 	$error = true;
@@ -113,8 +113,8 @@ if (!is_really_writable(APPPATH . 'config/database.php')){
 }*/
 
 ?>
-<h3>Server Prerequisites</h3>
-<table class="table table-hover table-condensed">
+<h3 class='page-heading'>Server Prerequisites</h3>
+<table class="table table-hover table-sm">
 	<thead>
 		<tr>
 			<th><b>Requirement</b></th>
@@ -123,7 +123,7 @@ if (!is_really_writable(APPPATH . 'config/database.php')){
 	</thead>
 	<tbody>
 		<tr>
-			<td>PHP 5.4+ </td>
+			<td>PHP 5.6+ </td>
 			<td><?php echo $requirement1; ?></td>
 		</tr>
 		<tr>
@@ -131,11 +131,7 @@ if (!is_really_writable(APPPATH . 'config/database.php')){
 			<td><?php echo $requirement2; ?></td>
 		</tr>
 		<tr>
-			<td>Bower Components Installed</td>
-			<td><?php echo $requirement2a; ?></td>
-		</tr>
-		<tr>
-			<td>NPM Installed and Gulp Executed</td>
+			<td>Yarn Installed and Gulp Executed</td>
 			<td><?php echo $requirement2b; ?></td>
 		</tr>
 		<tr>
