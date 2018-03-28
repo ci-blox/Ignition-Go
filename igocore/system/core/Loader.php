@@ -29,7 +29,7 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2017, British Columbia Institute of Technology (http://bcit.ca/)
+ * @copyright	Copyright (c) 2014 - 2018, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
@@ -226,7 +226,7 @@ class CI_Loader {
 	 *
 	 * Loads and instantiates models.
 	 *
-	 * @param	string	$model		Model name
+	 * @param	mixed	$model		Model name
 	 * @param	string	$name		An optional object name to assign to
 	 * @param	bool	$db_conn	An optional database connection configuration to initialize
 	 * @return	object
@@ -318,6 +318,8 @@ class CI_Loader {
 				{
 					throw new RuntimeException($app_path.$class.".php exists, but doesn't declare class ".$class);
 				}
+
+				log_message('info', config_item('subclass_prefix').'Model class loaded');
 			}
 		}
 
@@ -351,7 +353,9 @@ class CI_Loader {
 		}
 
 		$this->_ci_models[] = $name;
-		$CI->$name = new $model();
+		$model = new $model();
+		$CI->$name = $model;
+		log_message('info', 'Model "'.get_class($model).'" initialized');
 		return $this;
 	}
 
@@ -1128,11 +1132,11 @@ class CI_Loader {
 				isset($this->_ci_varmap[$property]) && $property = $this->_ci_varmap[$property];
 			}
 
-				$CI =& get_instance();
+			$CI =& get_instance();
 			if ( ! isset($CI->$property))
-				{
-					return $this->_ci_init_library($library_name, $prefix, $params, $object_name);
-				}
+			{
+				return $this->_ci_init_library($library_name, $prefix, $params, $object_name);
+			}
 
 			log_message('debug', $library_name.' class already loaded. Second attempt ignored.');
 			return;
@@ -1154,9 +1158,9 @@ class CI_Loader {
 					return $this->_ci_init_library($library_name, $prefix, $params, $object_name);
 				}
 
-					log_message('debug', $path.' exists, but does not declare '.$prefix.$library_name);
-				}
+				log_message('debug', $path.' exists, but does not declare '.$prefix.$library_name);
 			}
+		}
 
 		include_once(BASEPATH.'libraries/'.$file_path.$library_name.'.php');
 
@@ -1173,9 +1177,9 @@ class CI_Loader {
 					break;
 				}
 
-					log_message('debug', $path.' exists, but does not declare '.$subclass);
-				}
+				log_message('debug', $path.' exists, but does not declare '.$subclass);
 			}
+		}
 
 		return $this->_ci_init_library($library_name, $prefix, $params, $object_name);
 	}
