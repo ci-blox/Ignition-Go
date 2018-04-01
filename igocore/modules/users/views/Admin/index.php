@@ -62,7 +62,7 @@ if ($can_delete) {
 					<?php endif;?>
 					
 				<?php if ($can_edit) : ?>
-					<td><?php echo anchor(SITE_AREA . '/users/edit/' . $record->id, '<span class="icon-pencil"></span> ' .  $record->username); ?></td>
+					<td><?php echo anchor('/admin/users/edit/' . $record->id, '<span class="icon-pencil"></span> ' .  $record->username); ?></td>
 				<?php else : ?>
 					<td><?php e($record->username); ?></td>
 				<?php endif; ?>
