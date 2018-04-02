@@ -10,11 +10,17 @@ if ($can_delete) {
 }
 ?>
 <div class='admin-box'>
+<div class="row">
+		<div class="col-sm-12">
 	<h3>
 		<?php echo lang('usermaint_area_title'); ?>
 	</h3>
 	<a href="/admin/users/create" class="btn btn-sm btn-info btn-flat pull-left">Create User</a>
+	</div>
+</div>
 	<?php echo form_open($this->uri->uri_string()); ?>
+	<div class="row">
+		<div class="col-sm-12" style="overflow-x:auto;">
          <table class="table table-hover table-condensed">
 			<thead>
 				<tr>
@@ -60,12 +66,14 @@ if ($can_delete) {
 					<?php if ($can_delete) : ?>
 					<td class='column-check'><input type='checkbox' name='checked[]' value='<?php echo $record->id; ?>' /></td>
 					<?php endif;?>
-					
-				<?php if ($can_edit) : ?>
-					<td><?php echo anchor('/admin/users/edit/' . $record->id, '<span class="icon-pencil"></span> ' .  $record->username); ?></td>
-				<?php else : ?>
-					<td><?php e($record->username); ?></td>
-				<?php endif; ?>
+				<td>	
+				<?php 
+				if ($can_edit) :
+					echo anchor('/admin/users/edit/' . $record->id, '<span class="icon-pencil"></span> ' .  $record->username); 
+				else : 
+					e($record->username);
+				endif; ?>
+					</td>
 					<td><?php e($record->role); ?></td>
 					<td><?php e($record->email); ?></td>
 					<td><?php e($record->first_name); ?></td>
@@ -93,6 +101,8 @@ if ($can_delete) {
 				<?php endif; ?>
 			</tbody>
 		</table>
+		</div>
+	</div>
 	<?php
     echo form_close();
     
