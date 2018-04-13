@@ -1,4 +1,4 @@
-<?php $adm_url = base_url('components').'/admin-lte/';
+<?php $adm_url = base_url().'/assets/dist/';
 $adm_skincolor = 'purple';
 $adm_layout = 'layout-boxed';
 /* <!--
@@ -38,7 +38,13 @@ Apply one or more of the following
 <!-- Bootstrap 3.x -->
 <script src="<?php echo base_url(); ?>assets/dist/bootstrap.min.js"></script>
 <!-- iCheck -->
-<script src="<?php echo $adm_url; ?>plugins/iCheck/icheck.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/dist/icheck.min.js"></script>
+<style>
+  .icheckbox_square-blue,.iradio_square-blue{background:url(<?php echo base_url(); ?>assets/img/blue.png) no-repeat;}
+  @media only screen and (-webkit-min-device-pixel-ratio:1.5),only screen and (-moz-min-device-pixel-ratio:1.5),only screen and (-o-min-device-pixel-ratio:3/2),only screen and (min-device-pixel-ratio:1.5){
+    .icheckbox_square-blue,.iradio_square-blue{background-image:url(<?php echo base_url(); ?>assets/img/blue@2x.png);}
+}
+</style>
 <script>
   $(function () {
     $('input').iCheck({
@@ -49,11 +55,7 @@ Apply one or more of the following
   });
 </script>
 <!-- AdminLTE App -->
-<script src="<?php echo $adm_url; ?>dist/js/adminLTE.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/dist/adminlte.min.js"></script>
 
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. Slimscroll is required when using the
-     fixed layout. -->
 </body>
 </html>

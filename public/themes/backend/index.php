@@ -2,7 +2,7 @@
 $CI = &get_instance();
 $CI->load->config('admin');
 
-$adm_url = base_url().'/components/admin-lte/';
+$adm_url = base_url().'/assets/dist/';
 $adm_skincolor = $CI->config->item('adm_skin');
 $adm_layout = $CI->config->item('adm_layout');
 $adm_layout = $adm_layout!=null?'layout-'.$adm_layout:null;

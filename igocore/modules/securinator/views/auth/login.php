@@ -20,14 +20,9 @@
                 <label for="password">Password</label>
                 <input type="password" name="password" value="admin" id="password" class="form-control" />
             </div>
-      <div class="row">
-        <div class="col-xs-10 col-xs-indent-1">
-         <div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> Remember Me
-            </label>
-          </div>
-          </div>
+            <div class="form-check icheck">
+                <input type="checkbox" class="form-check-input" id="rememberme">
+                <label class="form-check-label" for="rememberme">Remember me</label>
           </div>
             <button type="submit" class="btn btn-primary">Sign In</button>
         </form>

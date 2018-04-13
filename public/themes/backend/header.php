@@ -23,8 +23,8 @@
         apply the skin class to the body tag so the changes take effect.
   -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/skin-<?php echo $adm_skincolor; ?>.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="<?php echo $adm_url; ?>plugins/iCheck/square/blue.css">
+  <!-- iCheck optional styling -->
+  <!--link rel="stylesheet" href="< ?php echo $adm_url; ?>plugins/iCheck/square/blue.css"-->
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
