@@ -222,10 +222,11 @@ CREATE TABLE IF NOT EXISTS `igo_menu` (
 # sample menu
 insert  into `igo_menu`(`id`,`parent_id`,`title`,`url`,`menu_order`,`status`,`level`,`icon`,`description`) values (1,0,'Admin Home','/dashboard/index',1,1,0,'fa fa-dashboard',NULL);
 insert  into `igo_menu`(`id`,`parent_id`,`title`,`url`,`menu_order`,`status`,`level`,`icon`,`description`) values (3,0,'Manage','#',3,1,2,'fa fa-sitemap',NULL);
-insert  into `igo_menu`(`id`,`parent_id`,`title`,`url`,`menu_order`,`status`,`level`,`icon`,`description`) values (6,3,'Link','#',1,1,1,'fa fa-shield',NULL);
-insert  into `igo_menu`(`id`,`parent_id`,`title`,`url`,`menu_order`,`status`,`level`,`icon`,`description`) values (7,3,'Another Link','#',2,1,0,NULL,NULL);
 insert  into `igo_menu`(`id`,`parent_id`,`title`,`url`,`menu_order`,`status`,`level`,`icon`,`description`) values (33,0,'Reports','#',5,1,0,'fa fa-bar-chart-o',NULL);
 insert  into `igo_menu`(`id`,`parent_id`,`title`,`url`,`menu_order`,`status`,`level`,`icon`,`description`) values (35,33,'Sample Summary','#',1,1,2,'',NULL);
 insert  into `igo_menu`(`id`,`parent_id`,`title`,`url`,`menu_order`,`status`,`level`,`icon`,`description`) values (36,33,'Sample Detail Report','#',3,1,2,'',NULL);
+INSERT INTO `igo_menu` (`id`, `menu_group`, `parent_id`, `title`, `url`, `menu_order`, `status`, `level`, `icon`, `description`) VALUES (6, 'admin', 3, 'Users', '/admin/users', 1, 1, 1, 'fa fa-users', '');
+INSERT INTO `igo_menu` (`id`, `menu_group`, `parent_id`, `title`, `url`, `menu_order`, `status`, `level`, `icon`, `description`) VALUES (7, 'admin', 3, 'Language Translations', '/admin/translations', 2, 1, 1, 'fa fa-globe', '');
+INSERT INTO `igo_menu` (`id`, `menu_group`, `parent_id`, `title`, `url`, `menu_order`, `status`, `level`, `icon`, `description`) VALUES (8, 'admin', 3, 'Menu Editor', '/buildamenu', 4, 1, 1, 'fa fa-elementor', '');
 
 # end install.sql

@@ -182,6 +182,7 @@ echo ($adm_logo_use_ttl && isset($site_title) ? $site_title : (isset($adm_brandt
 
 <!-- jQuery -->
 <script src="<?php echo base_url(); ?>assets/dist/jquery.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/dist/jquery.powertip.min.js"></script>
 <!-- Bootstrap 4.x -->
 <script src="<?php echo base_url(); ?>assets/dist/popper.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/dist/bootstrap.min.js"></script>
@@ -189,7 +190,12 @@ echo ($adm_logo_use_ttl && isset($site_title) ? $site_title : (isset($adm_brandt
 <script src="<?php echo base_url(); ?>assets/dist/adminlte.min.js"></script>
 <!-- Custom Admin -->
 <script src="<?php echo base_url(); ?>assets/dist/admin.min.js"></script>
-
+<script>
+  $('.has-tip').powerTip({
+    placement: 'n',
+    smartPlacement: true
+});
+</script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. Slimscroll is required when using the

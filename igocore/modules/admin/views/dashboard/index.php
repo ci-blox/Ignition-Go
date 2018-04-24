@@ -12,9 +12,9 @@
             <div class="box-footer">This is a box footer.</div>
         </div>
 
-        <div class="box box-primary info-box">
+        <div class="box box-primary info-box info-box-users">
             <a href="../users">
-                <span class="info-box-icon"><i class="fa fa-users"></i></span>
+                <span class="has-tip info-box-icon" title="Click here to manage users."><i class="fa fa-users"></i></span>
             </a>
             <div class="info-box-content">
                 <span class="info-box-text">Total Users</span>
@@ -23,17 +23,17 @@
         </div>
         <?php /* hide if blox and menu module removed */ 
         if (Modules::controller_exists('buildablox', 'buildablox') || Modules::controller_exists('buildamenu', 'buildamenu')) : ?>
-        <div class="box box-success ">
+        <div class="box box-success box-dev">
             <div class="box-header with-border">
                 <h3 class="box-title">Developer Tools</h3>
             </div>
             <div class="box-body">
                 <?php if (Modules::controller_exists('buildablox', 'buildablox')) : ?>
-                <p><a href='/buildablox'>Manage Blox</a></p>
+                <p><a class="has-tip" title="Click here to generate and manage modules." href='/buildablox'>Manage Blox</a></p>
                 <?php endif; ?>
-                <p><a href='/buildamenu'>Manage Menus</a></p>
+                <p><a class="has-tip" title="Click here to manage the navigation menus in the three areas." href='/buildamenu'>Manage Menus</a></p>
                 <?php if (modules::controller_exists('translate', 'translate')) : ?>
-                <p><a href='/translate'>Manage Translations</a></p>
+                <p><a class="has-tip" title="Click here to manage language translations." href='/translate'>Manage Translations</a></p>
                 <?php endif; ?>
             </div>
         </div>

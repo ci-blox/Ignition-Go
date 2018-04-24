@@ -93,6 +93,7 @@ module.exports = {
 				dir_packages + '/font-awesome/css/font-awesome.css',
 				dir_packages + '/ionicons/css/ionicons.min.css',
 				dir_packages + '/admin-lte/plugins/iCheck/all.css',
+				dir_packages + '/jquery-powertip/dist/css/jquery.powertip.css',
 				//dir_packages + '/admin-lte/dist/css/AdminLTE.min.css',
 				//dir_packages + '/admin-lte/dist/css/skins/_all-skins.css',
 				// custom files
@@ -127,7 +128,8 @@ module.exports = {
 				dir_packages + '/bootstrap/js/bootstrap.js',
 				//dir_packages + '/admin-lte/plugins/fastclick/fastclick.js',
 				dir_packages + '/admin-lte/dist/js/adminlte.js',
-				dir_packages + '/jquery-slimscroll/jquery.slimscroll.min.js',
+				dir_packages + '/jquery-powertip/dist/jquery.powertip.js',				
+				dir_packages + '/jquery-slimscroll/jquery.slimscroll.js',
 				dir_packages + '/Sortable/Sortable.js',
 				// custom files
 				dir_asset + '/js/admin.js'
