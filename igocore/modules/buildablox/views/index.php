@@ -107,3 +107,78 @@
 		</div>
 	</div>
 </div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="box box-primary admin-box">
+			<div class="box-header">
+				<h3 class="box-title"><?php echo lang('mb_available_head'); ?></h3>
+				<div class="box-tools">
+				</div>
+				<div class="box-body">
+					<?php if (isset($modules) && is_array($modules) && count($modules)) : ?>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>
+									<?php echo lang('mb_table_name'); ?>
+								</th>
+								<th>
+									<?php echo lang('mb_table_version'); ?>
+								</th>
+								<th>
+									<?php echo lang('mb_table_description'); ?>
+								</th>
+								<th>
+									<?php echo lang('mb_table_author'); ?>
+								</th>
+								<th>
+									<?php echo lang('mb_table_dbversion_current_available'); ?>
+								</th>
+								<th colspan="2">
+									<?php echo lang('mb_actions'); ?>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php 
+		foreach ($available_modules as $amodule => $aconfig) : ?>
+							<tr>
+								<td>
+									<?php echo $amodule; /* $aconfig['name']; */ ?>
+								</td>
+								<td>
+									<?php e(isset($aconfig['version']) ? $config['version'] : '---'); ?>
+								</td>
+								<td>
+									<?php e(isset($aconfig['description']) ? $config['description'] : '---'); ?>
+								</td>
+								<td>
+									<?php e(isset($aconfig['author']) ? $config['author'] : '---'); ?>
+								</td>
+								<td>
+									<?php if (isset($aconfig['dbversions']))
+				{
+				  echo form_close(); 
+				} ?>
+								</td>
+								<td>
+								</td>
+							</tr>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+				</div>
+				<?php else: ?>
+				<div class="alert alert-warning">
+					<p>
+						<?php e(lang('mb_no_modules')); ?>
+						<a href="<?php echo site_url('/buildablox/create_module') ?>">
+							<?php e(lang('mb_create_link')); ?>
+						</a>
+					</p>
+				</div>
+				<?php endif; ?>
+			</div>
+		</div>
+	</div>
+</div>

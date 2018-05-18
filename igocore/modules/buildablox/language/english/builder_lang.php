@@ -10,6 +10,7 @@ $lang['mb_create_note']			= 'Use this Blox builder to create your Module Blox. T
 $lang['mb_not_writable_note']	= 'Error: The application/toolblox folder is not writable so files cannot be created. Please make the folder writable and refresh this page.';
 $lang['mb_generic_description']	= 'Your Description here.';
 $lang['mb_installed_head']		= 'Installed Application Blox';
+$lang['mb_available_head']		= 'Available - Application ToolBlox';
 $lang['mb_module']				= 'Blox';
 $lang['mb_no_modules']			= 'No Blox Installed.';
 $lang['mb_breadcrumb_title']    = 'Manage Blox';
