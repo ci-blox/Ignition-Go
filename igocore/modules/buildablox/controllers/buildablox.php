@@ -3,7 +3,7 @@
  * Buildablox Controller
  *
  * This controller displays the list of current blox in the
- * application/toolblox folder and also allows the user to create new blox modules
+ * application/modules folder and also allows the user to create new blox modules
  * 
  */
 class Buildablox extends Admin_Controller
