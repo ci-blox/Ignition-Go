@@ -3,7 +3,7 @@
  * Buildablox Controller
  *
  * This controller displays the list of current blox in the
- * application/toolblox folder and also allows the user to create new blox modules
+ * application/modules folder and also allows the user to create new blox modules
  * 
  */
 class Buildablox extends Admin_Controller
@@ -38,7 +38,7 @@ class Buildablox extends Admin_Controller
     }
 
     /**
-     * Display a list of installed modules
+     * Display a list of installed and toolblox modules
      *
      * Includes the options to create a new module or context and delete
      * existing modules.
@@ -71,6 +71,21 @@ class Buildablox extends Admin_Controller
         // Sort the module list (by the name of each module's folder)
         ksort($configs);
 
+        // toolblox
+        $toolblox_items = array();
+        $this->load->helper('filedir');
+        $dirmap = create_directory_map($this->options['toolblox_path'], 2);
+        if ($dirmap)
+        {
+            foreach ($dirmap as $key => $value) {
+                if (strlen($key)>2 && !is_numeric($key))
+                {
+                    // assume it is toolblox module if folder TODO: get the description et al
+                    $toolblox_items[] = array('Name'=>$key);
+                }
+            }
+        }
+
         // Check that the modules folder is writable
         Template::set('writable', $this->checkWritable());
         Template::set('modules', $configs);
@@ -82,6 +97,7 @@ class Buildablox extends Admin_Controller
 
         $data['writable'] = $this->checkWritable();
         $data['modules'] = $configs;
+        $data['available_modules'] = $toolblox_items;
 
         foreach( $data as $key => $value )
             Template::set($key, $value);
@@ -703,3 +719,4 @@ class Buildablox extends Admin_Controller
 
 
  }
+/* end Buildablox.php */

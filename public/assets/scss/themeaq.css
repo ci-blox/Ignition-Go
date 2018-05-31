@@ -68,7 +68,7 @@ body {
   margin: 0;
   font-family: Roboto;
   font-size: 1rem;
-  font-weight: 200;
+  font-weight: 300;
   line-height: 1.5;
   color: #333;
   text-align: left;
@@ -435,7 +435,7 @@ hr {
 small,
 .small {
   font-size: 80%;
-  font-weight: 200;
+  font-weight: 300;
 }
 
 mark,
@@ -2111,7 +2111,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
 
 .btn {
   display: inline-block;
-  font-weight: 200;
+  font-weight: 300;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
@@ -2709,7 +2709,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-link {
-  font-weight: 200;
+  font-weight: 300;
   color: #12bbad;
   background-color: transparent;
 }
@@ -2932,7 +2932,7 @@ tbody.collapse.show {
   width: 100%;
   padding: 0.25rem 1.5rem;
   clear: both;
-  font-weight: 200;
+  font-weight: 300;
   color: #212529;
   text-align: inherit;
   white-space: nowrap;
@@ -3204,7 +3204,7 @@ tbody.collapse.show {
   padding: 0.375rem 1rem;
   margin-bottom: 0;
   font-size: 1rem;
-  font-weight: 200;
+  font-weight: 300;
   line-height: 1.5;
   color: #495057;
   text-align: center;
@@ -5023,7 +5023,7 @@ button.close {
   margin: 0;
   font-family: Roboto;
   font-style: normal;
-  font-weight: 200;
+  font-weight: 300;
   line-height: 1.5;
   text-align: left;
   text-align: start;
@@ -5136,7 +5136,7 @@ button.close {
   max-width: 276px;
   font-family: Roboto;
   font-style: normal;
-  font-weight: 200;
+  font-weight: 300;
   line-height: 1.5;
   text-align: left;
   text-align: start;
@@ -7983,7 +7983,7 @@ button.bg-dark:focus {
 }
 
 .font-weight-normal {
-  font-weight: 200 !important;
+  font-weight: 300 !important;
 }
 
 .font-weight-bold {

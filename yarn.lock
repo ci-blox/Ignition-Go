@@ -2491,6 +2491,12 @@ jquery-mousewheel@~3.1.13:
   version "3.1.13"
   resolved "https://registry.yarnpkg.com/jquery-mousewheel/-/jquery-mousewheel-3.1.13.tgz#06f0335f16e353a695e7206bf50503cb523a6ee5"
 
+jquery-powertip@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/jquery-powertip/-/jquery-powertip-1.3.1.tgz#cb01253ec7ff4f749582888c250477380d02eeb8"
+  dependencies:
+    jquery ">=1.7 <4.0"
+
 jquery-slimscroll@^1.3.8:
   version "1.3.8"
   resolved "https://registry.yarnpkg.com/jquery-slimscroll/-/jquery-slimscroll-1.3.8.tgz#8481c44e7a47687653908a28f7f70aed64c84e36"
@@ -2505,7 +2511,7 @@ jquery-ui@^1.12.1:
   version "1.12.1"
   resolved "https://registry.yarnpkg.com/jquery-ui/-/jquery-ui-1.12.1.tgz#bcb4045c8dd0539c134bc1488cdd3e768a7a9e51"
 
-"jquery@2 - 3", "jquery@>= 1.7", jquery@>=1.10, jquery@>=1.5, jquery@>=1.7, "jquery@>=1.7.1 <4.0.0", jquery@>=1.8, jquery@^3.2.1, jquery@^3.3.1:
+"jquery@2 - 3", "jquery@>= 1.7", jquery@>=1.10, jquery@>=1.5, jquery@>=1.7, "jquery@>=1.7 <4.0", "jquery@>=1.7.1 <4.0.0", jquery@>=1.8, jquery@^3.2.1, jquery@^3.3.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
 

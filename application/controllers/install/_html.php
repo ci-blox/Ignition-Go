@@ -50,18 +50,18 @@
       </style>
     </head>
     <body>
-<div class="navbar navbar-inverse navbar-fixed-top navbar-transparent">
+<nav class="navbar navbar-inverse bg-white fixed-top">
     <div class="container">
         <div class="navbar-header">
             <a href="./" class="navbar-brand">Ignition Go</a>
+        </div>
 </div>
-</div>
-</div>
-     <div class="container">
+</nav>
+     <div class="container" style="margin-top:60px;">
       <div class="row">
 
        <div class="col-md-8 col-md-offset-2">
-        <div class="install-row">
+        <div class="install-row row">
           <div class="col-md-3 text-center <?php if($passed_steps[1] == true || $step == 1){echo 'bg-default';} ?> padding-5 mbot15">
             <h5>Prerequisites</h5>
           </div>

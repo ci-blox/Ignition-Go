@@ -226,7 +226,7 @@ $id = isset($usermaint->id) ? $usermaint->id : '';
         <fieldset class='form-actions'>
             <input type='submit' name='save' class='btn btn-primary' value="<?php echo lang('usermaint_action_create'); ?>" />
             <?php echo lang('app_or'); ?>
-            <?php echo anchor(SITE_AREA . '/admin/usermaint', lang('usermaint_cancel'), 'class="btn btn-warning"'); ?>
+            <?php echo anchor('/admin/users', lang('usermaint_cancel'), 'class="btn btn-warning"'); ?>
             
         </fieldset>
     <?php echo form_close(); ?>

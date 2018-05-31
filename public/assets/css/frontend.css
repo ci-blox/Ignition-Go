@@ -8,19 +8,19 @@ html {
 	position: relative;
 	min-height: 100%;
 }
-body {
+body
+{
 	/* Margin bottom by footer height */
 	margin-bottom: 60px !important;
 }
 .footer {
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	width: 100%;
 	/* Set the fixed height of the footer here */
 	height: 60px;
 	line-height: 60px; 
 	overflow: hidden;
-	background-color: #f5f5f5;
 }
 
 
@@ -28,12 +28,8 @@ body {
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 
-body {
-	margin-top: 90px !important;
-}
-
 body > .container {
-	padding: 60px 15px 0;
+	padding: 10px 15px 0;
 }
 .container .text-muted {
 	margin: 20px 0;
@@ -48,6 +44,29 @@ code {
 	font-size: 80%;
 }
 
+section {
+	padding: 80px 0;
+}
+
+.section h2.section-heading {
+	  font-size: 40px;
+	  margin-top: 0;
+	  margin-bottom: 15px;
+}
+.section h3.section-subheading {
+	  font-size: 16px;
+	  font-weight: 400;
+	  font-style: italic;
+	  margin-bottom: 75px;
+	  text-transform: none;
+}
+
+  @media(min-width:768px) {
+	section {
+	  padding: 100px 0;
+	}
+  }
+  
 /* top nav logo and app title */
 a.navbar-brand {
 	width:240px;

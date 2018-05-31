@@ -213,6 +213,13 @@ class Admin extends Admin_Controller
 		// Make sure we only pass in the fields we want
 		
 		$data = $this->user_model->prep_data($this->input->post());
+		
+		// Status checkboxes only on update
+		if ($type == 'update') {
+			$data['deleted']= ($this->input->post('deleted')  && $this->input->post('deleted')==1 ? 1 : 0 );
+			$data['active']= ($data['deleted']==0 && $this->input->post('active')  && $this->input->post('active')==1 ? 1 : 0 );
+			$data['banned']= ($this->input->post('banned') && $this->input->post('banned')==1 ? 1 : 0 );
+		}
 
         // Additional handling for default values should be added below,
         // or in the model's prep_data() method

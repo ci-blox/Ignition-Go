@@ -1,6 +1,6 @@
 The MIT License (MIT)
 
-Copyright (c) 2016-2017 ci-blox
+Copyright (c) 2016-2018 ci-blox / the Ignition Go team
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,5 +27,5 @@ Please see the special required licensing notice in Ignition-Go/public/index.php
 2. Others
 Portions of this software subject to the licenses of their respective 
 creators.  Every attempt was made to utilize software which has no licensing
-restrictions at the time of inclusion, but ci-blox makes no guarantees of that 
+restrictions at the time of inclusion, but we make no guarantees of that 
 fact nor status in the future.

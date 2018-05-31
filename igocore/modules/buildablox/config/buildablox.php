@@ -1,6 +1,10 @@
 <?php
 
 /* destination folder for new blox */
+$config['buildablox']['toolblox_path'] = APPPATH . '/toolblox/';
+
+
+/* destination folder for new blox */
 $config['buildablox']['output_path'] = APPPATH . '/modules/';
 
 /* Form actions to appear in the "Controller Types" list */
