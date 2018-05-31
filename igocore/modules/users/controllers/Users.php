@@ -103,7 +103,7 @@ class Users extends Front_Controller
     public function register()
     {
         // Are users allowed to register?
-        if (! $this->settings_lib->item('auth.allow_register')) {
+        if (!$this->siteSettings['auth.allow_register']) {
             Template::set_message(lang('us_register_disabled'), 'error');
             Template::redirect('/');
         }
@@ -111,7 +111,6 @@ class Users extends Front_Controller
         $register_url = $this->input->post('register_url') ?: REGISTER_URL;
         $login_url    = $this->input->post('login_url') ?: LOGIN_URL;
 
-        $this->load->model('roles/role_model');
         $this->load->helper('date');
 
         $this->load->config('countries');
@@ -120,5 +119,10 @@ class Users extends Front_Controller
         $this->load->config('user_meta');
         $meta_fields = config_item('user_meta_fields');
         Template::set('meta_fields', $meta_fields);
+
+        Template::set('secarea', 'users');
+        Template::set('secareatitleorlogo', 'Ignition Go');
+        Template::set_view('register');
+        Template::render();
     }
 }
