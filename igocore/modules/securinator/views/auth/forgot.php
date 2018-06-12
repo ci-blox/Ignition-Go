@@ -1,27 +1,33 @@
 
 <div class="container">
- <div class="form-group">
+
+<div class="card">
+    <div class="card-body forgotpw-card-body">
+      <p class="login-box-msg">Forgot Password?</p>
+
+<div class="form-group">
  <label for="email">Email:</label>
  <input id="email" class="form-control" type="email" placeholder="Your Email">
  </div>
-<button type="submit" id="submit" class="btn btn-default">Reset Password</button>
+<button type="submit" id="submit" class="btn btn-primary" onclick='return resetpw();' >Reset Password</button>
 <div id="display"></div>
 <script>
-$(document).ready(function(){
-$("#submit").click(function(){
+function resetpw(){
 var em = $("#email").val();
 var dataString = 'em1='+ em;
 $.ajax({
 type: "POST",
-url: "<?php echo base_url(); ?>/securinator/forgot",
+url: "<?php echo base_url(); ?>users/recover",
 data: dataString,
 cache: false,
 success: function(result){
-$("#display").html(result);
+$("#display").html(result.msg);
 }
 });
 return false;
-});
-});
+}
 </script>
+</div>
+</div>
+</div>
 </div>
