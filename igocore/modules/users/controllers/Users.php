@@ -150,65 +150,44 @@ class Users extends Front_Controller
         $ret = '';
         $em = $this->input->post('em1');
 
-        // TODO
+        $userrec = $this->user_model->find_by('email', $em);
+        $banned = $userrec == null ? '' : $userrec->banned;
+
+        // TODO - handle cases below as desired
         $msg = '';
-        if (isset($banned)) {
-            $msg = '
-		<div style="border:1px solid red;">
-			<p>
+        $border = 'red';
+
+        if ($banned) {
+            $msg = '<p>
 				<strong>Account Locked or Disabled</strong>
 			</p>
 			<p>
 				This account has been blocked or disabled by an administrator. 
 				If you feel this is an error, you may contact us  
 				to make an inquiry regarding the status of the account.
-			</p>
-		</div>
-	';
+			</p> ';
         } elseif (isset($confirmation)) { /* only for testing, not production */
-            $msg = '
-		<div style="border:1px solid green;">
-			<p>
+            $border='green';
+            $msg = '<p>
 				Congratulations, you have created an account recovery link.
 			</p>
 			<p>
-				<b>Please <a href="' . $special_link . '">click here</a> to reset your password.</b> 
-            </p>
-        </div>';
-        } elseif (isset($emailconfirm)) {
-            $msg = '            
-		<div style="border:1px solid green;">    
-			<p>
-				Check your email for instructions on how 
-				to recover your account.
-			</p>
-		</div>
-	';
-        } elseif (isset($no_match)) {
-            $msg = '
-		<div  style="border:1px solid red;">
-			<p class="feedback_header">
-				Email was not found.
-			</p>
-		</div>
-	';
-
-            $show_form = 1;
-        } else {
-            $msg = '
-		<p>
-			If you\'ve forgotten your password and/or username, 
-			enter the email address used for your account.'
-            /* and we will send you an e-mail
-            with instructions on how to access your account. */
-        .' </p>
-	';
+				<b>Please <a href=\"' . $special_link . '\">click here</a> to reset your password.</b> 
+            </p> ';
+        } 
+        elseif (isset($emailconfirm)) {
+            $border='green';
+            $msg = 'Check your email for instructions on how to recover your account.';
+        } 
+        else //if (isset($no_match)) 
+        {
+            $msg = 'An account with that email address could not be found.';
 
             $show_form = 1;
         }
 
-        $ret .= 'msg:"'.$msg.'", showform: "'.$show_form.'"';
+        $ret .= 'msg:"'. $msg.'", border: "'.$border.'", showform: "'.$show_form.'"';
         echo('{'.$ret.'}');
-        exit;
+            exit;
     }
 }
