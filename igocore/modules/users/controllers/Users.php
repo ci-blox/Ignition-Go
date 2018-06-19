@@ -134,6 +134,11 @@ class Users extends Front_Controller
      */
     public function forgot()
     {
+        $this->load->library('settings');
+        $min_length = $this->settings->item('auth.password_min_length');
+        $force_numbers = $this->settings->item('auth.password_force_numbers');
+        Template::set('pw_min_length', $min_length);
+        Template::set('pw_force_numbers', $force_numbers);
         Template::set('secarea', '');
         Template::set('secareatitleorlogo', 'Ignition Go');
         Template::set_view('securinator/auth/forgot');
@@ -189,5 +194,13 @@ class Users extends Front_Controller
         $ret .= 'msg:"'. $msg.'", border: "'.$border.'", showform: "'.$show_form.'"';
         echo('{'.$ret.'}');
             exit;
+    }
+
+    public function reset_password(){
+        $newpw=$_POST['newpw'];
+        $pw_hash=$this->auth->hash_password($newpw)['hash'];
+        $this->db->where('email',$_POST['email']);
+        $this->db->set('password_hash',$pw_hash);
+        return $this->db->update('users');
     }
 }
