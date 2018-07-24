@@ -43,6 +43,10 @@
         border-radius:6px;
     }
 
+.below-login{
+    text-align:center;
+    margin: 10px auto;
+}
 </style>
 
 <head>
@@ -57,7 +61,7 @@
     </div>
 
     <div class="login-box-body" id="login-box-body">
-        
+        <em>Please login to access our secure area.</em>
         <form action="<?php echo base_url($secarea); ?>/check/login" method="post" accept-charset="utf-8">
             <div class="form-group">
                 <label for="username">Username</label>
@@ -69,10 +73,12 @@
                 <span class="fa fa-lock form-control-feedback" style="position: relative; left: 220px; top: 40px;"></span>
                 <input type="password" name="password" value="" id="password" class="form-control" />
             </div>
+            <?php if (isset($settings['auth.allow_remember']) && $settings['auth.allow_remember'] == 1) { ?>
             <div class="form-group icheck" id="rememberme-div">
                 <input type="checkbox" class="form-check-input" id="rememberme">
                 <label class="form-check-label" for="rememberme">Remember me</label>
             </div>
+            <?php } ?>
             <div class="form-group" id="forgot-div">
                 <a href="/users/forgot" id="forgot-password">Forgot password?</a>
             </div>
@@ -82,4 +88,8 @@
             </div>
         </form>
     </div>
+<div class="below-login">
+<?php if (isset($settings['auth.allow_register']) && $settings['auth.allow_register'] == 1) { ?>
+<a id="register_now" href="/users/register">Or Request An Account</a></div>
+<?php } ?>
 </div>

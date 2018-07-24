@@ -26,8 +26,17 @@ class Check extends Front_Controller
 
         Template::set_theme('backend');
         //$this->lang->load('users');
-        $this->siteSettings = $this->settings->find_all();
-        //if ($this->siteSettings['auth.password_show_labels'] == 1) {
+
+        $allSettings = $this->settings->find_all();
+
+        // Filter ettings
+        $s = array();
+        foreach ($allSettings as $k =>$val) {
+            if (substr($k,0,4)=='auth')
+                $s[$k] = $val;
+        }
+        $this->siteSettings = $s;
+        //if $this->siteSettings['auth.password_show_labels'] == 1) {
            //js('users', 'password_strength.js');
            //js('users', 'jquery.strength.js');
         //}
@@ -58,7 +67,7 @@ class Check extends Front_Controller
                 $this->input->post('remember_me') == '1'
             )
         ) {
-          /**  TO DO: log_activity( $this->auth->user_id(),
+          /*  TO DO: log_activity( $this->auth->user_id(),
                 lang('us_log_logged_in') . ': ' . $this->input->ip_address(),
           */
             // If possible, send the user to the requested page.
@@ -69,6 +78,9 @@ class Check extends Front_Controller
             // Go to main destination.
             Template::redirect($this->loginDest);
         }
+
+        // Pass settings.
+        Template::set('settings', $this->siteSettings);
 
         // Prompt the user to login.
         Template::set('secarea', 'admin');
