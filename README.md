@@ -1,14 +1,14 @@
 # Ignition Go     |  [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NV6YA38KWC8U4)
 <small>  &nbsp;Status:</small> <img src="https://travis-ci.org/ci-blox/Ignition-Go.svg?branch=master"/> <img src="https://styleci.io/repos/49680592/shield?style=plastic&branch=master" />
 
-A Modular (HMVC) App Building Framework - complete with front end, REST api, and admin area
+A Modular (HMVC) App Building Framework - complete with front end, REST api, and 2 admin areas (Admin / Secure)
 
-*LATEST NEWS: WE HAVE UPDATED TO BOOTSTRAP 4.0 AND USE YARN INSTEAD OF NPM / BOWER. (if you want the old Bootstrap 3.3 see the previous releases)*
+*LATEST NEWS: WE HAVE UPDATED TO BOOTSTRAP 4.1 (including buildablox) AND USE YARN INSTEAD OF BOWER. (if you want the old Bootstrap 3.3 see the previous releases)*
 
 - create "blox" modules to build enterprise class web applications
-- uses Codeigniter 3.x and now Bootstrap 4.0.x
+- uses Codeigniter 3.x and now Bootstrap 4.1.x
 - can be used as a quickstart project starter/boilerplate
-- *What are blox?* "Blox" are just pluggable modules or applets that are commonly used in web applications. Ignition Go includes a web-based generator. Planned example "blox" would be a bulk emailer, report manager, and many more!!!  
+- *What are blox?* "Blox" are just pluggable modules or applets that are commonly used in web applications. Ignition Go includes a web-based generator (see BuildABlox). Planned example "blox" would be a bulk emailer, report manager, and many more!!!  
 
 ### Documentation
 Documentation is now available: [Ignition-Go Documentation on GitHub] (http://ci-blox.github.io/Ignition-Go/#/concepts/ACL)
@@ -22,7 +22,7 @@ Take a look at the key concepts documents and also see the /docs folder for more
 
 ### Installing 
 
-****NOTE: now using [Yarn](https://yarnpkg.com/en/) for packages (so NPM and Bower are now totally optional).
+****NOTE: now using [Yarn](https://yarnpkg.com/en/) for packages (so Bower is not needed / optional).
 
 1. GIT clone this repository
 
@@ -70,7 +70,7 @@ Ignition Go is a jumpstart for your rapid development:
 * Admin Panel with AdminLTE v2 theme
 * Includes usage of many other 3rd party optional libraries via Composer, NPM or Yarn
 * API Site to handle RESTful endpoints
-* User authentication (optional) for Frontend Website (Sign Up, Login, Forgot Password, et al)
+* User authentication (optional) for secure area in Frontend Website (Sign Up, Login, Forgot Password, et al)
 * User authentication for Admin Panel (Login, Change Password, et al)
 * Preset layouts and templates
 * Preset asset pipeline (e.g. minify scripts, image optimization) via Gulp (reference from [gulp-starter 2.0 branch](https://github.com/greypants/gulp-starter/tree/2.0))
@@ -125,8 +125,8 @@ public/assets/
     uploads/                    --- Default directory of upload files, where permission should set as writable
 gulpfile.js/                    --- Task runner following gulp-starter 2.0 practice
 sql/                            --- MySQL files
-ignitcore/                         --- Ignition Go core files
-ignitcore/system/                         --- CodeIgniter core files (clean CI3 installation with modifications only to reference IGO core)
+igocore/                         --- Ignition Go core files
+igocore/system/                         --- CodeIgniter core files (clean CI3 installation with modifications only to reference IGO core)
 ```
 
 ### Asset Customization (e.g. additional js/css files)
