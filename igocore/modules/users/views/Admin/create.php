@@ -20,19 +20,7 @@ $id = isset($usermaint->id) ? $usermaint->id : '';
     	<?php echo lang('usermaint_area_title'); ?>
     </h3>
     <?php echo form_open($this->uri->uri_string(), 'class="form-horizontal"'); ?>
-        <fieldset>
-            
-
-            <?php // Change the values in this array to populate your dropdown as required
-                $options = array(
-                     'admin' =>  'admin ',
-                     'staff' =>  'staff ',
-                     'user' =>  'user ',
-                     'support' =>  'support ',
-                );
-                echo form_dropdown(array('name' => 'role'), $options, set_value('role', isset($usermaint->role) ? $usermaint->role : ''), lang('usermaint_field_role'));
-            ?>
-
+    
             <div class="form-group<?php echo form_error('email') ? ' error' : ''; ?>">
                 <?php echo form_label(lang('usermaint_field_email') . lang('app_form_label_required'), 'email', array('class' => 'control-label')); ?>
                 <div class='controls'>
@@ -48,7 +36,87 @@ $id = isset($usermaint->id) ? $usermaint->id : '';
                     <span class='help-inline'><?php echo form_error('username'); ?></span>
                 </div>
             </div>
+            <div class="card">
+		        <div class="card-body">
+		            <div class="row">
+		                <div class="col-md-12">
+		                    <h4>Create User</h4>
+		                    <hr>
+		                </div>
+		            </div>
+		            <div class="row">
+		                <div class="col-md-12">
+		                    <form>
+                            <div class="form-group row<?php echo form_error('role') ? ' error' : ''; ?>">
+                                <label for="role" class="col-4 col-form-label">User 
+                                    Role*</label> 
+                                <div class="col-8">
 
+            <?php // Change the values in this array to populate your dropdown as required
+                $options = array(
+                     'admin' =>  'admin ',
+                     'staff' =>  'staff ',
+                     'user' =>  'user ',
+                     'support' =>  'support ',
+                );
+                echo form_dropdown(array('name' => 'role'), $options, set_value('role', isset($usermaint->role) ? $usermaint->role : ''), lang('usermaint_field_role'));
+            ?>
+                                </div>
+                              </div>
+                            <div class="form-group row<?php echo form_error('username') ? ' error' : ''; ?>">
+                                <label for="username" class="col-4 col-form-label">User Name*</label> 
+                                <div class="col-8">
+                                  <input id='username' name="username" type='text' placeholder="Username"class="form-control here" required='required' name='username' maxlength='30' value="<?php echo set_value('username', isset($usermaint->username) ? $usermaint->username : ''); ?>" />
+                                  <span class='help-inline'><?php echo form_error('username'); ?></span>
+
+                                </div>
+                              </div>
+                              <div class="form-group row<?php echo form_error('first_name') ? ' error' : ''; ?>">
+                                <label for="name" class="col-4 col-form-label">First Name*</label> 
+                                <div class="col-8">
+                                  <input id="name" name="name" placeholder="First Name" class="form-control here" type="text">
+                                </div>
+                              </div>
+                              <div class="form-group row<?php echo form_error('last_name') ? ' error' : ''; ?>">
+                                <label for="lastname" class="col-4 col-form-label">Last Name*</label> 
+                                <div class="col-8">
+                                  <input id="lastname" name="lastname" placeholder="Last Name" class="form-control here" type="text">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="text" class="col-4 col-form-label">Time Zone</label> 
+                                <div class="col-8">
+                                <?php // Populate dropdown with timezones
+                $options = generate_timezone_list();
+                echo form_dropdown(array('name' => 'timezone'), $options, set_value('timezone', isset($usermaint->timezone) ? $usermaint->timezone : 'America/Chicago'), lang('usermaint_field_timezone'));
+            ?>                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="select" class="col-4 col-form-label">Display Name public as</label> 
+                                <div class="col-8">
+                                  <select id="select" name="select" class="custom-select">
+                                    <option value="admin">Admin</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <label for="email" class="col-4 col-form-label">Email*</label> 
+                                <div class="col-8">
+                                  <input id="email" name="email" placeholder="Email" class="form-control here" required="required" type="text">
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                <div class="offset-4 col-8">
+                                  <button name="submit" type="submit" class="btn btn-primary">Create User</button>
+                                </div>
+                              </div>
+                            </form>
+		                </div>
+		            </div>
+		            
+		        </div>
+            </div>
+            
             <div class="form-group<?php echo form_error('first_name') ? ' error' : ''; ?>">
                 <?php echo form_label(lang('usermaint_field_first_name') . lang('app_form_label_required'), 'first_name', array('class' => 'control-label')); ?>
                 <div class='controls'>
@@ -231,3 +299,53 @@ $id = isset($usermaint->id) ? $usermaint->id : '';
         </fieldset>
     <?php echo form_close(); ?>
 </div>
+<?php // Modified version of the timezone list function from http://stackoverflow.com/a/17355238/507629
+// Includes current time for each timezone (would help users who don't know what their timezone is)
+
+function generate_timezone_list() 
+{
+    static $regions = array(
+        DateTimeZone::AFRICA,
+        DateTimeZone::AMERICA,
+        DateTimeZone::ANTARCTICA,
+        DateTimeZone::ASIA,
+        DateTimeZone::ATLANTIC,
+        DateTimeZone::AUSTRALIA,
+        DateTimeZone::EUROPE,
+        DateTimeZone::INDIAN,
+        DateTimeZone::PACIFIC,
+    );
+
+    $timezones = array();
+    foreach( $regions as $region )
+    {
+        $timezones = array_merge( $timezones, DateTimeZone::listIdentifiers( $region ) );
+    }
+
+    $timezone_offsets = array();
+    foreach( $timezones as $timezone )
+    {
+        $tz = new DateTimeZone($timezone);
+        $timezone_offsets[$timezone] = $tz->getOffset(new DateTime);
+    }
+
+    // sort timezone by timezone name
+    ksort($timezone_offsets);
+
+    $timezone_list = array();
+    foreach( $timezone_offsets as $timezone => $offset )
+    {
+        $offset_prefix = $offset < 0 ? '-' : '+';
+        $offset_formatted = gmdate( 'H:i', abs($offset) );
+
+        $pretty_offset = "UTC${offset_prefix}${offset_formatted}";
+        
+        $t = new DateTimeZone($timezone);
+        $c = new DateTime(null, $t);
+        $current_time = $c->format('g:i A');
+
+        $timezone_list[$timezone] = "(${pretty_offset}) $timezone - $current_time";
+    }
+
+    return $timezone_list;
+}

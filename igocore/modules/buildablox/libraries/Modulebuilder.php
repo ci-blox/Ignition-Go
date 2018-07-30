@@ -332,6 +332,16 @@ class Modulebuilder
                         $content['views'][$context_name][$action_name] = $this->buildView($data);
                     }
                 }
+
+                 // Build the create/edit _fields view.
+                 if (in_array('create', $action_names) ||
+                     in_array('edit', $action_names))
+                 {
+                     $data['action_name'] = '_' . $module_name_lower.'_fields';
+                     $data['action_label'] = '';
+                     $content['views'][$context_name]['_' . $module_name_lower.'_fields'] = $this->buildView($data);
+                 }
+
                 // Build the js view.
                 $data['action_name'] = '_' . $module_name_lower.'_js';
                 $data['action_label'] = '';
@@ -680,14 +690,19 @@ class Modulebuilder
                 $view_name = $action_name;
                 break;
             default:
-                $view_name = 'default';
-                break;
+            $view_name = 'default';
+            break;
         }
-
+        
         if (! function_exists('strip_slashes')) {
             $this->CI->load->helper('string');
         }
 
+        if (strpos($action_name,'_js')>0)
+        $view_name = 'js';
+        if (strpos($action_name,'_fields')>0)
+        $view_name = 'fields';
+        
         return $this->CI->load->view("files/view_{$view_name}", $data, true);
     }
 

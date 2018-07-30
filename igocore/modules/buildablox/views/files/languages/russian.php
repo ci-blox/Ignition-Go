@@ -20,7 +20,7 @@ for ($counter = 1; $field_total >= $counter; $counter++) {
 
 echo $lang = "<?php defined('BASEPATH') || exit('No direct script access allowed');
 " . PHP_EOL . "
-\$lang['{$module_name_lower}_manage']            = 'Управление записями {$module_name}';
+\$lang['{$module_name_lower}_manage']            = 'Управление записями {$entity_name_plural} ';
 \$lang['{$module_name_lower}_edit']              = 'Рекдактировать';
 \$lang['{$module_name_lower}_true']              = 'Да';
 \$lang['{$module_name_lower}_false']             = 'Нет';
@@ -29,25 +29,25 @@ echo $lang = "<?php defined('BASEPATH') || exit('No direct script access allowed
 \$lang['{$module_name_lower}_new']               = 'Новый';
 \$lang['{$module_name_lower}_edit_text']         = 'Редактировать в соответствии с вашими потребностями';
 \$lang['{$module_name_lower}_no_records']        = 'Нет такой записи в {$module_name_lower}.';
-\$lang['{$module_name_lower}_create_new']        = 'Создать новую запись в {$module_name}.';
-\$lang['{$module_name_lower}_create_success']    = 'Запись успешно создана в {$module_name}';
+\$lang['{$module_name_lower}_create_new']        = 'Создать новую запись в {$entity_name_single} .';
+\$lang['{$module_name_lower}_create_success']    = 'Запись успешно создана в {$entity_name_single} ';
 \$lang['{$module_name_lower}_create_failure']    = 'Возникли проблемы при создании записи в {$module_name_lower}: ';
 \$lang['{$module_name_lower}_create_new_button'] = 'Создать';
-\$lang['{$module_name_lower}_invalid_id']        = 'Не корректный ID для {$module_name}';
-\$lang['{$module_name_lower}_edit_success']      = 'Изменения в {$module_name} успешно сохранены.';
+\$lang['{$module_name_lower}_invalid_id']        = 'Не корректный ID для {$entity_name_single} ';
+\$lang['{$module_name_lower}_edit_success']      = 'Изменения в {$entity_name_single}  успешно сохранены.';
 \$lang['{$module_name_lower}_edit_failure']      = 'Возникли проблемы при редактировании записи из {$module_name_lower}: ';
 \$lang['{$module_name_lower}_delete_success']    = 'Запись(и) успешно удалены.';
 \$lang['{$module_name_lower}_delete_failure']    = 'Невозможно удалить запись: ';
 \$lang['{$module_name_lower}_delete_error']      = 'Вы не выбрали что удалять.';
 \$lang['{$module_name_lower}_actions']           = 'Действия';
 \$lang['{$module_name_lower}_cancel']            = 'Отмена';
-\$lang['{$module_name_lower}_delete_record']     = 'Удалить эту запись из {$module_name}';
+\$lang['{$module_name_lower}_delete_record']     = 'Удалить эту запись из {$entity_name_single} ';
 \$lang['{$module_name_lower}_delete_confirm']    = 'Вы уверены что хотите удалить эту запись из {$module_name_lower}?';
-\$lang['{$module_name_lower}_edit_heading']      = 'Редактировать {$module_name}';
+\$lang['{$module_name_lower}_edit_heading']      = 'Редактировать {$entity_name_single} ';
 
 // Create/Edit Buttons
-\$lang['{$module_name_lower}_action_edit']   = 'Сохранить запись из {$module_name}';
-\$lang['{$module_name_lower}_action_create'] = 'Создать новую запись в {$module_name}.';
+\$lang['{$module_name_lower}_action_edit']   = 'Сохранить запись из {$entity_name_single} ';
+\$lang['{$module_name_lower}_action_create'] = 'Создать новую запись в {$entity_name_single} .';
 
 // Activities
 \$lang['{$module_name_lower}_act_create_record'] = 'Создана запись с ID';
@@ -69,6 +69,6 @@ echo $lang = "<?php defined('BASEPATH') || exit('No direct script access allowed
 // Module Details
 \$lang['{$module_name_lower}_module_name']        = '{$module_name}';
 \$lang['{$module_name_lower}_module_description'] = '{$module_description}';
-\$lang['{$module_name_lower}_area_title']         = '{$module_name}';
+\$lang['{$module_name_lower}_area_title']         = '{$entity_name_plural} ';
 
 // Fields{$fieldEntries}";

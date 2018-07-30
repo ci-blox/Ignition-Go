@@ -1,6 +1,7 @@
 <?php if ( ! $writable) : ?>
 <div class="alert alert-danger">
 	<p>
+		
 		<?php echo lang('mb_not_writable_note'); ?>
 	</p>
 </div>

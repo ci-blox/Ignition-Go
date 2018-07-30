@@ -66,6 +66,6 @@ echo $lang = "<?php defined('BASEPATH') || exit('No direct script access allowed
 // Module Details
 \$lang['{$module_name_lower}_module_name'] = '{$module_name}';
 \$lang['{$module_name_lower}_module_description'] = '{$module_description}';
-\$lang['{$module_name_lower}_area_title'] = '{$module_name}';
+\$lang['{$module_name_lower}_area_title'] = '{$entity_name_plural}';
 
 // Fields{$fieldEntries}";

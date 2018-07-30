@@ -347,7 +347,7 @@ if ($db_required != '') {
 		}";
 
     $editFind = "
-        Template::set('{$module_name_lower}', \$this->{$module_name_lower}_model->find(\$id));
+        Template::set('record', \$this->{$module_name_lower}_model->find(\$id));
         ";
 
     $editSave = "

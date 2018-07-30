@@ -103,18 +103,18 @@ if (\$can_delete) {
 ?>
 <div class='row'>
 	<div class='col-md-12'>
-		<div class='box'>
-			<div class='box-header'>
-				<h3 class='box-title'>
+		<div class='card'>
+			<div class='card-header'>
+				<h3 class='card-title'>
 					<?php echo lang('{$module_name_lower}_area_title'); ?>
 				</h3>
-				<div class='box-tools'>
+				<div class='card-tools'>
 					<?php if (\$can_edit) : ?>
 					<a href='<?php echo site_url('/" . strtolower($controller_name) . "/{$module_name_lower}/create'); ?>' class='btn btn-success btn-sm'>Add</a>
 					<?php endif; ?>
 				</div>
 			</div>
-			<div class='box-body'>
+			<div class='card-body'>
 				<?php echo form_open(\$this->uri->uri_string()); ?>
 				<table class='table table-striped'>
 					<thead>

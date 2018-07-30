@@ -7,7 +7,7 @@
  */
 $lang = '<?php defined(\'BASEPATH\') || exit(\'No direct script access allowed\');' .
 PHP_EOL . '
-$lang[\'' . $module_name_lower . '_manage\']      = \'Gestisci ' . $module_name . '\';
+$lang[\'' . $module_name_lower . '_manage\']      = \'Gestisci ' . $entity_name_plural . '\';
 $lang[\'' . $module_name_lower . '_edit\']        = \'Modifica\';
 $lang[\'' . $module_name_lower . '_true\']        = \'Vero\';
 $lang[\'' . $module_name_lower . '_false\']       = \'Falso\';
@@ -15,26 +15,26 @@ $lang[\'' . $module_name_lower . '_create\']      = \'Crea\';
 $lang[\'' . $module_name_lower . '_list\']        = \'Elenca\';
 $lang[\'' . $module_name_lower . '_new\']       = \'Nuovo\';
 $lang[\'' . $module_name_lower . '_edit_text\']     = \'Modifica questo secondo le tue necessità\';
-$lang[\'' . $module_name_lower . '_no_records\']    = \'Non ci sono ' . $module_name_lower . ' nel sistema.\';
-$lang[\'' . $module_name_lower . '_create_new\']    = \'Crea un nuovo ' . $module_name . '.\';
-$lang[\'' . $module_name_lower . '_create_success\']  = \'' . $module_name . ' creato con successo.\';
-$lang[\'' . $module_name_lower . '_create_failure\']  = \'C\\\'è stato un problema nella creazione di ' . $module_name_lower . ': \';
-$lang[\'' . $module_name_lower . '_create_new_button\'] = \'Crea nuovo ' . $module_name . '\';
-$lang[\'' . $module_name_lower . '_invalid_id\']    = \'ID ' . $module_name . ' non valido.\';
-$lang[\'' . $module_name_lower . '_edit_success\']    = \'' . $module_name . ' creato con successo.\';
-$lang[\'' . $module_name_lower . '_edit_failure\']    = \'C\\\'è stato un errore nel salvataggio di ' . $module_name_lower . ': \';
+$lang[\'' . $module_name_lower . '_no_records\']    = \'Non ci sono ' . $entity_name_plural . ' nel sistema.\';
+$lang[\'' . $module_name_lower . '_create_new\']    = \'Crea un nuovo ' . $entity_name_single . '.\';
+$lang[\'' . $module_name_lower . '_create_success\']  = \'' . $entity_name_single  . ' creato con successo.\';
+$lang[\'' . $module_name_lower . '_create_failure\']  = \'C\\\'è stato un problema nella creazione di ' . $entity_name_single . ': \';
+$lang[\'' . $module_name_lower . '_create_new_button\'] = \'Crea nuovo ' . $entity_name_single  . '\';
+$lang[\'' . $module_name_lower . '_invalid_id\']    = \'ID ' . $entity_name_single  . ' non valido.\';
+$lang[\'' . $module_name_lower . '_edit_success\']    = \'' . $entity_name_single  . ' creato con successo.\';
+$lang[\'' . $module_name_lower . '_edit_failure\']    = \'C\\\'è stato un errore nel salvataggio di ' . $entity_name_single . ': \';
 $lang[\'' . $module_name_lower . '_delete_success\']  = \'record(s) creati con successo.\';
 $lang[\'' . $module_name_lower . '_delete_failure\']  = \'Non possiamo eliminare il record: \';
 $lang[\'' . $module_name_lower . '_delete_error\']    = \'Non hai selezionato alcun record da eliminare.\';
 $lang[\'' . $module_name_lower . '_actions\']     = \'Azioni\';
 $lang[\'' . $module_name_lower . '_cancel\']      = \'Cancella\';
-$lang[\'' . $module_name_lower . '_delete_record\']   = \'Elimina questo ' . $module_name . '\';
-$lang[\'' . $module_name_lower . '_delete_confirm\']  = \'Sei sicuro di voler eliminare questo ' . $module_name_lower . '?\';
-$lang[\'' . $module_name_lower . '_edit_heading\']    = \'Modifica ' . $module_name . '\';
+$lang[\'' . $module_name_lower . '_delete_record\']   = \'Elimina questo ' . $entity_name_single  . '\';
+$lang[\'' . $module_name_lower . '_delete_confirm\']  = \'Sei sicuro di voler eliminare questo ' . $entity_name_single . '?\';
+$lang[\'' . $module_name_lower . '_edit_heading\']    = \'Modifica ' . $entity_name_single  . '\';
 
 // Create/Edit Buttons
-$lang[\'' . $module_name_lower . '_action_edit\']   = \'Salva ' . $module_name . '\';
-$lang[\'' . $module_name_lower . '_action_create\']   = \'Crea ' . $module_name . '\';
+$lang[\'' . $module_name_lower . '_action_edit\']   = \'Salva ' . $entity_name_single  . '\';
+$lang[\'' . $module_name_lower . '_action_create\']   = \'Crea ' . $entity_name_single  . '\';
 
 // Activities
 $lang[\'' . $module_name_lower . '_act_create_record\'] = \'Creato il record con ID\';
@@ -53,7 +53,7 @@ $lang[\'' . $module_name_lower . '_column_modified\'] = \'Modificato\';
 // Module Details
 $lang[\'' . $module_name_lower . '_module_name\'] = \'' . $module_name . '\';
 $lang[\'' . $module_name_lower . '_module_description\'] = \'' . $module_description . '\';
-$lang[\'' . $module_name_lower . '_area_title\'] = \'' . $module_name . '\';
+$lang[\'' . $module_name_lower . '_area_title\'] = \'' . $entity_name_plural . '\';
 
 // Fields
 ';
