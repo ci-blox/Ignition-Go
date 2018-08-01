@@ -195,5 +195,7 @@ function generate_timezone_list()
             <span class='help-inline'><?php echo form_error('active'); ?></span>
         </div>
     </div>
+<?php else : ?>
+<input type='hidden' id='active' name='active'  value='1'>
 <?php endif; ?>
 <input type="hidden" id="activate_hash" name="activate_hash" placeholder="<?php echo lang('usermaint_field_activate_hash');?>" class="form-control" value="<?php echo set_value('activate_hash', isset($record->activate_hash) ? $record->activate_hash : ''); ?>"  /> 
