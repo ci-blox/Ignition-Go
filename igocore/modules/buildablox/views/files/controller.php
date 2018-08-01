@@ -396,7 +396,7 @@ $mb_create = "
         {$createSave}
 
 		Template::set('subpage_title', lang('{$module_name_lower}_action_create'));
-
+        Template::set('record', array());
 		Template::render();
 	}";
 

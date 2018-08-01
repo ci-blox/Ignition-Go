@@ -102,7 +102,7 @@ for ($counter = 1; $field_total >= $counter; $counter++) {
                 $max++; // Add 1 to allow for the decimal point
             }
 		}
-
+        if (strpos($max,',')<1)
         $tempRules[] = "max_length[{$max}]";
 	}
 
