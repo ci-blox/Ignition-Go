@@ -74,3 +74,4 @@ $lang['us_zipcode']					= 'Zipcode';
 $lang['us_timezone']				= 'Timezone';
 
 $lang['us_user_settings']           = 'Settings';
+$lang['us_admin_area']           = 'Go to Admin Area';

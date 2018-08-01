@@ -61,7 +61,7 @@
             </a>
             <ul class="dropdown-menu scale-up" style="min-width:190px;">
               <!-- User image -->
-              <li class="user-header">
+              <li class="user-header" style="padding-left:10px;">
                 <i class="fa fa-user fa-2x"></i>
                 <p>
                   <?php echo $current_user->username; ?>
@@ -71,10 +71,10 @@
               <li class="user-body">
               </li>
               <!-- Menu Footer-->
-              <div class="user-footer">
+              <div class="user-footer" style="min-height: 40px;">
                 <div class="pull-left">
-                  <a <?php echo check_method( 'profile'); ?> class="btn btn-sm btn-default" href="
-                    <?php echo site_url('users/profile'); ?>">
+                  <a <?php echo check_method( 'profile'); ?> class="btn btn-sm btn-primary" style="margin-left:10px;" 
+                  href="<?php echo site_url('users/profile'); ?>">
                     <?php e(lang('us_user_settings')); ?>
                   </a>
                 </div>
@@ -83,6 +83,13 @@
                     <?php e(lang('us_action_logout')); ?>
                   </a>
                 </div>
+<?php if (!empty($current_user) && $current_user->role == 'admin') : ?>
+                <div class="pull-left">
+                  <a class="btn btn-sm btn-default" href="<?php echo site_url('admin/dashboard/index'); ?>">
+                    <?php e(lang('us_admin_area')); ?>
+                  </a>
+                </div>
+<?php endif; ?>
               </div>
             </ul>
           </li>
