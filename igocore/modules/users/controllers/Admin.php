@@ -123,6 +123,8 @@ class Admin extends Admin_Controller
 				Template::set_message(lang('usermaint_create_failure') . $this->user_model->error, 'error');
             }
 		}
+        $data['record'] = array();
+
 
         foreach( $data as $key => $value )
             Template::set($key, $value);
@@ -176,7 +178,7 @@ class Admin extends Admin_Controller
             Template::set_message(lang('usermaint_delete_failure') . $this->user_model->error, 'error');
 		}
         
-        Template::set('usermaint', $this->user_model->find($id));
+        Template::set('record', $this->user_model->find($id));
 
 
         foreach( $data as $key => $value )

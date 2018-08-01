@@ -29,7 +29,7 @@ echo "<?php
 
 if (validation_errors()) :
     ?>
-    <div class='alert alert-block alert-danger fade in'>
+    <div class='alert alert-block alert-danger'>
     <a class='close' data-dismiss='alert'>&times;</a>
     <h4 class='alert-heading'>
     <?php echo lang('{$module_name_lower}_errors_message'); ?>
