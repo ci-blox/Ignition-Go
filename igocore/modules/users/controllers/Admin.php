@@ -115,7 +115,7 @@ class Admin extends Admin_Controller
 				log_activity($this->auth->user_id(), lang('usermaint_act_create_record') . ': ' . $insert_id . ' : ' . $this->input->ip_address(), 'usermaint');
 				Template::set_message(lang('usermaint_create_success'), 'success');
 
-				redirect('/admin/users');
+				redirect('/admin/users/');
 			}
 
             // Not validation error
@@ -156,7 +156,7 @@ class Admin extends Admin_Controller
 			if ($this->save_usermaint('update', $id)) {
 				log_activity($this->auth->user_id(), lang('usermaint_act_edit_record') . ': ' . $id . ' : ' . $this->input->ip_address(), 'usermaint');
 				Template::set_message(lang('usermaint_edit_success'), 'success');
-				redirect('/admin/users');
+				redirect('/admin/users/');
 			}
 
             // Not validation error

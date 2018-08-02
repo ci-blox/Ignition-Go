@@ -1,4 +1,5 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+
 $lang['us_account_deleted']			= 'Unfortunately your account has been deleted. It has not yet been purged and <strong>may still</strong> be restored. Contact the administrator at %s.';
 
 $lang['us_bad_email_pass']			= 'Incorrect email or password.';
@@ -185,3 +186,7 @@ $lang['us_forced_password_reset_note']	= 'Due to security reasons, you must choo
 $lang['us_back_to']					= 'Back to ';
 $lang['us_no_account']              = 'No account?';
 $lang['us_force_password_reset']    = 'Force password reset on next login';
+
+// User meta data
+$lang['user_meta_state'] = 'State';
+$lang['user_meta_country'] = 'Country';

@@ -58,7 +58,7 @@ class Users extends Front_Controller
 
         if (isset($_POST['save'])) {
             $user_id = $this->current_user->id;
-            if ($this->save_user('update', $user_id, $meta_fields)) {
+            if ($this->save_user($user_id, $meta_fields)) {
                 $user = $this->user_model->find($user_id);
                 $log_name = empty($user->display_name) ?
                     ($this->siteSettings['auth.use_usernames'] ? $user->username : $user->email)
@@ -237,8 +237,8 @@ class Users extends Front_Controller
 		// Setting the payload for Events system.
 		$payload = array ( 'user_id' => $id, 'data' => $this->input->post() );
 
-        
-		$this->form_validation->set_rules('email', 'lang:us_email', 'required|trim|valid_email|max_length[120]|unique[users.email,users.id]');
+        if ($this->current_user->email != $_POST['email'])
+	    	$this->form_validation->set_rules('email', 'lang:us_email', 'required|trim|valid_email|max_length[120]|unique[users.email,users.id]');
 		$this->form_validation->set_rules('password', 'lang:us_password', 'max_length[120]|valid_password');
 
 		// check if a value has been entered for the password - if so then the pass_confirm is required
@@ -252,7 +252,8 @@ class Users extends Front_Controller
 		{
 			$username_required = 'required|';
 		}
-		$this->form_validation->set_rules('username', 'lang:usermaint_username', $username_required . 'trim|max_length[30]|unique[users.username,users.id]');
+        if ($this->current_user->username != $_POST['username'])
+    		$this->form_validation->set_rules('username', 'lang:usermaint_username', $username_required . 'trim|max_length[30]|unique[users.username,users.id]');
 
 		$this->form_validation->set_rules('language', 'lang:usermaint_language', 'required|trim');
 		$this->form_validation->set_rules('timezone', 'lang:usermaint_timezone', 'required|trim|max_length[50]');
