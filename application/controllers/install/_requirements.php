@@ -36,13 +36,13 @@ if (!extension_loaded('mysqli')) {
 	$requirement3 = "<span class='label label-success'>Enabled</span>";
 }
 
-if (!extension_loaded('mcrypt')) {
+/* if (!extension_loaded('mcrypt')) {
 	$error = true;
 	$requirement4 = "<span class='label label-danger'>Not enabled</span>";
 } else {
 	$requirement4 = "<span class='label label-success'>Enabled</span>";
 }
-
+*/
 
 if (!extension_loaded('mbstring')) {
 	$error = true;
@@ -123,7 +123,7 @@ if (!is_really_writable(APPPATH . 'config/database.php')){
 	</thead>
 	<tbody>
 		<tr>
-			<td>PHP 5.6+ </td>
+			<td>PHP 5.6.*, 7.1.*, 7.2.* </td>
 			<td><?php echo $requirement1; ?></td>
 		</tr>
 		<tr>
@@ -137,10 +137,6 @@ if (!is_really_writable(APPPATH . 'config/database.php')){
 		<tr>
 			<td>MySQLi PHP Extension</td>
 			<td><?php echo $requirement3; ?></td>
-		</tr>
-		<tr>
-			<td>Mcrypt PHP Extension</td>
-			<td><?php echo $requirement4; ?></td>
 		</tr>
 		<tr>
 			<td>MBString PHP Extension</td>
