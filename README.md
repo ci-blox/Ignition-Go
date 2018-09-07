@@ -110,6 +110,7 @@ application/                    --- Main application (CodeIgniter) source folder
             views/              --- Views for Admin Panel; can reuse Frontend views, or override by using same path/filename
         api/                    --- A module specific for REST API endpoints
         buildablox/             --- A module to generate and add/remove blox
+        logs/                   --- A module for viewing the daily logs
         securinator/            --- A module for roles, permissions, security settings
         translate/              --- A module to edit  (and auto-generate**) translations
     third_party/
