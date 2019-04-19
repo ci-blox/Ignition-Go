@@ -3,10 +3,10 @@
 
 A Modular (HMVC) App Building Framework - complete with front end, REST api, and 2 admin areas (Admin / Secure)
 
-*LATEST NEWS: WE HAVE UPDATED TO BOOTSTRAP 4.1 (including buildablox) AND USE YARN INSTEAD OF BOWER. (if you want the old Bootstrap 3.3 see the previous releases)*
+*LATEST NEWS: WE HAVE UPDATED TO BOOTSTRAP 4 (including buildablox) AND USE YARN INSTEAD OF BOWER. (if you want the old Bootstrap 3.3 see the previous releases)*
 
 - create "blox" modules to build enterprise class web applications
-- uses Codeigniter 3.x and now Bootstrap 4.1.x
+- uses Codeigniter 3.x and Bootstrap 4.x.x
 - can be used as a quickstart project starter/boilerplate
 - *What are blox?* "Blox" are just pluggable modules or applets that are commonly used in web applications. Ignition Go includes a web-based generator (see BuildABlox). Planned example "blox" would be a bulk emailer, report manager, and many more!!!  
 
