@@ -30,7 +30,7 @@
   "private": false,
   "dependencies": {
     "admin-lte": "^2.4.2",
-    "bootstrap": "4",
+    "bootstrap": ">=4.3.1",
     "font-awesome": "^4.7.0",
     "ionicons": "^3.0.0",
     "jquery": "^3.3.1",
