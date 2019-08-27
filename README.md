@@ -16,7 +16,7 @@ Take a look at the key concepts documents and also see the /docs folder for more
 
 ### Server Requirements (Preferred)
 
-* **PHP 5.6, 7.1, 7.2** you can run in lower (5.6) but the recommended version to use is [PHP 7.1](http://php.net/manual/en/migration70.php) for this your projects. 
+* **PHP 5.6, 7.1, 7.2** you can run in lower (5.6) but the recommended version to use is [PHP 7.1](http://php.net/manual/en/migration70.php) for this your projects.  PHP 7.3 is now supported in the latest code.
 * **Apache 2.2+** with rewrite mod enabled
 * **MySQL 5.5+ or MariaDb**
 
@@ -29,10 +29,10 @@ Take a look at the key concepts documents and also see the /docs folder for more
 Example: git clone https://github.com/ci-blox/Ignition-Go.git myigoapp
 
 2. Either:<br>
-a) map your webserver to the 'public' folder to use pre-installed versions of packages<br>
-(skip to step 7)<br>
+2a) use Yarn and Gulpjs (highly recommended for non-experts) - go to step 3<br>
 -or-<br>
-b) use Yarn and Gulpjs (recommended)
+2b) map your webserver to the 'public' folder to use pre-installed versions of packages<br>
+(skip to step 8)<br>
 
 3. Install NPM [node.js](http://nodejs.org/): package manager for node modules, and [install Yarn] (https://yarnpkg.com/lang/en/docs/install/) 
 
@@ -42,22 +42,23 @@ Example: ```cd myigoapp```
 5. Install all the packages and components <br>
 Type: ```yarn install``` <br>
 
-6. Run 'gulp' (note that gulp will run continuously in 'watch' mode, watching for css and js changes).<br> then<br>
+6. Create an empty mySql or MariaDb database (default db name is ci_blox) and a user (default is root/no password).  Note that the database.php file in application/config contains these configuration settings.<br>
+
+Example: use a tool like HeidiSQL or phpMyAdmin and create both a database and a user with privileges that new database<br> 
+
+7. Run 'gulp' (note that gulp will run continuously in 'watch' mode, watching for css and js changes).<br> then<br>
 EITHER type: ```gulp```<br>
 OR..  type: ```gulp serve``` 
 OR..  type: ```gulp build``` which just rebuilds the JS and CSS
 
-7. (Optional, required if no gulp or in production) In Apache, map the 'public' folder to localhost or other url
+8. (Optional, required if no gulp or in production) In Apache, map the 'public' folder to localhost or other url
 
 Example: in your httpd-vhosts.conf file, add new ```<VirtualHost>``` section and restart Apache
 
-8. Create an empty mysql database and a user
+9. Go to http://[your-web-root-from-step-7]/install/init in your browser to finish using install wizard<br> 
 
-Example: use HeidiSQL and create both a database and a user with privileges to new database 
-
-9. Go to http://[your-web-root-from-step-7]/install/init in your browser to finish using install wizard 
-
-eg if you had created virtual host igotestlocal.com, then go to http://igotestlocal.com/install/init in your browser
+eg if you used gulp, goto http://localhost:8080/install/init<br>
+if you had created virtual host igotestlocal.com, then go to http://igotestlocal.com/install/init in your browser
 
 
 ### Features
