@@ -238,9 +238,9 @@ class API_Controller extends MX_Controller
     protected function get_subitems($parent_id, $subitem)
     {
         $data = array(
-		'parent_id' => (int) $parent_id,
-		'subitem' => $subitem,
-		);
+            'parent_id' => (int) $parent_id,
+            'subitem' => $subitem,
+        );
 
         $this->to_not_implemented($data);
     }
@@ -255,9 +255,9 @@ class API_Controller extends MX_Controller
     protected function create_subitem($parent_id, $subitem)
     {
         $data = array(
-		'parent_id' => (int) $parent_id,
-		'subitem' => $subitem,
-		);
+            'parent_id' => (int) $parent_id,
+            'subitem' => $subitem,
+        );
 
         $this->to_not_implemented($data);
     }
@@ -265,9 +265,9 @@ class API_Controller extends MX_Controller
     protected function update_item($id)
     {
         $data = array(
-		'item_id' => (int) $id,
-		'params' => $this->mParams,
-		);
+            'item_id' => (int) $id,
+            'params' => $this->mParams,
+        );
 
         $this->to_not_implemented($data);
     }
