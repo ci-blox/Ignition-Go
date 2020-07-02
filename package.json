@@ -22,7 +22,7 @@
     "gulp-sourcemaps": "*",
     "gulp-uglify": "^1.2.0",
     "gulp-watch": "*",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.13",
     "minimatch": "^3.0.4",
     "require-dir": "*"
   },
