@@ -29,8 +29,9 @@ class Check extends Front_Controller
 
         $allSettings = $this->settings->find_all();
 
-        // Filter ettings
+        // Filter settings
         $s = array();
+        if (!empty($allSettings))
         foreach ($allSettings as $k =>$val) {
             if (substr($k,0,4)=='auth')
                 $s[$k] = $val;

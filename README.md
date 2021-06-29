@@ -3,8 +3,6 @@
 
 A Modular (HMVC) App Building Framework - complete with front end, REST api, and 2 admin areas (Admin / Secure)
 
-*LATEST NEWS: WE HAVE UPDATED TO BOOTSTRAP 4 (including buildablox) AND USE YARN INSTEAD OF BOWER. (if you want the old Bootstrap 3.3 see the previous releases)*
-
 - create "blox" modules to build enterprise class web applications
 - uses Codeigniter 3.x and Bootstrap 4.x.x
 - can be used as a quickstart project starter/boilerplate
@@ -68,7 +66,7 @@ Ignition Go is a jumpstart for your rapid development:
 * Modular design using CodeIgniter HMVC extension
 * Custom config files (sites.php, locale.php) for easy configuration of website behavior
 * Frontend with multiple themes (with over 16 free Bootswatch themes)
-* Admin Panel with AdminLTE v2 theme
+* Admin Panel with AdminLTE v3 theme
 * Includes usage of many other 3rd party optional libraries via Composer, NPM or Yarn
 * API Site to handle RESTful endpoints
 * User authentication (optional) for secure area in Frontend Website (Sign Up, Login, Forgot Password, et al)
