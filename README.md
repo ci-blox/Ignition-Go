@@ -16,8 +16,8 @@ Take a look at the key concepts documents and also see the /docs folder for more
 
 ### Server Requirements (Preferred)
 
-* **PHP 5.6, 7.1, 7.2** you can run in lower (5.6) but the recommended version to use is [PHP 7.1](http://php.net/manual/en/migration70.php) for this your projects.  PHP 7.3 is now supported in the latest code.
-* **Apache 2.2+** with rewrite mod enabled
+* **PHP 7.3** you can run in lower (5.6) but the recommended version for production to use is [PHP 7.3](http://php.net/manual/en/migration70.php) for your projects.  PHP 7.3 is now supported in the latest code and anything below PHP 7.3 is no longer officially supported.
+* **Apache 2.4+** with rewrite mod enabled
 * **MySQL 5.5+ or MariaDb**
 
 ### Installing 
@@ -136,7 +136,6 @@ igocore/system/                         --- CodeIgniter core files (clean CI3 in
 A gulp configuration (**gulpfile.js**) is included. It utilizes package and component tools from these sites:
 * NPM [node.js](http://nodejs.org/): package manager for node modules
 * [Yarn](https://yarnpkg.com/): package manager
-* (DEPRECATED) Bower [bower](http://bower.io/): manager for bower components 
 * GulpJS [gulp](http://gulpjs.com/): task runner to compile, combine, and minify
 * Guzzle [guzzle](http://guzzlephp.com/): integrated for use as a REST client or for complex curl operations
 
