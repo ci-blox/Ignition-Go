@@ -1,6 +1,6 @@
 <?php
 
-(defined('BASEPATH')) or exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /* load the MX_Loader class */
 

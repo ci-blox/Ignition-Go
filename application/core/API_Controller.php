@@ -40,15 +40,14 @@ class API_Controller extends MX_Controller
     // 	Verify access token (e.g. API Key, JSON Web Token)
     protected function verify_token()
     {
-
-		// 		TODO: implement API Key or JWT handling
+        // 		TODO: implement API Key or JWT handling
         $this->current_user = NULL;
 
         // $valid === $this->auth->login(
-		// 		$this->input->post('username'),
-		// 		$this->input->post('password'),
-		// 		0
-		// )
+        // 		$this->input->post('username'),
+        // 		$this->input->post('password'),
+        // 		0
+        // )
     }
 
     // 	verify_method
@@ -82,8 +81,7 @@ class API_Controller extends MX_Controller
     // 	Parse request to obtain request info (method, body)
     protected function parse_request()
     {
-
-		// 		GET parameters
+        // 		GET parameters
         $params = $this->input->get();
 
         // 		request body
@@ -96,17 +94,14 @@ class API_Controller extends MX_Controller
             $is_json_request = ($content_type == 'application/json' || $content_type == 'application/json; charset=UTF-8');
 
             if ($is_form_request) {
-
-				// 	check CodeIgniter input
+                // 	check CodeIgniter input
                 $form_data = $this->input->post();
 
                 if (!empty($form_data)) {
-
-					// 	save parameters from form body
+                    // 	save parameters from form body
                     $params = array_merge($params, $form_data);
                 } else {
-
-					// 	query string from text body
+                    // 	query string from text body
                     $data = file_get_contents('php://input');
 
                     parse_str($data, $temp);
@@ -114,8 +109,7 @@ class API_Controller extends MX_Controller
                     $params = array_merge($params, $temp);
                 }
             } elseif ($is_json_request) {
-
-				// 	JSON from text body
+                // 	JSON from text body
                 $data = file_get_contents('php://input');
 
                 if (!empty($data)) {
@@ -173,53 +167,51 @@ class API_Controller extends MX_Controller
         $subitem = strtolower($this->uri->rsegment(4));
 
         switch ($this->input->method(TRUE)) {
+            case 'GET':
+                if (!empty($subitem)) {
+                    $this->get_subitems($item_id, $subitem);
+                } elseif (!empty($item_id)) {
+                    $this->get_item($item_id);
+                } else {
+                    $this->get_items();
+                }
 
-			case 'GET':
-			if (!empty($subitem)) {
-			    $this->get_subitems($item_id, $subitem);
-			} elseif (!empty($item_id)) {
-			    $this->get_item($item_id);
-			} else {
-			    $this->get_items();
-			}
+                break;
 
-			break;
+            case 'POST':
+                if (!empty($item_id) && !empty($subitem)) {
+                    $this->create_subitem($item_id, $subitem);
+                } elseif (empty($item_id)) {
+                    $this->create_item();
+                } else {
+                    $this->to_error_not_found();
+                }
 
-			case 'POST':
-			if (!empty($item_id) && !empty($subitem)) {
-			    $this->create_subitem($item_id, $subitem);
-			} elseif (empty($item_id)) {
-			    $this->create_item();
-			} else {
-			    $this->to_error_not_found();
-			}
+                break;
 
-			break;
+            case 'PUT':
+                if (!empty($item_id)) {
+                    $this->update_item($item_id);
+                } else {
+                    $this->to_error_not_found();
+                }
 
-			case 'PUT':
-			if (!empty($item_id)) {
-			    $this->update_item($item_id);
-			} else {
-			    $this->to_error_not_found();
-			}
+                break;
 
-			break;
+            case 'DELETE':
+                if (!empty($item_id)) {
+                    $this->remove_item($item_id);
+                } else {
+                    $this->to_error_not_found();
+                }
 
-			case 'DELETE':
-			if (!empty($item_id)) {
-			    $this->remove_item($item_id);
-			} else {
-			    $this->to_error_not_found();
-			}
+                break;
 
-			break;
+            default:
+                $this->to_error_not_found();
 
-			default:
-			$this->to_error_not_found();
-
-			break;
-
-		}
+                break;
+        }
     }
 
     /**	 * Functions to be override by child controllers	 */
@@ -341,8 +333,7 @@ class API_Controller extends MX_Controller
 
     protected function to_not_implemented($additional_data = array())
     {
-
-		// 		show "not implemented" info only during development mode
+        // 		show "not implemented" info only during development mode
         if (ENVIRONMENT == 'development') {
             $trace = debug_backtrace();
 
