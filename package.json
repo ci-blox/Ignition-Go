@@ -9,7 +9,7 @@
   "author": "boblennes",
   "license": "MIT",
   "devDependencies": {
-    "browser-sync": "*",
+    "browser-sync": ">=2.29.3",
     "del": "*",
     "gulp": "^3.9.1",
     "gulp-changed": "*",
