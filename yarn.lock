@@ -2027,9 +2027,9 @@ flot@^4.2.2:
   integrity sha512-Strct/A27o0TA25X7Z0pxKhwK4djiP1Kjeqj0tkiqrkRu1qYPqfbp5BYuxEL8CWDNtj85Uc0PnG2E2plo1+VMg==
 
 follow-redirects@^1.0.0, follow-redirects@^1.14.0:
-  version "1.15.3"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.3.tgz#fe2f3ef2690afce7e82ed0b44db08165b207123a"
-  integrity sha512-1VzOtuEM8pC9SFU1E+8KfTjZyMztRsgEfwQl44z8A25uy13jSzTj6dyK2Df52iV0vgHCfBwLhDWevLn95w5v6Q==
+  version "1.15.4"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.4.tgz#cdc7d308bf6493126b17ea2191ea0ccf3e535adf"
+  integrity sha512-Cr4D/5wlrb0z9dgERpUL3LrmPKVDsETIJhaCMeDfuFYcqa5bldGV6wBsAN6X/vxlXQtFBMrXdXxdL8CbDTGniw==
 
 font-awesome@^4.7.0:
   version "4.7.0"
