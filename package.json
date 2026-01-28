@@ -23,7 +23,7 @@
     "gulp-uglify": "*",
     "gulp-watch": "*",
     "lodash": "*",
-    "minimatch": ">=3.0.2",
+    "minimatch": ">=3.0.5",
     "require-dir": "*"
   },
   "main": "index.php",
